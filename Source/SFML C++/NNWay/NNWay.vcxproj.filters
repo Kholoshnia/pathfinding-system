@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="UI">
+      <UniqueIdentifier>{44ac66f9-9299-44a3-acf3-8fff1226e882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NEAT">
+      <UniqueIdentifier>{c9183238-b232-4a10-afd7-23105a60c161}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QL">
+      <UniqueIdentifier>{3e891e41-e2e2-49a7-9ae8-7b263ad15f8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NEAT\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="NEAT\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="QL\Header Files">
+      <UniqueIdentifier>{01147994-5451-4d3a-ad44-56d768191e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QL\Source Files">
+      <UniqueIdentifier>{8f1d5625-f6ea-47d8-acbc-6b50e548216e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="menu.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="NEAT\Source Files\NEAT_Agent.cpp">
+      <Filter>NEAT\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NEAT\Source Files\NEAT_Brain.cpp">
+      <Filter>NEAT\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NEAT\Source Files\NEAT_Population.cpp">
+      <Filter>NEAT\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NEAT\Source Files\NEAT_Map.cpp">
+      <Filter>NEAT\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NEAT\Source Files\NEAT_Logic.cpp">
+      <Filter>NEAT\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NEAT\Source Files\NEAT_Layers.cpp">
+      <Filter>NEAT\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QL\Source Files\QL_Table.cpp">
+      <Filter>QL\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QL\Source Files\QL_Map.cpp">
+      <Filter>QL\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QL\Source Files\QL_Logic.cpp">
+      <Filter>QL\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QL\Source Files\QL_Agent.cpp">
+      <Filter>QL\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="menu.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="NEAT\Header Files\NEAT_Agent.h">
+      <Filter>NEAT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NEAT\Header Files\NEAT_Brain.h">
+      <Filter>NEAT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NEAT\Header Files\NEAT_Layers.h">
+      <Filter>NEAT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NEAT\Header Files\NEAT_Logic.h">
+      <Filter>NEAT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NEAT\Header Files\NEAT_Map.h">
+      <Filter>NEAT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NEAT\Header Files\NEAT_Population.h">
+      <Filter>NEAT\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QL\Header Files\QL_Table.h">
+      <Filter>QL\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QL\Header Files\QL_Map.h">
+      <Filter>QL\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QL\Header Files\QL_Logic.h">
+      <Filter>QL\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QL\Header Files\QL_Agent.h">
+      <Filter>QL\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
