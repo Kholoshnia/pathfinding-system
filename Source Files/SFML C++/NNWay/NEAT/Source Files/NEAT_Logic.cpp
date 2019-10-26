@@ -2,7 +2,7 @@
 
 void neat::check()
 {
-	if (dimension == 0)
+	if (dimention == Dimentions::TWOD)
 	{
 		std::vector<sf::Vector2f> check;
 
@@ -42,12 +42,13 @@ void neat::check()
 			window.display();
 		}
 	}
-	else language == "EN" ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\", enable \"cheker\" in main script (Goal object) and run") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\", включите \"cheker\" в галвном скрипте (объект Goal) и запустите");
+	else if (dimention == Dimentions::THREED)
+		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\", enable \"cheker\" in main script (Goal object) and run") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\", включите \"cheker\" в галвном скрипте (объект Goal) и запустите");
 }
 
 void neat::load_from_file()
 {
-	if (dimension == 0)
+	if (dimention == Dimentions::TWOD)
 	{
 		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
@@ -114,13 +115,13 @@ void neat::load_from_file()
 			else
 			{
 				std::string message;
-				language == "EN" ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
+				language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
 				System::String^ str = gcnew System::String(message.c_str());
 				System::Windows::Forms::MessageBox::Show(str);
 			}
 		}
 	}
-	else
+	else if (dimention == Dimentions::THREED)
 	{
 		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
@@ -130,7 +131,7 @@ void neat::load_from_file()
 
 void neat::create_new_map()
 {
-	if (dimension == 0)
+	if (dimention == Dimentions::TWOD)
 	{
 		sf::RenderWindow window(sf::VideoMode(800, 800), "Map creator");
 		while (window.isOpen())
@@ -251,7 +252,8 @@ void neat::create_new_map()
 			window.display();
 		}
 	}
-	else language == "EN" ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
+	else if (dimention == Dimentions::THREED)
+		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
 }
 
 void neat::check_from_file()
@@ -269,7 +271,7 @@ void neat::check_from_file()
 	else
 	{
 		std::string message;
-		language == "EN" ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
+		language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
 		System::String^ str = gcnew System::String(message.c_str());
 		System::Windows::Forms::MessageBox::Show(str);
 	}
@@ -313,7 +315,7 @@ void neat::check_from_file()
 
 void neat::with_visualization()
 {
-	if (dimension == 0)
+	if (dimention == Dimentions::TWOD)
 	{
 		layers.reset(new Layers());
 
@@ -350,8 +352,8 @@ void neat::with_visualization()
 			layers->update();
 			layers->show(window);
 
-			if (layers->get_best_population().reached_the_goal) language == "EN" ? text[1].setString(L"Yes") : text[1].setString(L"Да");
-			else language == "EN" ? text[1].setString(L"No") : text[1].setString(L"Нет");
+			if (layers->get_best_population().reached_the_goal) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
+			else language == Languages::EN ? text[1].setString(L"No") : text[1].setString(L"Нет");
 
 			std::ostringstream str;
 			str << layers->get_best_population().gen;
@@ -363,7 +365,7 @@ void neat::with_visualization()
 			window.display();
 		}
 	}
-	else
+	else if (dimention == Dimentions::THREED)
 	{
 		fout.open(path, std::fstream::app);
 		if (fout.is_open())
@@ -374,18 +376,18 @@ void neat::with_visualization()
 		else
 		{
 			std::string message;
-			language == "EN" ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
+			language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
 			System::String^ str = gcnew System::String(message.c_str());
 			System::Windows::Forms::MessageBox::Show(str);
 		}
 
-		language == "EN" ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\" and start with map file") : System::Windows::Forms::MessageBox::Show("Откройте \"NNWay3D\" и запустите с файлом карты");
+		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\" and start with map file") : System::Windows::Forms::MessageBox::Show("Откройте \"NNWay3D\" и запустите с файлом карты");
 	}
 }
 
 void neat::without_visualization()
 {
-	if (dimension == 0)
+	if (dimention == Dimentions::TWOD)
 	{
 		layers.reset(new Layers());
 		bool calculating = true;
@@ -407,7 +409,7 @@ void neat::without_visualization()
 			layers->update();
 		}
 	}
-	else
+	else if (dimention == Dimentions::THREED)
 	{
 		fout.open(path, std::fstream::app);
 		if (fout.is_open())
@@ -418,10 +420,10 @@ void neat::without_visualization()
 		else
 		{
 			std::string message;
-			language == "EN" ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
+			language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
 			System::String^ str = gcnew System::String(message.c_str());
 			System::Windows::Forms::MessageBox::Show(str);
 		}
-		language == "EN" ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\" and start with map file") : System::Windows::Forms::MessageBox::Show("Откройте \"NNWay3D\" и запустите с файлом карты");
+		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\" and start with map file") : System::Windows::Forms::MessageBox::Show("Откройте \"NNWay3D\" и запустите с файлом карты");
 	}
 }

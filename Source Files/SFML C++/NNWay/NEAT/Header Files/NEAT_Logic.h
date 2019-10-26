@@ -6,15 +6,20 @@
 #include <vector>
 #include <string>
 
+#include <Enums.h>
+
 #include <NEAT/Header Files/NEAT_Map.h>
 #include <NEAT/Header Files/NEAT_Brain.h>
 #include <NEAT/Header Files/NEAT_Layers.h>
 #include <NEAT/Header Files/NEAT_Population.h>
 
+extern Languages language;
+extern Dimentions dimention;
+
+extern std::string path;
 extern sf::Sprite loading;
+extern int auto_exit, fps;
 extern bool from_image, auto_end;
-extern std::string language, path;
-extern int auto_exit, dimension, fps;
 
 namespace neat
 {

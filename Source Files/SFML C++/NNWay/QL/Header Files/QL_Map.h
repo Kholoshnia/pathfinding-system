@@ -4,7 +4,7 @@
 
 #include <fstream>
 
-extern std::string path, language;
+extern std::string path;
 
 namespace ql
 {

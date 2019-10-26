@@ -62,7 +62,7 @@ void ql::check()
 
 void ql::load_from_file()
 {
-	if (dimension == 0)
+	if (dimention == Dimentions::TWOD)
 	{
 		map.reset(new Map());
 
@@ -101,7 +101,7 @@ void ql::load_from_file()
 			else
 			{
 				std::string message;
-				language == "EN" ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
+				language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
 				System::String^ str = gcnew System::String(message.c_str());
 				System::Windows::Forms::MessageBox::Show(str);
 			}
@@ -110,7 +110,7 @@ void ql::load_from_file()
 		table.reset(new Table());
 		finish_reward = map_size_x * map_size_x * map_size_y * map_size_y;
 	}
-	else
+	else if (dimention == Dimentions::THREED)
 	{
 		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
@@ -120,7 +120,7 @@ void ql::load_from_file()
 
 void ql::create_new_map()
 {
-	if (dimension == 0)
+	if (dimention == Dimentions::TWOD)
 	{
 		map.reset(new Map());
 		bool space_pressed = false;
@@ -216,7 +216,8 @@ void ql::create_new_map()
 
 		map_loaded = true;
 	}
-	else language == "EN" ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
+	else if (dimention == Dimentions::THREED)
+		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
 }
 
 void ql::load_from_image()
@@ -261,7 +262,7 @@ void ql::check_from_file()
 	else
 	{
 		std::string message;
-		language == "EN" ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
+		language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
 		System::String^ str = gcnew System::String(message.c_str());
 		System::Windows::Forms::MessageBox::Show(str);
 	}
