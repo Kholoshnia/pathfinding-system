@@ -25,8 +25,11 @@ namespace Assets.Scripts.QL
 
                 for (int z = 0; z < mapSize.z; z++)
                     for (int y = 0; y < mapSize.y; y++)
+                    {
                         for (int x = 0; x < mapSize.x; x++)
                             map[z, x, y] = (char)reader.Read();
+                        reader.Read();
+                    }
 
                 language = reader.ReadLine();
             }
@@ -66,9 +69,9 @@ namespace Assets.Scripts.QL
                         }
                     }
 
-            space.SetActive(false);
-            wall.SetActive(false);
-            goal.SetActive(false);
+            UnityEngine.Object.Destroy(space);
+            UnityEngine.Object.Destroy(wall);
+            UnityEngine.Object.Destroy(goal);
 
             /*int x = 0, y = 0, z = 0;
             for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)

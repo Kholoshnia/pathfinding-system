@@ -8,8 +8,8 @@ namespace Assets.Scripts.QL
         const float gamma = 0.8f;
         int state, action, finishState;
 
-        long[,] R;
-        long[,] Q;
+        private long[,] R;
+        private long[,] Q;
 
         public Table(ref long finishReward, ref Vector3Int mapSize, ref Map map)
         {
@@ -21,8 +21,8 @@ namespace Assets.Scripts.QL
             for (int y = 0; y < mapSize.x * mapSize.y * mapSize.z; y++)
                 for (int x = 0; x < mapSize.x * mapSize.y * mapSize.z; x++)
                 {
-                    Q[y, x] = 0;
                     R[y, x] = -1;
+                    Q[y, x] = 0;
                 }
 
             for (int z = 0; z < mapSize.z; z++)

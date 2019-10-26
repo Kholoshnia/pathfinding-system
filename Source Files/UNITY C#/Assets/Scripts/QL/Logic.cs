@@ -10,15 +10,18 @@ namespace Assets.Scripts.QL
         private Table table;
         private GameObject agent;
         private Vector3Int mapSize;
-        private readonly string language, pathIn, pathOut;
+        private string language;
+        private readonly string pathIn;
+        private readonly string pathOut;
         private int finishState, iterations;
         private bool checker;
         int iterationsK, initialsK;
-        bool playing = true;
+        bool playing;
         private long finishReward;
 
         public Logic(ref string pathIn, ref string pathOut, ref bool checker)
         {
+            playing = true;
             initialsK = 0;
             iterationsK = 0;
             this.checker = checker;

@@ -151,9 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checker: 0
   learningAlgorithm: 1
-  pathForMap: "/Users/vadim/Google \u0414\u0438\u0441\u043A/NEAT-QL/UNITY C#/Demo
-    Files/Input Files/Map3D.txt"
-  pathForResult: "/Users/vadim/Google \u0414\u0438\u0441\u043A/RLQL/UNITY C#/\u041F\u0440\u043E\u0435\u043A\u0442/RLQL/\u0414\u0435\u043C\u043E\u043D\u0441\u0442\u0440\u0430\u0446\u0438\u044F/result_QL.txt"
+  pathForMap: /Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/QL/Input Files/map3d.txt
+  pathForResult: /Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/QL/Output FIles/result.txt
 --- !u!4 &116241495
 Transform:
   m_ObjectHideFlags: 0
