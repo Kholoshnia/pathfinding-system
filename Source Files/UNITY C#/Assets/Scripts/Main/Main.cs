@@ -9,19 +9,6 @@ public class Main : MonoBehaviour
     private string pathForMap;
     private string pathForResult;
 
-    if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-    {
-        pathForMap = "";
-        pathForResult = "";
-    }
-    else
-    {
-        pathForMap = "";
-        pathForResult = "";
-    }
-
-
-
     private Assets.Scripts.NEAT.Logic NEAT_logic;
     private Assets.Scripts.QL.Logic QL_logic;
 
