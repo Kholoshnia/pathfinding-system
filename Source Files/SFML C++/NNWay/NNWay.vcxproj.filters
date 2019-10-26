@@ -94,5 +94,8 @@
     <ClInclude Include="QL\Header Files\QL_Agent.h">
       <Filter>QL\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

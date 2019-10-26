@@ -8,16 +8,25 @@
 #include <NEAT/Header Files/NEAT_Layers.h>
 #include <NEAT/Header Files/NEAT_Population.h>
 
+#include <Enums.h>
+
 #include <QL/Header Files/QL_Map.h>
 #include <QL/Header Files/QL_Table.h>
 #include <QL/Header Files/QL_Logic.h>
 #include <QL/Header Files/QL_Agent.h>
 
+Modes mode;
+Languages language;
+Dimentions dimention;
+LearningAlgorythms learning_algorithm;
+
+std::string path;
+
 sf::Font font;
 sf::Sprite loading;
-std::string language, path;
 sf::Texture loading_texture;
-int auto_exit, dimension, fps, learning_algorithm;
+
+int auto_exit, fps;
 bool visualisation, auto_end, from_image, check_from_file;
 
 namespace neat
@@ -583,12 +592,13 @@ namespace NNWay
 		}
 		void InitializeVariables(void)
 		{
-			language = "EN";
+			mode = Modes::LEARN;
+			language = Languages::EN;
+			dimention = Dimentions::TWOD;
+			learning_algorithm = LearningAlgorythms::NEAT;
 
-			dimension = 0;
 			auto_exit = 10;
 			neat::goal_radius = 10;
-			learning_algorithm = 0;
 			neat::layers_quantity = 3;
 			neat::population_quantity = 250;
 			neat::direction_array_size = 400;
@@ -686,7 +696,7 @@ namespace NNWay
 			{
 				if (comboBox1->SelectedIndex == 0) neat::load_from_file();
 				else if (comboBox1->SelectedIndex == 1) neat::create_new_map();
-				else if (comboBox1->SelectedIndex == -1) language == "EN" ? MessageBox::Show("Please, select action") : MessageBox::Show("Пожалуйста, выберите дейсивте");
+				else if (comboBox1->SelectedIndex == -1) language == Languages::EN ? MessageBox::Show("Please, select action") : MessageBox::Show("Пожалуйста, выберите дейсивте");
 			}
 			else
 			{
@@ -701,7 +711,7 @@ namespace NNWay
 					}
 				}
 				else if (comboBox1->SelectedIndex == 1) ql::create_new_map();
-				else if (comboBox1->SelectedIndex == -1) language == "EN" ? MessageBox::Show("Please, select action") : MessageBox::Show("Пожалуйста, выберите дейсивте");
+				else if (comboBox1->SelectedIndex == -1) language == Languages::EN ? MessageBox::Show("Please, select action") : MessageBox::Show("Пожалуйста, выберите дейсивте");
 			}
 		}
 		System::Void Button2_Click(System::Object^ sender, System::EventArgs^ e)
@@ -709,14 +719,14 @@ namespace NNWay
 			if (learning_algorithm == 0)
 			{
 				if (Convert::ToInt32(textBox1->Text) <= 0)
-					language == "EN" ? MessageBox::Show("Error, incorrect number") : MessageBox::Show("Ошибка, неверное число");
+					language == Languages::EN ? MessageBox::Show("Error, incorrect number") : MessageBox::Show("Ошибка, неверное число");
 				else
 					neat::direction_array_size = Convert::ToInt32(textBox1->Text);
 			}
 			else
 			{
 				if (Convert::ToInt32(textBox1->Text) <= 0)
-					language == "EN" ? MessageBox::Show("Error, incorrect number") : MessageBox::Show("Ошибка, неверное число");
+					language == Languages::EN ? MessageBox::Show("Error, incorrect number") : MessageBox::Show("Ошибка, неверное число");
 				else
 					ql::iterations = Convert::ToInt32(textBox1->Text);
 			}
@@ -726,14 +736,14 @@ namespace NNWay
 			if (learning_algorithm == 0)
 			{
 				if (Convert::ToInt32(textBox2->Text) <= 0)
-					language == "EN" ? MessageBox::Show("Error, incorrect number") : MessageBox::Show("Ошибка, неверное число");
+					language == Languages::EN ? MessageBox::Show("Error, incorrect number") : MessageBox::Show("Ошибка, неверное число");
 				else
 					neat::population_quantity = Convert::ToInt32(textBox2->Text);
 			}
 			else
 			{
 				if (Convert::ToInt32(textBox2->Text) < 10 || Convert::ToInt32(textBox5->Text) < 10)
-					language == "EN" ? MessageBox::Show("Error, incorrect number (< 10)") : MessageBox::Show("Ошибка, неверное число (< 10)");
+					language == Languages::EN ? MessageBox::Show("Error, incorrect number (< 10)") : MessageBox::Show("Ошибка, неверное число (< 10)");
 				else
 				{
 					ql::map_size_x = Convert::ToInt32(textBox2->Text);
@@ -743,7 +753,7 @@ namespace NNWay
 				ql::load_from_image();
 
 				if (!ql::finish_loaded)
-					language == "EN" ? MessageBox::Show("Error, finish coordinates not loaded, check file or change map size") : MessageBox::Show("Ошибка, координаты цели не загружены, проверьте файл или измените размер карты");
+					language == Languages::EN ? MessageBox::Show("Error, finish coordinates not loaded, check file or change map size") : MessageBox::Show("Ошибка, координаты цели не загружены, проверьте файл или измените размер карты");
 			}
 		}
 		System::Void Button4_Click(System::Object^ sender, System::EventArgs^ e)
@@ -756,19 +766,19 @@ namespace NNWay
 				auto_exit = Convert::ToInt32(textBox4->Text);
 
 				if (!neat::map_loaded)
-					language == "EN" ? MessageBox::Show("Error, map not loaded") : MessageBox::Show("Ошибка, карта не загружена");
+					language == Languages::EN ? MessageBox::Show("Error, map not loaded") : MessageBox::Show("Ошибка, карта не загружена");
 				else if (neat::layers_quantity <= 0)
-					language == "EN" ? MessageBox::Show("Error, wrong layers number") : MessageBox::Show("Ошибка, неверное число слоев");
+					language == Languages::EN ? MessageBox::Show("Error, wrong layers number") : MessageBox::Show("Ошибка, неверное число слоев");
 				else if (neat::population_quantity <= 0)
-					language == "EN" ? MessageBox::Show("Error, wrong objects number") : MessageBox::Show("Ошибка, неверное число объектов");
+					language == Languages::EN ? MessageBox::Show("Error, wrong objects number") : MessageBox::Show("Ошибка, неверное число объектов");
 				else if (neat::direction_array_size <= 0)
-					language == "EN" ? MessageBox::Show("Error, wrong direction array size") : MessageBox::Show("Ошибка, неверный размер массива направлений");
+					language == Languages::EN ? MessageBox::Show("Error, wrong direction array size") : MessageBox::Show("Ошибка, неверный размер массива направлений");
 				else if (auto_end && auto_exit < 0)
-					language == "EN" ? MessageBox::Show("Error, wrong automatic exit number") : MessageBox::Show("Ошибка, неверное число ходов для автомачисеского завершения");
+					language == Languages::EN ? MessageBox::Show("Error, wrong automatic exit number") : MessageBox::Show("Ошибка, неверное число ходов для автомачисеского завершения");
 				else if (fps < 0)
-					language == "EN" ? MessageBox::Show("Error, wrong frames per second number") : MessageBox::Show("Ошибка, неверное число кадров в секунду");
+					language == Languages::EN ? MessageBox::Show("Error, wrong frames per second number") : MessageBox::Show("Ошибка, неверное число кадров в секунду");
 				else if (comboBox1->SelectedIndex == -1)
-					language == "EN" ? MessageBox::Show("Error, chose action with neat::map") : MessageBox::Show("Ошибка, выберете действие с картой");
+					language == Languages::EN ? MessageBox::Show("Error, chose action with neat::map") : MessageBox::Show("Ошибка, выберете действие с картой");
 				else if (visualisation)
 					neat::with_visualization();
 				else
@@ -779,13 +789,13 @@ namespace NNWay
 				ql::was_running = true;
 
 				if (!ql::map_loaded)
-					language == "EN" ? MessageBox::Show("Error, map not loaded") : MessageBox::Show("Ошибка, карта не загружена");
+					language == Languages::EN ? MessageBox::Show("Error, map not loaded") : MessageBox::Show("Ошибка, карта не загружена");
 				else if (ql::iterations <= 0)
-					language == "EN" ? MessageBox::Show("Error, wrong iterations number") : MessageBox::Show("Ошибка, неверное число повторений");
+					language == Languages::EN ? MessageBox::Show("Error, wrong iterations number") : MessageBox::Show("Ошибка, неверное число повторений");
 				else if (fps < 0)
-					language == "EN" ? MessageBox::Show("Error, wrong frames per second number") : MessageBox::Show("Ошибка, неверное число кадров в секунду");
+					language == Languages::EN ? MessageBox::Show("Error, wrong frames per second number") : MessageBox::Show("Ошибка, неверное число кадров в секунду");
 				else if (comboBox1->SelectedIndex == -1)
-					language == "EN" ? MessageBox::Show("Error, chose action with neat::map") : MessageBox::Show("Ошибка, выберете действие с картой");
+					language == Languages::EN ? MessageBox::Show("Error, chose action with neat::map") : MessageBox::Show("Ошибка, выберете действие с картой");
 				else if (visualisation)
 					ql::with_visualization();
 				else
@@ -798,33 +808,33 @@ namespace NNWay
 			{
 				if (check_from_file)
 				{
-					if (comboBox1->SelectedIndex == -1 || neat::map.get() == nullptr) language == "EN" ? MessageBox::Show("Please, load map") : MessageBox::Show("Пожалуйста, загрузите карту");
+					if (comboBox1->SelectedIndex == -1 || neat::map.get() == nullptr) language == Languages::EN ? MessageBox::Show("Please, load map") : MessageBox::Show("Пожалуйста, загрузите карту");
 					else neat::check_from_file();
 				}
 				else
 				{
 					if (neat::was_running) neat::check();
-					else language == "EN" ? MessageBox::Show("Error, the program has not started yet") : MessageBox::Show("Ошибка, программа еще не запускалась");
+					else language == Languages::EN ? MessageBox::Show("Error, the program has not started yet") : MessageBox::Show("Ошибка, программа еще не запускалась");
 				}
 			}
 			else
 			{
 				if (check_from_file)
 				{
-					if (comboBox1->SelectedIndex == -1 || ql::map.get() == nullptr) language == "EN" ? MessageBox::Show("Please, load map") : MessageBox::Show("Пожалуйста, загрузите карту");
+					if (comboBox1->SelectedIndex == -1 || ql::map.get() == nullptr) language == Languages::EN ? MessageBox::Show("Please, load map") : MessageBox::Show("Пожалуйста, загрузите карту");
 					else ql::check_from_file();
 				}
 				else
 				{
 					if (ql::was_running) ql::check();
-					else language == "EN" ? MessageBox::Show("Error, the program has not started yet") : MessageBox::Show("Ошибка, программа еще не запускалась");
+					else language == Languages::EN ? MessageBox::Show("Error, the program has not started yet") : MessageBox::Show("Ошибка, программа еще не запускалась");
 				}
 			}
 		}
 		System::Void Button6_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			if (Convert::ToInt32(textBox5->Text) <= 0)
-				language == "EN" ? MessageBox::Show("Error, incorrect number") : MessageBox::Show("Ошибка, неверное число");
+				language == Languages::EN ? MessageBox::Show("Error, incorrect number") : MessageBox::Show("Ошибка, неверное число");
 			else
 				neat::layers_quantity = Convert::ToInt32(textBox5->Text);
 		}
@@ -838,11 +848,11 @@ namespace NNWay
 			textBox4->ReadOnly = !textBox4->ReadOnly;
 			auto_end = !auto_end;
 		}
-		System::Void DToolStripMenuItem_Click(Object^ sender, EventArgs^ e) { dimension = 0; }
-		System::Void DToolStripMenuItem1_Click(Object^ sender, EventArgs^ e) { dimension = 1; }
+		System::Void DToolStripMenuItem_Click(Object^ sender, EventArgs^ e) { dimention = Dimentions::TWOD; }
+		System::Void DToolStripMenuItem1_Click(Object^ sender, EventArgs^ e) { dimention = Dimentions::THREED; }
 		System::Void EnglishToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			language = "EN";
+			language = Languages::EN;
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -901,7 +911,7 @@ namespace NNWay
 		}
 		System::Void РусскийToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			language = "RU";
+			language = Languages::RU;
 			this->settingsToolStripMenuItem->Text = L"Настройкии";
 			this->dimensionToolStripMenuItem->Text = L"Изамерение";
 			this->languageToolStripMenuItem->Text = L"Язык";
@@ -992,22 +1002,22 @@ namespace NNWay
 				this->textBox5->Enabled = false;
 			}
 			if (comboBox1->SelectedIndex == 0)
-				language == "EN" ? button1->Text = L"Select" : button1->Text = L"Выбрать";
+				language == Languages::EN ? button1->Text = L"Select" : button1->Text = L"Выбрать";
 			else if (comboBox1->SelectedIndex == 1)
-				language == "EN" ? button1->Text = L"Create" : button1->Text = L"Создать";
+				language == Languages::EN ? button1->Text = L"Create" : button1->Text = L"Создать";
 		}
 		System::Void AboutToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (learning_algorithm == 0)
+			if (learning_algorithm == LearningAlgorythms::NEAT)
 			{
-				if (language == "EN")
+				if (language == Languages::EN)
 					MessageBox::Show("The algorithm works according to the following principle: when the program starts, each object randomly forms an array of directions, represented as positions for displacements formed from corners, the size of this array can also be adjusted. After that, each object starts moving in accordance with the elements of the direction array. The object ceases move as soon as it touches a user-defined area, for example, a building on a map, reaches a goal or when elements in an array of directions end (the number of ode). After this, the best object for further study is selected: the “value” of objects is compared and the object with the highest value is remembered as the best (the value is given by a certain formula, for example, for a given algorithm, the value is greater for that object, to the goal is less than the rest).");
 				else
 					MessageBox::Show("Алгоритм работает по следующему принципу : при запуске программы каждый объект случайным образом формирует массив направлений, представленный в виде позиций для перемещений, образованных от углов, размер этого массива также можно регулировать.После этого каждый объект начинает движение в соответствии с элементами массива направлений.Объект перестает двигаться, как только касается заданной пользователем области, например, здание на карте, достигает цели или когда заканчиваются элементы в массиве направлений(заканчивается количество ходов).После этого происходит отбор лучшего объекта для дальнейшего обучения : сравнивается “ценность” объектов и объект с наибольшей ценностью запоминается как лучший(ценность задается по определенной формуле, так, например, для данного алгоритма, ценность больше у того объекта, расстояние у которого до цели меньше чем у остальных).");
 			}
-			else
+			else if (learning_algorithm == LearningAlgorythms::QL)
 			{
-				if (language == "EN")
+				if (language == Languages::EN)
 					MessageBox::Show("When the algorithm starts, an array R (stateXactions) is created, which shows where the agent can go and where not, as well as the location of the targets on the map (the numbering starts at 0 and runs horizontally in ascending order). After this, training takes place: a second array Q is created and filled with zeros. He needs to check any such state (after creating the first array R, an array of initial states is also created). As a result, all possible subsequent actions. After that, the second array with weights is filled in accordance with the formula. After the training is completed, the second array, the user can enter any initial state and get the shortest route.");
 				else
 					MessageBox::Show("При запуске алгоритма создается массив R (stateXactions), который показывает, где агент может проходить, а где нет, а также расположение целей на карте (нумерация начинается с 0 и идет горизонтально по возрастанию). После этого происходит обучение: создаётся второй массив Q и заполняется нулями. Ему необходимо проверить любое такое состояние (после создания первого массива R также создается массив начальных состояний). В результате все возможные последующие действия. После этого второй массив с весами заполняется в соответствии с формулой. После того, как обучение закончено, второй массив пользователь может ввести любое начальное состояние и получить кратчайший маршрут.");
@@ -1015,16 +1025,16 @@ namespace NNWay
 		}
 		System::Void HowToUseToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (learning_algorithm == 0)
+			if (learning_algorithm == LearningAlgorythms::NEAT)
 			{
-				if (language == "EN")
+				if (language == Languages::EN)
 					MessageBox::Show("Before launching the program, the user needs to add a map of the terrain on which the route should be laid, after selecting the number of measurements (two-dimensional or three-dimensional map). The user can choose the speed of learning NA and, accordingly, the speed of obtaining the desired result. The learning rate is regulated by changing the number of objects (conditional agents) (the more objects, the higher the learning rate), but for this it is necessary to increase the computing power. The accuracy of training is governed by the number of layers (the more there are, the higher the accuracy of training), this also requires an increase in computing power.");
 				else
 					MessageBox::Show("Перед запуском программы пользователю необходимо добавить карту местности, на которой необходимо проложить маршрут, предварительно выбрав количество измерений (двухмерная или трехмерная карта). Пользователь может выбрать скорость обучения НС и соответственно быстроту получения желаемого результата. Скорость обучения регулируется посредством изменения количества объектов (условных нейронов) (чем больше объектов, тем выше скорость обучения), но для этого необходимо увеличивать и вычислительные мощности. Точность обучения регулируется количеством слоев (чем их больше, тем точность обучения выше), для этого также требуется увеличение вычислительной мощности.");
 			}
-			else
+			else if (learning_algorithm == LearningAlgorythms::QL)
 			{
-				if (language == "EN")
+				if (language == Languages::EN)
 					MessageBox::Show("Pre-selected number of measurements (two-dimensional or three-dimensional map). The user can select the learning speed. The learning speed is regulated by changing gamma parameters and changing the size of the map and changes in the number of iterations.");
 				else
 					MessageBox::Show("Перед запуском программы пользователю необходимо добавить карту местности, на которой необходимо проложить маршрут, предварительно выбрав количество измерений (двухмерная или трехмерная карта). Пользователь может выбрать скорость обучения НС и соответственно быстроту получения желаемого результата. Скорость обучения регулируется посредством изменения параметра gamma, изменения размера карты и изменения количества повторений.");
@@ -1034,10 +1044,12 @@ namespace NNWay
 		System::Void BugReportToolStripMenuItem_Click(Object^ sender, EventArgs^ e) { MessageBox::Show("e-mail: vhd-ru@yandex.ru"); }
 		System::Void NEATToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			dimension = 0;
+			mode = Modes::LEARN;
+			dimention = Dimentions::TWOD;
+			learning_algorithm = LearningAlgorythms::NEAT;
+
 			auto_exit = 10;
 			neat::goal_radius = 10;
-			learning_algorithm = 0;
 			neat::layers_quantity = 3;
 			neat::population_quantity = 250;
 			neat::direction_array_size = 400;
@@ -1057,7 +1069,6 @@ namespace NNWay
 			neat::was_running = false;
 			ql::finish_loaded = false;
 
-			learning_algorithm = 0;
 			this->Controls->Clear();
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label2);
@@ -1092,16 +1103,7 @@ namespace NNWay
 			this->textBox2->Enabled = true;
 			this->textBox5->Enabled = true;
 			this->checkBox2->Location = System::Drawing::Point(15, 332);
-			if (language == "RU")
-			{
-				this->label1->Text = L"Главное меню (NEAT)";
-				this->label1->Location = System::Drawing::Point(30, 40);
-				this->label2->Text = L"Установить размер массива направлений:";
-				this->label4->Text = L"Установить количество объектов:";
-				this->checkBox2->Text = L"Закончить автоматически";
-				this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
-			}
-			else if (language == "EN")
+			if (language == Languages::EN)
 			{
 				this->label1->Text = L"Main menu (NEAT)";
 				this->label1->Location = System::Drawing::Point(55, 40);
@@ -1110,13 +1112,24 @@ namespace NNWay
 				this->checkBox2->Text = L"Exit automatically";
 				this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
 			}
+			else if (language == Languages::RU)
+			{
+				this->label1->Text = L"Главное меню (NEAT)";
+				this->label1->Location = System::Drawing::Point(30, 40);
+				this->label2->Text = L"Установить размер массива направлений:";
+				this->label4->Text = L"Установить количество объектов:";
+				this->checkBox2->Text = L"Закончить автоматически";
+				this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
+			}
 		}
 		System::Void QLearningToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			dimension = 0;
+			mode = Modes::LEARN;
+			dimention = Dimentions::TWOD;
+			learning_algorithm = LearningAlgorythms::QL;
+
 			auto_exit = 10;
 			neat::goal_radius = 10;
-			learning_algorithm = 0;
 			neat::layers_quantity = 3;
 			neat::population_quantity = 250;
 			neat::direction_array_size = 400;
@@ -1136,7 +1149,6 @@ namespace NNWay
 			neat::was_running = false;
 			ql::finish_loaded = false;
 
-			learning_algorithm = 1;
 			this->Controls->Clear();
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label2);
@@ -1166,21 +1178,21 @@ namespace NNWay
 			this->textBox2->Enabled = false;
 			this->textBox5->Enabled = false;
 			this->checkBox2->Location = System::Drawing::Point(249, 239);
-			if (language == "RU")
-			{
-				this->label1->Text = L"Главное меню (QL)";
-				this->label1->Location = System::Drawing::Point(50, 40);
-				this->label2->Text = L"Установить количество повторений:";
-				this->label4->Text = L"Установить количество полей (X и Y)";
-				this->checkBox2->Text = L"Из изображения";
-			}
-			else if (language == "EN")
+			if (language == Languages::EN)
 			{
 				this->label1->Text = L"Main menu (QL)";
 				this->label1->Location = System::Drawing::Point(75, 40);
 				this->label2->Text = L"Set number of iterations:";
 				this->label4->Text = L"Set number of fields (X and Y)";
 				this->checkBox2->Text = L"From image";
+			}
+			else if (language == Languages::RU)
+			{
+				this->label1->Location = System::Drawing::Point(50, 40);
+				this->label1->Text = L"Главное меню (QL)";
+				this->label2->Text = L"Установить количество повторений:";
+				this->label4->Text = L"Установить количество полей (X и Y)";
+				this->checkBox2->Text = L"Из изображения";
 			}
 		}
 		System::Void CheckBox4_CheckedChanged(System::Object^ sender, System::EventArgs^ e) { check_from_file = !check_from_file; }

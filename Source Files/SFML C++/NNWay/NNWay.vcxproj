@@ -156,6 +156,7 @@
     <ClCompile Include="QL\Source Files\QL_Table.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="menu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
