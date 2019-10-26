@@ -34,9 +34,15 @@ namespace Assets.Scripts.NEAT
                 SetDirection(i);
         }
 
-        public void IncStep() { Step++; }
+        public Brain Clone()
+        {
+            Brain clone = new Brain(Directions.Length, MutationRate, Speed);
+            for (int i = 0; i < Directions.Length; i++)
+                clone.Directions[i] = Directions[i];
+            return clone;
+        }
 
-        public Brain Clone() { return new Brain(Directions.Length, MutationRate, Speed) { Directions = Directions }; }
+        public void IncStep() { Step++; }
 
         private void SetDirection(int i) { Directions[i] = new Vector3(Random.Range(-Speed, Speed), Random.Range(-Speed, Speed), Random.Range(-Speed, Speed)); }
     };
