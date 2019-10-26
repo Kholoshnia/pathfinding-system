@@ -4,52 +4,46 @@ namespace Assets.Scripts.NEAT
 {
     public class Brain
     {
-        private readonly float speed;
+        public int Step { get; private set; }
+        public Vector3[] Directions { get; private set; }
+        public float MutationRate { get; }
+        public float Speed { get; }
 
-        public int Step { get; set; }
-        public Vector3[] Directions { get; }
-
-        public Brain(int directionArraySize)
+        public Brain(int directionArraySize, float mutationRate, float speed)
         {
-            speed = 0.1f;
             Step = 0;
+            Speed = speed;
+            MutationRate = mutationRate;
             Directions = new Vector3[directionArraySize];
-            for (int i = 0; i < Directions.Length; i++)
-                Directions[i] = new Vector3();
             Randomize();
-        }
-
-        public Brain Clone()
-        {
-            Brain clone = new Brain(Directions.Length);
-            for (int i = 0; i < Directions.Length; i++)
-                clone.Directions[i] = Directions[i];
-            return clone;
         }
 
         public void Mutate()
         {
-            float mutationRate = 0.01f;
             for (int i = 0; i < Directions.Length; i++)
             {
-                float randn = UnityEngine.Random.Range(0.0f, 1.0f);
-                if (randn < mutationRate)
-                {
-                    Directions[i].x = UnityEngine.Random.Range(-speed, speed);
-                    Directions[i].y = UnityEngine.Random.Range(-speed, speed);
-                    Directions[i].z = UnityEngine.Random.Range(-speed, speed);
-                }
+                float rand = Random.Range(0.0f, 1.0f);
+                if (rand < MutationRate)
+                    SetDirection(i);
             }
         }
 
         public void Randomize()
         {
             for (int i = 0; i < Directions.Length; i++)
-            {
-                Directions[i].x = UnityEngine.Random.Range(-speed, speed);
-                Directions[i].y = UnityEngine.Random.Range(-speed, speed);
-                Directions[i].z = UnityEngine.Random.Range(-speed, speed);
-            }
+                SetDirection(i);
         }
+
+        public Brain Clone()
+        {
+            Brain clone = new Brain(Directions.Length, MutationRate, Speed);
+            for (int i = 0; i < Directions.Length; i++)
+                clone.Directions[i] = Directions[i];
+            return clone;
+        }
+
+        public void IncStep() { Step++; }
+
+        private void SetDirection(int i) { Directions[i] = new Vector3(Random.Range(-Speed, Speed), Random.Range(-Speed, Speed), Random.Range(-Speed, Speed)); }
     };
 }

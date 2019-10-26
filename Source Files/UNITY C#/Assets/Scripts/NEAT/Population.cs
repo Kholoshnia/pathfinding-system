@@ -5,17 +5,16 @@ namespace Assets.Scripts.NEAT
     public class Population
     {
         private Color color;
-        private int minStep;
         private float fitnessSum;
         private readonly int layersQuantity;
 
         public int Gen { get; private set; }
+        public int MinStep { get; private set; }
         public int BestAgent { get; private set; }
         public Agent[] Agents { get; private set; }
         public bool ReachedTheGoal { get; private set; }
 
-
-        public Population(int directionArraySize,int populationQuantity, int layersQuantity)
+        public Population(int directionArraySize, int populationQuantity, int layersQuantity, float mutationRate, float speed, float maxSpeed)
         {
             if (layersQuantity != 1)
                 color = Random.ColorHSV();
@@ -24,13 +23,13 @@ namespace Assets.Scripts.NEAT
             Agents = new Agent[populationQuantity];
             if (layersQuantity != 1)
                 for (int i = 0; i < Agents.Length; i++)
-                    Agents[i] = new Agent(directionArraySize) { Color = color };
+                    Agents[i] = new Agent(directionArraySize, mutationRate, speed, maxSpeed) { Color = color };
             else
                 for (int i = 0; i < Agents.Length; i++)
-                    Agents[i] = new Agent(directionArraySize);
+                    Agents[i] = new Agent(directionArraySize, mutationRate, speed, maxSpeed);
             Gen = 1;
-            minStep = 4000;
             BestAgent = 0;
+            MinStep = directionArraySize;
             this.layersQuantity = layersQuantity;
         }
 
@@ -38,7 +37,7 @@ namespace Assets.Scripts.NEAT
         {
             for (int i = 0; i < Agents.Length; i++)
             {
-                if (Agents[i].Brain.Step > minStep)
+                if (Agents[i].Brain.Step > MinStep)
                     Agents[i].Dead = true;
                 else
                     Agents[i].Update();
@@ -64,7 +63,7 @@ namespace Assets.Scripts.NEAT
                 }
             BestAgent = maxIndex;
             if (Agents[BestAgent].ReachedGoal)
-                minStep = Agents[BestAgent].Brain.Step;
+                MinStep = Agents[BestAgent].Brain.Step;
         }
 
         public Agent SelectParent()
@@ -109,7 +108,11 @@ namespace Assets.Scripts.NEAT
             Agents = newAgents;
             if (layersQuantity != 1)
                 for (int i = 0; i < Agents.Length; i++)
+                {
                     Agents[i].Color = color;
+                    Agents[i].Brain.Randomize();
+                }
+
             Gen++;
         }
 

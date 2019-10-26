@@ -14,7 +14,7 @@ namespace Assets.Scripts.QL
         public GameObject finish;
         public List<GameObject> spaces, walls;
 
-        public Map(ref Vector3Int mapSize, ref string language, ref string pathIn)
+        public Map(Vector3Int mapSize, string pathIn)
         {
             FileStream fin = new FileStream(pathIn, FileMode.Open);
 
@@ -30,8 +30,6 @@ namespace Assets.Scripts.QL
                             map[z, x, y] = (char)reader.Read();
                         reader.Read();
                     }
-
-                language = reader.ReadLine();
             }
             fin.Close();
 

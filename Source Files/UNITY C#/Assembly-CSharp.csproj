@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Main\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Main\Enums.cs" />
     <Compile Include="Assets\Scripts\Main\Information.cs" />
     <Compile Include="Assets\Scripts\Main\Main.cs" />
     <Compile Include="Assets\Scripts\Main\OnCollision.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Assets\Scripts\NEAT\Layers.cs" />
     <Compile Include="Assets\Scripts\NEAT\Logic.cs" />
     <Compile Include="Assets\Scripts\NEAT\Population.cs" />
-    <Compile Include="Assets\Scripts\QL\Agent.cs" />
     <Compile Include="Assets\Scripts\QL\Logic.cs" />
     <Compile Include="Assets\Scripts\QL\Map.cs" />
     <Compile Include="Assets\Scripts\QL\Table.cs" />

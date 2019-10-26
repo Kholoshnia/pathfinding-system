@@ -1,30 +1,124 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    enum LearningAlgorithm { NEAT, QL };
+    private Modes mode;
+    private Languages language;
+    private LearningAlgorithms learningAlgorithm;
 
-    [SerializeField] private bool checker;
-    [SerializeField] private LearningAlgorithm learningAlgorithm;
-    private string pathForMap;
-    private string pathForResult;
+    private string path, pathIn, pathOut;
 
     private Assets.Scripts.NEAT.Logic NEAT_logic;
     private Assets.Scripts.QL.Logic QL_logic;
 
     public void Awake()
     {
-        if (learningAlgorithm == LearningAlgorithm.NEAT)
-            NEAT_logic = new Assets.Scripts.NEAT.Logic(ref checker, ref pathForMap, ref pathForResult);
-        else if (learningAlgorithm == LearningAlgorithm.QL)
-            QL_logic = new Assets.Scripts.QL.Logic(ref pathForMap, ref pathForResult, ref checker);
+        switch (Application.platform)
+        {
+            case RuntimePlatform.WindowsEditor:
+                path = "";
+                break;
+            case RuntimePlatform.WindowsPlayer:
+                path = "";
+                break;
+            case RuntimePlatform.OSXEditor:
+                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data.txt";
+                break;
+            case RuntimePlatform.OSXPlayer:
+                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data.txt";
+                break;
+        }
+
+        FileStream fin = new FileStream(path, FileMode.Open);
+
+        using (StreamReader reader = new StreamReader(fin))
+        {
+            switch (reader.ReadLine())
+            {
+                case "EN":
+                    language = Languages.EN;
+                    break;
+                case "RU":
+                    language = Languages.RU;
+                    break;
+                default:
+                    Debug.Log("Incorrect language");
+                    break;
+            }
+
+            switch (reader.ReadLine())
+            {
+                case "NEAT":
+                    learningAlgorithm = LearningAlgorithms.NEAT;
+                    break;
+                case "QL":
+                    learningAlgorithm = LearningAlgorithms.QL;
+                    break;
+                default:
+                    Debug.Log("Incorrect learning algorithm");
+                    break;
+            }
+
+            switch (reader.ReadLine())
+            {
+                case "LEARN":
+                    mode = Modes.LEARN;
+                    break;
+                case "CHECK":
+                    mode = Modes.CHECK;
+                    break;
+                default:
+                    Debug.Log("Incorrect mode");
+                    break;
+            }
+
+            pathIn = reader.ReadLine();
+            pathOut = reader.ReadLine();
+        }
+        fin.Close();
+    }
+
+    public void Start()
+    {
+        switch (learningAlgorithm)
+        {
+            case LearningAlgorithms.NEAT:
+                NEAT_logic = new Assets.Scripts.NEAT.Logic(mode, language, pathIn, pathOut);
+                break;
+            case LearningAlgorithms.QL:
+                QL_logic = new Assets.Scripts.QL.Logic(mode, language, pathIn, pathOut);
+                break;
+        }
     }
 
     public void Update()
     {
-        if (learningAlgorithm == LearningAlgorithm.NEAT)
-            NEAT_logic.Update();
-        else if (learningAlgorithm == LearningAlgorithm.QL)
-            QL_logic.Update();
+        switch (learningAlgorithm)
+        {
+            case LearningAlgorithms.NEAT:
+                switch (mode)
+                {
+                    case Modes.LEARN:
+                        NEAT_logic.Learn();
+                        break;
+                    case Modes.CHECK:
+                        NEAT_logic.Check();
+                        break;
+                }
+
+                break;
+            case LearningAlgorithms.QL:
+                switch (mode)
+                {
+                    case Modes.LEARN:
+                        QL_logic.Learn();
+                        break;
+                    case Modes.CHECK:
+                        QL_logic.Check();
+                        break;
+                }
+                break;
+        }
     }
 }

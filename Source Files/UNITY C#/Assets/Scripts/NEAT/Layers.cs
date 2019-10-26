@@ -7,7 +7,7 @@ namespace Assets.Scripts.NEAT
     {
         private readonly UpdateThreads updateThreads;
 
-        public static Population[] Populations { get; set; }
+        public static Population[] Populations;
 
         private struct UpdateThreads : IJobParallelFor
         {
@@ -26,12 +26,12 @@ namespace Assets.Scripts.NEAT
             }
         }
 
-        public Layers(ref int directionArraySize, ref int populationQuantity, ref int layersQuantity)
+        public Layers(int directionArraySize, int populationQuantity, int layersQuantity, float mutationRate, float speed, float maxSpeed)
         {
             updateThreads = new UpdateThreads();
             Populations = new Population[layersQuantity];
             for (int i = 0; i < Populations.Length; i++)
-                Populations[i] = new Population(directionArraySize, populationQuantity, layersQuantity);
+                Populations[i] = new Population(directionArraySize, populationQuantity, layersQuantity, mutationRate, speed, maxSpeed);
         }
 
         public void Update()
