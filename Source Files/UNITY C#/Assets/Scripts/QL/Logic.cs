@@ -19,6 +19,8 @@ namespace Assets.Scripts.QL
 
         public Logic(Modes mode, Languages language, string pathIn, string pathOut)
         {
+            UnityEngine.Object.Destroy(GameObject.Find("NEAT"));
+
             playing = true;
             initialsK = 0;
             iterationsK = 0;

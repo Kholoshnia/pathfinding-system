@@ -14,13 +14,11 @@ namespace Assets.Scripts.NEAT
         private Vector3[] acc;
         private Vector3 vel, pos;
 
-        private GameObject[] way;
+        private readonly GameObject[] way;
         private readonly GameObject[] cubes;
 
-        private bool pause;
-
-        private string pathIn, pathOut;
         private Languages language;
+        private readonly string pathIn, pathOut;
 
         private readonly bool autoEnd;
 
@@ -31,66 +29,66 @@ namespace Assets.Scripts.NEAT
 
         public Logic(Modes mode, Languages language, string pathIn, string pathOut)
         {
-            if (mode == Modes.LEARN)
+            UnityEngine.Object.Destroy(GameObject.Find("QL"));
+
+            this.pathIn = pathIn;
+            this.pathOut = pathOut;
+            this.language = language;
+
+            GameObject goal = GameObject.FindWithTag("Goal");
+            GameObject start = GameObject.FindWithTag("Start");
+
+            FileStream fin = new FileStream(pathIn, FileMode.Open);
+
+            using (StreamReader reader = new StreamReader(fin))
             {
-                this.pathIn = pathIn;
-                this.pathOut = pathOut;
-                this.language = language;
-
-                GameObject goal = GameObject.FindWithTag("Goal");
-                GameObject start = GameObject.FindWithTag("Start");
-
-                FileStream fin = new FileStream(pathIn, FileMode.Open);
-
-                using (StreamReader reader = new StreamReader(fin))
+                int numberOfObjects = Convert.ToInt32(reader.ReadLine());
+                cubes = new GameObject[numberOfObjects - 2];
+                reader.ReadLine();
+                goal.transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                goal.transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                goal.transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                reader.ReadLine();
+                start.transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                start.transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                start.transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                for (int i = 0; i < numberOfObjects - 2; i++)
                 {
-                    int numberOfObjects = Convert.ToInt32(reader.ReadLine());
-                    cubes = new GameObject[numberOfObjects - 2];
                     reader.ReadLine();
-                    goal.transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    goal.transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    goal.transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    reader.ReadLine();
-                    start.transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    start.transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    start.transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    for (int i = 0; i < numberOfObjects - 2; i++)
-                    {
-                        reader.ReadLine();
-                        cubes[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Wall"));
-                        cubes[i].transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                        cubes[i].transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                        cubes[i].transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    }
-
-                    if (Convert.ToInt32(reader.ReadLine()) == 0)
-                        for (int i = 1; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
-                            SceneManager.GetActiveScene().GetRootGameObjects()[i].SetActive(false);
-
-                    directionArraySize = Convert.ToInt32(reader.ReadLine());
-                    populationQuantity = Convert.ToInt32(reader.ReadLine());
-                    layersQuantity = Convert.ToInt32(reader.ReadLine());
-
-                    if (Convert.ToInt32(reader.ReadLine()) == 1) autoEnd = true;
-                    else autoEnd = false;
-
-                    autoExit = Convert.ToInt32(reader.ReadLine());
-                    speed = Convert.ToSingle(reader.ReadLine());
-                    maxSpeed = Convert.ToSingle(reader.ReadLine());
-                    mutationRate = Convert.ToSingle(reader.ReadLine());
+                    cubes[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Wall"));
+                    cubes[i].transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                    cubes[i].transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                    cubes[i].transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
                 }
-                fin.Close();
 
-                UnityEngine.Object.Destroy(GameObject.FindWithTag("Wall"));
+                if (Convert.ToInt32(reader.ReadLine()) == 0)
+                    for (int i = 1; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
+                        SceneManager.GetActiveScene().GetRootGameObjects()[i].SetActive(false);
 
-                layers = new Layers(directionArraySize, populationQuantity, layersQuantity, mutationRate, speed, maxSpeed);
+                directionArraySize = Convert.ToInt32(reader.ReadLine());
+                populationQuantity = Convert.ToInt32(reader.ReadLine());
+                layersQuantity = Convert.ToInt32(reader.ReadLine());
+
+                if (Convert.ToInt32(reader.ReadLine()) == 1) autoEnd = true;
+                else autoEnd = false;
+
+                autoExit = Convert.ToInt32(reader.ReadLine());
+                speed = Convert.ToSingle(reader.ReadLine());
+                maxSpeed = Convert.ToSingle(reader.ReadLine());
+                mutationRate = Convert.ToSingle(reader.ReadLine());
             }
+            fin.Close();
+
+            UnityEngine.Object.Destroy(GameObject.FindWithTag("Wall"));
+
+            if (mode == Modes.LEARN)
+                layers = new Layers(directionArraySize, populationQuantity, layersQuantity, mutationRate, speed, maxSpeed);
             else if (mode == Modes.CHECK)
             {
                 pos = GameObject.FindWithTag("Start").transform.position;
                 vel = Vector3.zero;
 
-                FileStream fin2 = new FileStream(pathIn, FileMode.Open);
+                FileStream fin2 = new FileStream(pathOut, FileMode.Open);
 
                 using (StreamReader reader = new StreamReader(fin2))
                 {
@@ -153,7 +151,7 @@ namespace Assets.Scripts.NEAT
 
         public void Check()
         {
-            if (pause)
+            if (k < acc.Length)
             {
                 if (Mathf.Abs(vel.x + acc[k].x) < maxSpeed) vel.x += acc[k].x;
                 if (Mathf.Abs(vel.y + acc[k].y) < maxSpeed) vel.y += acc[k].y;
@@ -163,8 +161,6 @@ namespace Assets.Scripts.NEAT
                 way[k].transform.position = pos;
 
                 k++;
-
-                pause &= k < acc.Length;
             }
         }
     };

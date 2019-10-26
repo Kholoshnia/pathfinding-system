@@ -23,10 +23,10 @@ public class Main : MonoBehaviour
                 path = "";
                 break;
             case RuntimePlatform.OSXEditor:
-                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data.txt";
+                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data-macos.txt";
                 break;
             case RuntimePlatform.OSXPlayer:
-                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data.txt";
+                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data-macos.txt";
                 break;
         }
 
