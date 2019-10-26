@@ -5,6 +5,7 @@ namespace Assets.Scripts.NEAT
     public class Agent
     {
         private Color color;
+        private float maxSpeed;
         private Vector3 pos, vel, acc;
 
         public bool Dead { get; set; }
@@ -15,30 +16,31 @@ namespace Assets.Scripts.NEAT
         public bool ReachedGoal { get; private set; }
         public Color Color { get => color; set => color = value; }
 
-        public Agent(int directionArraySize)
+        public Agent(int directionArraySize, float mutationRate, float speed, float maxSpeed)
         {
-            Sphere = Object.Instantiate(GameObject.FindWithTag("Start"));
-            Brain = new Brain(directionArraySize);
             Fitness = 0;
             Dead = false;
-            ReachedGoal = false;
             IsBest = false;
-            pos = GameObject.FindWithTag("Start").transform.position;
+            ReachedGoal = false;
+            Brain = new Brain(directionArraySize, mutationRate, speed);
+            Sphere = Object.Instantiate(GameObject.FindWithTag("Start"));
             vel = Vector3.zero;
             acc = Vector3.zero;
+            pos = Sphere.transform.position;
+            this.maxSpeed = maxSpeed;
         }
 
         private void Move()
         {
-            if (Brain.Directions.GetLength(0) > Brain.Step)
+            if (Brain.Directions.Length > Brain.Step)
             {
                 acc = Brain.Directions[Brain.Step];
-                Brain.Step++;
+                Brain.IncStep();
             }
             else Dead = true;
-            if (Mathf.Abs(vel.x + acc.x) < 5) vel.x += acc.x;
-            if (Mathf.Abs(vel.y + acc.y) < 5) vel.y += acc.y;
-            if (Mathf.Abs(vel.z + acc.z) < 5) vel.z += acc.z;
+            if (Mathf.Abs(vel.x + acc.x) < maxSpeed) vel.x += acc.x;
+            if (Mathf.Abs(vel.y + acc.y) < maxSpeed) vel.y += acc.y;
+            if (Mathf.Abs(vel.z + acc.z) < maxSpeed) vel.z += acc.z;
             pos += vel;
             Sphere.transform.position = pos;
         }
@@ -52,21 +54,15 @@ namespace Assets.Scripts.NEAT
                     ReachedGoal = true;
                 else Dead |= Sphere.GetComponent<OnCollision>().touchedWall;
             }
-
-            if (IsBest)
-                Sphere.GetComponent<MeshRenderer>().material.color = new Color(0, 255, 0);
-            else
-                Sphere.GetComponent<MeshRenderer>().material.color = color;
+            Sphere.GetComponent<MeshRenderer>().material.color = IsBest ? Color.green : color;
         }
 
         public void CalculateFitness()
         {
-            if (ReachedGoal)
-                Fitness = 100000.0f / (Brain.Step * Brain.Step);
-            else
-                Fitness = 1.0f / (GameObject.FindWithTag("Goal").GetComponent<Information>().GetDistance(Sphere) * GameObject.FindWithTag("Goal").GetComponent<Information>().GetDistance(Sphere));
+            if (ReachedGoal) Fitness = Brain.Directions.Length / (Brain.Step * Brain.Step);
+            else Fitness = 1.0f / Mathf.Pow(GameObject.FindWithTag("Goal").GetComponent<Information>().GetDistance(Sphere), 2);
         }
 
-        public Agent GetCopy() { return new Agent(Brain.Directions.Length) { Brain = Brain.Clone() }; }
+        public Agent GetCopy() { return new Agent(Brain.Directions.Length, Brain.MutationRate, Brain.Speed, maxSpeed) { Brain = Brain.Clone() }; }
     };
 }

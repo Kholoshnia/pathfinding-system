@@ -11,7 +11,7 @@ namespace Assets.Scripts.QL
         private long[,] R;
         private long[,] Q;
 
-        public Table(ref long finishReward, ref Vector3Int mapSize, ref Map map)
+        public Table(long finishReward, Vector3Int mapSize, Map map)
         {
             this.mapSize = mapSize;
 
@@ -86,7 +86,7 @@ namespace Assets.Scripts.QL
             }
         }
 
-        public void Episode(int initState, ref GameObject agent)
+        public void Episode(int initState)
         {
             state = initState;
             if (state != finishState)
