@@ -6,8 +6,21 @@ public class Main : MonoBehaviour
 
     [SerializeField] private bool checker;
     [SerializeField] private LearningAlgorithm learningAlgorithm;
-    [SerializeField] private string pathForMap;
-    [SerializeField] private string pathForResult;
+    private string pathForMap;
+    private string pathForResult;
+
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+    {
+        pathForMap = "";
+        pathForResult = "";
+    }
+    else
+    {
+        pathForMap = "";
+        pathForResult = "";
+    }
+
+
 
     private Assets.Scripts.NEAT.Logic NEAT_logic;
     private Assets.Scripts.QL.Logic QL_logic;
