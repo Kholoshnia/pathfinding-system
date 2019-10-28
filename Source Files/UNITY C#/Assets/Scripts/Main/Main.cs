@@ -23,10 +23,10 @@ public class Main : MonoBehaviour
                 path = "";
                 break;
             case RuntimePlatform.OSXEditor:
-                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data-macos.txt";
+                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data-ql-macos.csv";
                 break;
             case RuntimePlatform.OSXPlayer:
-                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data-macos.txt";
+                path = "/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/3D/Data Files/data-ql-macos.csv";
                 break;
         }
 
@@ -106,7 +106,6 @@ public class Main : MonoBehaviour
                         NEAT_logic.Check();
                         break;
                 }
-
                 break;
             case LearningAlgorithms.QL:
                 switch (mode)

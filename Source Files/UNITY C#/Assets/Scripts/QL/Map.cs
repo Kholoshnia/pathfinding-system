@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.QL
@@ -14,62 +11,11 @@ namespace Assets.Scripts.QL
         public GameObject finish;
         public List<GameObject> spaces, walls;
 
-        public Map(Vector3Int mapSize, string pathIn)
+        public Map()
         {
-            FileStream fin = new FileStream(pathIn, FileMode.Open);
-
-            using (StreamReader reader = new StreamReader(fin))
-            {
-                mapSize = new Vector3Int(Convert.ToInt32(reader.ReadLine()), Convert.ToInt32(reader.ReadLine()), Convert.ToInt32(reader.ReadLine()));
-                map = new char[mapSize.z, mapSize.y, mapSize.x];
-
-                for (int z = 0; z < mapSize.z; z++)
-                    for (int y = 0; y < mapSize.y; y++)
-                    {
-                        for (int x = 0; x < mapSize.x; x++)
-                            map[z, x, y] = (char)reader.Read();
-                        reader.Read();
-                    }
-            }
-            fin.Close();
-
-            spaces = new List<GameObject>();
-            walls = new List<GameObject>();
-
-            GameObject space = GameObject.Find("QL_Space"), wall = GameObject.Find("QL_Wall"), goal = GameObject.Find("QL_Goal");
-
             initials = new List<int>();
-
-            int k = 0;
-            for (int z = 0; z < mapSize.z; z++)
-                for (int y = 0; y < mapSize.y; y++)
-                    for (int x = 0; x < mapSize.x; x++)
-                    {
-                        space.transform.position = new Vector3(x, y, z);
-                        wall.transform.position = new Vector3(x, y, z);
-                        goal.transform.position = new Vector3(x, y, z);
-
-                        if (map[z, x, y] == 'B')
-                        {
-                            spaces.Add(UnityEngine.Object.Instantiate(space));
-                            initials.Add(k);
-                            k++;
-                        }
-                        if (map[z, x, y] == 'W')
-                        {
-                            walls.Add(UnityEngine.Object.Instantiate(wall));
-                            k++;
-                        }
-                        if (map[z, x, y] == 'F')
-                        {
-                            finish = UnityEngine.Object.Instantiate(goal);
-                            k++;
-                        }
-                    }
-
-            UnityEngine.Object.Destroy(space);
-            UnityEngine.Object.Destroy(wall);
-            UnityEngine.Object.Destroy(goal);
+            walls = new List<GameObject>();
+            spaces = new List<GameObject>();
 
             /*int x = 0, y = 0, z = 0;
             for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)
@@ -93,6 +39,45 @@ namespace Assets.Scripts.QL
                     tempMapSize = new Vector3Int((int)spaces[i].transform.position.x , (int)spaces[i].transform.position.y, (int)spaces[i].transform.position.z);
 
             mapSize = tempMapSize;*/
+        }
+
+        public void Initialize(Vector3Int mapSize)
+        {
+            GameObject space = GameObject.Find("QL_Space"), wall = GameObject.Find("QL_Wall"), goal = GameObject.Find("QL_Goal");
+
+            int k = 0;
+            for (int z = 0; z < mapSize.z; z++)
+                for (int y = 0; y < mapSize.y; y++)
+                    for (int x = 0; x < mapSize.x; x++)
+                    {
+                        space.transform.position = new Vector3(x, y, z);
+                        wall.transform.position = new Vector3(x, y, z);
+                        goal.transform.position = new Vector3(x, y, z);
+
+                        if (map[z, x, y] == 'B')
+                        {
+                            spaces.Add(Object.Instantiate(space));
+                            initials.Add(k);
+                            k++;
+                        }
+                        if (map[z, x, y] == 'W')
+                        {
+                            walls.Add(Object.Instantiate(wall));
+                            k++;
+                        }
+                        if (map[z, x, y] == 'F')
+                        {
+                            finish = Object.Instantiate(goal);
+                            k++;
+                        }
+                    }
+
+            for (int i = 0; i < spaces.Count; i++)
+                spaces[i].name = "Position " + i;
+
+            Object.Destroy(space);
+            Object.Destroy(wall);
+            Object.Destroy(goal);
         }
     };
 }

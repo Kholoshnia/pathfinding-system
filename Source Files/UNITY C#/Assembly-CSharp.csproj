@@ -64,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Main\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Main\DropdownStartPositions.cs" />
+    <Compile Include="Assets\Scripts\Main\DropdownWalls.cs" />
     <Compile Include="Assets\Scripts\Main\Enums.cs" />
     <Compile Include="Assets\Scripts\Main\Information.cs" />
     <Compile Include="Assets\Scripts\Main\Main.cs" />

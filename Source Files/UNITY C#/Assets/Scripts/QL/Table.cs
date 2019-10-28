@@ -5,14 +5,15 @@ namespace Assets.Scripts.QL
     class Table
     {
         Vector3Int mapSize;
-        const float gamma = 0.8f;
-        int state, action, finishState;
+        private readonly float gamma;
+        private int state, finishState;
 
-        private long[,] R;
-        private long[,] Q;
+        public long[,] R;
+        public long[,] Q;
 
-        public Table(long finishReward, Vector3Int mapSize, Map map)
+        public Table(long finishReward, Vector3Int mapSize, Map map, float gamma)
         {
+            this.gamma = gamma;
             this.mapSize = mapSize;
 
             R = new long[mapSize.x * mapSize.y * mapSize.z, mapSize.x * mapSize.y * mapSize.z];
@@ -98,7 +99,7 @@ namespace Assets.Scripts.QL
                 ChooseAnAction();
         }
 
-        int InferenceBestAction(int nowState)
+        public Vector3 InferenceBestAction(int nowState, ref Map map)
         {
             double tempMaxQ = 0;
             int bestAction = 0;
@@ -108,7 +109,7 @@ namespace Assets.Scripts.QL
                     tempMaxQ = Q[nowState, i];
                     bestAction = i;
                 }
-            return bestAction;
+            return map.spaces[bestAction].transform.position;
         }
 
         long Maximum(int st, bool returnIndexOnly)
@@ -122,7 +123,7 @@ namespace Assets.Scripts.QL
             do
             {
                 foundNewWinner = false;
-                for (int i = 0; i < mapSize.x * mapSize.y *mapSize.z; i++)
+                for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)
                     if ((i < winner) || (i > winner))
                         if (Q[st, i] > Q[st, winner])
                         {

@@ -12,9 +12,14 @@ public class OnCollision : MonoBehaviour
 
     public void OnCollisionEnter(Collision collisionInfo)
     {
-        if (collisionInfo.collider.tag == "Goal")
-            touchedGoal = true;
-        else
-            touchedWall = true;
+        switch (collisionInfo.collider.tag)
+        {
+            case "Goal":
+                touchedGoal = true;
+                break;
+            default:
+                touchedWall = true;
+                break;
+        }
     }
 }

@@ -1,107 +1,210 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.QL
 {
     class Logic
     {
+        List<Vector3> moves;
+
+        int k;
+        Vector3 position;
+        bool done;
+
         private Map map;
         private Table table;
-        private GameObject agent;
+        private GameObject agent, agent2; //Debug
         private Vector3Int mapSize;
-        private readonly string pathIn;
-        private readonly string pathOut;
-        private int finishState, iterations;
-        int iterationsK, initialsK;
-        bool playing;
+
+        private bool pause; //Debug
+
+        private Modes mode;
+        private Languages language;
+
         private long finishReward;
+        private int iterationsK, initialsK;
+        private int finishState, iterations;
+        private readonly string pathIn, pathOut;
 
         public Logic(Modes mode, Languages language, string pathIn, string pathOut)
         {
-            UnityEngine.Object.Destroy(GameObject.Find("NEAT"));
+            k = 0;
 
-            playing = true;
-            initialsK = 0;
-            iterationsK = 0;
-            map = new Map(mapSize, pathIn);
+            UnityEngine.Object.Destroy(GameObject.Find("NEAT"));
+            UnityEngine.Object.Destroy(GameObject.Find("NEAT_Canvas"));
+
             this.pathIn = pathIn;
             this.pathOut = pathOut;
-            table = new Table(finishReward, mapSize, map);
+
+            this.mode = mode;
+            this.language = language;
+
+            map = new Map();
+
+            float gamma;
+
+            FileStream fin = new FileStream(pathIn, FileMode.Open);
+
+            using (StreamReader reader = new StreamReader(fin))
+            {
+                mapSize = new Vector3Int(Convert.ToInt32(reader.ReadLine()), Convert.ToInt32(reader.ReadLine()), Convert.ToInt32(reader.ReadLine()));
+                map.map = new char[mapSize.z, mapSize.y, mapSize.x];
+
+                for (int z = 0; z < mapSize.z; z++)
+                    for (int y = 0; y < mapSize.y; y++)
+                    {
+                        for (int x = 0; x < mapSize.x; x++)
+                            map.map[z, x, y] = (char)reader.Read();
+                        reader.Read();
+                    }
+
+                gamma = Convert.ToSingle(reader.ReadLine());
+                iterations = Convert.ToInt32(reader.ReadLine());
+            }
+            fin.Close();
+
+            map.Initialize(mapSize);
+
             agent = GameObject.FindWithTag("Start");
-            UnityEngine.Object.Destroy(GameObject.Find("NEAT"));
-            finishReward = (long)Math.Pow(mapSize.x * mapSize.y * mapSize.z, 3);
+            agent2 = UnityEngine.Object.Instantiate(agent);
+
+            for (int j = 0; j < map.walls.Count; j++)
+                GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.walls[j].name });
+
+            if (mode == Modes.LEARN)
+            {
+                initialsK = 0;
+                iterationsK = 0;
+
+                finishReward = (long)Math.Pow(mapSize.x * mapSize.y * mapSize.z, 3);
+
+                table = new Table(finishReward, mapSize, map, gamma);
+                
+                UnityEngine.Object.Destroy(GameObject.FindWithTag("StartPositions"));
+                
+            }
+            else if (mode == Modes.CHECK)
+            {
+                moves = new List<Vector3>();
+
+                FileStream fresult = new FileStream(pathOut, FileMode.Open);
+
+                table = new Table(finishReward, mapSize, map, gamma);
+
+                using (StreamReader reader = new StreamReader(fresult))
+                {
+                    for (int action = 0; action < mapSize.x * mapSize.y * mapSize.z; action++)
+                        for (int state = 0; state < mapSize.x * mapSize.y * mapSize.z; state++)
+                            table.Q[action, state] = reader.Read();
+                }
+                fresult.Close();
+
+                for (int j = 0; j < map.walls.Count; j++)
+                    for (int i = 0; i < map.spaces.Count; i++)
+                        if (map.spaces[i] != map.walls[j] || map.spaces[i] != map.finish)
+                            GameObject.FindWithTag("StartPositions").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.spaces[i].name });
+            }
         }
 
         public void Learn()
         {
-            List<int> moves;
-
-            int position, k = 0;
-            bool done = false, playing = true;
-
-            while (playing)
+            if (!pause)
             {
-                if (!done)
-                {
-                    /*if (Input.GetKeyUp(KeyCode.Mouse0))
-                    {
-                    position = map_size_y * (event.mouseMove.y / (width / map_size_y)) + event.mouseMove.x / (width / map_size_x);
-				                    moves.emplace_back(position);
-				                    if (std::find(initials.begin(), initials.end(), position) != initials.end())
-				                    {
-					                    moves.Add(position);
-					                    while (true)
-					                    {
-						                    int best_action = table->inference_best_action(position);
-                                            moves.emplace_back(best_action);
-						                    if (best_action == finish_state) break;
-						                    else position = best_action;
-					                    }
-                                        done = true;
-				                    }
-			                    }
-		                    }*/
-                }
-                else
-                {
-                    /*agent->show(window);
-                    agent->update(moves[k]);
-                    k++;
+                table.Episode(map.initials[initialsK]);
 
-			        if (k > moves.size() - 1)
+                initialsK++;
+
+                if (initialsK > map.initials.Count - 1)
+                {
+                    initialsK = 0;
+                    iterationsK++;
+                }
+
+                if (iterationsK > iterations)
+                {
+                    FileStream fout = new FileStream(pathOut, FileMode.Create);
+
+                    using (StreamWriter writer = new StreamWriter(fout))
                     {
-				        moves.clear();
-				        k = 0;
-				        done = false;
-			        }*/
+                        for (int action = 0; action < mapSize.x * mapSize.y * mapSize.z; action++)
+                        {
+                            for (int state = 0; state < mapSize.x * mapSize.y * mapSize.z; state++)
+                            {
+                                writer.Write(table.Q[action, state]);
+                                writer.Write(' ');
+                            }
+                            writer.WriteLine();
+                        }
+                    }
+                    fout.Close();
+                    pause = true;
+                    Application.Quit();
+                }
+
+                if (language == Languages.EN)
+                {
+                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.initials[initialsK];
+                    GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + iterationsK;
+                }
+                else if (language == Languages.RU)
+                {
+                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Позиция: " + map.initials[initialsK];
+                    GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Итерация: " + iterationsK;
                 }
             }
         }
 
         public void Check()
         {
-            table.Episode(map.initials[initialsK]);
-
-            /*std::ostringstream initials_str;
-            initials_str << initials[initials_k];
-            text[1].setString(initials_str.str());
-
-            std::ostringstream iterations_str;
-            iterations_str << iterations_k;
-            text[3].setString(iterations_str.str());*/
-
-            initialsK++;
-
-            if (initialsK > map.initials.Count - 1)
+            if (!done)
             {
-                initialsK = 0;
-                iterationsK++;
+                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
+                {
+                    position = map.spaces[GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value].transform.position;
+                    moves.Add(position);
+
+                    bool found = false;
+                    for (int i = 0; i < map.initials.Count; i++)
+                        if (map.spaces[map.initials[i]].transform.position == position)
+                        {
+                            found = true;
+                            break;
+                        }
+
+                    if (found)
+                    {
+                        while (true)
+                        {
+                            Vector3 bestAction = table.InferenceBestAction((int)(mapSize.z * position.x + mapSize.y * position.y + position.x), ref map);
+                            moves.Add(bestAction);
+                            if (bestAction == map.finish.transform.position) break;
+                            position = bestAction;
+                            if (moves.Count > 20)
+                                done = true;
+                        }
+                        done = true;
+                    }
+                }
             }
-
-            if (iterationsK > iterations)
+            else
             {
+                agent2.transform.position = moves[k];
 
+                if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    k++;
+
+                    if (k > moves.Count - 1)
+                    {
+                        moves.Clear();
+                        k = 0;
+                        done = false;
+                    }
+                }
             }
         }
     }

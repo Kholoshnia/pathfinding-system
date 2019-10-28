@@ -12,6 +12,12 @@ TagManager:
   - TextGen
   - TextReachedTheGoal
   - Space
+  - ImagePosition
+  - ImageIteration
+  - TextPosition
+  - TextIteration
+  - Walls
+  - StartPositions
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,7 @@ namespace Assets.Scripts.NEAT
         private Vector3 vel, pos;
 
         private readonly GameObject[] way;
-        private readonly GameObject[] cubes;
+        public readonly GameObject[] walls;
 
         private Languages language;
         private readonly string pathIn, pathOut;
@@ -30,6 +30,7 @@ namespace Assets.Scripts.NEAT
         public Logic(Modes mode, Languages language, string pathIn, string pathOut)
         {
             UnityEngine.Object.Destroy(GameObject.Find("QL"));
+            UnityEngine.Object.Destroy(GameObject.Find("QL_Canvas"));
 
             this.pathIn = pathIn;
             this.pathOut = pathOut;
@@ -43,7 +44,7 @@ namespace Assets.Scripts.NEAT
             using (StreamReader reader = new StreamReader(fin))
             {
                 int numberOfObjects = Convert.ToInt32(reader.ReadLine());
-                cubes = new GameObject[numberOfObjects - 2];
+                walls = new GameObject[numberOfObjects - 2];
                 reader.ReadLine();
                 goal.transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
                 goal.transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
@@ -55,10 +56,11 @@ namespace Assets.Scripts.NEAT
                 for (int i = 0; i < numberOfObjects - 2; i++)
                 {
                     reader.ReadLine();
-                    cubes[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Wall"));
-                    cubes[i].transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    cubes[i].transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    cubes[i].transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                    walls[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Wall"));
+                    walls[i].name = "Wall " + i;
+                    walls[i].transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                    walls[i].transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                    walls[i].transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
                 }
 
                 if (Convert.ToInt32(reader.ReadLine()) == 0)
@@ -108,6 +110,9 @@ namespace Assets.Scripts.NEAT
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextGen"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("ImageGen"));
             }
+
+            for (int i = 0; i < walls.Length; i++)
+                GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = walls[i].name });
         }
 
         public void Learn()
