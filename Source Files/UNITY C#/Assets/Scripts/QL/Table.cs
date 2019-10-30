@@ -69,7 +69,9 @@ namespace Assets.Scripts.QL
                         if (map.map[z, y, x] == 'F')
                         {
                             R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x] = finishReward;
-                            finishState = mapSize.z * z + mapSize.y * y + x;
+                            for (int i = 0; i < map.spaces.Count; i++)
+                                if (map.spaces[i].transform.position == map.finish.transform.position)
+                                    finishState = i;
                         }
                     }
 
@@ -99,7 +101,7 @@ namespace Assets.Scripts.QL
                 ChooseAnAction();
         }
 
-        public Vector3 InferenceBestAction(int nowState, ref Map map)
+        public int InferenceBestAction(int nowState)
         {
             double tempMaxQ = 0;
             int bestAction = 0;
@@ -109,7 +111,7 @@ namespace Assets.Scripts.QL
                     tempMaxQ = Q[nowState, i];
                     bestAction = i;
                 }
-            return map.spaces[bestAction].transform.position;
+            return bestAction;
         }
 
         public long Maximum(int st, bool returnIndexOnly)

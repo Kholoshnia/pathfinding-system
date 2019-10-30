@@ -166,37 +166,10 @@ namespace Assets.Scripts.QL
         {
             if (!done)
             {
-                /*if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
-                {
-                    position = map.spaces[GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value].transform.position;
-                    moves.Add(position);
-
-                    bool found = false;
-                    for (int i = 0; i < map.initials.Count; i++)
-                        if (map.spaces[map.initials[i]].transform.position == position)
-                        {
-                            found = true;
-                            break;
-                        }
-
-                    if (found)
-                    {
-                        while (true)
-                        {
-                            Vector3 bestAction = table.InferenceBestAction((int)(mapSize.z * position.x + mapSize.y * position.y + position.x), ref map);
-                            moves.Add(bestAction);
-                            if (bestAction == map.finish.transform.position) break;
-                            position = bestAction;
-                            if (moves.Count > 20)
-                                done = true;
-                        }
-                        done = true;
-                    }
-                }*/
-
-                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
+                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0 && GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().valueChanged)
                 {
                     position = map.spaces[GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1].transform.position;
+                    int nowState = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1;
                     moves.Add(position);
 
                     bool found = false;
@@ -206,20 +179,20 @@ namespace Assets.Scripts.QL
                             found = true;
                             break;
                         }
-
                     if (found)
                     {
                         while (true)
                         {
-                            Vector3 bestAction = table.InferenceBestAction((int)(mapSize.z * position.x + mapSize.y * position.y + position.x), ref map);
+                            nowState = table.InferenceBestAction(nowState);
+                            Vector3 bestAction = map.spaces[nowState].transform.position;
                             moves.Add(bestAction);
                             if (bestAction == map.finish.transform.position) break;
                             position = bestAction;
                             if (moves.Count > 20)
-                                done = true;
+                                break;
                         }
-                        done = true;
                     }
+                    done = true;
                 }
             }
             else
@@ -235,6 +208,8 @@ namespace Assets.Scripts.QL
                         moves.Clear();
                         k = 0;
                         done = false;
+                        GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value = 0;
+                        GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().valueChanged = false;
                     }
                 }
             }
