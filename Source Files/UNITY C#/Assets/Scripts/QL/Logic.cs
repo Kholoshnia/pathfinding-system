@@ -98,8 +98,12 @@ namespace Assets.Scripts.QL
                 using (StreamReader reader = new StreamReader(fresult))
                 {
                     for (int action = 0; action < mapSize.x * mapSize.y * mapSize.z; action++)
+                    {
+                        string text = reader.ReadLine();
+                        string[] bits = text.Split(' ');
                         for (int state = 0; state < mapSize.x * mapSize.y * mapSize.z; state++)
-                            table.Q[action, state] = reader.Read();
+                            table.Q[action, state] = Convert.ToInt64(bits[state]);
+                    }
                 }
                 fresult.Close();
 
@@ -162,9 +166,37 @@ namespace Assets.Scripts.QL
         {
             if (!done)
             {
-                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
+                /*if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
                 {
                     position = map.spaces[GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value].transform.position;
+                    moves.Add(position);
+
+                    bool found = false;
+                    for (int i = 0; i < map.initials.Count; i++)
+                        if (map.spaces[map.initials[i]].transform.position == position)
+                        {
+                            found = true;
+                            break;
+                        }
+
+                    if (found)
+                    {
+                        while (true)
+                        {
+                            Vector3 bestAction = table.InferenceBestAction((int)(mapSize.z * position.x + mapSize.y * position.y + position.x), ref map);
+                            moves.Add(bestAction);
+                            if (bestAction == map.finish.transform.position) break;
+                            position = bestAction;
+                            if (moves.Count > 20)
+                                done = true;
+                        }
+                        done = true;
+                    }
+                }*/
+
+                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
+                {
+                    position = map.spaces[GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1].transform.position;
                     moves.Add(position);
 
                     bool found = false;

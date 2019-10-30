@@ -112,7 +112,7 @@ namespace Assets.Scripts.QL
             return map.spaces[bestAction].transform.position;
         }
 
-        long Maximum(int st, bool returnIndexOnly)
+        public long Maximum(int st, bool returnIndexOnly)
         {
             int winner;
             bool done = false;
