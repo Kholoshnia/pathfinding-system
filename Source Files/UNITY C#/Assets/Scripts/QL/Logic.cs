@@ -58,7 +58,7 @@ namespace Assets.Scripts.QL
                     for (int y = 0; y < mapSize.y; y++)
                     {
                         for (int x = 0; x < mapSize.x; x++)
-                            map.map[z, x, y] = (char)reader.Read();
+                            map.map[z, y, x] = (char)reader.Read();
                         reader.Read();
                     }
 
@@ -127,7 +127,7 @@ namespace Assets.Scripts.QL
                     iterationsK++;
                 }
 
-                if (iterationsK > iterations)
+                if (iterationsK >= iterations)
                 {
                     FileStream fout = new FileStream(pathOut, FileMode.Create);
 
@@ -199,6 +199,10 @@ namespace Assets.Scripts.QL
             else
             {
                 agent.transform.position = moves[k];
+
+                if (Input.GetKeyUp(KeyCode.Space))
+                    k++;
+
                 if (iterationsK > iterations)
                 {
                     if (k > moves.Count - 1)
