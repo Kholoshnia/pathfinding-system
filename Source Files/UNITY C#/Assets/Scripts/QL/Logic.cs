@@ -201,16 +201,18 @@ namespace Assets.Scripts.QL
                 agent.transform.position = moves[k];
 
                 if (Input.GetKeyUp(KeyCode.Space))
+                {
                     k++;
 
-                if (iterationsK > iterations)
-                {
-                    if (k > moves.Count - 1)
+                    if (iterationsK > iterations)
                     {
-                        k = 0;
-                        done = false;
-                        moves.Clear();
-                        GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value = 0;
+                        if (k > moves.Count - 1)
+                        {
+                            k = 0;
+                            done = false;
+                            moves.Clear();
+                            GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value = 0;
+                        }
                     }
                 }
             }
