@@ -2,9 +2,6 @@
 # Created by https://www.gitignore.io/api/unity,macos,windows,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=unity,macos,windows,visualstudio,visualstudiocode
 
-#Release Files
-!Release\ Files/
-
 ### macOS ###
 # General
 .DS_Store
@@ -457,5 +454,8 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+
+#Release Files
+!Release\ Files/
 
 # End of https://www.gitignore.io/api/unity,macos,windows,visualstudio,visualstudiocode
