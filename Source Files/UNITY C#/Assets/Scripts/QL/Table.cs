@@ -4,9 +4,10 @@ namespace Assets.Scripts.QL
 {
     class Table
     {
+        private int state;
         Vector3Int mapSize;
         private readonly float gamma;
-        private int state, finishState;
+        private readonly int finishState;
 
         public long[,] R;
         public long[,] Q;
@@ -22,8 +23,8 @@ namespace Assets.Scripts.QL
             for (int y = 0; y < mapSize.x * mapSize.y * mapSize.z; y++)
                 for (int x = 0; x < mapSize.x * mapSize.y * mapSize.z; x++)
                 {
-                    R[y, x] = -1;
-                    Q[y, x] = 0;
+                    R[y, x] = -1L;
+                    Q[y, x] = 0L;
                 }
 
             for (int z = 0; z < mapSize.z; z++)
@@ -56,15 +57,15 @@ namespace Assets.Scripts.QL
 
                         if (z - 1 >= 0)
                             if (map.map[z - 1, y, x] == 'B')
-                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = 0;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * (z - 1) + mapSize.y * y + x] = 0;
                             else if (map.map[z - 1, y, x] == 'F')
-                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = finishReward;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * (z - 1) + mapSize.y * y + x] = finishReward;
 
                         if (z + 1 < mapSize.z)
                             if (map.map[z + 1, y, x] == 'B')
-                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = 0;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * (z + 1) + mapSize.y * y + x] = 0;
                             else if (map.map[z + 1, y, x] == 'F')
-                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = finishReward;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * (z + 1) + mapSize.y * y + x] = finishReward;
 
                         if (map.map[z, y, x] == 'F')
                         {

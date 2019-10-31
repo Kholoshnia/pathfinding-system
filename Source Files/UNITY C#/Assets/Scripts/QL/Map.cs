@@ -27,7 +27,7 @@ namespace Assets.Scripts.QL
                 for (int y = mapSize.y - 1; y >= 0; y--)
                     for (int x = 0; x < mapSize.x; x++)
                     {
-                        space.transform.position = new Vector3(x, y, z);
+                        space.transform.position = new Vector3(x, mapSize.y - 1 - y, mapSize.z - 1 - z);
 
                         if (map[z, y, x] == 'B')
                         {
