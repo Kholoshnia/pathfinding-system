@@ -23,28 +23,28 @@ namespace Assets.Scripts.QL
             GameObject space = GameObject.Find("QL_Space"), wall = GameObject.Find("QL_Wall"), goal = GameObject.Find("QL_Goal");
 
             int k = 0;
-            for (int z = 0; z < mapSize.z; z++)
-                for (int y = 0; y < mapSize.y; y++)
+            for (int z = mapSize.z - 1; z >= 0; z--)
+                for (int y = mapSize.y - 1; y >= 0; y--)
                     for (int x = 0; x < mapSize.x; x++)
                     {
                         space.transform.position = new Vector3(x, y, z);
-                        wall.transform.position = new Vector3(x, y, z);
-                        goal.transform.position = new Vector3(x, y, z);
 
-                        if (map[z, x, y] == 'B')
+                        if (map[z, y, x] == 'B')
                         {
                             spaces.Add(Object.Instantiate(space));
                             initials.Add(k);
                             k++;
                         }
-                        if (map[z, x, y] == 'W')
+                        if (map[z, y, x] == 'W')
                         {
+                            wall.transform.position = new Vector3(x, y, z);
                             spaces.Add(Object.Instantiate(space));
                             walls.Add(Object.Instantiate(wall));
                             k++;
                         }
-                        if (map[z, x, y] == 'F')
+                        if (map[z, y, x] == 'F')
                         {
+                            goal.transform.position = new Vector3(x, y, z);
                             spaces.Add(Object.Instantiate(space));
                             finish = Object.Instantiate(goal);
                             k++;

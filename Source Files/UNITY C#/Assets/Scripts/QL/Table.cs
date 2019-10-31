@@ -5,10 +5,8 @@ namespace Assets.Scripts.QL
     class Table
     {
         Vector3Int mapSize;
-
-        private int state;
         private readonly float gamma;
-        private readonly int finishState;
+        private int state, finishState;
 
         public long[,] R;
         public long[,] Q;
@@ -70,8 +68,6 @@ namespace Assets.Scripts.QL
 
                         if (map.map[z, y, x] == 'F')
                         {
-                            R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x] = finishReward;
-                            finishState = mapSize.z * z + mapSize.y * y + x;
                             R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = finishReward;
                             for (int i = 0; i < map.spaces.Count; i++)
                                 if (map.spaces[i].transform.position == map.finish.transform.position)
@@ -85,10 +81,11 @@ namespace Assets.Scripts.QL
 
         void ChooseAnAction()
         {
-            if (R[state, GetRandomAction()] >= 0)
+            int possibleAction = GetRandomAction();
+            if (R[state, possibleAction] >= 0)
             {
-                Q[state, GetRandomAction()] = (long)(R[state, GetRandomAction()] + gamma * Maximum(GetRandomAction(), false));
-                state = GetRandomAction();
+                Q[state, possibleAction] = (long)(R[state, possibleAction] + gamma * Maximum(possibleAction, false));
+                state = possibleAction;
             }
         }
 
@@ -117,7 +114,7 @@ namespace Assets.Scripts.QL
             return bestAction;
         }
 
-        long Maximum(int st, bool returnIndexOnly)
+        public long Maximum(int st, bool returnIndexOnly)
         {
             int winner;
             bool done = false;
@@ -149,7 +146,7 @@ namespace Assets.Scripts.QL
             bool choiceIsValid = false;
             do
             {
-                act = Random.Range(0, mapSize.z * mapSize.y * mapSize.x - 1);
+                act = Random.Range(0, mapSize.x * mapSize.y * mapSize.z - 1);
                 choiceIsValid |= R[state, act] > -1;
             } while (!choiceIsValid);
             return act;

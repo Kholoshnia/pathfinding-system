@@ -9,26 +9,26 @@ namespace Assets.Scripts.QL
 {
     class Logic
     {
-        List<Vector3> moves;
+        private int k;
+        private bool done;
+        private float timer;
+        private Vector3 position;
+        private readonly List<Vector3> moves;
 
-        int k;
-        Vector3 position;
-        bool done;
-
-        private Map map;
-        private Table table;
-        private GameObject agent;
         private Vector3Int mapSize;
 
+        private readonly Map map;
+        private readonly Table table;
+        private readonly GameObject agent;
+
+        private readonly Modes mode;
+        private readonly Languages language;
+
         private bool pause;
-
-        private Modes mode;
-        private Languages language;
-
-        private long finishReward;
+        private readonly string pathOut;
+        private readonly int iterations;
+        private readonly long finishReward;
         private int iterationsK, initialsK;
-        private int finishState, iterations;
-        private readonly string pathIn, pathOut;
 
         public Logic(Modes mode, Languages language, string pathIn, string pathOut)
         {
@@ -37,7 +37,6 @@ namespace Assets.Scripts.QL
             UnityEngine.Object.Destroy(GameObject.Find("NEAT"));
             UnityEngine.Object.Destroy(GameObject.Find("NEAT_Canvas"));
 
-            this.pathIn = pathIn;
             this.pathOut = pathOut;
 
             this.mode = mode;
@@ -54,12 +53,12 @@ namespace Assets.Scripts.QL
                 mapSize = new Vector3Int(Convert.ToInt32(reader.ReadLine()), Convert.ToInt32(reader.ReadLine()), Convert.ToInt32(reader.ReadLine()));
                 map.map = new char[mapSize.z, mapSize.y, mapSize.x];
 
-                for (int z = 0; z < mapSize.z; z++)
-                    for (int y = 0; y < mapSize.y; y++)
+                for (int z = mapSize.z - 1; z >= 0; z--)
+                    for (int y = mapSize.y - 1; y >= 0; y--)
                     {
                         for (int x = 0; x < mapSize.x; x++)
                             map.map[z, y, x] = (char)reader.Read();
-                        reader.Read();
+                        reader.ReadLine();
                     }
 
                 gamma = Convert.ToSingle(reader.ReadLine());
@@ -71,9 +70,6 @@ namespace Assets.Scripts.QL
 
             agent = GameObject.Find("QL_Start");
 
-            for (int j = 0; j < map.walls.Count; j++)
-                GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.walls[j].name });
-
             if (mode == Modes.LEARN)
             {
                 initialsK = 0;
@@ -84,15 +80,17 @@ namespace Assets.Scripts.QL
                 table = new Table(finishReward, mapSize, map, gamma);
                 
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("StartPositions"));
-                
+
+                for (int j = 0; j < map.walls.Count; j++)
+                    GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.walls[j].name });
             }
             else if (mode == Modes.CHECK)
             {
+                agent.SetActive(false);
                 moves = new List<Vector3>();
+                table = new Table(finishReward, mapSize, map, gamma);
 
                 FileStream fresult = new FileStream(pathOut, FileMode.Open);
-
-                table = new Table(finishReward, mapSize, map, gamma);
 
                 using (StreamReader reader = new StreamReader(fresult))
                 {
@@ -106,10 +104,15 @@ namespace Assets.Scripts.QL
                 }
                 fresult.Close();
 
-                for (int j = 0; j < map.walls.Count; j++)
-                    for (int i = 0; i < map.spaces.Count; i++)
-                        if (map.spaces[i] != map.walls[j] || map.spaces[i] != map.finish)
-                            GameObject.FindWithTag("StartPositions").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.spaces[i].name });
+                for (int i = 0; i < map.spaces.Count; i++)
+                {
+                    bool notThere = true;
+                    for (int j = 0; j < map.walls.Count; j++)
+                        notThere &= map.spaces[i] != map.walls[j];
+
+                    if (notThere && map.spaces[i] != map.finish)
+                        GameObject.FindWithTag("StartPositions").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.spaces[i].name });
+                }
             }
         }
 
@@ -167,9 +170,8 @@ namespace Assets.Scripts.QL
             {
                 if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
                 {
-                    int nowValue = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1;
-                    position = map.spaces[nowValue].transform.position;
-                    int nowState = nowValue;
+                    int nowState = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1;
+                    position = map.spaces[nowState].transform.position;
                     moves.Add(position);
 
                     bool found = false;
@@ -189,31 +191,33 @@ namespace Assets.Scripts.QL
                             moves.Add(bestAction);
                             if (bestAction == map.finish.transform.position) break;
                             position = bestAction;
-                            if (moves.Count > mapSize.z * mapSize.y * mapSize.z)
+                            if (moves.Count > mapSize.z * mapSize.y * mapSize.x)
                                 break;
                         }
                     }
                     done = true;
+                    agent.SetActive(true);
                 }
             }
             else
             {
                 agent.transform.position = moves[k];
 
-                if (Input.GetKeyUp(KeyCode.Space))
+                timer += Time.deltaTime;
+
+                if (timer >= 0.25f)
                 {
                     k++;
+                    timer = 0;
+                }
 
-                    if (iterationsK > iterations)
-                    {
-                        if (k > moves.Count - 1)
-                        {
-                            k = 0;
-                            done = false;
-                            moves.Clear();
-                            GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value = 0;
-                        }
-                    }
+                if (k > moves.Count - 1)
+                {
+                    k = 0;
+                    done = false;
+                    moves.Clear();
+                    agent.SetActive(false);
+                    GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value = 0;
                 }
             }
         }
