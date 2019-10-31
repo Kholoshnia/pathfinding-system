@@ -3,7 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=unity,macos,windows,visualstudio,visualstudiocode
 
 #Release Files
-!Release Files/
+!Release\ Files/
 
 ### macOS ###
 # General
