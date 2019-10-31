@@ -147,8 +147,9 @@ namespace Assets.Scripts.QL
                         }
                     }
                     fout.Close();
-                    pause = true;
+
                     Application.Quit();
+                    pause = true;
                 }
 
                 if (language == Languages.EN)

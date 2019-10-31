@@ -54,6 +54,9 @@ namespace Assets.Scripts.QL
             for (int i = 0; i < spaces.Count; i++)
                 spaces[i].name = "Position " + i;
 
+            for (int i = 0; i < walls.Count; i++)
+                walls[i].name = "Walls " + i;
+
             Object.Destroy(space);
             Object.Destroy(wall);
             Object.Destroy(goal);

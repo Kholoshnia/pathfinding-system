@@ -105,7 +105,7 @@ namespace Assets.Scripts.QL
         {
             double tempMaxQ = 0;
             int bestAction = 0;
-            for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; ++i)
+            for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)
                 if (Q[nowState, i] > tempMaxQ)
                 {
                     tempMaxQ = Q[nowState, i];
