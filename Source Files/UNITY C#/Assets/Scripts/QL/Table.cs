@@ -10,11 +10,12 @@ namespace Assets.Scripts.QL
         private readonly float gamma;
         private readonly int finishState;
 
-        private long[,] R;
-        private long[,] Q;
+        public long[,] R;
+        public long[,] Q;
 
-        public Table(long finishReward, Vector3Int mapSize, Map map)
+        public Table(long finishReward, Vector3Int mapSize, Map map, float gamma)
         {
+            this.gamma = gamma;
             this.mapSize = mapSize;
 
             R = new long[mapSize.x * mapSize.y * mapSize.z, mapSize.x * mapSize.y * mapSize.z];
@@ -103,7 +104,7 @@ namespace Assets.Scripts.QL
                 ChooseAnAction();
         }
 
-        int InferenceBestAction(int nowState)
+        public int InferenceBestAction(int nowState)
         {
             double tempMaxQ = 0;
             int bestAction = 0;

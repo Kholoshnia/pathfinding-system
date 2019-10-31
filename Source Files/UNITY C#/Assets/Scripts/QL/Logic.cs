@@ -17,10 +17,10 @@ namespace Assets.Scripts.QL
 
         private Map map;
         private Table table;
-        private GameObject agent, agent2; //Debug
+        private GameObject agent;
         private Vector3Int mapSize;
 
-        private bool pause; //Debug
+        private bool pause;
 
         private Modes mode;
         private Languages language;
@@ -69,8 +69,7 @@ namespace Assets.Scripts.QL
 
             map.Initialize(mapSize);
 
-            agent = GameObject.FindWithTag("Start");
-            agent2 = UnityEngine.Object.Instantiate(agent);
+            agent = GameObject.Find("QL_Start");
 
             for (int j = 0; j < map.walls.Count; j++)
                 GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.walls[j].name });
@@ -166,10 +165,11 @@ namespace Assets.Scripts.QL
         {
             if (!done)
             {
-                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0 && GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().valueChanged)
+                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
                 {
-                    position = map.spaces[GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1].transform.position;
-                    int nowState = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1;
+                    int nowValue = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1;
+                    position = map.spaces[nowValue].transform.position;
+                    int nowState = nowValue;
                     moves.Add(position);
 
                     bool found = false;
@@ -179,6 +179,7 @@ namespace Assets.Scripts.QL
                             found = true;
                             break;
                         }
+
                     if (found)
                     {
                         while (true)
@@ -188,7 +189,7 @@ namespace Assets.Scripts.QL
                             moves.Add(bestAction);
                             if (bestAction == map.finish.transform.position) break;
                             position = bestAction;
-                            if (moves.Count > 20)
+                            if (moves.Count > mapSize.z * mapSize.y * mapSize.z)
                                 break;
                         }
                     }
@@ -197,19 +198,15 @@ namespace Assets.Scripts.QL
             }
             else
             {
-                agent2.transform.position = moves[k];
-
-                if (Input.GetKeyUp(KeyCode.Space))
+                agent.transform.position = moves[k];
+                if (iterationsK > iterations)
                 {
-                    k++;
-
                     if (k > moves.Count - 1)
                     {
-                        moves.Clear();
                         k = 0;
                         done = false;
+                        moves.Clear();
                         GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value = 0;
-                        GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().valueChanged = false;
                     }
                 }
             }
