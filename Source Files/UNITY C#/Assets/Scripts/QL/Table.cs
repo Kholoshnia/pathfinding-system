@@ -5,8 +5,15 @@ namespace Assets.Scripts.QL
     class Table
     {
         Vector3Int mapSize;
+<<<<<<< Updated upstream
         const float gamma = 0.8f;
         int state, action, finishState;
+=======
+
+        private int state;
+        private readonly float gamma;
+        private readonly int finishState;
+>>>>>>> Stashed changes
 
         private long[,] R;
         private long[,] Q;
@@ -31,44 +38,51 @@ namespace Assets.Scripts.QL
                     {
                         if (x - 1 >= 0)
                             if (map.map[z, y, x - 1] == 'B')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + (x - 1)] = 0;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + (x - 1)] = 0;
                             else if (map.map[z, y, x - 1] == 'F')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + (x - 1)] = finishReward;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + (x - 1)] = finishReward;
 
                         if (x + 1 < mapSize.x)
                             if (map.map[z, y, x + 1] == 'B')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x + 1] = 0;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x + 1] = 0;
                             else if (map.map[z, y, x + 1] == 'F')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x + 1] = finishReward;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x + 1] = finishReward;
 
                         if (y - 1 >= 0)
                             if (map.map[z, y - 1, x] == 'B')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * (y - 1) + x] = 0;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * (y - 1) + x] = 0;
                             else if (map.map[z, y - 1, x] == 'F')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * (y - 1) + x] = finishReward;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * (y - 1) + x] = finishReward;
 
                         if (y + 1 < mapSize.y)
                             if (map.map[z, y + 1, x] == 'B')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * (y + 1) + x] = 0;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * (y + 1) + x] = 0;
                             else if (map.map[z, y + 1, x] == 'F')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * (y + 1) + x] = finishReward;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * (y + 1) + x] = finishReward;
 
                         if (z - 1 >= 0)
                             if (map.map[z - 1, y, x] == 'B')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x] = 0;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = 0;
                             else if (map.map[z - 1, y, x] == 'F')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x] = finishReward;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = finishReward;
 
                         if (z + 1 < mapSize.z)
                             if (map.map[z + 1, y, x] == 'B')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x] = 0;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = 0;
                             else if (map.map[z + 1, y, x] == 'F')
-                                R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x] = finishReward;
+                                R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = finishReward;
 
                         if (map.map[z, y, x] == 'F')
                         {
+<<<<<<< Updated upstream
                             R[mapSize.z * z + mapSize.y * y + x, mapSize.z * z + mapSize.y * y + x] = finishReward;
                             finishState = mapSize.z * z + mapSize.y * y + x;
+=======
+                            R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = finishReward;
+                            for (int i = 0; i < map.spaces.Count; i++)
+                                if (map.spaces[i].transform.position == map.finish.transform.position)
+                                    finishState = i;
+>>>>>>> Stashed changes
                         }
                     }
 
@@ -78,16 +92,20 @@ namespace Assets.Scripts.QL
 
         void ChooseAnAction()
         {
-            int possibleAction = GetRandomAction(0, mapSize.x * mapSize.y * mapSize.z - 1);
-            if (R[state, possibleAction] >= 0)
+            if (R[state, GetRandomAction()] >= 0)
             {
-                Q[state, possibleAction] = (long)(R[state, possibleAction] + gamma * Maximum(possibleAction, false));
-                state = possibleAction;
+                Q[state, GetRandomAction()] = (long)(R[state, GetRandomAction()] + gamma * Maximum(GetRandomAction(), false));
+                state = GetRandomAction();
             }
         }
 
         public void Episode(int initState)
         {
+            //if (initState == 101)
+            //{
+            //    ChooseAnAction();
+            //}
+
             state = initState;
             if (state != finishState)
                 do
@@ -137,13 +155,13 @@ namespace Assets.Scripts.QL
             return Q[st, winner];
         }
 
-        int GetRandomAction(int lowerBound, int upperBound)
+        int GetRandomAction()
         {
             int act;
             bool choiceIsValid = false;
             do
             {
-                act = Random.Range(lowerBound, upperBound);
+                act = Random.Range(0, mapSize.z * mapSize.y * mapSize.x - 1);
                 choiceIsValid |= R[state, act] > -1;
             } while (!choiceIsValid);
             return act;

@@ -46,8 +46,6 @@ namespace Assets.Scripts.QL
                     for (int x = 0; x < mapSize.x; x++)
                     {
                         space.transform.position = new Vector3(x, y, z);
-                        wall.transform.position = new Vector3(x, y, z);
-                        goal.transform.position = new Vector3(x, y, z);
 
                         if (map[z, x, y] == 'B')
                         {
@@ -57,12 +55,24 @@ namespace Assets.Scripts.QL
                         }
                         if (map[z, x, y] == 'W')
                         {
+<<<<<<< Updated upstream
                             walls.Add(UnityEngine.Object.Instantiate(wall));
+=======
+                            wall.transform.position = new Vector3(x, y, z);
+                            spaces.Add(Object.Instantiate(space));
+                            walls.Add(Object.Instantiate(wall));
+>>>>>>> Stashed changes
                             k++;
                         }
                         if (map[z, x, y] == 'F')
                         {
+<<<<<<< Updated upstream
                             finish = UnityEngine.Object.Instantiate(goal);
+=======
+                            goal.transform.position = new Vector3(x, y, z);
+                            spaces.Add(Object.Instantiate(space));
+                            finish = Object.Instantiate(goal);
+>>>>>>> Stashed changes
                             k++;
                         }
                     }

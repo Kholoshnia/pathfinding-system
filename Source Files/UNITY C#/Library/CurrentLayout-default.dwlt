@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 494}
   m_MaxSize: {x: 14004, y: 14044}
   vertical: 0
-  controlID: 114
+  controlID: 83
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 90
+  controlID: 84
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 91
+  controlID: 62
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -309,9 +309,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -11.869815, y: -33.031067, z: 110.142044}
+    m_Target: {x: 10.10568, y: 6.711952, z: -20.087456}
     speed: 2
-    m_Value: {x: -11.869815, y: -33.031067, z: 110.142044}
+    m_Value: {x: -208.6029, y: -114.96132, z: 236.94147}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -320,12 +320,12 @@ MonoBehaviour:
   m_ValidateTrueMetals: 0
   m_DoValidateTrueMetals: 0
   m_SceneViewState:
-    showFog: 1
+    showFog: 0
     showMaterialUpdate: 0
-    showSkybox: 1
-    showFlares: 1
-    showImageEffects: 1
-    showParticleSystems: 1
+    showSkybox: 0
+    showFlares: 0
+    showImageEffects: 0
+    showParticleSystems: 0
   grid:
     xGrid:
       m_Target: 0
@@ -340,13 +340,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.16261917, y: 0.07451502, z: -0.012284103, w: -0.98382145}
+    m_Target: {x: -0.20989376, y: 0.40394408, z: -0.095777474, w: -0.8852178}
     speed: 2
-    m_Value: {x: -0.16261487, y: 0.07451305, z: -0.012283778, w: -0.9837954}
+    m_Value: {x: -0.13842675, y: 0.23008662, z: -0.033082567, w: -0.9627106}
   m_Size:
-    m_Target: 162.47043
+    m_Target: 22
     speed: 2
-    m_Value: 162.47043
+    m_Value: 120.220116
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -365,7 +365,7 @@ MonoBehaviour:
     m_DynamicClip: 1
     m_OcclusionCulling: 0
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: -0.24493803, y: 0.05145348, z: -0.013013926, w: -0.96809363}
+  m_LastSceneViewRotation: {x: -0.104969256, y: 0.3589448, z: -0.04066424, w: -0.9265477}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -403,7 +403,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 5afbffff
+      m_ExpandedIDs: 6efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -453,21 +453,21 @@ MonoBehaviour:
     width: 957
     height: 518
   m_ViewDataDictionary: {fileID: 0}
-  m_VSyncEnabled: 1
+  m_VSyncEnabled: 0
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 00000000000000000300000003000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 07000000000000000300000003000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -239.25
-    m_HBaseRangeMax: 239.25
-    m_VBaseRangeMin: -125.25
-    m_VBaseRangeMax: 125.25
+    m_HBaseRangeMin: -400
+    m_HBaseRangeMax: 400
+    m_VBaseRangeMin: -400
+    m_VBaseRangeMax: 400
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -487,23 +487,23 @@ MonoBehaviour:
       y: 17
       width: 957
       height: 501
-    m_Scale: {x: 2, y: 2}
-    m_Translation: {x: 478.5, y: 250.5}
+    m_Scale: {x: 0.62625, y: 0.62625}
+    m_Translation: {x: 478.5, y: 250.49997}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -239.25
-      y: -125.25
-      width: 478.5
-      height: 250.5
+      x: -764.07184
+      y: -399.99994
+      width: 1528.1437
+      height: 799.99994
     m_MinimalGUI: 1
-  m_defaultScale: 2
+  m_defaultScale: 0.62625
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 1914, y: 1036}
+  m_LastWindowPixelSize: {x: 957, y: 518}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000101000100000100
@@ -531,7 +531,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 202
     y: 30
-    width: 959
+    width: 957
     height: 518
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &16
@@ -573,20 +573,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/NEAT
+    - Assets/Scripts/Main
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/NEAT
+  - Assets/Scripts/Main
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/vadim/Documents/GitHub/NEAT-QL/Source Files/UNITY C#
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2a2e0000
-    m_LastClickedID: 11818
-    m_ExpandedIDs: 00000000c62c0000942e000000ca9a3b
+    m_SelectedIDs: 0e2f0000
+    m_LastClickedID: 12046
+    m_ExpandedIDs: 00000000b22c0000802e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -614,7 +614,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c62c0000942e0000
+    m_ExpandedIDs: 00000000b22c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -658,7 +658,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 10}
+      m_ClientGUIView: {fileID: 0}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0

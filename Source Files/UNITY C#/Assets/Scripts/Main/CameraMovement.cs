@@ -8,8 +8,8 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float ySpeed = 200.0f;
     [SerializeField] private float zoomDampening = 5.0f;
 
-    private float xDeg = 0.0f;
-    private float yDeg = 0.0f;
+    private float xDeg;
+    private float yDeg;
     private Quaternion currentRotation;
     private Quaternion desiredRotation;
     private Quaternion rotation;
