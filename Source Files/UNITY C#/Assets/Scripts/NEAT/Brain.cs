@@ -4,10 +4,10 @@ namespace Assets.Scripts.NEAT
 {
     public class Brain
     {
+        public float Speed { get; }
+        public float MutationRate { get; }
         public int Step { get; private set; }
         public Vector3[] Directions { get; private set; }
-        public float MutationRate { get; }
-        public float Speed { get; }
 
         public Brain(int directionArraySize, float mutationRate, float speed)
         {

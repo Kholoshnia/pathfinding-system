@@ -7,7 +7,7 @@ namespace Assets.Scripts.NEAT
     {
         private readonly UpdateThreads updateThreads;
 
-        public static Population[] Populations;
+        public static Population[] Populations { get; private set; }
 
         private struct UpdateThreads : IJobParallelFor
         {

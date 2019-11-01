@@ -56,9 +56,9 @@ namespace Assets.Scripts.QL
                 for (int z = mapSize.z - 1; z >= 0; z--)
                     for (int y = mapSize.y - 1; y >= 0; y--)
                     {
+                        var values = reader.ReadLine().Split(';');
                         for (int x = 0; x < mapSize.x; x++)
-                            map.map[z, y, x] = (char)reader.Read();
-                        reader.ReadLine();
+                            map.map[z, y, x] = Convert.ToChar(values[x]);
                     }
 
                 gamma = Convert.ToSingle(reader.ReadLine());
@@ -96,8 +96,7 @@ namespace Assets.Scripts.QL
                 {
                     for (int action = 0; action < mapSize.x * mapSize.y * mapSize.z; action++)
                     {
-                        string text = reader.ReadLine();
-                        string[] bits = text.Split(' ');
+                        string[] bits = reader.ReadLine().Split(';');
                         for (int state = 0; state < mapSize.x * mapSize.y * mapSize.z; state++)
                             table.Q[action, state] = Convert.ToInt64(bits[state]);
                     }
@@ -141,7 +140,7 @@ namespace Assets.Scripts.QL
                             for (int state = 0; state < mapSize.x * mapSize.y * mapSize.z; state++)
                             {
                                 writer.Write(table.Q[action, state]);
-                                writer.Write(' ');
+                                writer.Write(';');
                             }
                             writer.WriteLine();
                         }

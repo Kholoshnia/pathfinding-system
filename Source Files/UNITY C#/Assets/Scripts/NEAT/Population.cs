@@ -108,11 +108,7 @@ namespace Assets.Scripts.NEAT
             Agents = newAgents;
             if (layersQuantity != 1)
                 for (int i = 0; i < Agents.Length; i++)
-                {
                     Agents[i].Color = color;
-                    Agents[i].Brain.Randomize();
-                }
-
             Gen++;
         }
 

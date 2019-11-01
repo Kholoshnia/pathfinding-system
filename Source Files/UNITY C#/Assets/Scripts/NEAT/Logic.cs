@@ -18,7 +18,7 @@ namespace Assets.Scripts.NEAT
         public readonly GameObject[] walls;
 
         private Languages language;
-        private readonly string pathIn, pathOut;
+        private readonly string pathOut;
 
         private readonly bool autoEnd;
 
@@ -32,7 +32,6 @@ namespace Assets.Scripts.NEAT
             UnityEngine.Object.Destroy(GameObject.Find("QL"));
             UnityEngine.Object.Destroy(GameObject.Find("QL_Canvas"));
 
-            this.pathIn = pathIn;
             this.pathOut = pathOut;
             this.language = language;
 
@@ -43,41 +42,64 @@ namespace Assets.Scripts.NEAT
 
             using (StreamReader reader = new StreamReader(fin))
             {
-                int numberOfObjects = Convert.ToInt32(reader.ReadLine());
+                var values = reader.ReadLine().Split(';');
+                int numberOfObjects = Convert.ToInt32(values[1]);
                 walls = new GameObject[numberOfObjects - 2];
+
                 reader.ReadLine();
-                goal.transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                goal.transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                goal.transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
                 reader.ReadLine();
-                start.transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                start.transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                start.transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                values = reader.ReadLine().Split(';');
+                goal.transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+                values = reader.ReadLine().Split(';');
+                goal.transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
+                values = reader.ReadLine().Split(';');
+                goal.transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+                reader.ReadLine();
+                reader.ReadLine();
+                values = reader.ReadLine().Split(';');
+                start.transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+                values = reader.ReadLine().Split(';');
+                start.transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
+                values = reader.ReadLine().Split(';');
+                start.transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+
                 for (int i = 0; i < numberOfObjects - 2; i++)
                 {
                     reader.ReadLine();
+                    reader.ReadLine();
                     walls[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Wall"));
                     walls[i].name = "Wall " + i;
-                    walls[i].transform.position = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    walls[i].transform.rotation = new Quaternion(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
-                    walls[i].transform.localScale = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+                    values = reader.ReadLine().Split(';');
+                    walls[i].transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+                    values = reader.ReadLine().Split(';');
+                    walls[i].transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
+                    values = reader.ReadLine().Split(';');
+                    walls[i].transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
                 }
 
-                if (Convert.ToInt32(reader.ReadLine()) == 0)
+                reader.ReadLine();
+                reader.ReadLine();
+                values = reader.ReadLine().Split(';');
+                if (Convert.ToInt32(values[1]) == 0)
                     for (int i = 1; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
                         SceneManager.GetActiveScene().GetRootGameObjects()[i].SetActive(false);
 
-                directionArraySize = Convert.ToInt32(reader.ReadLine());
-                populationQuantity = Convert.ToInt32(reader.ReadLine());
-                layersQuantity = Convert.ToInt32(reader.ReadLine());
+                values = reader.ReadLine().Split(';');
+                directionArraySize = Convert.ToInt32(values[1]);
+                populationQuantity = Convert.ToInt32(values[2]);
+                layersQuantity = Convert.ToInt32(values[3]);
 
-                if (Convert.ToInt32(reader.ReadLine()) == 1) autoEnd = true;
+                values = reader.ReadLine().Split(';');
+                if (Convert.ToInt32(values[1]) == 1) autoEnd = true;
                 else autoEnd = false;
+                autoExit = Convert.ToInt32(values[2]);
 
-                autoExit = Convert.ToInt32(reader.ReadLine());
-                speed = Convert.ToSingle(reader.ReadLine());
-                maxSpeed = Convert.ToSingle(reader.ReadLine());
-                mutationRate = Convert.ToSingle(reader.ReadLine());
+                values = reader.ReadLine().Split(';');
+                speed = Convert.ToSingle(values[1]);
+                maxSpeed = Convert.ToSingle(values[2]);
+
+                values = reader.ReadLine().Split(';');
+                mutationRate = Convert.ToSingle(values[1]);
             }
             fin.Close();
 
@@ -99,7 +121,9 @@ namespace Assets.Scripts.NEAT
                     for (int i = 0; i < way.Length; i++)
                     {
                         way[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Start"));
-                        acc[i] = new Vector3(Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()), Convert.ToSingle(reader.ReadLine()));
+
+                        var values = reader.ReadLine().Split(';');
+                        acc[i] = new Vector3(Convert.ToSingle(values[0]), Convert.ToSingle(values[1]), Convert.ToSingle(values[2]));
                     }
                 }
 
@@ -130,9 +154,12 @@ namespace Assets.Scripts.NEAT
                     writer.WriteLine(steps);
                     for (int i = 0; i < steps; i++)
                     {
-                        writer.WriteLine(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].x);
-                        writer.WriteLine(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].y);
-                        writer.WriteLine(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].z);
+                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].x);
+                        writer.Write(';');
+                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].y);
+                        writer.Write(';');
+                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].z);
+                        writer.WriteLine();
                     }
                 }
                 fout.Close();
