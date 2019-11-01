@@ -29,6 +29,7 @@ namespace Assets.Scripts.QL
         private readonly int iterations;
         private readonly long finishReward;
         private int iterationsK, initialsK;
+        private readonly bool visualization;
 
         public Logic(Modes mode, Languages language, string pathIn, string pathOut)
         {
@@ -45,24 +46,32 @@ namespace Assets.Scripts.QL
             map = new Map();
 
             float gamma;
+            string[] values;
 
             FileStream fin = new FileStream(pathIn, FileMode.Open);
 
             using (StreamReader reader = new StreamReader(fin))
             {
-                mapSize = new Vector3Int(Convert.ToInt32(reader.ReadLine()), Convert.ToInt32(reader.ReadLine()), Convert.ToInt32(reader.ReadLine()));
+                values = reader.ReadLine().Split(';');
+                mapSize = new Vector3Int(Convert.ToInt32(values[1]), Convert.ToInt32(values[2]), Convert.ToInt32(values[3]));
                 map.map = new char[mapSize.z, mapSize.y, mapSize.x];
 
                 for (int z = mapSize.z - 1; z >= 0; z--)
                     for (int y = mapSize.y - 1; y >= 0; y--)
                     {
-                        var values = reader.ReadLine().Split(';');
+                        values = reader.ReadLine().Split(';');
                         for (int x = 0; x < mapSize.x; x++)
                             map.map[z, y, x] = Convert.ToChar(values[x]);
                     }
 
-                gamma = Convert.ToSingle(reader.ReadLine());
-                iterations = Convert.ToInt32(reader.ReadLine());
+                values = reader.ReadLine().Split(';');
+                gamma = Convert.ToSingle(values[1]);
+
+                values = reader.ReadLine().Split(';');
+                iterations = Convert.ToInt32(values[1]);
+
+                values = reader.ReadLine().Split(';');
+                visualization |= Convert.ToInt32(values[1]) == 1;
             }
             fin.Close();
 
@@ -78,11 +87,24 @@ namespace Assets.Scripts.QL
                 finishReward = (long)Math.Pow(mapSize.x * mapSize.y * mapSize.z, 3);
 
                 table = new Table(finishReward, mapSize, map, gamma);
-                
+
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("StartPositions"));
 
-                for (int j = 0; j < map.walls.Count; j++)
-                    GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.walls[j].name });
+                for (int j = 0; j < map.Walls.Count; j++)
+                    GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.Walls[j].name });
+
+                if (!visualization)
+                {
+                    UnityEngine.Object.Destroy(agent);
+                    for (int i = 0; i < map.Spaces.Count; i++)
+                        UnityEngine.Object.Destroy(map.Spaces[i]);
+                    for (int i = 0; i < map.Walls.Count; i++)
+                        UnityEngine.Object.Destroy(map.Walls[i]);
+                    UnityEngine.Object.Destroy(map.Finish);
+                    UnityEngine.Object.Destroy(GameObject.FindWithTag("Walls"));
+                    UnityEngine.Object.Destroy(GameObject.FindWithTag("StartPositions"));
+                    GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>().enabled = false;
+                }
             }
             else if (mode == Modes.CHECK)
             {
@@ -103,15 +125,18 @@ namespace Assets.Scripts.QL
                 }
                 fresult.Close();
 
-                for (int i = 0; i < map.spaces.Count; i++)
+                for (int i = 0; i < map.Spaces.Count; i++)
                 {
                     bool notThere = true;
-                    for (int j = 0; j < map.walls.Count; j++)
-                        notThere &= map.spaces[i] != map.walls[j];
+                    for (int j = 0; j < map.Walls.Count; j++)
+                        notThere &= map.Spaces[i] != map.Walls[j];
 
-                    if (notThere && map.spaces[i] != map.finish)
-                        GameObject.FindWithTag("StartPositions").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.spaces[i].name });
+                    if (notThere && map.Spaces[i] != map.Finish)
+                        GameObject.FindWithTag("StartPositions").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.Spaces[i].name });
                 }
+
+                UnityEngine.Object.Destroy(GameObject.FindWithTag("TextPosition"));
+                UnityEngine.Object.Destroy(GameObject.FindWithTag("TextIteration"));
             }
         }
 
@@ -119,11 +144,14 @@ namespace Assets.Scripts.QL
         {
             if (!pause)
             {
-                table.Episode(map.initials[initialsK]);
+                table.Episode(map.Initials[initialsK]);
+
+                if (visualization)
+                    agent.transform.position = GameObject.Find("Position " + map.Initials[initialsK]).transform.position;
 
                 initialsK++;
 
-                if (initialsK > map.initials.Count - 1)
+                if (initialsK > map.Initials.Count - 1)
                 {
                     initialsK = 0;
                     iterationsK++;
@@ -153,12 +181,12 @@ namespace Assets.Scripts.QL
 
                 if (language == Languages.EN)
                 {
-                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.initials[initialsK];
+                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK];
                     GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + iterationsK;
                 }
                 else if (language == Languages.RU)
                 {
-                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Позиция: " + map.initials[initialsK];
+                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Позиция: " + map.Initials[initialsK];
                     GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Итерация: " + iterationsK;
                 }
             }
@@ -171,12 +199,12 @@ namespace Assets.Scripts.QL
                 if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
                 {
                     int nowState = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1;
-                    position = map.spaces[nowState].transform.position;
+                    position = map.Spaces[nowState].transform.position;
                     moves.Add(position);
 
                     bool found = false;
-                    for (int i = 0; i < map.initials.Count; i++)
-                        if (map.spaces[map.initials[i]].transform.position == position)
+                    for (int i = 0; i < map.Initials.Count; i++)
+                        if (map.Spaces[map.Initials[i]].transform.position == position)
                         {
                             found = true;
                             break;
@@ -187,9 +215,9 @@ namespace Assets.Scripts.QL
                         while (true)
                         {
                             nowState = table.InferenceBestAction(nowState);
-                            Vector3 bestAction = map.spaces[nowState].transform.position;
+                            Vector3 bestAction = map.Spaces[nowState].transform.position;
                             moves.Add(bestAction);
-                            if (bestAction == map.finish.transform.position) break;
+                            if (bestAction == map.Finish.transform.position) break;
                             position = bestAction;
                             if (moves.Count > mapSize.z * mapSize.y * mapSize.x)
                                 break;

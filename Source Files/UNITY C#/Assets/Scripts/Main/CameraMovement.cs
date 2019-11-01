@@ -2,17 +2,17 @@
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private int yMaxLimit = 80;
-    [SerializeField] private int yMinLimit = -80;
-    [SerializeField] private float xSpeed = 200.0f;
-    [SerializeField] private float ySpeed = 200.0f;
-    [SerializeField] private float zoomDampening = 5.0f;
+    private int yMaxLimit = 80;
+    private int yMinLimit = -80;
+    private float xSpeed = 200.0f;
+    private float ySpeed = 200.0f;
+    private float zoomDampening = 5.0f;
 
-    private float xDeg = 0.0f;
-    private float yDeg = 0.0f;
+    private float xDeg;
+    private float yDeg;
+    private Quaternion rotation;
     private Quaternion currentRotation;
     private Quaternion desiredRotation;
-    private Quaternion rotation;
 
     public void Start() { Init(); }
     public void OnEnable() { Init(); }

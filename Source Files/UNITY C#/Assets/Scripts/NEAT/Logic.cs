@@ -3,29 +3,25 @@ using System.IO;
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.NEAT
 {
     class Logic
     {
-        private Layers layers;
+        private readonly Layers layers;
 
-        private Vector3[] acc;
         private Vector3 vel, pos;
-
+        private readonly Vector3[] acc;
         private readonly GameObject[] way;
-        public readonly GameObject[] walls;
+        private readonly GameObject[] walls;
 
-        private Languages language;
         private readonly string pathOut;
+        private readonly Languages language;
 
-        private readonly bool autoEnd;
-
+        private int steps, k;
+        private readonly bool visualization, autoEnd;
         private readonly float mutationRate, speed, maxSpeed;
-
-        private readonly int autoExit;
-        private int directionArraySize, populationQuantity, layersQuantity, steps, k;
+        private readonly int directionArraySize, populationQuantity, layersQuantity, autoExit;
 
         public Logic(Modes mode, Languages language, string pathIn, string pathOut)
         {
@@ -34,9 +30,6 @@ namespace Assets.Scripts.NEAT
 
             this.pathOut = pathOut;
             this.language = language;
-
-            GameObject goal = GameObject.FindWithTag("Goal");
-            GameObject start = GameObject.FindWithTag("Start");
 
             FileStream fin = new FileStream(pathIn, FileMode.Open);
 
@@ -49,19 +42,19 @@ namespace Assets.Scripts.NEAT
                 reader.ReadLine();
                 reader.ReadLine();
                 values = reader.ReadLine().Split(';');
-                goal.transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+                GameObject.FindWithTag("Goal").transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
                 values = reader.ReadLine().Split(';');
-                goal.transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
+                GameObject.FindWithTag("Goal").transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
                 values = reader.ReadLine().Split(';');
-                goal.transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+                GameObject.FindWithTag("Goal").transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
                 reader.ReadLine();
                 reader.ReadLine();
                 values = reader.ReadLine().Split(';');
-                start.transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+                GameObject.FindWithTag("Start").transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
                 values = reader.ReadLine().Split(';');
-                start.transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
+                GameObject.FindWithTag("Start").transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
                 values = reader.ReadLine().Split(';');
-                start.transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
+                GameObject.FindWithTag("Start").transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
 
                 for (int i = 0; i < numberOfObjects - 2; i++)
                 {
@@ -79,10 +72,9 @@ namespace Assets.Scripts.NEAT
 
                 reader.ReadLine();
                 reader.ReadLine();
+
                 values = reader.ReadLine().Split(';');
-                if (Convert.ToInt32(values[1]) == 0)
-                    for (int i = 1; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
-                        SceneManager.GetActiveScene().GetRootGameObjects()[i].SetActive(false);
+                visualization |= Convert.ToInt32(values[1]) == 1;
 
                 values = reader.ReadLine().Split(';');
                 directionArraySize = Convert.ToInt32(values[1]);
@@ -106,7 +98,25 @@ namespace Assets.Scripts.NEAT
             UnityEngine.Object.Destroy(GameObject.FindWithTag("Wall"));
 
             if (mode == Modes.LEARN)
+            {
                 layers = new Layers(directionArraySize, populationQuantity, layersQuantity, mutationRate, speed, maxSpeed);
+
+                if (!visualization)
+                {
+                    UnityEngine.Object.Destroy(GameObject.FindWithTag("Walls"));
+                    GameObject.FindWithTag("MainCamera").GetComponent<CameraMovement>().enabled = false;
+
+                    for (int i = 0; i < walls.Length; i++)
+                        walls[i].GetComponent<MeshRenderer>().enabled = false;
+
+                    for (int i = 0; i < Layers.Populations.Length; i++)
+                        for (int j = 0; j < Layers.Populations[i].Agents.Length; j++)
+                            Layers.Populations[i].Agents[j].Sphere.GetComponent<MeshRenderer>().enabled = false;
+
+                    GameObject.FindWithTag("Goal").GetComponent<MeshRenderer>().enabled = false;
+                    GameObject.FindWithTag("Start").GetComponent<MeshRenderer>().enabled = false;
+                }
+            }
             else if (mode == Modes.CHECK)
             {
                 pos = GameObject.FindWithTag("Start").transform.position;

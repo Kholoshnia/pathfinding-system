@@ -15,6 +15,7 @@ namespace Assets.Scripts.NEAT
             Speed = speed;
             MutationRate = mutationRate;
             Directions = new Vector3[directionArraySize];
+
             Randomize();
         }
 

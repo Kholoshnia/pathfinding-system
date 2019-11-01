@@ -6,16 +6,16 @@ namespace Assets.Scripts.QL
     class Map
     {
         public char[,,] map;
-
-        public List<int> initials;
-        public GameObject finish;
-        public List<GameObject> spaces, walls;
+        public List<int> Initials { get; }
+        public List<GameObject> Walls { get; }
+        public GameObject Finish { get; private set; }
+        public List<GameObject> Spaces { get; private set; }
 
         public Map()
         {
-            initials = new List<int>();
-            walls = new List<GameObject>();
-            spaces = new List<GameObject>();
+            Initials = new List<int>();
+            Walls = new List<GameObject>();
+            Spaces = new List<GameObject>();
         }
 
         public void Initialize(Vector3Int mapSize)
@@ -31,31 +31,31 @@ namespace Assets.Scripts.QL
 
                         if (map[z, y, x] == 'B')
                         {
-                            spaces.Add(Object.Instantiate(space));
-                            initials.Add(k);
+                            Spaces.Add(Object.Instantiate(space));
+                            Initials.Add(k);
                             k++;
                         }
                         if (map[z, y, x] == 'W')
                         {
                             wall.transform.position = new Vector3(x, y, z);
-                            spaces.Add(Object.Instantiate(space));
-                            walls.Add(Object.Instantiate(wall));
+                            Spaces.Add(Object.Instantiate(space));
+                            Walls.Add(Object.Instantiate(wall));
                             k++;
                         }
                         if (map[z, y, x] == 'F')
                         {
                             goal.transform.position = new Vector3(x, y, z);
-                            spaces.Add(Object.Instantiate(space));
-                            finish = Object.Instantiate(goal);
+                            Spaces.Add(Object.Instantiate(space));
+                            Finish = Object.Instantiate(goal);
                             k++;
                         }
                     }
 
-            for (int i = 0; i < spaces.Count; i++)
-                spaces[i].name = "Position " + i;
+            for (int i = 0; i < Spaces.Count; i++)
+                Spaces[i].name = "Position " + i;
 
-            for (int i = 0; i < walls.Count; i++)
-                walls[i].name = "Walls " + i;
+            for (int i = 0; i < Walls.Count; i++)
+                Walls[i].name = "Walls " + i;
 
             Object.Destroy(space);
             Object.Destroy(wall);

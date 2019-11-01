@@ -10,7 +10,7 @@ namespace Assets.Scripts.NEAT
 
         public bool Dead { get; set; }
         public bool IsBest { get; set; }
-        public GameObject Sphere { get; }
+        public GameObject Sphere { get; set; }
         public Brain Brain { get; private set; }
         public float Fitness { get; private set; }
         public bool ReachedGoal { get; private set; }
@@ -18,16 +18,19 @@ namespace Assets.Scripts.NEAT
 
         public Agent(int directionArraySize, float mutationRate, float speed, float maxSpeed)
         {
-            Fitness = 0;
             Dead = false;
             IsBest = false;
             ReachedGoal = false;
+
+            Fitness = 0;
+            this.maxSpeed = maxSpeed;
+
             Brain = new Brain(directionArraySize, mutationRate, speed);
             Sphere = Object.Instantiate(GameObject.FindWithTag("Start"));
+
             vel = Vector3.zero;
             acc = Vector3.zero;
             pos = Sphere.transform.position;
-            this.maxSpeed = maxSpeed;
         }
 
         private void Move()
@@ -38,10 +41,12 @@ namespace Assets.Scripts.NEAT
                 Brain.IncStep();
             }
             else Dead = true;
+
             if (Mathf.Abs(vel.x + acc.x) < maxSpeed) vel.x += acc.x;
             if (Mathf.Abs(vel.y + acc.y) < maxSpeed) vel.y += acc.y;
             if (Mathf.Abs(vel.z + acc.z) < maxSpeed) vel.z += acc.z;
             pos += vel;
+
             Sphere.transform.position = pos;
         }
 
@@ -54,6 +59,7 @@ namespace Assets.Scripts.NEAT
                     ReachedGoal = true;
                 else Dead |= Sphere.GetComponent<OnCollision>().touchedWall;
             }
+
             Sphere.GetComponent<MeshRenderer>().material.color = IsBest ? Color.green : color;
         }
 

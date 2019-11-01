@@ -1,6 +1,4 @@
-10
-10
-10
+map-size:;10;10;10
 B;B;B;B;B;B;B;B;B;B
 B;B;B;B;B;B;B;B;B;B
 B;B;B;B;B;B;B;B;B;B
@@ -101,5 +99,6 @@ B;B;B;B;B;B;B;B;B;B
 B;B;B;B;B;B;B;B;B;B
 B;B;B;B;B;B;B;B;B;B
 B;B;B;B;B;B;B;B;B;B
-0.8
-1
+gamma:;0.8
+iterations:;1
+visualization:;1

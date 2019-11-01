@@ -5,12 +5,12 @@ namespace Assets.Scripts.QL
     class Table
     {
         private int state;
-        Vector3Int mapSize;
+        private Vector3Int mapSize;
         private readonly float gamma;
         private readonly int finishState;
 
-        public long[,] R;
-        public long[,] Q;
+        public long[,] R { get; }
+        public long[,] Q { get; }
 
         public Table(long finishReward, Vector3Int mapSize, Map map, float gamma)
         {
@@ -70,8 +70,8 @@ namespace Assets.Scripts.QL
                         if (map.map[z, y, x] == 'F')
                         {
                             R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = finishReward;
-                            for (int i = 0; i < map.spaces.Count; i++)
-                                if (map.spaces[i].transform.position == map.finish.transform.position)
+                            for (int i = 0; i < map.Spaces.Count; i++)
+                                if (map.Spaces[i].transform.position == map.Finish.transform.position)
                                     finishState = i;
                         }
                     }
@@ -90,6 +90,18 @@ namespace Assets.Scripts.QL
             }
         }
 
+        int GetRandomAction()
+        {
+            int act;
+            bool choiceIsValid = false;
+            do
+            {
+                act = Random.Range(0, mapSize.x * mapSize.y * mapSize.z - 1);
+                choiceIsValid |= R[state, act] > -1;
+            } while (!choiceIsValid);
+            return act;
+        }
+
         public void Episode(int initState)
         {
             state = initState;
@@ -104,8 +116,8 @@ namespace Assets.Scripts.QL
 
         public int InferenceBestAction(int nowState)
         {
-            double tempMaxQ = 0;
             int bestAction = 0;
+            double tempMaxQ = 0;
             for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)
                 if (Q[nowState, i] > tempMaxQ)
                 {
@@ -117,11 +129,9 @@ namespace Assets.Scripts.QL
 
         public long Maximum(int st, bool returnIndexOnly)
         {
-            int winner;
+            int winner = 0;
             bool done = false;
             bool foundNewWinner;
-
-            winner = 0;
 
             do
             {
@@ -139,18 +149,6 @@ namespace Assets.Scripts.QL
             if (returnIndexOnly == true)
                 return winner;
             return Q[st, winner];
-        }
-
-        int GetRandomAction()
-        {
-            int act;
-            bool choiceIsValid = false;
-            do
-            {
-                act = Random.Range(0, mapSize.x * mapSize.y * mapSize.z - 1);
-                choiceIsValid |= R[state, act] > -1;
-            } while (!choiceIsValid);
-            return act;
         }
     };
 }
