@@ -1,5 +1,5 @@
 #pragma once
 enum Languages { EN, RU };
-enum Modes { LEARN, CHECK };
+enum Modes { MENU, LEARN, CHECK };
 enum Dimentions { TWOD, THREED };
 enum LearningAlgorythms { NEAT, QL };
