@@ -135,239 +135,129 @@ namespace NNWay
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox4 = (gcnew System::Windows::Forms::ComboBox());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->informationToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(11, 4, 0, 4);
+			this->menuStrip1->Size = System::Drawing::Size(675, 42);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
 			// informationToolStripMenuItem
 			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
-			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(140, 34);
 			this->informationToolStripMenuItem->Text = L"Information";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(315, 40);
 			this->aboutToolStripMenuItem->Text = L"About";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
-			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(315, 40);
 			this->howToUseToolStripMenuItem->Text = L"How to use";
 			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
-			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(315, 40);
 			this->bugReportToolStripMenuItem->Text = L"Bug report";
-			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click_1);
-			// 
-			// settingsToolStripMenuItem
-			// 
-			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
-			this->settingsToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// dimensionToolStripMenuItem
-			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->dToolStripMenuItem1 });
-			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
-			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
-			// 
-			// dToolStripMenuItem1
-			// 
-			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
-			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
-			this->dToolStripMenuItem1->Text = L"3D";
-			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
-			// 
-			// dToolStripMenuItem
-			// 
-			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
-			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
-			this->dToolStripMenuItem->Text = L"2D";
-			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
-			// 
-			// languageToolStripMenuItem
-			// 
-			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
-			this->languageToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// englishToolStripMenuItem
-			// 
-			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
-			this->englishToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// ðóññêèéToolStripMenuItem
-			// 
-			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
-			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// learningAlgorithmToolStripMenuItem
-			// 
-			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
-			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// nEATToolStripMenuItem
-			// 
-			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
-			this->nEATToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// qLearningToolStripMenuItem
-			// 
-			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
-			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// modeToolStripMenuItem
-			// 
-			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
-			this->modeToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// learnToolStripMenuItem
-			// 
-			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
-			this->learnToolStripMenuItem->Size = System::Drawing::Size(32, 19);
-			// 
-			// checkToolStripMenuItem
-			// 
-			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
-			this->checkToolStripMenuItem->Size = System::Drawing::Size(32, 19);
+			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Blue;
-			this->label1->Location = System::Drawing::Point(95, 40);
+			this->label1->Location = System::Drawing::Point(174, 74);
+			this->label1->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(166, 39);
+			this->label1->Size = System::Drawing::Size(290, 68);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Main menu";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(15, 270);
+			this->label2->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(80, 19);
+			this->label2->Size = System::Drawing::Size(143, 35);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Dimention:";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(15, 185);
+			this->label3->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(76, 19);
+			this->label3->Size = System::Drawing::Size(131, 35);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"Language:";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label4->Location = System::Drawing::Point(8, 191);
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label4->Location = System::Drawing::Point(15, 353);
+			this->label4->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(131, 19);
+			this->label4->Size = System::Drawing::Size(228, 35);
 			this->label4->TabIndex = 4;
 			this->label4->Text = L"Learning algorithm";
-			// 
-			// label5
-			// 
-			this->label5->Location = System::Drawing::Point(0, 0);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(100, 23);
-			this->label5->TabIndex = 0;
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label6->Location = System::Drawing::Point(8, 236);
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label6->Location = System::Drawing::Point(15, 436);
+			this->label6->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(50, 19);
+			this->label6->Size = System::Drawing::Size(91, 35);
 			this->label6->TabIndex = 22;
 			this->label6->Text = L"Mode:";
 			// 
-			// label7
-			// 
-			this->label7->Location = System::Drawing::Point(0, 0);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(100, 23);
-			this->label7->TabIndex = 0;
-			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(250, 122);
+			this->button1->Location = System::Drawing::Point(458, 225);
+			this->button1->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(106, 21);
+			this->button1->Size = System::Drawing::Size(194, 39);
 			this->button1->TabIndex = 8;
 			this->button1->Text = L"&OK";
 			this->button1->UseVisualStyleBackColor = true;
@@ -375,9 +265,10 @@ namespace NNWay
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(250, 167);
+			this->button2->Location = System::Drawing::Point(458, 308);
+			this->button2->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(106, 21);
+			this->button2->Size = System::Drawing::Size(194, 39);
 			this->button2->TabIndex = 9;
 			this->button2->Text = L"&OK";
 			this->button2->UseVisualStyleBackColor = true;
@@ -385,9 +276,10 @@ namespace NNWay
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(250, 212);
+			this->button3->Location = System::Drawing::Point(458, 391);
+			this->button3->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(106, 21);
+			this->button3->Size = System::Drawing::Size(194, 39);
 			this->button3->TabIndex = 10;
 			this->button3->Text = L"&OK";
 			this->button3->UseVisualStyleBackColor = true;
@@ -396,9 +288,10 @@ namespace NNWay
 			// button4
 			// 
 			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->button4->Location = System::Drawing::Point(137, 316);
+			this->button4->Location = System::Drawing::Point(251, 583);
+			this->button4->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->Size = System::Drawing::Size(196, 129);
 			this->button4->TabIndex = 20;
 			this->button4->Text = L"&Go to";
 			this->button4->UseVisualStyleBackColor = true;
@@ -406,106 +299,38 @@ namespace NNWay
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(250, 257);
+			this->button6->Location = System::Drawing::Point(458, 474);
+			this->button6->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(106, 21);
+			this->button6->Size = System::Drawing::Size(194, 39);
 			this->button6->TabIndex = 24;
 			this->button6->Text = L"&OK";
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(0, 0);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 20);
-			this->textBox1->TabIndex = 0;
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(0, 0);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(100, 20);
-			this->textBox2->TabIndex = 0;
-			// 
-			// textBox3
-			// 
-			this->textBox3->Location = System::Drawing::Point(0, 0);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(100, 20);
-			this->textBox3->TabIndex = 0;
-			// 
-			// textBox4
-			// 
-			this->textBox4->Location = System::Drawing::Point(0, 0);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(100, 20);
-			this->textBox4->TabIndex = 0;
-			// 
-			// textBox5
-			// 
-			this->textBox5->Location = System::Drawing::Point(0, 0);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(100, 20);
-			this->textBox5->TabIndex = 0;
 			// 
 			// comboBox1
 			// 
 			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"English", L"Ðóññêèé" });
-			this->comboBox1->Location = System::Drawing::Point(12, 122);
+			this->comboBox1->Location = System::Drawing::Point(22, 225);
+			this->comboBox1->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(232, 21);
+			this->comboBox1->Size = System::Drawing::Size(422, 32);
 			this->comboBox1->TabIndex = 5;
 			this->comboBox1->Text = L"(Choose action)";
 			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::ComboBox1_SelectedIndexChanged);
 			this->comboBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::ComboBox1_KeyPress);
-			// 
-			// checkBox1
-			// 
-			this->checkBox1->Location = System::Drawing::Point(0, 0);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(104, 24);
-			this->checkBox1->TabIndex = 0;
-			// 
-			// checkBox2
-			// 
-			this->checkBox2->Location = System::Drawing::Point(0, 0);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(104, 24);
-			this->checkBox2->TabIndex = 31;
-			// 
-			// label8
-			// 
-			this->label8->Location = System::Drawing::Point(0, 0);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(100, 23);
-			this->label8->TabIndex = 0;
-			// 
-			// button7
-			// 
-			this->button7->Location = System::Drawing::Point(0, 0);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(75, 23);
-			this->button7->TabIndex = 0;
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(124, 141);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(232, 20);
-			this->textBox6->TabIndex = 26;
-			this->textBox6->Text = L"0.01";
 			// 
 			// comboBox2
 			// 
 			this->comboBox2->Cursor = System::Windows::Forms::Cursors::Default;
 			this->comboBox2->FormattingEnabled = true;
 			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"2D", L"3D" });
-			this->comboBox2->Location = System::Drawing::Point(12, 167);
+			this->comboBox2->Location = System::Drawing::Point(22, 308);
+			this->comboBox2->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->comboBox2->Name = L"comboBox2";
-			this->comboBox2->Size = System::Drawing::Size(232, 21);
+			this->comboBox2->Size = System::Drawing::Size(422, 32);
 			this->comboBox2->TabIndex = 28;
 			this->comboBox2->Text = L"(Choose action)";
 			// 
@@ -514,9 +339,10 @@ namespace NNWay
 			this->comboBox3->Cursor = System::Windows::Forms::Cursors::Default;
 			this->comboBox3->FormattingEnabled = true;
 			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"NEAT", L"Q-Learning" });
-			this->comboBox3->Location = System::Drawing::Point(12, 213);
+			this->comboBox3->Location = System::Drawing::Point(22, 393);
+			this->comboBox3->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->comboBox3->Name = L"comboBox3";
-			this->comboBox3->Size = System::Drawing::Size(232, 21);
+			this->comboBox3->Size = System::Drawing::Size(422, 32);
 			this->comboBox3->TabIndex = 29;
 			this->comboBox3->Text = L"(Choose action)";
 			// 
@@ -525,20 +351,18 @@ namespace NNWay
 			this->comboBox4->Cursor = System::Windows::Forms::Cursors::Default;
 			this->comboBox4->FormattingEnabled = true;
 			this->comboBox4->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Learn", L"Check" });
-			this->comboBox4->Location = System::Drawing::Point(12, 257);
+			this->comboBox4->Location = System::Drawing::Point(22, 474);
+			this->comboBox4->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->comboBox4->Name = L"comboBox4";
-			this->comboBox4->Size = System::Drawing::Size(232, 21);
+			this->comboBox4->Size = System::Drawing::Size(422, 32);
 			this->comboBox4->TabIndex = 30;
 			this->comboBox4->Text = L"(Choose action)";
 			// 
 			// menu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(368, 426);
-			this->Controls->Add(this->comboBox4);
-			this->Controls->Add(this->comboBox3);
-			this->Controls->Add(this->comboBox2);
+			this->ClientSize = System::Drawing::Size(675, 786);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label3);
@@ -550,10 +374,14 @@ namespace NNWay
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->comboBox2);
+			this->Controls->Add(this->comboBox3);
+			this->Controls->Add(this->comboBox4);
 			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->Name = L"menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"NNWay";
@@ -561,30 +389,548 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
+		}
 
+		void InitializeComponentMainMenuEN(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox4 = (gcnew System::Windows::Forms::ComboBox());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(11, 4, 0, 4);
+			this->menuStrip1->Size = System::Drawing::Size(675, 42);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(140, 34);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(174, 74);
+			this->label1->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(290, 68);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Main menu";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(15, 270);
+			this->label2->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(143, 35);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Dimention:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(15, 185);
+			this->label3->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(131, 35);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Language:";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label4->Location = System::Drawing::Point(15, 353);
+			this->label4->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(228, 35);
+			this->label4->TabIndex = 4;
+			this->label4->Text = L"Learning algorithm";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label6->Location = System::Drawing::Point(15, 436);
+			this->label6->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(91, 35);
+			this->label6->TabIndex = 22;
+			this->label6->Text = L"Mode:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(458, 225);
+			this->button1->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(194, 39);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"&OK";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(458, 308);
+			this->button2->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(194, 39);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&OK";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(458, 391);
+			this->button3->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(194, 39);
+			this->button3->TabIndex = 10;
+			this->button3->Text = L"&OK";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &menu::Button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(251, 583);
+			this->button4->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(196, 129);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Go to";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// button6
+			// 
+			this->button6->Location = System::Drawing::Point(458, 474);
+			this->button6->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(194, 39);
+			this->button6->TabIndex = 24;
+			this->button6->Text = L"&OK";
+			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"English", L"Ðóññêèé" });
+			this->comboBox1->Location = System::Drawing::Point(22, 225);
+			this->comboBox1->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(422, 32);
+			this->comboBox1->TabIndex = 5;
+			this->comboBox1->Text = L"(Choose action)";
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::ComboBox1_SelectedIndexChanged);
+			this->comboBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::ComboBox1_KeyPress);
+			// 
+			// comboBox2
+			// 
+			this->comboBox2->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox2->FormattingEnabled = true;
+			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"2D", L"3D" });
+			this->comboBox2->Location = System::Drawing::Point(22, 308);
+			this->comboBox2->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->comboBox2->Name = L"comboBox2";
+			this->comboBox2->Size = System::Drawing::Size(422, 32);
+			this->comboBox2->TabIndex = 28;
+			this->comboBox2->Text = L"(Choose action)";
+			// 
+			// comboBox3
+			// 
+			this->comboBox3->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox3->FormattingEnabled = true;
+			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"NEAT", L"Q-Learning" });
+			this->comboBox3->Location = System::Drawing::Point(22, 393);
+			this->comboBox3->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->comboBox3->Name = L"comboBox3";
+			this->comboBox3->Size = System::Drawing::Size(422, 32);
+			this->comboBox3->TabIndex = 29;
+			this->comboBox3->Text = L"(Choose action)";
+			// 
+			// comboBox4
+			// 
+			this->comboBox4->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox4->FormattingEnabled = true;
+			this->comboBox4->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Learn", L"Check" });
+			this->comboBox4->Location = System::Drawing::Point(22, 474);
+			this->comboBox4->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->comboBox4->Name = L"comboBox4";
+			this->comboBox4->Size = System::Drawing::Size(422, 32);
+			this->comboBox4->TabIndex = 30;
+			this->comboBox4->Text = L"(Choose action)";
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(675, 786);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button6);
+			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->comboBox2);
+			this->Controls->Add(this->comboBox3);
+			this->Controls->Add(this->comboBox4);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+		void InitializeComponentMainMenuRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox4 = (gcnew System::Windows::Forms::ComboBox());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(11, 4, 0, 4);
+			this->menuStrip1->Size = System::Drawing::Size(675, 42);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(140, 34);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(174, 74);
+			this->label1->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(290, 68);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Main menu";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(15, 270);
+			this->label2->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(143, 35);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Dimention:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(15, 185);
+			this->label3->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(131, 35);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Language:";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label4->Location = System::Drawing::Point(15, 353);
+			this->label4->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(228, 35);
+			this->label4->TabIndex = 4;
+			this->label4->Text = L"Learning algorithm";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label6->Location = System::Drawing::Point(15, 436);
+			this->label6->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(91, 35);
+			this->label6->TabIndex = 22;
+			this->label6->Text = L"Mode:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(458, 225);
+			this->button1->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(194, 39);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"&OK";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(458, 308);
+			this->button2->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(194, 39);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&OK";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(458, 391);
+			this->button3->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(194, 39);
+			this->button3->TabIndex = 10;
+			this->button3->Text = L"&OK";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &menu::Button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(251, 583);
+			this->button4->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(196, 129);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Go to";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// button6
+			// 
+			this->button6->Location = System::Drawing::Point(458, 474);
+			this->button6->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(194, 39);
+			this->button6->TabIndex = 24;
+			this->button6->Text = L"&OK";
+			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"English", L"Ðóññêèé" });
+			this->comboBox1->Location = System::Drawing::Point(22, 225);
+			this->comboBox1->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(422, 32);
+			this->comboBox1->TabIndex = 5;
+			this->comboBox1->Text = L"(Choose action)";
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::ComboBox1_SelectedIndexChanged);
+			this->comboBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::ComboBox1_KeyPress);
+			// 
+			// comboBox2
+			// 
+			this->comboBox2->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox2->FormattingEnabled = true;
+			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"2D", L"3D" });
+			this->comboBox2->Location = System::Drawing::Point(22, 308);
+			this->comboBox2->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->comboBox2->Name = L"comboBox2";
+			this->comboBox2->Size = System::Drawing::Size(422, 32);
+			this->comboBox2->TabIndex = 28;
+			this->comboBox2->Text = L"(Choose action)";
+			// 
+			// comboBox3
+			// 
+			this->comboBox3->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox3->FormattingEnabled = true;
+			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"NEAT", L"Q-Learning" });
+			this->comboBox3->Location = System::Drawing::Point(22, 393);
+			this->comboBox3->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->comboBox3->Name = L"comboBox3";
+			this->comboBox3->Size = System::Drawing::Size(422, 32);
+			this->comboBox3->TabIndex = 29;
+			this->comboBox3->Text = L"(Choose action)";
+			// 
+			// comboBox4
+			// 
+			this->comboBox4->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox4->FormattingEnabled = true;
+			this->comboBox4->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Learn", L"Check" });
+			this->comboBox4->Location = System::Drawing::Point(22, 474);
+			this->comboBox4->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->comboBox4->Name = L"comboBox4";
+			this->comboBox4->Size = System::Drawing::Size(422, 32);
+			this->comboBox4->TabIndex = 30;
+			this->comboBox4->Text = L"(Choose action)";
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(11, 24);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(675, 786);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button6);
+			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->comboBox2);
+			this->Controls->Add(this->comboBox3);
+			this->Controls->Add(this->comboBox4);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
 		}
 
 		void InitializeComponentNEATLearn2DEN(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -592,31 +938,28 @@ namespace NNWay
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(368, 24);
@@ -625,20 +968,14 @@ namespace NNWay
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->dimensionToolStripMenuItem,
-					this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem
-			});
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
 			// dimensionToolStripMenuItem
 			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->dToolStripMenuItem,
-					this->dToolStripMenuItem1
-			});
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
@@ -659,10 +996,7 @@ namespace NNWay
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->englishToolStripMenuItem,
-					this->ðóññêèéToolStripMenuItem
-			});
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -683,10 +1017,7 @@ namespace NNWay
 			// 
 			// learningAlgorithmToolStripMenuItem
 			// 
-			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->nEATToolStripMenuItem,
-					this->qLearningToolStripMenuItem
-			});
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
@@ -707,10 +1038,7 @@ namespace NNWay
 			// 
 			// modeToolStripMenuItem
 			// 
-			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->learnToolStripMenuItem,
-					this->checkToolStripMenuItem
-			});
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->modeToolStripMenuItem->Text = L"Mode";
@@ -731,10 +1059,7 @@ namespace NNWay
 			// 
 			// informationToolStripMenuItem
 			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->informationToolStripMenuItem->Text = L"Information";
@@ -762,8 +1087,7 @@ namespace NNWay
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Blue;
 			this->label1->Location = System::Drawing::Point(60, 40);
 			this->label1->Name = L"label1";
@@ -774,8 +1098,7 @@ namespace NNWay
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(160, 19);
@@ -785,8 +1108,7 @@ namespace NNWay
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(131, 19);
@@ -796,8 +1118,7 @@ namespace NNWay
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(154, 19);
@@ -816,8 +1137,7 @@ namespace NNWay
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label6->Location = System::Drawing::Point(8, 236);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(146, 19);
@@ -833,6 +1153,16 @@ namespace NNWay
 			this->label7->Size = System::Drawing::Size(51, 13);
 			this->label7->TabIndex = 17;
 			this->label7->Text = L"Exit after:";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label8->Location = System::Drawing::Point(8, 281);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(125, 19);
+			this->label8->TabIndex = 25;
+			this->label8->Text = L"Set mutation rate:";
 			// 
 			// button1
 			// 
@@ -885,6 +1215,15 @@ namespace NNWay
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
 			// 
+			// button7
+			// 
+			this->button7->Location = System::Drawing::Point(250, 302);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(106, 21);
+			this->button7->TabIndex = 27;
+			this->button7->Text = L"&OK";
+			this->button7->UseVisualStyleBackColor = true;
+			// 
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(12, 168);
@@ -932,6 +1271,14 @@ namespace NNWay
 			this->textBox5->Text = L"3";
 			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
 			// 
+			// textBox6
+			// 
+			this->textBox6->Location = System::Drawing::Point(12, 303);
+			this->textBox6->Name = L"textBox6";
+			this->textBox6->Size = System::Drawing::Size(232, 20);
+			this->textBox6->TabIndex = 26;
+			this->textBox6->Text = L"0.01";
+			// 
 			// comboBox1
 			// 
 			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
@@ -967,42 +1314,11 @@ namespace NNWay
 			this->checkBox2->UseVisualStyleBackColor = true;
 			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox2_CheckedChanged);
 			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label8->Location = System::Drawing::Point(8, 281);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(125, 19);
-			this->label8->TabIndex = 25;
-			this->label8->Text = L"Set mutation rate:";
-			// 
-			// button7
-			// 
-			this->button7->Location = System::Drawing::Point(250, 302);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(106, 21);
-			this->button7->TabIndex = 27;
-			this->button7->Text = L"&OK";
-			this->button7->UseVisualStyleBackColor = true;
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(12, 303);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(232, 20);
-			this->textBox6->TabIndex = 26;
-			this->textBox6->Text = L"0.01";
-			// 
 			// menu
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(368, 426);
-			this->Controls->Add(this->label8);
-			this->Controls->Add(this->button7);
-			this->Controls->Add(this->textBox6);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label3);
@@ -1010,16 +1326,19 @@ namespace NNWay
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label7);
+			this->Controls->Add(this->label8);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button6);
+			this->Controls->Add(this->button7);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->textBox4);
 			this->Controls->Add(this->textBox5);
+			this->Controls->Add(this->textBox6);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->checkBox2);
@@ -1034,61 +1353,56 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 		void InitializeComponentNEATLearn3DEN(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(368, 24);
@@ -1097,20 +1411,14 @@ namespace NNWay
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->dimensionToolStripMenuItem,
-					this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem
-			});
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
 			// dimensionToolStripMenuItem
 			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->dToolStripMenuItem,
-					this->dToolStripMenuItem1
-			});
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
@@ -1131,10 +1439,7 @@ namespace NNWay
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->englishToolStripMenuItem,
-					this->ðóññêèéToolStripMenuItem
-			});
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -1155,10 +1460,7 @@ namespace NNWay
 			// 
 			// learningAlgorithmToolStripMenuItem
 			// 
-			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->nEATToolStripMenuItem,
-					this->qLearningToolStripMenuItem
-			});
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
@@ -1179,10 +1481,7 @@ namespace NNWay
 			// 
 			// modeToolStripMenuItem
 			// 
-			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->learnToolStripMenuItem,
-					this->checkToolStripMenuItem
-			});
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->modeToolStripMenuItem->Text = L"Mode";
@@ -1203,10 +1502,7 @@ namespace NNWay
 			// 
 			// informationToolStripMenuItem
 			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->informationToolStripMenuItem->Text = L"Information";
@@ -1234,8 +1530,7 @@ namespace NNWay
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Blue;
 			this->label1->Location = System::Drawing::Point(60, 40);
 			this->label1->Name = L"label1";
@@ -1246,8 +1541,7 @@ namespace NNWay
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(160, 19);
@@ -1257,8 +1551,7 @@ namespace NNWay
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(131, 19);
@@ -1268,28 +1561,17 @@ namespace NNWay
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(154, 19);
 			this->label4->TabIndex = 4;
 			this->label4->Text = L"Set number of objects:";
 			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(9, 349);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(30, 13);
-			this->label5->TabIndex = 13;
-			this->label5->Text = L"FPS:";
-			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label6->Location = System::Drawing::Point(8, 236);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(146, 19);
@@ -1305,6 +1587,16 @@ namespace NNWay
 			this->label7->Size = System::Drawing::Size(51, 13);
 			this->label7->TabIndex = 17;
 			this->label7->Text = L"Exit after:";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label8->Location = System::Drawing::Point(8, 281);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(125, 19);
+			this->label8->TabIndex = 25;
+			this->label8->Text = L"Set mutation rate:";
 			// 
 			// button1
 			// 
@@ -1357,6 +1649,15 @@ namespace NNWay
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
 			// 
+			// button7
+			// 
+			this->button7->Location = System::Drawing::Point(250, 302);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(106, 21);
+			this->button7->TabIndex = 27;
+			this->button7->Text = L"&OK";
+			this->button7->UseVisualStyleBackColor = true;
+			// 
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(12, 168);
@@ -1404,6 +1705,14 @@ namespace NNWay
 			this->textBox5->Text = L"3";
 			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
 			// 
+			// textBox6
+			// 
+			this->textBox6->Location = System::Drawing::Point(12, 303);
+			this->textBox6->Name = L"textBox6";
+			this->textBox6->Size = System::Drawing::Size(232, 20);
+			this->textBox6->TabIndex = 26;
+			this->textBox6->Text = L"0.01";
+			// 
 			// comboBox1
 			// 
 			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
@@ -1439,57 +1748,29 @@ namespace NNWay
 			this->checkBox2->UseVisualStyleBackColor = true;
 			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox2_CheckedChanged);
 			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label8->Location = System::Drawing::Point(8, 281);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(125, 19);
-			this->label8->TabIndex = 25;
-			this->label8->Text = L"Set mutation rate:";
-			// 
-			// button7
-			// 
-			this->button7->Location = System::Drawing::Point(250, 302);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(106, 21);
-			this->button7->TabIndex = 27;
-			this->button7->Text = L"&OK";
-			this->button7->UseVisualStyleBackColor = true;
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(12, 303);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(232, 20);
-			this->textBox6->TabIndex = 26;
-			this->textBox6->Text = L"0.01";
-			// 
 			// menu
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(368, 426);
-			this->Controls->Add(this->label8);
-			this->Controls->Add(this->button7);
-			this->Controls->Add(this->textBox6);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label7);
+			this->Controls->Add(this->label8);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button6);
+			this->Controls->Add(this->button7);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox4);
 			this->Controls->Add(this->textBox5);
+			this->Controls->Add(this->textBox6);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->checkBox2);
@@ -1510,56 +1791,35 @@ namespace NNWay
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(368, 24);
@@ -1568,20 +1828,14 @@ namespace NNWay
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->dimensionToolStripMenuItem,
-					this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem
-			});
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
 			// dimensionToolStripMenuItem
 			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->dToolStripMenuItem,
-					this->dToolStripMenuItem1
-			});
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
@@ -1602,10 +1856,7 @@ namespace NNWay
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->englishToolStripMenuItem,
-					this->ðóññêèéToolStripMenuItem
-			});
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -1626,10 +1877,7 @@ namespace NNWay
 			// 
 			// learningAlgorithmToolStripMenuItem
 			// 
-			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->nEATToolStripMenuItem,
-					this->qLearningToolStripMenuItem
-			});
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
@@ -1650,10 +1898,7 @@ namespace NNWay
 			// 
 			// modeToolStripMenuItem
 			// 
-			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->learnToolStripMenuItem,
-					this->checkToolStripMenuItem
-			});
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->modeToolStripMenuItem->Text = L"Mode";
@@ -1674,476 +1919,7 @@ namespace NNWay
 			// 
 			// informationToolStripMenuItem
 			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
-			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
-			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
-			// 
-			// aboutToolStripMenuItem
-			// 
-			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
-			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
-			// 
-			// howToUseToolStripMenuItem
-			// 
-			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
-			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
-			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
-			// 
-			// bugReportToolStripMenuItem
-			// 
-			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
-			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
-			// 
-// label1
-// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label1->ForeColor = System::Drawing::Color::Blue;
-			this->label1->Location = System::Drawing::Point(65, 40);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(244, 39);
-			this->label1->TabIndex = 1;
-			this->label1->Text = L"NEAT (Check, 3D)";
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(8, 146);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(109, 19);
-			this->label2->TabIndex = 2;
-			this->label2->Text = L"Load result file:";
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label3->Location = System::Drawing::Point(8, 100);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(76, 19);
-			this->label3->TabIndex = 3;
-			this->label3->Text = L"Load map:";
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label4->Location = System::Drawing::Point(8, 191);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(85, 19);
-			this->label4->TabIndex = 4;
-			this->label4->Text = L"Set gamma:";
-			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(37, 304);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(30, 13);
-			this->label5->TabIndex = 13;
-			this->label5->Text = L"FPS:";
-			// 
-			// label6
-			// 
-			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label6->Location = System::Drawing::Point(8, 191);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(204, 19);
-			this->label6->TabIndex = 22;
-			this->label6->Text = L"Set number of fields (X and Y):";
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->label7->Location = System::Drawing::Point(9, 392);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(51, 13);
-			this->label7->TabIndex = 17;
-			this->label7->Text = L"Exit after:";
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(12, 122);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(344, 21);
-			this->button1->TabIndex = 8;
-			this->button1->Text = L"&Load";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(12, 167);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(344, 21);
-			this->button2->TabIndex = 9;
-			this->button2->Text = L"&Load";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(250, 212);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(106, 21);
-			this->button3->TabIndex = 10;
-			this->button3->Text = L"&OK";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &menu::Button3_Click);
-			// 
-			// button4
-			// 
-			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->button4->Location = System::Drawing::Point(131, 205);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->TabIndex = 20;
-			this->button4->Text = L"&Check";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
-			// 
-			// button6
-			// 
-			this->button6->Enabled = false;
-			this->button6->Location = System::Drawing::Point(250, 212);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(106, 21);
-			this->button6->TabIndex = 24;
-			this->button6->Text = L"&OK";
-			this->button6->UseVisualStyleBackColor = true;
-			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(12, 168);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(232, 20);
-			this->textBox1->TabIndex = 6;
-			this->textBox1->Text = L"3";
-			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox1_KeyPress);
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(12, 213);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(232, 20);
-			this->textBox2->TabIndex = 7;
-			this->textBox2->Text = L"0.8";
-			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox2_KeyPress);
-			// 
-			// textBox3
-			// 
-			this->textBox3->Location = System::Drawing::Point(73, 301);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(50, 20);
-			this->textBox3->TabIndex = 18;
-			this->textBox3->Text = L"60";
-			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox3_KeyPress);
-			// 
-			// textBox4
-			// 
-			this->textBox4->Location = System::Drawing::Point(66, 389);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->ReadOnly = true;
-			this->textBox4->Size = System::Drawing::Size(50, 20);
-			this->textBox4->TabIndex = 19;
-			this->textBox4->Text = L"10";
-			this->textBox4->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox4_KeyPress);
-			// 
-			// textBox5
-			// 
-			this->textBox5->Location = System::Drawing::Point(12, 213);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->ReadOnly = true;
-			this->textBox5->Size = System::Drawing::Size(115, 20);
-			this->textBox5->TabIndex = 23;
-			this->textBox5->Text = L"3";
-			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
-			this->comboBox1->Location = System::Drawing::Point(12, 122);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(232, 21);
-			this->comboBox1->TabIndex = 5;
-			this->comboBox1->Text = L"(Choose action)";
-			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::ComboBox1_SelectedIndexChanged);
-			this->comboBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::ComboBox1_KeyPress);
-			// 
-			// checkBox1
-			// 
-			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(28, 324);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(123, 17);
-			this->checkBox1->TabIndex = 11;
-			this->checkBox1->Text = L"Graphic visualization";
-			this->checkBox1->UseVisualStyleBackColor = true;
-			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox1_CheckedChanged);
-			// 
-			// checkBox2
-			// 
-			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(12, 372);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(107, 17);
-			this->checkBox2->TabIndex = 12;
-			this->checkBox2->Text = L"Exit automatically";
-			this->checkBox2->UseVisualStyleBackColor = true;
-			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox2_CheckedChanged);
-			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label8->Location = System::Drawing::Point(8, 281);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(125, 19);
-			this->label8->TabIndex = 25;
-			this->label8->Text = L"Set mutation rate:";
-			// 
-			// button7
-			// 
-			this->button7->Location = System::Drawing::Point(250, 302);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(106, 21);
-			this->button7->TabIndex = 27;
-			this->button7->Text = L"&OK";
-			this->button7->UseVisualStyleBackColor = true;
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(12, 303);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(232, 20);
-			this->textBox6->TabIndex = 26;
-			this->textBox6->Text = L"0.01";
-			// 
-			// textBox7
-			// 
-			this->textBox7->Location = System::Drawing::Point(129, 213);
-			this->textBox7->Name = L"textBox7";
-			this->textBox7->ReadOnly = true;
-			this->textBox7->Size = System::Drawing::Size(115, 20);
-			this->textBox7->TabIndex = 28;
-			this->textBox7->Text = L"3";
-			// 
-			// menu
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(368, 301);
-			this->Controls->Add(this->label1);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button4);
-			this->Controls->Add(this->menuStrip1);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->MainMenuStrip = this->menuStrip1;
-			this->Name = L"menu";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"NNWay";
-			this->menuStrip1->ResumeLayout(false);
-			this->menuStrip1->PerformLayout();
-			this->ResumeLayout(false);
-			this->PerformLayout();
-
-		}
-		void InitializeComponentNEATCheck3DEN(void)
-		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
-			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
-			this->menuStrip1->SuspendLayout();
-			this->SuspendLayout();
-			// 
-			// menuStrip1
-			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(368, 24);
-			this->menuStrip1->TabIndex = 0;
-			this->menuStrip1->Text = L"menuStrip1";
-			// 
-			// settingsToolStripMenuItem
-			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->dimensionToolStripMenuItem,
-					this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem
-			});
-			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
-			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
-			// 
-			// dimensionToolStripMenuItem
-			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->dToolStripMenuItem,
-					this->dToolStripMenuItem1
-			});
-			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
-			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
-			// 
-			// dToolStripMenuItem
-			// 
-			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
-			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
-			this->dToolStripMenuItem->Text = L"2D";
-			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
-			// 
-			// dToolStripMenuItem1
-			// 
-			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
-			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
-			this->dToolStripMenuItem1->Text = L"3D";
-			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
-			// 
-			// languageToolStripMenuItem
-			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->englishToolStripMenuItem,
-					this->ðóññêèéToolStripMenuItem
-			});
-			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
-			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
-			// 
-			// englishToolStripMenuItem
-			// 
-			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
-			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
-			this->englishToolStripMenuItem->Text = L"English";
-			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
-			// 
-			// ðóññêèéToolStripMenuItem
-			// 
-			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
-			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
-			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
-			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
-			// 
-			// learningAlgorithmToolStripMenuItem
-			// 
-			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->nEATToolStripMenuItem,
-					this->qLearningToolStripMenuItem
-			});
-			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
-			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
-			// 
-			// nEATToolStripMenuItem
-			// 
-			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
-			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->nEATToolStripMenuItem->Text = L"NEAT";
-			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
-			// 
-			// qLearningToolStripMenuItem
-			// 
-			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
-			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
-			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
-			// 
-			// modeToolStripMenuItem
-			// 
-			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->learnToolStripMenuItem,
-					this->checkToolStripMenuItem
-			});
-			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
-			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
-			// 
-			// learnToolStripMenuItem
-			// 
-			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
-			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
-			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
-			// 
-			// checkToolStripMenuItem
-			// 
-			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
-			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
-			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
-			// 
-			// informationToolStripMenuItem
-			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->informationToolStripMenuItem->Text = L"Information";
@@ -2171,8 +1947,7 @@ namespace NNWay
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Blue;
 			this->label1->Location = System::Drawing::Point(65, 40);
 			this->label1->Name = L"label1";
@@ -2183,8 +1958,7 @@ namespace NNWay
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(109, 19);
@@ -2194,54 +1968,12 @@ namespace NNWay
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(76, 19);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"Load map:";
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label4->Location = System::Drawing::Point(8, 191);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(85, 19);
-			this->label4->TabIndex = 4;
-			this->label4->Text = L"Set gamma:";
-			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(37, 304);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(30, 13);
-			this->label5->TabIndex = 13;
-			this->label5->Text = L"FPS:";
-			// 
-			// label6
-			// 
-			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label6->Location = System::Drawing::Point(8, 191);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(204, 19);
-			this->label6->TabIndex = 22;
-			this->label6->Text = L"Set number of fields (X and Y):";
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->label7->Location = System::Drawing::Point(9, 392);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(51, 13);
-			this->label7->TabIndex = 17;
-			this->label7->Text = L"Exit after:";
 			// 
 			// button1
 			// 
@@ -2263,6 +1995,557 @@ namespace NNWay
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
 			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(131, 205);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Check";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 301);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+		void InitializeComponentNEATCheck3DEN(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// dimensionToolStripMenuItem
+			// 
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(65, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(244, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"NEAT (Check, 3D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(109, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Load result file:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(76, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Load map:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(12, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(344, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"&Load";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(12, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(344, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&Load";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(131, 205);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Check";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 301);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+
+		void InitializeComponentNEATLearn2DRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// dimensionToolStripMenuItem
+			// 
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(60, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(237, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"NEAT (Learn, 2D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(160, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Set direction array size:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(131, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Map configuration:";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label4->Location = System::Drawing::Point(8, 191);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(154, 19);
+			this->label4->TabIndex = 4;
+			this->label4->Text = L"Set number of objects:";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(9, 349);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(30, 13);
+			this->label5->TabIndex = 13;
+			this->label5->Text = L"FPS:";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label6->Location = System::Drawing::Point(8, 236);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(146, 19);
+			this->label6->TabIndex = 22;
+			this->label6->Text = L"Set number of layers:";
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->label7->Location = System::Drawing::Point(9, 392);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(51, 13);
+			this->label7->TabIndex = 17;
+			this->label7->Text = L"Exit after:";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label8->Location = System::Drawing::Point(8, 281);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(125, 19);
+			this->label8->TabIndex = 25;
+			this->label8->Text = L"Set mutation rate:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(250, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(106, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"...";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(250, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(106, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&OK";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
 			// button3
 			// 
 			this->button3->Location = System::Drawing::Point(250, 212);
@@ -2276,18 +2559,17 @@ namespace NNWay
 			// button4
 			// 
 			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->button4->Location = System::Drawing::Point(131, 205);
+			this->button4->Location = System::Drawing::Point(198, 335);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(107, 70);
 			this->button4->TabIndex = 20;
-			this->button4->Text = L"&Check";
+			this->button4->Text = L"&Start";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
 			// 
 			// button6
 			// 
-			this->button6->Enabled = false;
-			this->button6->Location = System::Drawing::Point(250, 212);
+			this->button6->Location = System::Drawing::Point(250, 257);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(106, 21);
 			this->button6->TabIndex = 24;
@@ -2295,13 +2577,22 @@ namespace NNWay
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
 			// 
+			// button7
+			// 
+			this->button7->Location = System::Drawing::Point(250, 302);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(106, 21);
+			this->button7->TabIndex = 27;
+			this->button7->Text = L"&OK";
+			this->button7->UseVisualStyleBackColor = true;
+			// 
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(12, 168);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(232, 20);
 			this->textBox1->TabIndex = 6;
-			this->textBox1->Text = L"3";
+			this->textBox1->Text = L"400";
 			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox1_KeyPress);
 			// 
 			// textBox2
@@ -2310,13 +2601,14 @@ namespace NNWay
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(232, 20);
 			this->textBox2->TabIndex = 7;
-			this->textBox2->Text = L"0.8";
+			this->textBox2->Text = L"250";
 			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox2_KeyPress);
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(73, 301);
+			this->textBox3->Location = System::Drawing::Point(45, 346);
 			this->textBox3->Name = L"textBox3";
+			this->textBox3->ReadOnly = true;
 			this->textBox3->Size = System::Drawing::Size(50, 20);
 			this->textBox3->TabIndex = 18;
 			this->textBox3->Text = L"60";
@@ -2334,13 +2626,20 @@ namespace NNWay
 			// 
 			// textBox5
 			// 
-			this->textBox5->Location = System::Drawing::Point(12, 213);
+			this->textBox5->Location = System::Drawing::Point(12, 258);
 			this->textBox5->Name = L"textBox5";
-			this->textBox5->ReadOnly = true;
-			this->textBox5->Size = System::Drawing::Size(115, 20);
+			this->textBox5->Size = System::Drawing::Size(232, 20);
 			this->textBox5->TabIndex = 23;
 			this->textBox5->Text = L"3";
 			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
+			// 
+			// textBox6
+			// 
+			this->textBox6->Location = System::Drawing::Point(12, 303);
+			this->textBox6->Name = L"textBox6";
+			this->textBox6->Size = System::Drawing::Size(232, 20);
+			this->textBox6->TabIndex = 26;
+			this->textBox6->Text = L"0.01";
 			// 
 			// comboBox1
 			// 
@@ -2358,7 +2657,7 @@ namespace NNWay
 			// checkBox1
 			// 
 			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(28, 324);
+			this->checkBox1->Location = System::Drawing::Point(12, 329);
 			this->checkBox1->Name = L"checkBox1";
 			this->checkBox1->Size = System::Drawing::Size(123, 17);
 			this->checkBox1->TabIndex = 11;
@@ -2377,16 +2676,340 @@ namespace NNWay
 			this->checkBox2->UseVisualStyleBackColor = true;
 			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox2_CheckedChanged);
 			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 426);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button6);
+			this->Controls->Add(this->button7);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->textBox3);
+			this->Controls->Add(this->textBox4);
+			this->Controls->Add(this->textBox5);
+			this->Controls->Add(this->textBox6);
+			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->checkBox1);
+			this->Controls->Add(this->checkBox2);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+		void InitializeComponentNEATLearn3DRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// dimensionToolStripMenuItem
+			// 
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(60, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(237, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"NEAT (Learn, 3D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(160, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Set direction array size:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(131, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Map configuration:";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label4->Location = System::Drawing::Point(8, 191);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(154, 19);
+			this->label4->TabIndex = 4;
+			this->label4->Text = L"Set number of objects:";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label6->Location = System::Drawing::Point(8, 236);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(146, 19);
+			this->label6->TabIndex = 22;
+			this->label6->Text = L"Set number of layers:";
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->label7->Location = System::Drawing::Point(9, 387);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(51, 13);
+			this->label7->TabIndex = 17;
+			this->label7->Text = L"Exit after:";
+			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label8->Location = System::Drawing::Point(8, 281);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(125, 19);
 			this->label8->TabIndex = 25;
 			this->label8->Text = L"Set mutation rate:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(250, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(106, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"...";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(250, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(106, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&OK";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(250, 212);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(106, 21);
+			this->button3->TabIndex = 10;
+			this->button3->Text = L"&OK";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &menu::Button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(190, 338);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Start";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// button6
+			// 
+			this->button6->Location = System::Drawing::Point(250, 257);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(106, 21);
+			this->button6->TabIndex = 24;
+			this->button6->Text = L"&OK";
+			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
 			// 
 			// button7
 			// 
@@ -2397,6 +3020,53 @@ namespace NNWay
 			this->button7->Text = L"&OK";
 			this->button7->UseVisualStyleBackColor = true;
 			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(12, 168);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(232, 20);
+			this->textBox1->TabIndex = 6;
+			this->textBox1->Text = L"400";
+			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox1_KeyPress);
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(12, 213);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(232, 20);
+			this->textBox2->TabIndex = 7;
+			this->textBox2->Text = L"250";
+			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox2_KeyPress);
+			// 
+			// textBox3
+			// 
+			this->textBox3->Location = System::Drawing::Point(45, 346);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->ReadOnly = true;
+			this->textBox3->Size = System::Drawing::Size(50, 20);
+			this->textBox3->TabIndex = 18;
+			this->textBox3->Text = L"60";
+			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox3_KeyPress);
+			// 
+			// textBox4
+			// 
+			this->textBox4->Location = System::Drawing::Point(66, 384);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->ReadOnly = true;
+			this->textBox4->Size = System::Drawing::Size(50, 20);
+			this->textBox4->TabIndex = 19;
+			this->textBox4->Text = L"10";
+			this->textBox4->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox4_KeyPress);
+			// 
+			// textBox5
+			// 
+			this->textBox5->Location = System::Drawing::Point(12, 258);
+			this->textBox5->Name = L"textBox5";
+			this->textBox5->Size = System::Drawing::Size(232, 20);
+			this->textBox5->TabIndex = 23;
+			this->textBox5->Text = L"3";
+			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
+			// 
 			// textBox6
 			// 
 			this->textBox6->Location = System::Drawing::Point(12, 303);
@@ -2405,14 +3075,540 @@ namespace NNWay
 			this->textBox6->TabIndex = 26;
 			this->textBox6->Text = L"0.01";
 			// 
-			// textBox7
+			// comboBox1
 			// 
-			this->textBox7->Location = System::Drawing::Point(129, 213);
-			this->textBox7->Name = L"textBox7";
-			this->textBox7->ReadOnly = true;
-			this->textBox7->Size = System::Drawing::Size(115, 20);
-			this->textBox7->TabIndex = 28;
-			this->textBox7->Text = L"3";
+			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
+			this->comboBox1->Location = System::Drawing::Point(12, 122);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(232, 21);
+			this->comboBox1->TabIndex = 5;
+			this->comboBox1->Text = L"(Choose action)";
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::ComboBox1_SelectedIndexChanged);
+			this->comboBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::ComboBox1_KeyPress);
+			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(12, 344);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(123, 17);
+			this->checkBox1->TabIndex = 11;
+			this->checkBox1->Text = L"Graphic visualization";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox1_CheckedChanged);
+			// 
+			// checkBox2
+			// 
+			this->checkBox2->AutoSize = true;
+			this->checkBox2->Location = System::Drawing::Point(12, 367);
+			this->checkBox2->Name = L"checkBox2";
+			this->checkBox2->Size = System::Drawing::Size(107, 17);
+			this->checkBox2->TabIndex = 12;
+			this->checkBox2->Text = L"Exit automatically";
+			this->checkBox2->UseVisualStyleBackColor = true;
+			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox2_CheckedChanged);
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 426);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button6);
+			this->Controls->Add(this->button7);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->textBox4);
+			this->Controls->Add(this->textBox5);
+			this->Controls->Add(this->textBox6);
+			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->checkBox1);
+			this->Controls->Add(this->checkBox2);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
+		}
+		void InitializeComponentNEATCheck2DRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// dimensionToolStripMenuItem
+			// 
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(65, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(244, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"NEAT (Check, 2D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(109, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Load result file:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(76, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Load map:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(12, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(344, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"&Load";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(12, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(344, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&Load";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(131, 205);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Check";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 301);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+		void InitializeComponentNEATCheck3DRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// dimensionToolStripMenuItem
+			// 
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(65, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(244, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"NEAT (Check, 3D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(109, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Load result file:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(76, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Load map:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(12, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(344, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"&Load";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(12, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(344, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&Load";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(131, 205);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Check";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
 			// 
 			// menu
 			// 
@@ -2465,33 +3661,24 @@ namespace NNWay
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(368, 24);
@@ -2500,20 +3687,14 @@ namespace NNWay
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->dimensionToolStripMenuItem,
-					this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem
-			});
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
 			// dimensionToolStripMenuItem
 			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->dToolStripMenuItem,
-					this->dToolStripMenuItem1
-			});
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
@@ -2534,10 +3715,7 @@ namespace NNWay
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->englishToolStripMenuItem,
-					this->ðóññêèéToolStripMenuItem
-			});
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -2558,10 +3736,7 @@ namespace NNWay
 			// 
 			// learningAlgorithmToolStripMenuItem
 			// 
-			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->nEATToolStripMenuItem,
-					this->qLearningToolStripMenuItem
-			});
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
@@ -2582,10 +3757,7 @@ namespace NNWay
 			// 
 			// modeToolStripMenuItem
 			// 
-			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->learnToolStripMenuItem,
-					this->checkToolStripMenuItem
-			});
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->modeToolStripMenuItem->Text = L"Mode";
@@ -2606,10 +3778,7 @@ namespace NNWay
 			// 
 			// informationToolStripMenuItem
 			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->informationToolStripMenuItem->Text = L"Information";
@@ -2637,8 +3806,7 @@ namespace NNWay
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Blue;
 			this->label1->Location = System::Drawing::Point(30, 40);
 			this->label1->Name = L"label1";
@@ -2649,8 +3817,7 @@ namespace NNWay
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(169, 19);
@@ -2660,8 +3827,7 @@ namespace NNWay
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(131, 19);
@@ -2671,8 +3837,7 @@ namespace NNWay
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(85, 19);
@@ -2691,27 +3856,12 @@ namespace NNWay
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label6->Location = System::Drawing::Point(8, 236);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(204, 19);
 			this->label6->TabIndex = 22;
 			this->label6->Text = L"Set number of fields (X and Y):";
-			// 
-			// label7
-			// 
-			this->label7->Location = System::Drawing::Point(0, 0);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(100, 23);
-			this->label7->TabIndex = 0;
-			// 
-			// label8
-			// 
-			this->label8->Location = System::Drawing::Point(0, 0);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(100, 23);
-			this->label8->TabIndex = 0;
 			// 
 			// button1
 			// 
@@ -2764,13 +3914,6 @@ namespace NNWay
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
 			// 
-			// button7
-			// 
-			this->button7->Location = System::Drawing::Point(0, 0);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(75, 23);
-			this->button7->TabIndex = 0;
-			// 
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(12, 168);
@@ -2816,20 +3959,6 @@ namespace NNWay
 			this->textBox5->Text = L"50";
 			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
 			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(0, 0);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(100, 20);
-			this->textBox6->TabIndex = 0;
-			// 
-			// textBox7
-			// 
-			this->textBox7->Location = System::Drawing::Point(0, 0);
-			this->textBox7->Name = L"textBox7";
-			this->textBox7->Size = System::Drawing::Size(100, 20);
-			this->textBox7->TabIndex = 0;
-			// 
 			// comboBox1
 			// 
 			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
@@ -2853,13 +3982,6 @@ namespace NNWay
 			this->checkBox1->Text = L"Graphic visualization";
 			this->checkBox1->UseVisualStyleBackColor = true;
 			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox1_CheckedChanged);
-			// 
-			// checkBox2
-			// 
-			this->checkBox2->Location = System::Drawing::Point(0, 0);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(104, 24);
-			this->checkBox2->TabIndex = 0;
 			// 
 			// menu
 			// 
@@ -2922,34 +4044,21 @@ namespace NNWay
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(368, 24);
@@ -2958,20 +4067,14 @@ namespace NNWay
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->dimensionToolStripMenuItem,
-					this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem
-			});
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
 			// dimensionToolStripMenuItem
 			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->dToolStripMenuItem,
-					this->dToolStripMenuItem1
-			});
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
@@ -2992,10 +4095,7 @@ namespace NNWay
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->englishToolStripMenuItem,
-					this->ðóññêèéToolStripMenuItem
-			});
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -3016,10 +4116,7 @@ namespace NNWay
 			// 
 			// learningAlgorithmToolStripMenuItem
 			// 
-			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->nEATToolStripMenuItem,
-					this->qLearningToolStripMenuItem
-			});
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
@@ -3040,10 +4137,7 @@ namespace NNWay
 			// 
 			// modeToolStripMenuItem
 			// 
-			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->learnToolStripMenuItem,
-					this->checkToolStripMenuItem
-			});
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->modeToolStripMenuItem->Text = L"Mode";
@@ -3064,10 +4158,7 @@ namespace NNWay
 			// 
 			// informationToolStripMenuItem
 			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->informationToolStripMenuItem->Text = L"Information";
@@ -3095,8 +4186,7 @@ namespace NNWay
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Blue;
 			this->label1->Location = System::Drawing::Point(30, 40);
 			this->label1->Name = L"label1";
@@ -3107,8 +4197,7 @@ namespace NNWay
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(169, 19);
@@ -3118,8 +4207,7 @@ namespace NNWay
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(131, 19);
@@ -3129,8 +4217,7 @@ namespace NNWay
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(85, 19);
@@ -3145,27 +4232,6 @@ namespace NNWay
 			this->label5->Size = System::Drawing::Size(30, 13);
 			this->label5->TabIndex = 13;
 			this->label5->Text = L"FPS:";
-			// 
-			// label6
-			// 
-			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label6->Location = System::Drawing::Point(8, 236);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(204, 19);
-			this->label6->TabIndex = 22;
-			this->label6->Text = L"Set number of fields (X and Y):";
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->label7->Location = System::Drawing::Point(9, 392);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(51, 13);
-			this->label7->TabIndex = 17;
-			this->label7->Text = L"Exit after:";
 			// 
 			// button1
 			// 
@@ -3208,16 +4274,6 @@ namespace NNWay
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
 			// 
-			// button6
-			// 
-			this->button6->Location = System::Drawing::Point(250, 257);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(106, 21);
-			this->button6->TabIndex = 24;
-			this->button6->Text = L"&OK";
-			this->button6->UseVisualStyleBackColor = true;
-			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
-			// 
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(12, 168);
@@ -3246,25 +4302,6 @@ namespace NNWay
 			this->textBox3->Text = L"60";
 			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox3_KeyPress);
 			// 
-			// textBox4
-			// 
-			this->textBox4->Location = System::Drawing::Point(66, 389);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->ReadOnly = true;
-			this->textBox4->Size = System::Drawing::Size(50, 20);
-			this->textBox4->TabIndex = 19;
-			this->textBox4->Text = L"10";
-			this->textBox4->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox4_KeyPress);
-			// 
-			// textBox5
-			// 
-			this->textBox5->Location = System::Drawing::Point(12, 258);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(115, 20);
-			this->textBox5->TabIndex = 23;
-			this->textBox5->Text = L"3";
-			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
-			// 
 			// comboBox1
 			// 
 			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
@@ -3288,53 +4325,6 @@ namespace NNWay
 			this->checkBox1->Text = L"Graphic visualization";
 			this->checkBox1->UseVisualStyleBackColor = true;
 			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox1_CheckedChanged);
-			// 
-			// checkBox2
-			// 
-			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(12, 372);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(107, 17);
-			this->checkBox2->TabIndex = 12;
-			this->checkBox2->Text = L"Exit automatically";
-			this->checkBox2->UseVisualStyleBackColor = true;
-			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox2_CheckedChanged);
-			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label8->Location = System::Drawing::Point(8, 281);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(125, 19);
-			this->label8->TabIndex = 25;
-			this->label8->Text = L"Set mutation rate:";
-			// 
-			// button7
-			// 
-			this->button7->Location = System::Drawing::Point(250, 302);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(106, 21);
-			this->button7->TabIndex = 27;
-			this->button7->Text = L"&OK";
-			this->button7->UseVisualStyleBackColor = true;
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(12, 303);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(232, 20);
-			this->textBox6->TabIndex = 26;
-			this->textBox6->Text = L"0.01";
-			// 
-			// textBox7
-			// 
-			this->textBox7->Location = System::Drawing::Point(129, 258);
-			this->textBox7->Name = L"textBox7";
-			this->textBox7->Size = System::Drawing::Size(115, 20);
-			this->textBox7->TabIndex = 28;
-			this->textBox7->Text = L"3";
 			// 
 			// menu
 			// 
@@ -3366,62 +4356,46 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 		void InitializeComponentQLCheck2DEN(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(368, 24);
@@ -3430,20 +4404,14 @@ namespace NNWay
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->dimensionToolStripMenuItem,
-					this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem
-			});
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
 			// dimensionToolStripMenuItem
 			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->dToolStripMenuItem,
-					this->dToolStripMenuItem1
-			});
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
@@ -3464,10 +4432,7 @@ namespace NNWay
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->englishToolStripMenuItem,
-					this->ðóññêèéToolStripMenuItem
-			});
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -3488,10 +4453,7 @@ namespace NNWay
 			// 
 			// learningAlgorithmToolStripMenuItem
 			// 
-			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->nEATToolStripMenuItem,
-					this->qLearningToolStripMenuItem
-			});
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
@@ -3512,10 +4474,7 @@ namespace NNWay
 			// 
 			// modeToolStripMenuItem
 			// 
-			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->learnToolStripMenuItem,
-					this->checkToolStripMenuItem
-			});
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->modeToolStripMenuItem->Text = L"Mode";
@@ -3536,10 +4495,7 @@ namespace NNWay
 			// 
 			// informationToolStripMenuItem
 			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->informationToolStripMenuItem->Text = L"Information";
@@ -3567,8 +4523,7 @@ namespace NNWay
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Blue;
 			this->label1->Location = System::Drawing::Point(27, 40);
 			this->label1->Name = L"label1";
@@ -3579,8 +4534,7 @@ namespace NNWay
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(109, 19);
@@ -3590,24 +4544,12 @@ namespace NNWay
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(76, 19);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"Load map:";
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label4->Location = System::Drawing::Point(8, 191);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(85, 19);
-			this->label4->TabIndex = 4;
-			this->label4->Text = L"Set gamma:";
 			// 
 			// label5
 			// 
@@ -3621,23 +4563,12 @@ namespace NNWay
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label6->Location = System::Drawing::Point(8, 191);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(204, 19);
 			this->label6->TabIndex = 22;
 			this->label6->Text = L"Set number of fields (X and Y):";
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->label7->Location = System::Drawing::Point(9, 392);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(51, 13);
-			this->label7->TabIndex = 17;
-			this->label7->Text = L"Exit after:";
 			// 
 			// button1
 			// 
@@ -3658,16 +4589,6 @@ namespace NNWay
 			this->button2->Text = L"&Load";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(250, 212);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(106, 21);
-			this->button3->TabIndex = 10;
-			this->button3->Text = L"&OK";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &menu::Button3_Click);
 			// 
 			// button4
 			// 
@@ -3691,24 +4612,6 @@ namespace NNWay
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
 			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(12, 168);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(232, 20);
-			this->textBox1->TabIndex = 6;
-			this->textBox1->Text = L"3";
-			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox1_KeyPress);
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(12, 213);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(232, 20);
-			this->textBox2->TabIndex = 7;
-			this->textBox2->Text = L"0.8";
-			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox2_KeyPress);
-			// 
 			// textBox3
 			// 
 			this->textBox3->Location = System::Drawing::Point(43, 239);
@@ -3717,16 +4620,6 @@ namespace NNWay
 			this->textBox3->TabIndex = 18;
 			this->textBox3->Text = L"60";
 			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox3_KeyPress);
-			// 
-			// textBox4
-			// 
-			this->textBox4->Location = System::Drawing::Point(66, 389);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->ReadOnly = true;
-			this->textBox4->Size = System::Drawing::Size(50, 20);
-			this->textBox4->TabIndex = 19;
-			this->textBox4->Text = L"10";
-			this->textBox4->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox4_KeyPress);
 			// 
 			// textBox5
 			// 
@@ -3737,69 +4630,6 @@ namespace NNWay
 			this->textBox5->TabIndex = 23;
 			this->textBox5->Text = L"3";
 			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
-			this->comboBox1->Location = System::Drawing::Point(12, 122);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(232, 21);
-			this->comboBox1->TabIndex = 5;
-			this->comboBox1->Text = L"(Choose action)";
-			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::ComboBox1_SelectedIndexChanged);
-			this->comboBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::ComboBox1_KeyPress);
-			// 
-			// checkBox1
-			// 
-			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(28, 324);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(123, 17);
-			this->checkBox1->TabIndex = 11;
-			this->checkBox1->Text = L"Graphic visualization";
-			this->checkBox1->UseVisualStyleBackColor = true;
-			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox1_CheckedChanged);
-			// 
-			// checkBox2
-			// 
-			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(12, 372);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(107, 17);
-			this->checkBox2->TabIndex = 12;
-			this->checkBox2->Text = L"Exit automatically";
-			this->checkBox2->UseVisualStyleBackColor = true;
-			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox2_CheckedChanged);
-			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label8->Location = System::Drawing::Point(8, 281);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(125, 19);
-			this->label8->TabIndex = 25;
-			this->label8->Text = L"Set mutation rate:";
-			// 
-			// button7
-			// 
-			this->button7->Location = System::Drawing::Point(250, 302);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(106, 21);
-			this->button7->TabIndex = 27;
-			this->button7->Text = L"&OK";
-			this->button7->UseVisualStyleBackColor = true;
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(12, 303);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(232, 20);
-			this->textBox6->TabIndex = 26;
-			this->textBox6->Text = L"0.01";
 			// 
 			// textBox7
 			// 
@@ -3815,7 +4645,6 @@ namespace NNWay
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(368, 324);
-			this->Controls->Add(this->textBox7);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label3);
@@ -3827,6 +4656,7 @@ namespace NNWay
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->textBox5);
+			this->Controls->Add(this->textBox7);
 			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
@@ -3838,62 +4668,40 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 		void InitializeComponentQLCheck3DEN(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(368, 24);
@@ -3902,20 +4710,14 @@ namespace NNWay
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->dimensionToolStripMenuItem,
-					this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem
-			});
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
 			// dimensionToolStripMenuItem
 			// 
-			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->dToolStripMenuItem,
-					this->dToolStripMenuItem1
-			});
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
@@ -3936,10 +4738,7 @@ namespace NNWay
 			// 
 			// languageToolStripMenuItem
 			// 
-			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->englishToolStripMenuItem,
-					this->ðóññêèéToolStripMenuItem
-			});
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->languageToolStripMenuItem->Text = L"Language";
@@ -3960,10 +4759,7 @@ namespace NNWay
 			// 
 			// learningAlgorithmToolStripMenuItem
 			// 
-			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->nEATToolStripMenuItem,
-					this->qLearningToolStripMenuItem
-			});
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
@@ -3984,10 +4780,7 @@ namespace NNWay
 			// 
 			// modeToolStripMenuItem
 			// 
-			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->learnToolStripMenuItem,
-					this->checkToolStripMenuItem
-			});
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->modeToolStripMenuItem->Text = L"Mode";
@@ -4008,10 +4801,7 @@ namespace NNWay
 			// 
 			// informationToolStripMenuItem
 			// 
-			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutToolStripMenuItem,
-					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
-			});
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
 			this->informationToolStripMenuItem->Text = L"Information";
@@ -4039,8 +4829,7 @@ namespace NNWay
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label1->ForeColor = System::Drawing::Color::Blue;
 			this->label1->Location = System::Drawing::Point(27, 40);
 			this->label1->Name = L"label1";
@@ -4051,8 +4840,7 @@ namespace NNWay
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(109, 19);
@@ -4062,54 +4850,12 @@ namespace NNWay
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(76, 19);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"Load map:";
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label4->Location = System::Drawing::Point(8, 191);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(85, 19);
-			this->label4->TabIndex = 4;
-			this->label4->Text = L"Set gamma:";
-			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(37, 304);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(30, 13);
-			this->label5->TabIndex = 13;
-			this->label5->Text = L"FPS:";
-			// 
-			// label6
-			// 
-			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label6->Location = System::Drawing::Point(8, 191);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(204, 19);
-			this->label6->TabIndex = 22;
-			this->label6->Text = L"Set number of fields (X and Y):";
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->label7->Location = System::Drawing::Point(9, 392);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(51, 13);
-			this->label7->TabIndex = 17;
-			this->label7->Text = L"Exit after:";
 			// 
 			// button1
 			// 
@@ -4131,6 +4877,290 @@ namespace NNWay
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
 			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(131, 205);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Check";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 301);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+
+		void InitializeComponentQLLearn2DRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// dimensionToolStripMenuItem
+			// 
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(30, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(310, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Q-Learning (Learn, 2D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(169, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Set number of iterations:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(131, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Map configuration:";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label4->Location = System::Drawing::Point(8, 191);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(85, 19);
+			this->label4->TabIndex = 4;
+			this->label4->Text = L"Set gamma:";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(9, 304);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(30, 13);
+			this->label5->TabIndex = 13;
+			this->label5->Text = L"FPS:";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label6->Location = System::Drawing::Point(8, 236);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(204, 19);
+			this->label6->TabIndex = 22;
+			this->label6->Text = L"Set number of fields (X and Y):";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(250, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(106, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"...";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(250, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(106, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&OK";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
 			// button3
 			// 
 			this->button3->Location = System::Drawing::Point(250, 212);
@@ -4144,18 +5174,17 @@ namespace NNWay
 			// button4
 			// 
 			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->button4->Location = System::Drawing::Point(131, 205);
+			this->button4->Location = System::Drawing::Point(194, 290);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(107, 70);
 			this->button4->TabIndex = 20;
-			this->button4->Text = L"&Check";
+			this->button4->Text = L"&Start";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
 			// 
 			// button6
 			// 
-			this->button6->Enabled = false;
-			this->button6->Location = System::Drawing::Point(250, 212);
+			this->button6->Location = System::Drawing::Point(250, 257);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(106, 21);
 			this->button6->TabIndex = 24;
@@ -4183,8 +5212,9 @@ namespace NNWay
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(73, 301);
+			this->textBox3->Location = System::Drawing::Point(45, 301);
 			this->textBox3->Name = L"textBox3";
+			this->textBox3->ReadOnly = true;
 			this->textBox3->Size = System::Drawing::Size(50, 20);
 			this->textBox3->TabIndex = 18;
 			this->textBox3->Text = L"60";
@@ -4192,22 +5222,19 @@ namespace NNWay
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(66, 389);
+			this->textBox4->Location = System::Drawing::Point(133, 258);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->ReadOnly = true;
-			this->textBox4->Size = System::Drawing::Size(50, 20);
-			this->textBox4->TabIndex = 19;
-			this->textBox4->Text = L"10";
-			this->textBox4->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox4_KeyPress);
+			this->textBox4->Size = System::Drawing::Size(111, 20);
+			this->textBox4->TabIndex = 25;
+			this->textBox4->Text = L"50";
 			// 
 			// textBox5
 			// 
-			this->textBox5->Location = System::Drawing::Point(12, 213);
+			this->textBox5->Location = System::Drawing::Point(12, 258);
 			this->textBox5->Name = L"textBox5";
-			this->textBox5->ReadOnly = true;
 			this->textBox5->Size = System::Drawing::Size(115, 20);
 			this->textBox5->TabIndex = 23;
-			this->textBox5->Text = L"3";
+			this->textBox5->Text = L"50";
 			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
 			// 
 			// comboBox1
@@ -4226,7 +5253,7 @@ namespace NNWay
 			// checkBox1
 			// 
 			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(28, 324);
+			this->checkBox1->Location = System::Drawing::Point(12, 284);
 			this->checkBox1->Name = L"checkBox1";
 			this->checkBox1->Size = System::Drawing::Size(123, 17);
 			this->checkBox1->TabIndex = 11;
@@ -4234,44 +5261,653 @@ namespace NNWay
 			this->checkBox1->UseVisualStyleBackColor = true;
 			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox1_CheckedChanged);
 			// 
-			// checkBox2
+			// menu
 			// 
-			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(12, 372);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(107, 17);
-			this->checkBox2->TabIndex = 12;
-			this->checkBox2->Text = L"Exit automatically";
-			this->checkBox2->UseVisualStyleBackColor = true;
-			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox2_CheckedChanged);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 377);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button6);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->textBox3);
+			this->Controls->Add(this->textBox4);
+			this->Controls->Add(this->textBox5);
+			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->checkBox1);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+		void InitializeComponentQLLearn3DRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
 			// 
-			// label8
+			// menuStrip1
 			// 
-			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label8->Location = System::Drawing::Point(8, 281);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(125, 19);
-			this->label8->TabIndex = 25;
-			this->label8->Text = L"Set mutation rate:";
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
 			// 
-			// button7
+			// settingsToolStripMenuItem
 			// 
-			this->button7->Location = System::Drawing::Point(250, 302);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(106, 21);
-			this->button7->TabIndex = 27;
-			this->button7->Text = L"&OK";
-			this->button7->UseVisualStyleBackColor = true;
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
-			// textBox6
+			// dimensionToolStripMenuItem
 			// 
-			this->textBox6->Location = System::Drawing::Point(12, 303);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(232, 20);
-			this->textBox6->TabIndex = 26;
-			this->textBox6->Text = L"0.01";
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(30, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(310, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Q-Learning (Learn, 3D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(169, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Set number of iterations:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(131, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Map configuration:";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label4->Location = System::Drawing::Point(8, 191);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(85, 19);
+			this->label4->TabIndex = 4;
+			this->label4->Text = L"Set gamma:";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(9, 259);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(30, 13);
+			this->label5->TabIndex = 13;
+			this->label5->Text = L"FPS:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(250, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(106, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"...";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(250, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(106, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&OK";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(250, 212);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(106, 21);
+			this->button3->TabIndex = 10;
+			this->button3->Text = L"&OK";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &menu::Button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(195, 248);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Start";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(12, 168);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(232, 20);
+			this->textBox1->TabIndex = 6;
+			this->textBox1->Text = L"3";
+			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox1_KeyPress);
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(12, 213);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(232, 20);
+			this->textBox2->TabIndex = 7;
+			this->textBox2->Text = L"0.8";
+			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox2_KeyPress);
+			// 
+			// textBox3
+			// 
+			this->textBox3->Location = System::Drawing::Point(45, 256);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->ReadOnly = true;
+			this->textBox3->Size = System::Drawing::Size(50, 20);
+			this->textBox3->TabIndex = 18;
+			this->textBox3->Text = L"60";
+			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox3_KeyPress);
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->Cursor = System::Windows::Forms::Cursors::Default;
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
+			this->comboBox1->Location = System::Drawing::Point(12, 122);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(232, 21);
+			this->comboBox1->TabIndex = 5;
+			this->comboBox1->Text = L"(Choose action)";
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::ComboBox1_SelectedIndexChanged);
+			this->comboBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::ComboBox1_KeyPress);
+			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(12, 239);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(123, 17);
+			this->checkBox1->TabIndex = 11;
+			this->checkBox1->Text = L"Graphic visualization";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &menu::CheckBox1_CheckedChanged);
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 336);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->textBox3);
+			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->checkBox1);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+		void InitializeComponentQLCheck2DRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// dimensionToolStripMenuItem
+			// 
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(27, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(317, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Q-Learning (Check, 2D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(109, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Load result file:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(76, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Load map:";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(7, 242);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(30, 13);
+			this->label5->TabIndex = 13;
+			this->label5->Text = L"FPS:";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label6->Location = System::Drawing::Point(8, 191);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(204, 19);
+			this->label6->TabIndex = 22;
+			this->label6->Text = L"Set number of fields (X and Y):";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(12, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(344, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"&Load";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(12, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(344, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&Load";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(191, 240);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Check";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
+			// 
+			// button6
+			// 
+			this->button6->Enabled = false;
+			this->button6->Location = System::Drawing::Point(250, 212);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(106, 21);
+			this->button6->TabIndex = 24;
+			this->button6->Text = L"&OK";
+			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &menu::Button6_Click);
+			// 
+			// textBox3
+			// 
+			this->textBox3->Location = System::Drawing::Point(43, 239);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(50, 20);
+			this->textBox3->TabIndex = 18;
+			this->textBox3->Text = L"60";
+			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox3_KeyPress);
+			// 
+			// textBox5
+			// 
+			this->textBox5->Location = System::Drawing::Point(12, 213);
+			this->textBox5->Name = L"textBox5";
+			this->textBox5->ReadOnly = true;
+			this->textBox5->Size = System::Drawing::Size(115, 20);
+			this->textBox5->TabIndex = 23;
+			this->textBox5->Text = L"3";
+			this->textBox5->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::TextBox5_KeyPress);
 			// 
 			// textBox7
 			// 
@@ -4281,6 +5917,254 @@ namespace NNWay
 			this->textBox7->Size = System::Drawing::Size(115, 20);
 			this->textBox7->TabIndex = 28;
 			this->textBox7->Text = L"3";
+			// 
+			// menu
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(368, 324);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button6);
+			this->Controls->Add(this->textBox3);
+			this->Controls->Add(this->textBox5);
+			this->Controls->Add(this->textBox7);
+			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MainMenuStrip = this->menuStrip1;
+			this->Name = L"menu";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"NNWay";
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+		}
+		void InitializeComponentQLCheck3DRU(void)
+		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ðóññêèéToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->menuStrip1->SuspendLayout();
+			this->SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->settingsToolStripMenuItem, this->informationToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(368, 24);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// dimensionToolStripMenuItem
+			// 
+			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
+			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			// 
+			// dToolStripMenuItem
+			// 
+			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
+			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem_Click);
+			// 
+			// dToolStripMenuItem1
+			// 
+			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::DToolStripMenuItem1_Click);
+			// 
+			// languageToolStripMenuItem
+			// 
+			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->ðóññêèéToolStripMenuItem });
+			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->languageToolStripMenuItem->Text = L"Language";
+			// 
+			// englishToolStripMenuItem
+			// 
+			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
+			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::EnglishToolStripMenuItem_Click);
+			// 
+			// ðóññêèéToolStripMenuItem
+			// 
+			this->ðóññêèéToolStripMenuItem->Name = L"ðóññêèéToolStripMenuItem";
+			this->ðóññêèéToolStripMenuItem->Size = System::Drawing::Size(119, 22);
+			this->ðóññêèéToolStripMenuItem->Text = L"Ðóññêèé";
+			this->ðóññêèéToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::ÐóññêèéToolStripMenuItem_Click);
+			// 
+			// learningAlgorithmToolStripMenuItem
+			// 
+			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
+			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			// 
+			// nEATToolStripMenuItem
+			// 
+			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::NEATToolStripMenuItem_Click);
+			// 
+			// qLearningToolStripMenuItem
+			// 
+			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
+			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::QLearningToolStripMenuItem_Click);
+			// 
+			// modeToolStripMenuItem
+			// 
+			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
+			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Text = L"Mode";
+			// 
+			// learnToolStripMenuItem
+			// 
+			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
+			// 
+			// checkToolStripMenuItem
+			// 
+			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
+			// 
+			// informationToolStripMenuItem
+			// 
+			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
+			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
+			this->informationToolStripMenuItem->Text = L"Information";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::AboutToolStripMenuItem_Click);
+			// 
+			// howToUseToolStripMenuItem
+			// 
+			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::HowToUseToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Calibri", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label1->ForeColor = System::Drawing::Color::Blue;
+			this->label1->Location = System::Drawing::Point(27, 40);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(317, 39);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Q-Learning (Check, 3D)";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(8, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(109, 19);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Load result file:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Calibri", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(8, 100);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(76, 19);
+			this->label3->TabIndex = 3;
+			this->label3->Text = L"Load map:";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(12, 122);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(344, 21);
+			this->button1->TabIndex = 8;
+			this->button1->Text = L"&Load";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::Button1_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(12, 167);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(344, 21);
+			this->button2->TabIndex = 9;
+			this->button2->Text = L"&Load";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::Button2_Click);
+			// 
+			// button4
+			// 
+			this->button4->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->button4->Location = System::Drawing::Point(131, 205);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(107, 70);
+			this->button4->TabIndex = 20;
+			this->button4->Text = L"&Check";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::Button4_Click);
 			// 
 			// menu
 			// 
@@ -4405,6 +6289,73 @@ namespace NNWay
 				neat::controls[i].setOutlineColor(sf::Color::White);
 			}
 		}
+
+		void ChooseInitializer(void)
+		{
+			if (mode == Modes::MENU)
+			{
+				if (language == Languages::EN) InitializeComponentMainMenuEN();
+				else if (language == Languages::RU) InitializeComponentMainMenuRU();
+			}
+			else if (mode == Modes::LEARN)
+			{
+				if (learning_algorithm == LearningAlgorythms::NEAT)
+				{
+					if (dimention == Dimentions::TWOD)
+					{
+						if (language == Languages::EN) InitializeComponentNEATLearn2DEN();
+						else if (language == Languages::RU) InitializeComponentNEATLearn2DRU();
+					}
+					else if (dimention == Dimentions::THREED)
+					{
+						if (language == Languages::EN) InitializeComponentNEATLearn3DEN();
+						else if (language == Languages::RU) InitializeComponentNEATLearn3DRU();
+					}
+				}
+				else if (learning_algorithm == LearningAlgorythms::QL)
+				{
+					if (dimention == Dimentions::TWOD)
+					{
+						if (language == Languages::EN) InitializeComponentQLLearn2DEN();
+						else if (language == Languages::RU) InitializeComponentQLLearn2DRU();
+					}
+					else if (dimention == Dimentions::THREED)
+					{
+						if (language == Languages::EN) InitializeComponentQLLearn3DEN();
+						else if (language == Languages::RU) InitializeComponentQLLearn3DRU();
+					}
+				}
+			}
+			else if (mode == Modes::CHECK)
+			{
+				if (learning_algorithm == LearningAlgorythms::NEAT)
+				{
+					if (dimention == Dimentions::TWOD)
+					{
+						if (language == Languages::EN) InitializeComponentNEATCheck2DEN();
+						else if (language == Languages::RU) InitializeComponentNEATCheck2DRU();
+					}
+					else if (dimention == Dimentions::THREED)
+					{
+						if (language == Languages::EN) InitializeComponentNEATCheck3DEN();
+						else if (language == Languages::RU) InitializeComponentNEATCheck3DRU();
+					}
+				}
+				else if (learning_algorithm == LearningAlgorythms::QL)
+				{
+					if (dimention == Dimentions::TWOD)
+					{
+						if (language == Languages::EN) InitializeComponentQLCheck2DEN();
+						else if (language == Languages::RU) InitializeComponentQLCheck2DRU();
+					}
+					else if (dimention == Dimentions::THREED)
+					{
+						if (language == Languages::EN) InitializeComponentQLCheck3DEN();
+						else if (language == Languages::RU) InitializeComponentQLCheck3DRU();
+					}
+				}
+			}
+		}
 #pragma endregion
 		System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -4474,48 +6425,90 @@ namespace NNWay
 		}
 		System::Void Button4_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			fps = Convert::ToInt32(textBox3->Text);
-
-			if (learning_algorithm == 0)
+			if (mode == Modes::MENU)
 			{
-				neat::was_running = true;
-				auto_exit = Convert::ToInt32(textBox4->Text);
-
-				if (!neat::map_loaded)
-					language == Languages::EN ? MessageBox::Show("Error, map not loaded") : MessageBox::Show("Îøèáêà, êàðòà íå çàãðóæåíà");
-				else if (neat::layers_quantity <= 0)
-					language == Languages::EN ? MessageBox::Show("Error, wrong layers number") : MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî ñëîåâ");
-				else if (neat::population_quantity <= 0)
-					language == Languages::EN ? MessageBox::Show("Error, wrong objects number") : MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî îáúåêòîâ");
-				else if (neat::direction_array_size <= 0)
-					language == Languages::EN ? MessageBox::Show("Error, wrong direction array size") : MessageBox::Show("Îøèáêà, íåâåðíûé ðàçìåð ìàññèâà íàïðàâëåíèé");
-				else if (auto_end && auto_exit < 0)
-					language == Languages::EN ? MessageBox::Show("Error, wrong automatic exit number") : MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî õîäîâ äëÿ àâòîìà÷èñåñêîãî çàâåðøåíèÿ");
-				else if (fps < 0)
-					language == Languages::EN ? MessageBox::Show("Error, wrong frames per second number") : MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî êàäðîâ â ñåêóíäó");
-				else if (comboBox1->SelectedIndex == -1)
-					language == Languages::EN ? MessageBox::Show("Error, chose action with neat::map") : MessageBox::Show("Îøèáêà, âûáåðåòå äåéñòâèå ñ êàðòîé");
-				else if (visualisation)
-					neat::with_visualization();
+				if (comboBox1->SelectedIndex == -1)
+				{
+					if (language == Languages::EN) MessageBox::Show("Error, chose language");
+					else if (language == Languages::RU) MessageBox::Show("Îøèáêà, âûáåðåòå ÿçûê");
+				}
+				else if (comboBox2->SelectedIndex == -1)
+				{
+					if (language == Languages::EN) MessageBox::Show("Error, chose dimention");
+					else if (language == Languages::RU) MessageBox::Show("Îøèáêà, âûáåðåòå èçìåðåíèå");
+				}
+				else if (comboBox3->SelectedIndex == -1)
+				{
+					if (language == Languages::EN) MessageBox::Show("Error, chose learning algorithm");
+					else if (language == Languages::RU) MessageBox::Show("Îøèáêà, âûáåðåòå àëãîðèòì îáó÷åíèÿ");
+				}
+				else if (comboBox4->SelectedIndex == -1)
+				{
+					if (language == Languages::EN) MessageBox::Show("Error, chose mode");
+					else if (language == Languages::RU) MessageBox::Show("Îøèáêà, âûáåðåòå ðåæèì");
+				}
 				else
-					neat::without_visualization();
+					ChooseInitializer();
 			}
-			else
+			else if (mode == Modes::LEARN)
 			{
-				ql::was_running = true;
+				fps = Convert::ToInt32(textBox3->Text);
 
-				if (!ql::map_loaded)
-					language == Languages::EN ? MessageBox::Show("Error, map not loaded") : MessageBox::Show("Îøèáêà, êàðòà íå çàãðóæåíà");
-				else if (ql::iterations <= 0)
-					language == Languages::EN ? MessageBox::Show("Error, wrong iterations number") : MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî ïîâòîðåíèé");
-				else if (fps < 0)
-					language == Languages::EN ? MessageBox::Show("Error, wrong frames per second number") : MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî êàäðîâ â ñåêóíäó");
-				else if (comboBox1->SelectedIndex == -1)
-					language == Languages::EN ? MessageBox::Show("Error, chose action with neat::map") : MessageBox::Show("Îøèáêà, âûáåðåòå äåéñòâèå ñ êàðòîé");
-				else if (visualisation)
-					ql::with_visualization();
-				else
-					ql::without_visualization();
+				if (learning_algorithm == LearningAlgorythms::NEAT)
+				{
+					auto_exit = Convert::ToInt32(textBox4->Text);
+					if (!neat::map_loaded)
+					{
+						if (language == Languages::EN) MessageBox::Show("Error, map not loaded");
+						else if (language == Languages::RU) MessageBox::Show("Îøèáêà, êàðòà íå çàãðóæåíà");
+					}
+					else if (neat::layers_quantity = 0)
+					{
+						if (language == Languages::EN) MessageBox::Show("Error, wrong layers number");
+						else if (language == Languages::RU) MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî ñëîåâ");
+					}
+					else if (neat::population_quantity = 0)
+					{
+						if (language == Languages::EN) MessageBox::Show("Error, wrong objects number");
+						else if (language == Languages::RU) MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî îáúåêòîâ");
+					}
+					else if (neat::direction_array_size = 0)
+					{
+						if (language == Languages::EN) MessageBox::Show("Error, wrong direction array size");
+						else if (language == Languages::RU) MessageBox::Show("Îøèáêà, íåâåðíûé ðàçìåð ìàññèâà íàïðàâëåíèé");
+					}
+					else if (comboBox1->SelectedIndex == -1)
+					{
+						if (language == Languages::EN) MessageBox::Show("Error, chose action with neat::map");
+						else if (language == Languages::RU) MessageBox::Show("Îøèáêà, âûáåðåòå äåéñòâèå ñ êàðòîé");
+					}
+					else if (visualisation)
+						neat::with_visualization();
+					else
+						neat::without_visualization();
+				}
+				else if (learning_algorithm == LearningAlgorythms::QL)
+				{
+					if (!ql::map_loaded)
+					{
+						if (language == Languages::EN) MessageBox::Show("Error, map not loaded");
+						else if (language == Languages::RU) MessageBox::Show("Îøèáêà, êàðòà íå çàãðóæåíà");
+					}
+					else if (ql::iterations == 0)
+					{
+						if (language == Languages::EN) MessageBox::Show("Error, wrong iterations number");
+						else if (language == Languages::RU) MessageBox::Show("Îøèáêà, íåâåðíîå ÷èñëî ïîâòîðåíèé");
+					}
+					else if (comboBox1->SelectedIndex == -1)
+					{
+						if (language == Languages::EN) MessageBox::Show("Error, chose action with neat::map");
+						else if (language == Languages::RU) MessageBox::Show("Îøèáêà, âûáåðåòå äåéñòâèå ñ êàðòîé");
+					}
+					else if (visualisation)
+						ql::with_visualization();
+					else
+						ql::without_visualization();
+				}
 			}
 		}
 		System::Void Button5_Click(System::Object^ sender, System::EventArgs^ e)
@@ -4554,6 +6547,7 @@ namespace NNWay
 			else
 				neat::layers_quantity = Convert::ToInt32(textBox5->Text);
 		}
+
 		System::Void CheckBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
 		{
 			textBox3->ReadOnly = !textBox3->ReadOnly;
@@ -4564,152 +6558,9 @@ namespace NNWay
 			textBox4->ReadOnly = !textBox4->ReadOnly;
 			auto_end = !auto_end;
 		}
-		System::Void DToolStripMenuItem_Click(Object^ sender, EventArgs^ e) { dimention = Dimentions::TWOD; }
-		System::Void DToolStripMenuItem1_Click(Object^ sender, EventArgs^ e) { dimention = Dimentions::THREED; }
-		System::Void EnglishToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			language = Languages::EN;
-			this->settingsToolStripMenuItem->Text = L"Settings";
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
-			this->languageToolStripMenuItem->Text = L"Language";
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
-			this->informationToolStripMenuItem->Text = L"Information";
-			this->aboutToolStripMenuItem->Text = L"About";
-			this->howToUseToolStripMenuItem->Text = L"How to use";
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
-			if (learning_algorithm == 0)
-			{
-				this->label1->Text = L"Main menu (NEAT)";
-				this->label1->Location = System::Drawing::Point(55, 40);
-				this->label2->Text = L"Set direction array size:";
-			}
-			else
-			{
-				this->label1->Text = L"Main menu (QL)";
-				this->label1->Location = System::Drawing::Point(75, 40);
-				this->label2->Text = L"Set number of iterations:";
-			}
-			this->label3->Text = L"Map configuration:";
-			this->label4->Text = L"Set number of objects:";
-			this->label6->Text = L"Set number of layers:";
-			this->textBox4->Location = System::Drawing::Point(69, 349);
-			this->checkBox1->Text = L"Graphic visualization";
-			this->label7->Text = L"Exit after:";
-			this->checkBox2->Text = L"Exit automatically";
-			this->button4->Text = L"&Start";
-			//this->button5->Text = L"&Check";
-			comboBox1->Items->Clear();
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
-			this->comboBox1->Text = L"(Choose action)";
-			//this->checkBox4->Text = L"Check from file";
-			neat::text[0].setPosition(15, 10);
-			neat::text[0].setString(L"Reached the goal: ");
-			neat::text[1].setPosition(185, 10);
-			neat::text[1].setString(L"No");
-			neat::text[2].setPosition(15, 30);
-			neat::text[2].setString(L"Gen: ");
-			neat::text[3].setPosition(65, 30);
-			neat::text[3].setString(L"0");
-			neat::controls[0].setPosition(685, 10);
-			neat::controls[0].setString(L"[Esc] - exit");
-			neat::controls[1].setPosition(552, 10);
-			neat::controls[1].setString(L"[Esc] - exit without saving\n[Enter] - save&exit");
-			neat::controls[2].setPosition(612, 10);
-			neat::controls[2].setString(L"[Alt] - move goal\n[LCtrl] - move object\n[Space] - fill around");
-			ql::text[0].setPosition(15, 10);
-			ql::text[0].setString(L"Position: ");
-			ql::text[1].setPosition(100, 10);
-			ql::text[1].setString(L"0");
-			ql::text[2].setPosition(15, 30);
-			ql::text[2].setString(L"Iteration: ");
-			ql::text[3].setPosition(100, 30);
-			ql::text[3].setString(L"0");
-		}
-		System::Void ÐóññêèéToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			language = Languages::RU;
-			this->settingsToolStripMenuItem->Text = L"Íàñòðîéêèè";
-			this->dimensionToolStripMenuItem->Text = L"Èçàìåðåíèå";
-			this->languageToolStripMenuItem->Text = L"ßçûê";
-			this->learningAlgorithmToolStripMenuItem->Text = L"Àëãîðèòì îáó÷åíèÿ";
-			this->informationToolStripMenuItem->Text = L"Èíôîðìàöèÿ";
-			this->aboutToolStripMenuItem->Text = L"Î ïðîåêòå";
-			this->howToUseToolStripMenuItem->Text = L"Êàê ïîëüçîâàòüñÿ";
-			this->bugReportToolStripMenuItem->Text = L"Ñîîáùèòü îá îøèáêå";
-			if (learning_algorithm == 0)
-			{
-				this->label1->Text = L"Ãëàâíîå ìåíþ (NEAT)";
-				this->label1->Location = System::Drawing::Point(30, 40);
-				this->label2->Text = L"Óñòàíîâèòü ðàçìåð ìàññèâà íàïðàâëåíèé:";
-			}
-			else
-			{
-				this->label1->Text = L"Ãëàâíîå ìåíþ (QL)";
-				this->label1->Location = System::Drawing::Point(50, 40);
-				this->label2->Text = L"Óñòàíîâèòü êîëè÷åñòâî ïîâòîðåíèé:";
-			}
-			this->label3->Text = L"Êîíôèãóðàöèÿ êàðòû:";
-			this->label4->Text = L"Óñòàíîâèòü êîëè÷åñòâî îáúåêòîâ:";
-			this->label6->Text = L"Óñòàíîâèòü êîëè÷åñòâî ñëîåâ:";
-			this->textBox4->Location = System::Drawing::Point(114, 349);
-			this->checkBox1->Text = L"Ãðàôè÷åñêàÿ âèçóàëèçàöèÿ";
-			this->label7->Text = L"Çàêîí÷èòü ïîñëå:";
-			this->checkBox2->Text = L"Çàêîí÷èòü àâòîìàòè÷åñêè";
-			this->button4->Text = L"&Íà÷àòü";
-			//this->button5->Text = L"&Ïðîâåðèòü";
-			this->comboBox1->Items->Clear();
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Çàãðóçèòü èç ôàéëà", L"Ñîçäàòü íîâóþ" });
-			this->comboBox1->Text = L"(Âûáåðåòå äåéñòâèå)";
-			//this->checkBox4->Text = L"Ïðîâåðèòü èç ôàéëà";
-			neat::text[0].setPosition(15, 10);
-			neat::text[0].setString(L"Äîñòèã öåëè: ");
-			neat::text[1].setPosition(140, 10);
-			neat::text[1].setString(L"Íåò");
-			neat::text[2].setPosition(15, 30);
-			neat::text[2].setString(L"Ïîêîëåíèå: ");
-			neat::text[3].setPosition(125, 30);
-			neat::text[3].setString(L"0");
-			neat::controls[0].setPosition(660, 10);
-			neat::controls[0].setString(L"[Esc] - âûõîä");
-			neat::controls[1].setPosition(510, 10);
-			neat::controls[1].setString(L"[Esc] - âûõîä áåç ñîõðàíåíèÿ\n[Enter] - ñîõðàíèòü&âûéòè");
-			neat::controls[2].setPosition(535, 10);
-			neat::controls[2].setString(L"[Alt] - ïåðåìåùàòü öåëü\n[LCtrl] - ïåìåùàòü îáúåêò\n[Space] - çàïîëíèòü âîêðóã");
-			ql::text[0].setPosition(15, 10);
-			ql::text[0].setString(L"Ïîçèöèÿ: ");
-			ql::text[1].setPosition(105, 10);
-			ql::text[1].setString(L"0");
-			ql::text[2].setPosition(15, 30);
-			ql::text[2].setString(L"Ïîâòîðåíèå: ");
-			ql::text[3].setPosition(140, 30);
-			ql::text[3].setString(L"0");
+		System::Void CheckBox4_CheckedChanged(System::Object^ sender, System::EventArgs^ e) { check_from_file = !check_from_file; }
+		System::Void ComboBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = true; }
 
-		}
-		System::Void TextBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
-		{
-			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
-				e->Handled = true;
-		}
-		System::Void TextBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
-		{
-			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
-				e->Handled = true;
-		}
-		System::Void TextBox3_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
-		{
-			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
-				e->Handled = true;
-		}
-		System::Void TextBox4_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
-		{
-			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
-				e->Handled = true;
-		}
-		System::Void TextBox5_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
-		{
-			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
-				e->Handled = true;
-		}
 		System::Void ComboBox1_SelectedIndexChanged(Object^ sender, EventArgs^ e)
 		{
 			if (learning_algorithm == 1)
@@ -4722,41 +6573,6 @@ namespace NNWay
 			else if (comboBox1->SelectedIndex == 1)
 				language == Languages::EN ? button1->Text = L"Create" : button1->Text = L"Ñîçäàòü";
 		}
-		System::Void AboutToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			if (learning_algorithm == LearningAlgorythms::NEAT)
-			{
-				if (language == Languages::EN)
-					MessageBox::Show("The algorithm works according to the following principle: when the program starts, each object randomly forms an array of directions, represented as positions for displacements formed from corners, the size of this array can also be adjusted. After that, each object starts moving in accordance with the elements of the direction array. The object ceases move as soon as it touches a user-defined area, for example, a building on a map, reaches a goal or when elements in an array of directions end (the number of ode). After this, the best object for further study is selected: the “value” of objects is compared and the object with the highest value is remembered as the best (the value is given by a certain formula, for example, for a given algorithm, the value is greater for that object, to the goal is less than the rest).");
-				else
-					MessageBox::Show("Àëãîðèòì ðàáîòàåò ïî ñëåäóþùåìó ïðèíöèïó : ïðè çàïóñêå ïðîãðàììû êàæäûé îáúåêò ñëó÷àéíûì îáðàçîì ôîðìèðóåò ìàññèâ íàïðàâëåíèé, ïðåäñòàâëåííûé â âèäå ïîçèöèé äëÿ ïåðåìåùåíèé, îáðàçîâàííûõ îò óãëîâ, ðàçìåð ýòîãî ìàññèâà òàêæå ìîæíî ðåãóëèðîâàòü.Ïîñëå ýòîãî êàæäûé îáúåêò íà÷èíàåò äâèæåíèå â ñîîòâåòñòâèè ñ ýëåìåíòàìè ìàññèâà íàïðàâëåíèé.Îáúåêò ïåðåñòàåò äâèãàòüñÿ, êàê òîëüêî êàñàåòñÿ çàäàííîé ïîëüçîâàòåëåì îáëàñòè, íàïðèìåð, çäàíèå íà êàðòå, äîñòèãàåò öåëè èëè êîãäà çàêàí÷èâàþòñÿ ýëåìåíòû â ìàññèâå íàïðàâëåíèé(çàêàí÷èâàåòñÿ êîëè÷åñòâî õîäîâ).Ïîñëå ýòîãî ïðîèñõîäèò îòáîð ëó÷øåãî îáúåêòà äëÿ äàëüíåéøåãî îáó÷åíèÿ : ñðàâíèâàåòñÿ “öåííîñòü” îáúåêòîâ è îáúåêò ñ íàèáîëüøåé öåííîñòüþ çàïîìèíàåòñÿ êàê ëó÷øèé(öåííîñòü çàäàåòñÿ ïî îïðåäåëåííîé ôîðìóëå, òàê, íàïðèìåð, äëÿ äàííîãî àëãîðèòìà, öåííîñòü áîëüøå ó òîãî îáúåêòà, ðàññòîÿíèå ó êîòîðîãî äî öåëè ìåíüøå ÷åì ó îñòàëüíûõ).");
-			}
-			else if (learning_algorithm == LearningAlgorythms::QL)
-			{
-				if (language == Languages::EN)
-					MessageBox::Show("When the algorithm starts, an array R (stateXactions) is created, which shows where the agent can go and where not, as well as the location of the targets on the map (the numbering starts at 0 and runs horizontally in ascending order). After this, training takes place: a second array Q is created and filled with zeros. He needs to check any such state (after creating the first array R, an array of initial states is also created). As a result, all possible subsequent actions. After that, the second array with weights is filled in accordance with the formula. After the training is completed, the second array, the user can enter any initial state and get the shortest route.");
-				else
-					MessageBox::Show("Ïðè çàïóñêå àëãîðèòìà ñîçäàåòñÿ ìàññèâ R (stateXactions), êîòîðûé ïîêàçûâàåò, ãäå àãåíò ìîæåò ïðîõîäèòü, à ãäå íåò, à òàêæå ðàñïîëîæåíèå öåëåé íà êàðòå (íóìåðàöèÿ íà÷èíàåòñÿ ñ 0 è èäåò ãîðèçîíòàëüíî ïî âîçðàñòàíèþ). Ïîñëå ýòîãî ïðîèñõîäèò îáó÷åíèå: ñîçäà¸òñÿ âòîðîé ìàññèâ Q è çàïîëíÿåòñÿ íóëÿìè. Åìó íåîáõîäèìî ïðîâåðèòü ëþáîå òàêîå ñîñòîÿíèå (ïîñëå ñîçäàíèÿ ïåðâîãî ìàññèâà R òàêæå ñîçäàåòñÿ ìàññèâ íà÷àëüíûõ ñîñòîÿíèé). Â ðåçóëüòàòå âñå âîçìîæíûå ïîñëåäóþùèå äåéñòâèÿ. Ïîñëå ýòîãî âòîðîé ìàññèâ ñ âåñàìè çàïîëíÿåòñÿ â ñîîòâåòñòâèè ñ ôîðìóëîé. Ïîñëå òîãî, êàê îáó÷åíèå çàêîí÷åíî, âòîðîé ìàññèâ ïîëüçîâàòåëü ìîæåò ââåñòè ëþáîå íà÷àëüíîå ñîñòîÿíèå è ïîëó÷èòü êðàò÷àéøèé ìàðøðóò.");
-			}
-		}
-		System::Void HowToUseToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			if (learning_algorithm == LearningAlgorythms::NEAT)
-			{
-				if (language == Languages::EN)
-					MessageBox::Show("Before launching the program, the user needs to add a map of the terrain on which the route should be laid, after selecting the number of measurements (two-dimensional or three-dimensional map). The user can choose the speed of learning NA and, accordingly, the speed of obtaining the desired result. The learning rate is regulated by changing the number of objects (conditional agents) (the more objects, the higher the learning rate), but for this it is necessary to increase the computing power. The accuracy of training is governed by the number of layers (the more there are, the higher the accuracy of training), this also requires an increase in computing power.");
-				else
-					MessageBox::Show("Ïåðåä çàïóñêîì ïðîãðàììû ïîëüçîâàòåëþ íåîáõîäèìî äîáàâèòü êàðòó ìåñòíîñòè, íà êîòîðîé íåîáõîäèìî ïðîëîæèòü ìàðøðóò, ïðåäâàðèòåëüíî âûáðàâ êîëè÷åñòâî èçìåðåíèé (äâóõìåðíàÿ èëè òðåõìåðíàÿ êàðòà). Ïîëüçîâàòåëü ìîæåò âûáðàòü ñêîðîñòü îáó÷åíèÿ ÍÑ è ñîîòâåòñòâåííî áûñòðîòó ïîëó÷åíèÿ æåëàåìîãî ðåçóëüòàòà. Ñêîðîñòü îáó÷åíèÿ ðåãóëèðóåòñÿ ïîñðåäñòâîì èçìåíåíèÿ êîëè÷åñòâà îáúåêòîâ (óñëîâíûõ íåéðîíîâ) (÷åì áîëüøå îáúåêòîâ, òåì âûøå ñêîðîñòü îáó÷åíèÿ), íî äëÿ ýòîãî íåîáõîäèìî óâåëè÷èâàòü è âû÷èñëèòåëüíûå ìîùíîñòè. Òî÷íîñòü îáó÷åíèÿ ðåãóëèðóåòñÿ êîëè÷åñòâîì ñëîåâ (÷åì èõ áîëüøå, òåì òî÷íîñòü îáó÷åíèÿ âûøå), äëÿ ýòîãî òàêæå òðåáóåòñÿ óâåëè÷åíèå âû÷èñëèòåëüíîé ìîùíîñòè.");
-			}
-			else if (learning_algorithm == LearningAlgorythms::QL)
-			{
-				if (language == Languages::EN)
-					MessageBox::Show("Pre-selected number of measurements (two-dimensional or three-dimensional map). The user can select the learning speed. The learning speed is regulated by changing gamma parameters and changing the size of the map and changes in the number of iterations.");
-				else
-					MessageBox::Show("Ïåðåä çàïóñêîì ïðîãðàììû ïîëüçîâàòåëþ íåîáõîäèìî äîáàâèòü êàðòó ìåñòíîñòè, íà êîòîðîé íåîáõîäèìî ïðîëîæèòü ìàðøðóò, ïðåäâàðèòåëüíî âûáðàâ êîëè÷åñòâî èçìåðåíèé (äâóõìåðíàÿ èëè òðåõìåðíàÿ êàðòà). Ïîëüçîâàòåëü ìîæåò âûáðàòü ñêîðîñòü îáó÷åíèÿ ÍÑ è ñîîòâåòñòâåííî áûñòðîòó ïîëó÷åíèÿ æåëàåìîãî ðåçóëüòàòà. Ñêîðîñòü îáó÷åíèÿ ðåãóëèðóåòñÿ ïîñðåäñòâîì èçìåíåíèÿ ïàðàìåòðà gamma, èçìåíåíèÿ ðàçìåðà êàðòû è èçìåíåíèÿ êîëè÷åñòâà ïîâòîðåíèé.");
-			}
-		}
-		System::Void ComboBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = true; }
 		System::Void NEATToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			mode = Modes::LEARN;
@@ -4837,6 +6653,57 @@ namespace NNWay
 				this->learningAlgorithmToolStripMenuItem->Text = L"Àëãîðèòì îáó÷åíèÿ";
 			}
 		}
+		System::Void learnToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+
+		}
+		System::Void checkToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+
+		}
+		System::Void AboutToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (learning_algorithm == LearningAlgorythms::NEAT)
+			{
+				if (language == Languages::EN)
+					MessageBox::Show("The algorithm works according to the following principle: when the program starts, each object randomly forms an array of directions, represented as positions for displacements formed from corners, the size of this array can also be adjusted. After that, each object starts moving in accordance with the elements of the direction array. The object ceases move as soon as it touches a user-defined area, for example, a building on a map, reaches a goal or when elements in an array of directions end (the number of ode). After this, the best object for further study is selected: the “value” of objects is compared and the object with the highest value is remembered as the best (the value is given by a certain formula, for example, for a given algorithm, the value is greater for that object, to the goal is less than the rest).");
+				else
+					MessageBox::Show("Àëãîðèòì ðàáîòàåò ïî ñëåäóþùåìó ïðèíöèïó : ïðè çàïóñêå ïðîãðàììû êàæäûé îáúåêò ñëó÷àéíûì îáðàçîì ôîðìèðóåò ìàññèâ íàïðàâëåíèé, ïðåäñòàâëåííûé â âèäå ïîçèöèé äëÿ ïåðåìåùåíèé, îáðàçîâàííûõ îò óãëîâ, ðàçìåð ýòîãî ìàññèâà òàêæå ìîæíî ðåãóëèðîâàòü.Ïîñëå ýòîãî êàæäûé îáúåêò íà÷èíàåò äâèæåíèå â ñîîòâåòñòâèè ñ ýëåìåíòàìè ìàññèâà íàïðàâëåíèé.Îáúåêò ïåðåñòàåò äâèãàòüñÿ, êàê òîëüêî êàñàåòñÿ çàäàííîé ïîëüçîâàòåëåì îáëàñòè, íàïðèìåð, çäàíèå íà êàðòå, äîñòèãàåò öåëè èëè êîãäà çàêàí÷èâàþòñÿ ýëåìåíòû â ìàññèâå íàïðàâëåíèé(çàêàí÷èâàåòñÿ êîëè÷åñòâî õîäîâ).Ïîñëå ýòîãî ïðîèñõîäèò îòáîð ëó÷øåãî îáúåêòà äëÿ äàëüíåéøåãî îáó÷åíèÿ : ñðàâíèâàåòñÿ “öåííîñòü” îáúåêòîâ è îáúåêò ñ íàèáîëüøåé öåííîñòüþ çàïîìèíàåòñÿ êàê ëó÷øèé(öåííîñòü çàäàåòñÿ ïî îïðåäåëåííîé ôîðìóëå, òàê, íàïðèìåð, äëÿ äàííîãî àëãîðèòìà, öåííîñòü áîëüøå ó òîãî îáúåêòà, ðàññòîÿíèå ó êîòîðîãî äî öåëè ìåíüøå ÷åì ó îñòàëüíûõ).");
+			}
+			else if (learning_algorithm == LearningAlgorythms::QL)
+			{
+				if (language == Languages::EN)
+					MessageBox::Show("When the algorithm starts, an array R (stateXactions) is created, which shows where the agent can go and where not, as well as the location of the targets on the map (the numbering starts at 0 and runs horizontally in ascending order). After this, training takes place: a second array Q is created and filled with zeros. He needs to check any such state (after creating the first array R, an array of initial states is also created). As a result, all possible subsequent actions. After that, the second array with weights is filled in accordance with the formula. After the training is completed, the second array, the user can enter any initial state and get the shortest route.");
+				else
+					MessageBox::Show("Ïðè çàïóñêå àëãîðèòìà ñîçäàåòñÿ ìàññèâ R (stateXactions), êîòîðûé ïîêàçûâàåò, ãäå àãåíò ìîæåò ïðîõîäèòü, à ãäå íåò, à òàêæå ðàñïîëîæåíèå öåëåé íà êàðòå (íóìåðàöèÿ íà÷èíàåòñÿ ñ 0 è èäåò ãîðèçîíòàëüíî ïî âîçðàñòàíèþ). Ïîñëå ýòîãî ïðîèñõîäèò îáó÷åíèå: ñîçäà¸òñÿ âòîðîé ìàññèâ Q è çàïîëíÿåòñÿ íóëÿìè. Åìó íåîáõîäèìî ïðîâåðèòü ëþáîå òàêîå ñîñòîÿíèå (ïîñëå ñîçäàíèÿ ïåðâîãî ìàññèâà R òàêæå ñîçäàåòñÿ ìàññèâ íà÷àëüíûõ ñîñòîÿíèé). Â ðåçóëüòàòå âñå âîçìîæíûå ïîñëåäóþùèå äåéñòâèÿ. Ïîñëå ýòîãî âòîðîé ìàññèâ ñ âåñàìè çàïîëíÿåòñÿ â ñîîòâåòñòâèè ñ ôîðìóëîé. Ïîñëå òîãî, êàê îáó÷åíèå çàêîí÷åíî, âòîðîé ìàññèâ ïîëüçîâàòåëü ìîæåò ââåñòè ëþáîå íà÷àëüíîå ñîñòîÿíèå è ïîëó÷èòü êðàò÷àéøèé ìàðøðóò.");
+			}
+		}
+
+		System::Void EnglishToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+
+		}
+		System::Void ÐóññêèéToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+
+		}
+		System::Void HowToUseToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (learning_algorithm == LearningAlgorythms::NEAT)
+			{
+				if (language == Languages::EN)
+					MessageBox::Show("Before launching the program, the user needs to add a map of the terrain on which the route should be laid, after selecting the number of measurements (two-dimensional or three-dimensional map). The user can choose the speed of learning NA and, accordingly, the speed of obtaining the desired result. The learning rate is regulated by changing the number of objects (conditional agents) (the more objects, the higher the learning rate), but for this it is necessary to increase the computing power. The accuracy of training is governed by the number of layers (the more there are, the higher the accuracy of training), this also requires an increase in computing power.");
+				else
+					MessageBox::Show("Ïåðåä çàïóñêîì ïðîãðàììû ïîëüçîâàòåëþ íåîáõîäèìî äîáàâèòü êàðòó ìåñòíîñòè, íà êîòîðîé íåîáõîäèìî ïðîëîæèòü ìàðøðóò, ïðåäâàðèòåëüíî âûáðàâ êîëè÷åñòâî èçìåðåíèé (äâóõìåðíàÿ èëè òðåõìåðíàÿ êàðòà). Ïîëüçîâàòåëü ìîæåò âûáðàòü ñêîðîñòü îáó÷åíèÿ ÍÑ è ñîîòâåòñòâåííî áûñòðîòó ïîëó÷åíèÿ æåëàåìîãî ðåçóëüòàòà. Ñêîðîñòü îáó÷åíèÿ ðåãóëèðóåòñÿ ïîñðåäñòâîì èçìåíåíèÿ êîëè÷åñòâà îáúåêòîâ (óñëîâíûõ íåéðîíîâ) (÷åì áîëüøå îáúåêòîâ, òåì âûøå ñêîðîñòü îáó÷åíèÿ), íî äëÿ ýòîãî íåîáõîäèìî óâåëè÷èâàòü è âû÷èñëèòåëüíûå ìîùíîñòè. Òî÷íîñòü îáó÷åíèÿ ðåãóëèðóåòñÿ êîëè÷åñòâîì ñëîåâ (÷åì èõ áîëüøå, òåì òî÷íîñòü îáó÷åíèÿ âûøå), äëÿ ýòîãî òàêæå òðåáóåòñÿ óâåëè÷åíèå âû÷èñëèòåëüíîé ìîùíîñòè.");
+			}
+			else if (learning_algorithm == LearningAlgorythms::QL)
+			{
+				if (language == Languages::EN)
+					MessageBox::Show("Pre-selected number of measurements (two-dimensional or three-dimensional map). The user can select the learning speed. The learning speed is regulated by changing gamma parameters and changing the size of the map and changes in the number of iterations.");
+				else
+					MessageBox::Show("Ïåðåä çàïóñêîì ïðîãðàììû ïîëüçîâàòåëþ íåîáõîäèìî äîáàâèòü êàðòó ìåñòíîñòè, íà êîòîðîé íåîáõîäèìî ïðîëîæèòü ìàðøðóò, ïðåäâàðèòåëüíî âûáðàâ êîëè÷åñòâî èçìåðåíèé (äâóõìåðíàÿ èëè òðåõìåðíàÿ êàðòà). Ïîëüçîâàòåëü ìîæåò âûáðàòü ñêîðîñòü îáó÷åíèÿ ÍÑ è ñîîòâåòñòâåííî áûñòðîòó ïîëó÷åíèÿ æåëàåìîãî ðåçóëüòàòà. Ñêîðîñòü îáó÷åíèÿ ðåãóëèðóåòñÿ ïîñðåäñòâîì èçìåíåíèÿ ïàðàìåòðà gamma, èçìåíåíèÿ ðàçìåðà êàðòû è èçìåíåíèÿ êîëè÷åñòâà ïîâòîðåíèé.");
+			}
+		}
 		System::Void QLearningToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			mode = Modes::LEARN;
@@ -4910,15 +6777,35 @@ namespace NNWay
 				this->checkBox2->Text = L"Èç èçîáðàæåíèÿ";
 			}
 		}
-		System::Void CheckBox4_CheckedChanged(System::Object^ sender, System::EventArgs^ e) { check_from_file = !check_from_file; }
-		System::Void learnToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-		{
 
-		}
-		System::Void checkToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-		{
+		System::Void DToolStripMenuItem_Click(Object^ sender, EventArgs^ e) { dimention = Dimentions::TWOD; }
+		System::Void DToolStripMenuItem1_Click(Object^ sender, EventArgs^ e) { dimention = Dimentions::THREED; }
+		System::Void bugReportToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { MessageBox::Show("e-mail: vhd-ru@yandex.ru"); }
 
+		System::Void TextBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
+		{
+			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+				e->Handled = true;
 		}
-		System::Void bugReportToolStripMenuItem_Click_1(System::Object^ sender, System::EventArgs^ e) { MessageBox::Show("e-mail: vhd-ru@yandex.ru"); }
+		System::Void TextBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
+		{
+			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+				e->Handled = true;
+		}
+		System::Void TextBox3_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
+		{
+			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+				e->Handled = true;
+		}
+		System::Void TextBox4_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
+		{
+			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+				e->Handled = true;
+		}
+		System::Void TextBox5_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
+		{
+			if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08)
+				e->Handled = true;
+		}
 	};
 }
