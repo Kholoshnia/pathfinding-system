@@ -15,6 +15,7 @@
 #include <QL/Header Files/QL_Logic.h>
 #include <QL/Header Files/QL_Agent.h>
 
+Pages page;
 Modes mode;
 Languages language;
 Dimentions dimention;
@@ -115,7 +116,10 @@ namespace NNWay
 		System::ComponentModel::Container^ components;
 		System::Windows::Forms::ToolStripMenuItem^ dToolStripMenuItem;
 		System::Windows::Forms::ToolStripMenuItem^ dToolStripMenuItem1;
+		System::Windows::Forms::ToolStripMenuItem^ modeToolStripMenuItem;
 		System::Windows::Forms::ToolStripMenuItem^ nEATToolStripMenuItem;
+		System::Windows::Forms::ToolStripMenuItem^ learnToolStripMenuItem;
+		System::Windows::Forms::ToolStripMenuItem^ checkToolStripMenuItem;
 		System::Windows::Forms::ToolStripMenuItem^ aboutToolStripMenuItem;
 		System::Windows::Forms::ToolStripMenuItem^ englishToolStripMenuItem;
 		System::Windows::Forms::ToolStripMenuItem^ русскийToolStripMenuItem;
@@ -126,33 +130,56 @@ namespace NNWay
 		System::Windows::Forms::ToolStripMenuItem^ bugReportToolStripMenuItem;
 		System::Windows::Forms::ToolStripMenuItem^ qLearningToolStripMenuItem;
 		System::Windows::Forms::ToolStripMenuItem^ informationToolStripMenuItem;
-		System::Windows::Forms::ToolStripMenuItem^ modeToolStripMenuItem;
-		System::Windows::Forms::ToolStripMenuItem^ learnToolStripMenuItem;
-		System::Windows::Forms::ToolStripMenuItem^ checkToolStripMenuItem;
 		System::Windows::Forms::ToolStripMenuItem^ learningAlgorithmToolStripMenuItem;
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->nEATToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->modeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learnToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->englishToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->русскийToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dimensionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->qLearningToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->informationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->learningAlgorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox4 = (gcnew System::Windows::Forms::ComboBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -816,7 +843,7 @@ namespace NNWay
 			// 
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Size = System::Drawing::Size(154, 19);
-			this->label4->Text = L"Set number of objects:";
+			this->label4->Text = L"Set number of agents:";
 			// 
 			// label5
 			// 
@@ -1095,7 +1122,7 @@ namespace NNWay
 			// 
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Size = System::Drawing::Size(154, 19);
-			this->label4->Text = L"Set number of objects:";
+			this->label4->Text = L"Set number of agents:";
 			// 
 			// label6
 			// 
@@ -1569,14 +1596,14 @@ namespace NNWay
 			this->settingsToolStripMenuItem->DropDownItems->Clear();
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Text = L"Настройки";
 			// 
 			// dimensionToolStripMenuItem
 			// 
 			this->dimensionToolStripMenuItem->DropDownItems->Clear();
 			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			this->dimensionToolStripMenuItem->Text = L"Измерение";
 			// 
 			// dToolStripMenuItem
 			// 
@@ -1593,7 +1620,7 @@ namespace NNWay
 			this->languageToolStripMenuItem->DropDownItems->Clear();
 			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->русскийToolStripMenuItem });
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
+			this->languageToolStripMenuItem->Text = L"Язык";
 			// 
 			// englishToolStripMenuItem
 			// 
@@ -1610,7 +1637,7 @@ namespace NNWay
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->Clear();
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
 			// 
 			// nEATToolStripMenuItem
 			// 
@@ -1627,63 +1654,63 @@ namespace NNWay
 			this->modeToolStripMenuItem->DropDownItems->Clear();
 			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
+			this->modeToolStripMenuItem->Text = L"Режим";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Text = L"Обучение";
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Text = L"Проверка";
 			// 
 			// informationToolStripMenuItem
 			// 
 			this->informationToolStripMenuItem->DropDownItems->Clear();
 			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
+			this->informationToolStripMenuItem->Text = L"Информация";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Text = L"О проекте";
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Text = L"Как пользоваться";
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Text = L"Сообщить об ошибке";
 			// 
 			// label1
 			// 
 			this->label1->Location = System::Drawing::Point(60, 40);
 			this->label1->Size = System::Drawing::Size(237, 39);
-			this->label1->Text = L"NEAT (Learn, 2D)";
+			this->label1->Text = L"NEAT (Обучение, 2D)";
 			// 
 			// label2
 			// 
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Size = System::Drawing::Size(160, 19);
-			this->label2->Text = L"Set direction array size:";
+			this->label2->Text = L"Установить размер массива направлений:";
 			// 
 			// label3
 			// 
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Size = System::Drawing::Size(131, 19);
-			this->label3->Text = L"Map configuration:";
+			this->label3->Text = L"Конфигурация карты:";
 			// 
 			// label4
 			// 
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Size = System::Drawing::Size(154, 19);
-			this->label4->Text = L"Set number of objects:";
+			this->label4->Text = L"Установить количество агентов:";
 			// 
 			// label5
 			// 
@@ -1695,19 +1722,19 @@ namespace NNWay
 			// 
 			this->label6->Location = System::Drawing::Point(8, 236);
 			this->label6->Size = System::Drawing::Size(146, 19);
-			this->label6->Text = L"Set number of layers:";
+			this->label6->Text = L"Установить количество слоев:";
 			// 
 			// label7
 			// 
 			this->label7->Location = System::Drawing::Point(9, 392);
 			this->label7->Size = System::Drawing::Size(51, 13);
-			this->label7->Text = L"Exit after:";
+			this->label7->Text = L"Завершить после:";
 			// 
 			// label8
 			// 
 			this->label8->Location = System::Drawing::Point(8, 281);
 			this->label8->Size = System::Drawing::Size(125, 19);
-			this->label8->Text = L"Set mutation rate:";
+			this->label8->Text = L"Установить параметр mutation rate:";
 			// 
 			// button1
 			// 
@@ -1731,7 +1758,7 @@ namespace NNWay
 			// 
 			this->button4->Location = System::Drawing::Point(198, 335);
 			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->Text = L"&Start";
+			this->button4->Text = L"&Начать";
 			// 
 			// button6
 			// 
@@ -1784,22 +1811,22 @@ namespace NNWay
 			// comboBox1
 			// 
 			this->comboBox1->Items->Clear();
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Загрузить из файла", L"Создать новую" });
 			this->comboBox1->Location = System::Drawing::Point(12, 122);
 			this->comboBox1->Size = System::Drawing::Size(232, 21);
-			this->comboBox1->Text = L"(Choose action)";
+			this->comboBox1->Text = L"(Выберете действие)";
 			// 
 			// checkBox1
 			// 
 			this->checkBox1->Location = System::Drawing::Point(12, 329);
 			this->checkBox1->Size = System::Drawing::Size(123, 17);
-			this->checkBox1->Text = L"Graphic visualization";
+			this->checkBox1->Text = L"Графическая визуализация";
 			// 
 			// checkBox2
 			// 
 			this->checkBox2->Location = System::Drawing::Point(12, 372);
 			this->checkBox2->Size = System::Drawing::Size(107, 17);
-			this->checkBox2->Text = L"Exit automatically";
+			this->checkBox2->Text = L"Завершить автоматически";
 			// 
 			// menu
 			// 
@@ -1848,14 +1875,14 @@ namespace NNWay
 			this->settingsToolStripMenuItem->DropDownItems->Clear();
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Text = L"Настройки";
 			// 
 			// dimensionToolStripMenuItem
 			// 
 			this->dimensionToolStripMenuItem->DropDownItems->Clear();
 			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			this->dimensionToolStripMenuItem->Text = L"Измерение";
 			// 
 			// dToolStripMenuItem
 			// 
@@ -1872,7 +1899,7 @@ namespace NNWay
 			this->languageToolStripMenuItem->DropDownItems->Clear();
 			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->русскийToolStripMenuItem });
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
+			this->languageToolStripMenuItem->Text = L"Язык";
 			// 
 			// englishToolStripMenuItem
 			// 
@@ -1889,7 +1916,7 @@ namespace NNWay
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->Clear();
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
 			// 
 			// nEATToolStripMenuItem
 			// 
@@ -1906,81 +1933,81 @@ namespace NNWay
 			this->modeToolStripMenuItem->DropDownItems->Clear();
 			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
+			this->modeToolStripMenuItem->Text = L"Режим";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Text = L"Обучение";
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Text = L"Проверка";
 			// 
 			// informationToolStripMenuItem
 			// 
 			this->informationToolStripMenuItem->DropDownItems->Clear();
 			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
+			this->informationToolStripMenuItem->Text = L"Информация";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Text = L"О проекте";
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Text = L"Как пользоваться";
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Text = L"Сообщить об ошибке";
 			// 
 			// label1
 			// 
 			this->label1->Location = System::Drawing::Point(60, 40);
 			this->label1->Size = System::Drawing::Size(237, 39);
-			this->label1->Text = L"NEAT (Learn, 3D)";
+			this->label1->Text = L"NEAT (Обучение, 3D)";
 			// 
 			// label2
 			// 
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Size = System::Drawing::Size(160, 19);
-			this->label2->Text = L"Set direction array size:";
+			this->label2->Text = L"Установить размер массива направлений:";
 			// 
 			// label3
 			// 
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Size = System::Drawing::Size(131, 19);
-			this->label3->Text = L"Map configuration:";
+			this->label3->Text = L"Конфигурация карты:";
 			// 
 			// label4
 			// 
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Size = System::Drawing::Size(154, 19);
-			this->label4->Text = L"Set number of objects:";
+			this->label4->Text = L"Установить количество агентов:";
 			// 
 			// label6
 			// 
 			this->label6->Location = System::Drawing::Point(8, 236);
 			this->label6->Size = System::Drawing::Size(146, 19);
-			this->label6->Text = L"Set number of layers:";
+			this->label6->Text = L"Установить количество слоев:";
 			// 
 			// label7
 			// 
 			this->label7->Location = System::Drawing::Point(9, 387);
 			this->label7->Size = System::Drawing::Size(51, 13);
-			this->label7->Text = L"Exit after:";
+			this->label7->Text = L"Завершить после:";
 			// 
 			// label8
 			// 
 			this->label8->Location = System::Drawing::Point(8, 281);
 			this->label8->Size = System::Drawing::Size(125, 19);
-			this->label8->Text = L"Set mutation rate:";
+			this->label8->Text = L"Установить параметр mutation rate:";
 			// 
 			// button1
 			// 
@@ -2004,7 +2031,7 @@ namespace NNWay
 			// 
 			this->button4->Location = System::Drawing::Point(190, 338);
 			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->Text = L"&Start";
+			this->button4->Text = L"&Начать";
 			// 
 			// button6
 			// 
@@ -2057,22 +2084,22 @@ namespace NNWay
 			// comboBox1
 			// 
 			this->comboBox1->Items->Clear();
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Загрузить из файла", L"Создать новую" });
 			this->comboBox1->Location = System::Drawing::Point(12, 122);
 			this->comboBox1->Size = System::Drawing::Size(232, 21);
-			this->comboBox1->Text = L"(Choose action)";
+			this->comboBox1->Text = L"(Выберете действие)";
 			// 
 			// checkBox1
 			// 
 			this->checkBox1->Location = System::Drawing::Point(12, 344);
 			this->checkBox1->Size = System::Drawing::Size(123, 17);
-			this->checkBox1->Text = L"Graphic visualization";
+			this->checkBox1->Text = L"Графическая визуализация";
 			// 
 			// checkBox2
 			// 
 			this->checkBox2->Location = System::Drawing::Point(12, 367);
 			this->checkBox2->Size = System::Drawing::Size(107, 17);
-			this->checkBox2->Text = L"Exit automatically";
+			this->checkBox2->Text = L"Завершить автоматически";
 			// 
 			// menu
 			// 
@@ -2119,14 +2146,14 @@ namespace NNWay
 			this->settingsToolStripMenuItem->DropDownItems->Clear();
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Text = L"Настройки";
 			// 
 			// dimensionToolStripMenuItem
 			// 
 			this->dimensionToolStripMenuItem->DropDownItems->Clear();
 			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			this->dimensionToolStripMenuItem->Text = L"Измерение";
 			// 
 			// dToolStripMenuItem
 			// 
@@ -2143,7 +2170,7 @@ namespace NNWay
 			this->languageToolStripMenuItem->DropDownItems->Clear();
 			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->русскийToolStripMenuItem });
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
+			this->languageToolStripMenuItem->Text = L"Язык";
 			// 
 			// englishToolStripMenuItem
 			// 
@@ -2160,7 +2187,7 @@ namespace NNWay
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->Clear();
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
 			// 
 			// nEATToolStripMenuItem
 			// 
@@ -2177,75 +2204,75 @@ namespace NNWay
 			this->modeToolStripMenuItem->DropDownItems->Clear();
 			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
+			this->modeToolStripMenuItem->Text = L"Режим";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Text = L"Обучение";
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Text = L"Проверка";
 			// 
 			// informationToolStripMenuItem
 			// 
 			this->informationToolStripMenuItem->DropDownItems->Clear();
 			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
+			this->informationToolStripMenuItem->Text = L"Информация";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Text = L"О проекте";
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Text = L"Как пользоваться";
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Text = L"Сообщить об ошибке";
 			// 
 			// label1
 			// 
 			this->label1->Location = System::Drawing::Point(65, 40);
 			this->label1->Size = System::Drawing::Size(244, 39);
-			this->label1->Text = L"NEAT (Check, 2D)";
+			this->label1->Text = L"NEAT (Проверка, 2D)";
 			// 
 			// label2
 			// 
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Size = System::Drawing::Size(109, 19);
-			this->label2->Text = L"Load result file:";
+			this->label2->Text = L"Загрузить файл с результатом:";
 			// 
 			// label3
 			// 
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Size = System::Drawing::Size(76, 19);
-			this->label3->Text = L"Load map:";
+			this->label3->Text = L"Загрузить карту:";
 			// 
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(12, 122);
 			this->button1->Size = System::Drawing::Size(344, 21);
-			this->button1->Text = L"&Load";
+			this->button1->Text = L"&Загрузить";
 			// 
 			// button2
 			// 
 			this->button2->Location = System::Drawing::Point(12, 167);
 			this->button2->Size = System::Drawing::Size(344, 21);
-			this->button2->Text = L"&Load";
+			this->button2->Text = L"&Загрузить";
 			// 
 			// button4
 			// 
 			this->button4->Location = System::Drawing::Point(131, 205);
 			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->Text = L"&Check";
+			this->button4->Text = L"&Проверить";
 			// 
 			// menu
 			// 
@@ -2277,14 +2304,14 @@ namespace NNWay
 			this->settingsToolStripMenuItem->DropDownItems->Clear();
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Text = L"Настройки";
 			// 
 			// dimensionToolStripMenuItem
 			// 
 			this->dimensionToolStripMenuItem->DropDownItems->Clear();
 			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			this->dimensionToolStripMenuItem->Text = L"Измерение";
 			// 
 			// dToolStripMenuItem
 			// 
@@ -2301,7 +2328,7 @@ namespace NNWay
 			this->languageToolStripMenuItem->DropDownItems->Clear();
 			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->русскийToolStripMenuItem });
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
+			this->languageToolStripMenuItem->Text = L"Язык";
 			// 
 			// englishToolStripMenuItem
 			// 
@@ -2318,7 +2345,7 @@ namespace NNWay
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->Clear();
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
 			// 
 			// nEATToolStripMenuItem
 			// 
@@ -2335,75 +2362,75 @@ namespace NNWay
 			this->modeToolStripMenuItem->DropDownItems->Clear();
 			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
+			this->modeToolStripMenuItem->Text = L"Режим";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Text = L"Обучение";
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Text = L"Проверка";
 			// 
 			// informationToolStripMenuItem
 			// 
 			this->informationToolStripMenuItem->DropDownItems->Clear();
 			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
+			this->informationToolStripMenuItem->Text = L"Информация";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Text = L"О проекте";
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Text = L"Как пользоваться";
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Text = L"Сообщить об ошибке";
 			// 
 			// label1
 			// 
 			this->label1->Location = System::Drawing::Point(65, 40);
 			this->label1->Size = System::Drawing::Size(244, 39);
-			this->label1->Text = L"NEAT (Check, 3D)";
+			this->label1->Text = L"NEAT (Проверка, 3D)";
 			// 
 			// label2
 			// 
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Size = System::Drawing::Size(109, 19);
-			this->label2->Text = L"Load result file:";
+			this->label2->Text = L"Загрузить файл с результатом:";
 			// 
 			// label3
 			// 
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Size = System::Drawing::Size(76, 19);
-			this->label3->Text = L"Load map:";
+			this->label3->Text = L"Загрузить карту:";
 			// 
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(12, 122);
 			this->button1->Size = System::Drawing::Size(344, 21);
-			this->button1->Text = L"&Load";
+			this->button1->Text = L"&Загрузить";
 			// 
 			// button2
 			// 
 			this->button2->Location = System::Drawing::Point(12, 167);
 			this->button2->Size = System::Drawing::Size(344, 21);
-			this->button2->Text = L"&Load";
+			this->button2->Text = L"&Загрузить";
 			// 
 			// button4
 			// 
 			this->button4->Location = System::Drawing::Point(131, 205);
 			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->Text = L"&Check";
+			this->button4->Text = L"&Проверка";
 			// 
 			// menu
 			// 
@@ -3255,14 +3282,14 @@ namespace NNWay
 			this->settingsToolStripMenuItem->DropDownItems->Clear();
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Text = L"Настройки";
 			// 
 			// dimensionToolStripMenuItem
 			// 
 			this->dimensionToolStripMenuItem->DropDownItems->Clear();
 			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			this->dimensionToolStripMenuItem->Text = L"Измерение";
 			// 
 			// dToolStripMenuItem
 			// 
@@ -3279,7 +3306,7 @@ namespace NNWay
 			this->languageToolStripMenuItem->DropDownItems->Clear();
 			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->русскийToolStripMenuItem });
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
+			this->languageToolStripMenuItem->Text = L"Язык";
 			// 
 			// englishToolStripMenuItem
 			// 
@@ -3296,7 +3323,7 @@ namespace NNWay
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->Clear();
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
 			// 
 			// nEATToolStripMenuItem
 			// 
@@ -3313,63 +3340,63 @@ namespace NNWay
 			this->modeToolStripMenuItem->DropDownItems->Clear();
 			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
+			this->modeToolStripMenuItem->Text = L"Режим";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Text = L"Обучение";
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Text = L"Проверка";
 			// 
 			// informationToolStripMenuItem
 			// 
 			this->informationToolStripMenuItem->DropDownItems->Clear();
 			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
+			this->informationToolStripMenuItem->Text = L"Информация";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Text = L"О проекте";
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Text = L"Как пользоваться";
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Text = L"Сообщить об ошибке";
 			// 
 			// label1
 			// 
 			this->label1->Location = System::Drawing::Point(30, 40);
 			this->label1->Size = System::Drawing::Size(310, 39);
-			this->label1->Text = L"Q-Learning (Learn, 2D)";
+			this->label1->Text = L"Q-Learning (Обучение, 2D)";
 			// 
 			// label2
 			// 
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Size = System::Drawing::Size(169, 19);
-			this->label2->Text = L"Set number of iterations:";
+			this->label2->Text = L"Установить количество итераций:";
 			// 
 			// label3
 			// 
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Size = System::Drawing::Size(131, 19);
-			this->label3->Text = L"Map configuration:";
+			this->label3->Text = L"Конфигурация карты:";
 			// 
 			// label4
 			// 
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Size = System::Drawing::Size(85, 19);
-			this->label4->Text = L"Set gamma:";
+			this->label4->Text = L"Установить параметр gamma:";
 			// 
 			// label5
 			// 
@@ -3381,7 +3408,7 @@ namespace NNWay
 			// 
 			this->label6->Location = System::Drawing::Point(8, 236);
 			this->label6->Size = System::Drawing::Size(204, 19);
-			this->label6->Text = L"Set number of fields (X and Y):";
+			this->label6->Text = L"Установить количество полей (X и Y):";
 			// 
 			// button1
 			// 
@@ -3405,7 +3432,7 @@ namespace NNWay
 			// 
 			this->button4->Location = System::Drawing::Point(194, 290);
 			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->Text = L"&Start";
+			this->button4->Text = L"&Начать";
 			// 
 			// button6
 			// 
@@ -3446,16 +3473,16 @@ namespace NNWay
 			// comboBox1
 			// 
 			this->comboBox1->Items->Clear();
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Загрузить из файла", L"Создать новую" });
 			this->comboBox1->Location = System::Drawing::Point(12, 122);
 			this->comboBox1->Size = System::Drawing::Size(232, 21);
-			this->comboBox1->Text = L"(Choose action)";
+			this->comboBox1->Text = L"(Выберете действие)";
 			// 
 			// checkBox1
 			// 
 			this->checkBox1->Location = System::Drawing::Point(12, 284);
 			this->checkBox1->Size = System::Drawing::Size(123, 17);
-			this->checkBox1->Text = L"Graphic visualization";
+			this->checkBox1->Text = L"Графическая визуализация";
 			// 
 			// menu
 			// 
@@ -3499,14 +3526,14 @@ namespace NNWay
 			this->settingsToolStripMenuItem->DropDownItems->Clear();
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Text = L"Настройки";
 			// 
 			// dimensionToolStripMenuItem
 			// 
 			this->dimensionToolStripMenuItem->DropDownItems->Clear();
 			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			this->dimensionToolStripMenuItem->Text = L"Измерение";
 			// 
 			// dToolStripMenuItem
 			// 
@@ -3523,7 +3550,7 @@ namespace NNWay
 			this->languageToolStripMenuItem->DropDownItems->Clear();
 			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->русскийToolStripMenuItem });
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
+			this->languageToolStripMenuItem->Text = L"Язык";
 			// 
 			// englishToolStripMenuItem
 			// 
@@ -3540,7 +3567,7 @@ namespace NNWay
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->Clear();
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
 			// 
 			// nEATToolStripMenuItem
 			// 
@@ -3557,63 +3584,63 @@ namespace NNWay
 			this->modeToolStripMenuItem->DropDownItems->Clear();
 			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
+			this->modeToolStripMenuItem->Text = L"Режим";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Text = L"Обучение";
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Text = L"Проверка";
 			// 
 			// informationToolStripMenuItem
 			// 
 			this->informationToolStripMenuItem->DropDownItems->Clear();
 			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
+			this->informationToolStripMenuItem->Text = L"Информация";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Text = L"О проекте";
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Text = L"Как пользоваться";
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Text = L"Сообщить об ошибке";
 			// 
 			// label1
 			// 
 			this->label1->Location = System::Drawing::Point(30, 40);
 			this->label1->Size = System::Drawing::Size(310, 39);
-			this->label1->Text = L"Q-Learning (Learn, 3D)";
+			this->label1->Text = L"Q-Learning (Обучение, 3D)";
 			// 
 			// label2
 			// 
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Size = System::Drawing::Size(169, 19);
-			this->label2->Text = L"Set number of iterations:";
+			this->label2->Text = L"Установить количество итераций:";
 			// 
 			// label3
 			// 
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Size = System::Drawing::Size(131, 19);
-			this->label3->Text = L"Map configuration:";
+			this->label3->Text = L"Конфигурация карты:";
 			// 
 			// label4
 			// 
 			this->label4->Location = System::Drawing::Point(8, 191);
 			this->label4->Size = System::Drawing::Size(85, 19);
-			this->label4->Text = L"Set gamma:";
+			this->label4->Text = L"Установить параметр gamma:";
 			// 
 			// label5
 			// 
@@ -3643,7 +3670,7 @@ namespace NNWay
 			// 
 			this->button4->Location = System::Drawing::Point(195, 248);
 			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->Text = L"&Start";
+			this->button4->Text = L"&Начать";
 			// 
 			// textBox1
 			// 
@@ -3666,16 +3693,16 @@ namespace NNWay
 			// comboBox1
 			// 
 			this->comboBox1->Items->Clear();
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Load from file", L"Create new" });
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Загрузить из файла", L"Создать новую" });
 			this->comboBox1->Location = System::Drawing::Point(12, 122);
 			this->comboBox1->Size = System::Drawing::Size(232, 21);
-			this->comboBox1->Text = L"(Choose action)";
+			this->comboBox1->Text = L"(Выберете действие)";
 			// 
 			// checkBox1
 			// 
 			this->checkBox1->Location = System::Drawing::Point(12, 239);
 			this->checkBox1->Size = System::Drawing::Size(123, 17);
-			this->checkBox1->Text = L"Graphic visualization";
+			this->checkBox1->Text = L"Графическая визализация";
 			// 
 			// menu
 			// 
@@ -3715,14 +3742,14 @@ namespace NNWay
 			this->settingsToolStripMenuItem->DropDownItems->Clear();
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Text = L"Настройки";
 			// 
 			// dimensionToolStripMenuItem
 			// 
 			this->dimensionToolStripMenuItem->DropDownItems->Clear();
 			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			this->dimensionToolStripMenuItem->Text = L"Измерение";
 			// 
 			// dToolStripMenuItem
 			// 
@@ -3739,7 +3766,7 @@ namespace NNWay
 			this->languageToolStripMenuItem->DropDownItems->Clear();
 			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->русскийToolStripMenuItem });
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
+			this->languageToolStripMenuItem->Text = L"Язык";
 			// 
 			// englishToolStripMenuItem
 			// 
@@ -3756,7 +3783,7 @@ namespace NNWay
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->Clear();
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
 			// 
 			// nEATToolStripMenuItem
 			// 
@@ -3773,57 +3800,57 @@ namespace NNWay
 			this->modeToolStripMenuItem->DropDownItems->Clear();
 			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
+			this->modeToolStripMenuItem->Text = L"Режим";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Text = L"Обучение";
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Text = L"Проверка";
 			// 
 			// informationToolStripMenuItem
 			// 
 			this->informationToolStripMenuItem->DropDownItems->Clear();
 			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
+			this->informationToolStripMenuItem->Text = L"Информация";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Text = L"О проекте";
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Text = L"Как пользоваться";
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Text = L"Сообщить об ошибке";
 			// 
 			// label1
 			// 
 			this->label1->Location = System::Drawing::Point(27, 40);
 			this->label1->Size = System::Drawing::Size(317, 39);
-			this->label1->Text = L"Q-Learning (Check, 2D)";
+			this->label1->Text = L"Q-Learning (Проверка, 2D)";
 			// 
 			// label2
 			// 
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Size = System::Drawing::Size(109, 19);
-			this->label2->Text = L"Load result file:";
+			this->label2->Text = L"Загрузить файл с результатом:";
 			// 
 			// label3
 			// 
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Size = System::Drawing::Size(76, 19);
-			this->label3->Text = L"Load map:";
+			this->label3->Text = L"Загрузить карту:";
 			// 
 			// label5
 			// 
@@ -3835,25 +3862,25 @@ namespace NNWay
 			// 
 			this->label6->Location = System::Drawing::Point(8, 191);
 			this->label6->Size = System::Drawing::Size(204, 19);
-			this->label6->Text = L"Set number of fields (X and Y):";
+			this->label6->Text = L"Установить количество полкй (X и Y):";
 			// 
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(12, 122);
 			this->button1->Size = System::Drawing::Size(344, 21);
-			this->button1->Text = L"&Load";
+			this->button1->Text = L"&Загрузить";
 			// 
 			// button2
 			// 
 			this->button2->Location = System::Drawing::Point(12, 167);
 			this->button2->Size = System::Drawing::Size(344, 21);
-			this->button2->Text = L"&Load";
+			this->button2->Text = L"&Загрузить";
 			// 
 			// button4
 			// 
 			this->button4->Location = System::Drawing::Point(191, 240);
 			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->Text = L"&Check";
+			this->button4->Text = L"&Проверка";
 			// 
 			// button6
 			// 
@@ -3915,14 +3942,14 @@ namespace NNWay
 			this->settingsToolStripMenuItem->DropDownItems->Clear();
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) { this->dimensionToolStripMenuItem, this->languageToolStripMenuItem, this->learningAlgorithmToolStripMenuItem, this->modeToolStripMenuItem });
 			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
-			this->settingsToolStripMenuItem->Text = L"Settings";
+			this->settingsToolStripMenuItem->Text = L"Настройки";
 			// 
 			// dimensionToolStripMenuItem
 			// 
 			this->dimensionToolStripMenuItem->DropDownItems->Clear();
 			this->dimensionToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->dToolStripMenuItem, this->dToolStripMenuItem1 });
 			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->dimensionToolStripMenuItem->Text = L"Dimension";
+			this->dimensionToolStripMenuItem->Text = L"Измерение";
 			// 
 			// dToolStripMenuItem
 			// 
@@ -3939,7 +3966,7 @@ namespace NNWay
 			this->languageToolStripMenuItem->DropDownItems->Clear();
 			this->languageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->englishToolStripMenuItem, this->русскийToolStripMenuItem });
 			this->languageToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->languageToolStripMenuItem->Text = L"Language";
+			this->languageToolStripMenuItem->Text = L"Язык";
 			// 
 			// englishToolStripMenuItem
 			// 
@@ -3956,7 +3983,7 @@ namespace NNWay
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->Clear();
 			this->learningAlgorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->nEATToolStripMenuItem, this->qLearningToolStripMenuItem });
 			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
+			this->learningAlgorithmToolStripMenuItem->Text = L"Алгоритм обучения";
 			// 
 			// nEATToolStripMenuItem
 			// 
@@ -3973,75 +4000,75 @@ namespace NNWay
 			this->modeToolStripMenuItem->DropDownItems->Clear();
 			this->modeToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->learnToolStripMenuItem, this->checkToolStripMenuItem });
 			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
-			this->modeToolStripMenuItem->Text = L"Mode";
+			this->modeToolStripMenuItem->Text = L"Режим";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Text = L"Обучение";
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Text = L"Проверка";
 			// 
 			// informationToolStripMenuItem
 			// 
 			this->informationToolStripMenuItem->DropDownItems->Clear();
 			this->informationToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) { this->aboutToolStripMenuItem, this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem });
 			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 20);
-			this->informationToolStripMenuItem->Text = L"Information";
+			this->informationToolStripMenuItem->Text = L"Информация";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Text = L"О проекте";
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Text = L"Как пользоваться";
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
-			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Text = L"Сообщить об ошибке";
 			// 
 			// label1
 			// 
 			this->label1->Location = System::Drawing::Point(27, 40);
 			this->label1->Size = System::Drawing::Size(317, 39);
-			this->label1->Text = L"Q-Learning (Check, 3D)";
+			this->label1->Text = L"Q-Learning (Проверка, 3D)";
 			// 
 			// label2
 			// 
 			this->label2->Location = System::Drawing::Point(8, 146);
 			this->label2->Size = System::Drawing::Size(109, 19);
-			this->label2->Text = L"Load result file:";
+			this->label2->Text = L"Загрузить файл с результатом:";
 			// 
 			// label3
 			// 
 			this->label3->Location = System::Drawing::Point(8, 100);
 			this->label3->Size = System::Drawing::Size(76, 19);
-			this->label3->Text = L"Load map:";
+			this->label3->Text = L"Загрузить карту:";
 			// 
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(12, 122);
 			this->button1->Size = System::Drawing::Size(344, 21);
-			this->button1->Text = L"&Load";
+			this->button1->Text = L"&Загрузить";
 			// 
 			// button2
 			// 
 			this->button2->Location = System::Drawing::Point(12, 167);
 			this->button2->Size = System::Drawing::Size(344, 21);
-			this->button2->Text = L"&Load";
+			this->button2->Text = L"&Загрузить";
 			// 
 			// button4
 			// 
 			this->button4->Location = System::Drawing::Point(131, 205);
 			this->button4->Size = System::Drawing::Size(107, 70);
-			this->button4->Text = L"&Check";
+			this->button4->Text = L"&Проверить";
 			// 
 			// menu
 			// 
@@ -4060,7 +4087,8 @@ namespace NNWay
 
 		void InitializeVariables(void)
 		{
-			mode = Modes::MENU;
+			page = Pages::MENU;
+			mode = Modes::LEARN;
 			language = Languages::EN;
 			dimention = Dimentions::TWOD;
 			learning_algorithm = LearningAlgorythms::NEAT;
@@ -4166,11 +4194,14 @@ namespace NNWay
 				{
 					if (dimention == Dimentions::TWOD)
 					{
+						page = Pages::NEATLEARN2D;
 						if (language == Languages::EN) InitializeComponentNEATLearn2DEN();
 						else if (language == Languages::RU) InitializeComponentNEATLearn2DRU();
+						
 					}
 					else if (dimention == Dimentions::THREED)
 					{
+						page = Pages::NEATLEARN3D;
 						if (language == Languages::EN) InitializeComponentNEATLearn3DEN();
 						else if (language == Languages::RU) InitializeComponentNEATLearn3DRU();
 					}
@@ -4179,11 +4210,13 @@ namespace NNWay
 				{
 					if (dimention == Dimentions::TWOD)
 					{
+						page = Pages::QLLEARN2D;
 						if (language == Languages::EN) InitializeComponentQLLearn2DEN();
 						else if (language == Languages::RU) InitializeComponentQLLearn2DRU();
 					}
 					else if (dimention == Dimentions::THREED)
 					{
+						page = Pages::QLLEARN3D;
 						if (language == Languages::EN) InitializeComponentQLLearn3DEN();
 						else if (language == Languages::RU) InitializeComponentQLLearn3DRU();
 					}
@@ -4195,11 +4228,13 @@ namespace NNWay
 				{
 					if (dimention == Dimentions::TWOD)
 					{
+						page = Pages::NEATCHECK2D;
 						if (language == Languages::EN) InitializeComponentNEATCheck2DEN();
 						else if (language == Languages::RU) InitializeComponentNEATCheck2DRU();
 					}
 					else if (dimention == Dimentions::THREED)
 					{
+						page = Pages::NEATCHECK3D;
 						if (language == Languages::EN) InitializeComponentNEATCheck3DEN();
 						else if (language == Languages::RU) InitializeComponentNEATCheck3DRU();
 					}
@@ -4208,11 +4243,13 @@ namespace NNWay
 				{
 					if (dimention == Dimentions::TWOD)
 					{
+						page = Pages::QLCHECK2D;
 						if (language == Languages::EN) InitializeComponentQLCheck2DEN();
 						else if (language == Languages::RU) InitializeComponentQLCheck2DRU();
 					}
 					else if (dimention == Dimentions::THREED)
 					{
+						page = Pages::QLCHECK3D;
 						if (language == Languages::EN) InitializeComponentQLCheck3DEN();
 						else if (language == Languages::RU) InitializeComponentQLCheck3DRU();
 					}
@@ -4222,7 +4259,7 @@ namespace NNWay
 #pragma endregion
 		System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (mode == Modes::MENU)
+			if (page == Pages::MENU)
 			{
 				if (comboBox1->SelectedIndex == -1)
 				{
@@ -4260,7 +4297,7 @@ namespace NNWay
 					comboBox4->SelectedIndex = s[3];
 				}
 			}
-			else if (mode == Modes::LEARN)
+			else
 			{
 				if (learning_algorithm == LearningAlgorythms::NEAT)
 				{
@@ -4287,7 +4324,7 @@ namespace NNWay
 		}
 		System::Void Button2_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (mode == Modes::MENU)
+			if (page == Pages::MENU)
 			{
 				if (comboBox2->SelectedIndex == -1)
 				{
@@ -4323,7 +4360,7 @@ namespace NNWay
 		}
 		System::Void Button3_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (mode == Modes::MENU)
+			if (page == Pages::MENU)
 			{
 				if (comboBox3->SelectedIndex == -1)
 				{
@@ -4361,7 +4398,7 @@ namespace NNWay
 		}
 		System::Void Button4_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (mode == Modes::MENU)
+			if (page == Pages::MENU)
 			{
 				if (comboBox1->SelectedIndex == -1)
 				{
@@ -4384,9 +4421,12 @@ namespace NNWay
 					else if (language == Languages::RU) MessageBox::Show("Ошибка, выберете режим");
 				}
 				else
+				{
+					this->Controls->Clear();
 					ChooseInitializer();
+				}
 			}
-			else if (mode == Modes::LEARN)
+			else
 			{
 				fps = Convert::ToInt32(textBox3->Text);
 
@@ -4405,7 +4445,7 @@ namespace NNWay
 					}
 					else if (neat::population_quantity = 0)
 					{
-						if (language == Languages::EN) MessageBox::Show("Error, wrong objects number");
+						if (language == Languages::EN) MessageBox::Show("Error, wrong agents number");
 						else if (language == Languages::RU) MessageBox::Show("Ошибка, неверное число объектов");
 					}
 					else if (neat::direction_array_size = 0)
@@ -4478,7 +4518,7 @@ namespace NNWay
 		}
 		System::Void Button6_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (mode == Modes::MENU)
+			if (page == Pages::MENU)
 			{
 				if (comboBox4->SelectedIndex == -1)
 				{
@@ -4591,7 +4631,7 @@ namespace NNWay
 				this->label1->Text = L"Main menu (NEAT)";
 				this->label1->Location = System::Drawing::Point(55, 40);
 				this->label2->Text = L"Set direction array size:";
-				this->label4->Text = L"Set number of objects:";
+				this->label4->Text = L"Set number of agents:";
 				this->checkBox2->Text = L"Exit automatically";
 				this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
 			}
@@ -4618,7 +4658,7 @@ namespace NNWay
 			if (learning_algorithm == LearningAlgorythms::NEAT)
 			{
 				if (language == Languages::EN)
-					MessageBox::Show("The algorithm works according to the following principle: when the program starts, each object randomly forms an array of directions, represented as positions for displacements formed from corners, the size of this array can also be adjusted. After that, each object starts moving in accordance with the elements of the direction array. The object ceases move as soon as it touches a user-defined area, for example, a building on a map, reaches a goal or when elements in an array of directions end (the number of ode). After this, the best object for further study is selected: the “value” of objects is compared and the object with the highest value is remembered as the best (the value is given by a certain formula, for example, for a given algorithm, the value is greater for that object, to the goal is less than the rest).");
+					MessageBox::Show("The algorithm works according to the following principle: when the program starts, each object randomly forms an array of directions, represented as positions for displacements formed from corners, the size of this array can also be adjusted. After that, each object starts moving in accordance with the elements of the direction array. The object ceases move as soon as it touches a user-defined area, for example, a building on a map, reaches a goal or when elements in an array of directions end (the number of ode). After this, the best object for further study is selected: the “value” of agents is compared and the object with the highest value is remembered as the best (the value is given by a certain formula, for example, for a given algorithm, the value is greater for that object, to the goal is less than the rest).");
 				else
 					MessageBox::Show("Алгоритм работает по следующему принципу : при запуске программы каждый объект случайным образом формирует массив направлений, представленный в виде позиций для перемещений, образованных от углов, размер этого массива также можно регулировать.После этого каждый объект начинает движение в соответствии с элементами массива направлений.Объект перестает двигаться, как только касается заданной пользователем области, например, здание на карте, достигает цели или когда заканчиваются элементы в массиве направлений(заканчивается количество ходов).После этого происходит отбор лучшего объекта для дальнейшего обучения : сравнивается “ценность” объектов и объект с наибольшей ценностью запоминается как лучший(ценность задается по определенной формуле, так, например, для данного алгоритма, ценность больше у того объекта, расстояние у которого до цели меньше чем у остальных).");
 			}
@@ -4644,7 +4684,7 @@ namespace NNWay
 			if (learning_algorithm == LearningAlgorythms::NEAT)
 			{
 				if (language == Languages::EN)
-					MessageBox::Show("Before launching the program, the user needs to add a map of the terrain on which the route should be laid, after selecting the number of measurements (two-dimensional or three-dimensional map). The user can choose the speed of learning NA and, accordingly, the speed of obtaining the desired result. The learning rate is regulated by changing the number of objects (conditional agents) (the more objects, the higher the learning rate), but for this it is necessary to increase the computing power. The accuracy of training is governed by the number of layers (the more there are, the higher the accuracy of training), this also requires an increase in computing power.");
+					MessageBox::Show("Before launching the program, the user needs to add a map of the terrain on which the route should be laid, after selecting the number of measurements (two-dimensional or three-dimensional map). The user can choose the speed of learning NA and, accordingly, the speed of obtaining the desired result. The learning rate is regulated by changing the number of agents (conditional agents) (the more agents, the higher the learning rate), but for this it is necessary to increase the computing power. The accuracy of training is governed by the number of layers (the more there are, the higher the accuracy of training), this also requires an increase in computing power.");
 				else
 					MessageBox::Show("Перед запуском программы пользователю необходимо добавить карту местности, на которой необходимо проложить маршрут, предварительно выбрав количество измерений (двухмерная или трехмерная карта). Пользователь может выбрать скорость обучения НС и соответственно быстроту получения желаемого результата. Скорость обучения регулируется посредством изменения количества объектов (условных нейронов) (чем больше объектов, тем выше скорость обучения), но для этого необходимо увеличивать и вычислительные мощности. Точность обучения регулируется количеством слоев (чем их больше, тем точность обучения выше), для этого также требуется увеличение вычислительной мощности.");
 			}
