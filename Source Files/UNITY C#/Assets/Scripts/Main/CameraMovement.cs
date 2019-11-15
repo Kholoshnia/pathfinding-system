@@ -2,11 +2,11 @@
 
 public class CameraMovement : MonoBehaviour
 {
-    private int yMaxLimit = 80;
-    private int yMinLimit = -80;
-    private float xSpeed = 200.0f;
-    private float ySpeed = 200.0f;
-    private float zoomDampening = 5.0f;
+    private readonly int yMaxLimit = 80;
+    private readonly int yMinLimit = -80;
+    private readonly float xSpeed = 200.0f;
+    private readonly float ySpeed = 200.0f;
+    private readonly float zoomDampening = 5.0f;
 
     private float xDeg;
     private float yDeg;
