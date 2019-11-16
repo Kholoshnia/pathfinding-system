@@ -326,7 +326,7 @@ namespace NNWay
 			this->label19->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->label19->ForeColor = System::Drawing::Color::Blue;
-			this->label19->Location = System::Drawing::Point(27, 28);
+			this->label19->Location = System::Drawing::Point(10, 24);
 			this->label19->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(336, 37);
