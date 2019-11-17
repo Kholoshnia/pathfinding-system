@@ -2,7 +2,7 @@
 
 void neat::check()
 {
-	if (dimention == Dimentions::TWOD)
+	if (dimension == Dimensions::TWOD)
 	{
 		std::vector<sf::Vector2f> check;
 
@@ -42,96 +42,13 @@ void neat::check()
 			window.display();
 		}
 	}
-	else if (dimention == Dimentions::THREED)
+	else if (dimension == Dimensions::THREED)
 		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\", enable \"cheker\" in main script (Goal object) and run") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\", включите \"cheker\" в галвном скрипте (объект Goal) и запустите");
-}
-
-void neat::load_from_file()
-{
-	if (dimention == Dimentions::TWOD)
-	{
-		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-		std::string str;
-		for (int i = (int)path.length() - 1; i >= 0; i--)
-			if (path[i] != '.')
-				str += path[i];
-			else
-				break;
-		if (str == "gnp" || str == "gepj") from_image = true;
-		else from_image = false;
-		str.clear();
-
-		if (from_image)
-		{
-			sf::Image map_image;
-			map_image.loadFromFile(path);
-			for (unsigned int y = 0; y < 80; y++)
-			{
-				map_markup[y].resize(80);
-				for (unsigned int x = 0; x < 80; x++)
-				{
-					if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Black)
-						map_markup[y][x] = '#';
-					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Red)
-						map_markup[y][x] = '0';
-					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Blue)
-						map_markup[y][x] = '*';
-					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Yellow)
-						map_markup[y][x] = 'b';
-					else
-						map_markup[y][x] = '.';
-				}
-			}
-
-			map_loaded = true;
-
-			fout.open("Resource Files/Data/NEAT/map_image.txt");
-			if (fout.is_open())
-			{
-				for (int i = 0; i < 80; i++)
-					fout >> map_markup[i];
-				fout >> goal_radius;
-				map.reset(new Map());
-				fout.close();
-				map_loaded = true;
-			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"map_image.txt\"");
-		}
-		else
-		{
-			fout.open(path);
-			if (fout.is_open())
-			{
-				if (fout.is_open())
-					for (int i = 0; i < 80; i++)
-						fout >> map_markup[i];
-				fout >> goal_radius;
-				map.reset(new Map());
-				fout.close();
-				map_loaded = true;
-			}
-			else
-			{
-				std::string message;
-				language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-				System::String^ str = gcnew System::String(message.c_str());
-				System::Windows::Forms::MessageBox::Show(str);
-			}
-		}
-	}
-	else if (dimention == Dimentions::THREED)
-	{
-		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-	}
 }
 
 void neat::create_new_map()
 {
-	if (dimention == Dimentions::TWOD)
+	if (dimension == Dimensions::TWOD)
 	{
 		sf::RenderWindow window(sf::VideoMode(800, 800), "Map creator");
 		while (window.isOpen())
@@ -252,8 +169,91 @@ void neat::create_new_map()
 			window.display();
 		}
 	}
-	else if (dimention == Dimentions::THREED)
+	else if (dimension == Dimensions::THREED)
 		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
+}
+
+void neat::load_map_from_file()
+{
+	if (dimension == Dimensions::TWOD)
+	{
+		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
+		std::string str;
+		for (int i = (int)path.length() - 1; i >= 0; i--)
+			if (path[i] != '.')
+				str += path[i];
+			else
+				break;
+		if (str == "gnp" || str == "gepj") from_image = true;
+		else from_image = false;
+		str.clear();
+
+		if (from_image)
+		{
+			sf::Image map_image;
+			map_image.loadFromFile(path);
+			for (unsigned int y = 0; y < 80; y++)
+			{
+				map_markup[y].resize(80);
+				for (unsigned int x = 0; x < 80; x++)
+				{
+					if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Black)
+						map_markup[y][x] = '#';
+					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Red)
+						map_markup[y][x] = '0';
+					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Blue)
+						map_markup[y][x] = '*';
+					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Yellow)
+						map_markup[y][x] = 'b';
+					else
+						map_markup[y][x] = '.';
+				}
+			}
+
+			map_loaded = true;
+
+			fout.open("Resource Files/Data/NEAT/map_image.txt");
+			if (fout.is_open())
+			{
+				for (int i = 0; i < 80; i++)
+					fout >> map_markup[i];
+				fout >> goal_radius;
+				map.reset(new Map());
+				fout.close();
+				map_loaded = true;
+			}
+			else System::Windows::Forms::MessageBox::Show("Error opening file \"map_image.txt\"");
+		}
+		else
+		{
+			fout.open(path);
+			if (fout.is_open())
+			{
+				if (fout.is_open())
+					for (int i = 0; i < 80; i++)
+						fout >> map_markup[i];
+				fout >> goal_radius;
+				map.reset(new Map());
+				fout.close();
+				map_loaded = true;
+			}
+			else
+			{
+				std::string message;
+				language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
+				System::String^ str = gcnew System::String(message.c_str());
+				System::Windows::Forms::MessageBox::Show(str);
+			}
+		}
+	}
+	else if (dimension == Dimensions::THREED)
+	{
+		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
+	}
 }
 
 void neat::check_from_file()
@@ -315,7 +315,7 @@ void neat::check_from_file()
 
 void neat::with_visualization()
 {
-	if (dimention == Dimentions::TWOD)
+	if (dimension == Dimensions::TWOD)
 	{
 		layers.reset(new Layers());
 
@@ -365,7 +365,7 @@ void neat::with_visualization()
 			window.display();
 		}
 	}
-	else if (dimention == Dimentions::THREED)
+	else if (dimension == Dimensions::THREED)
 	{
 		fout.open(path, std::fstream::app);
 		if (fout.is_open())
@@ -387,7 +387,7 @@ void neat::with_visualization()
 
 void neat::without_visualization()
 {
-	if (dimention == Dimentions::TWOD)
+	if (dimension == Dimensions::TWOD)
 	{
 		layers.reset(new Layers());
 		bool calculating = true;
@@ -409,7 +409,7 @@ void neat::without_visualization()
 			layers->update();
 		}
 	}
-	else if (dimention == Dimentions::THREED)
+	else if (dimension == Dimensions::THREED)
 	{
 		fout.open(path, std::fstream::app);
 		if (fout.is_open())

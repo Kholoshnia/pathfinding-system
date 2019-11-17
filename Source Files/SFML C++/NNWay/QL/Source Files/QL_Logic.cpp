@@ -60,67 +60,9 @@ void ql::check()
 	}
 }
 
-void ql::load_from_file()
-{
-	if (dimention == Dimentions::TWOD)
-	{
-		map.reset(new Map());
-
-		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-		std::string str;
-		for (int i = (int)path.length() - 1; i >= 0; i--)
-			if (path[i] != '.') str += path[i];
-			else break;
-		if (str == "gnp" || str == "gepj" || str == "fig") from_image = true;
-		else from_image = false;
-		str.clear();
-
-		if (from_image)
-			image_path = path;
-		else
-		{
-			fin.open(path);
-			if (fin.is_open())
-			{
-				fin >> map_size_x >> map_size_y;
-
-				map->map.resize(map_size_y);
-				for (int y = 0; y < map_size_y; y++)
-					map->map[y].resize(map_size_x);
-
-				for (int y = 0; y < map_size_y; y++)
-					for (int x = 0; x < map_size_x; x++)
-						fin >> map->map[y][x];
-
-				fin.close();
-
-				map_loaded = true;
-			}
-			else
-			{
-				std::string message;
-				language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-				System::String^ str = gcnew System::String(message.c_str());
-				System::Windows::Forms::MessageBox::Show(str);
-			}
-		}
-		map->update();
-		table.reset(new Table());
-		finish_reward = map_size_x * map_size_x * map_size_y * map_size_y;
-	}
-	else if (dimention == Dimentions::THREED)
-	{
-		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-	}
-}
-
 void ql::create_new_map()
 {
-	if (dimention == Dimentions::TWOD)
+	if (dimension == Dimensions::TWOD)
 	{
 		map.reset(new Map());
 		bool space_pressed = false;
@@ -216,8 +158,66 @@ void ql::create_new_map()
 
 		map_loaded = true;
 	}
-	else if (dimention == Dimentions::THREED)
+	else if (dimension == Dimensions::THREED)
 		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
+}
+
+void ql::load_map_from_file()
+{
+	if (dimension == Dimensions::TWOD)
+	{
+		map.reset(new Map());
+
+		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
+		std::string str;
+		for (int i = (int)path.length() - 1; i >= 0; i--)
+			if (path[i] != '.') str += path[i];
+			else break;
+		if (str == "gnp" || str == "gepj" || str == "fig") from_image = true;
+		else from_image = false;
+		str.clear();
+
+		if (from_image)
+			image_path = path;
+		else
+		{
+			fin.open(path);
+			if (fin.is_open())
+			{
+				fin >> map_size_x >> map_size_y;
+
+				map->map.resize(map_size_y);
+				for (int y = 0; y < map_size_y; y++)
+					map->map[y].resize(map_size_x);
+
+				for (int y = 0; y < map_size_y; y++)
+					for (int x = 0; x < map_size_x; x++)
+						fin >> map->map[y][x];
+
+				fin.close();
+
+				map_loaded = true;
+			}
+			else
+			{
+				std::string message;
+				language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
+				System::String^ str = gcnew System::String(message.c_str());
+				System::Windows::Forms::MessageBox::Show(str);
+			}
+		}
+		map->update();
+		table.reset(new Table());
+		finish_reward = map_size_x * map_size_x * map_size_y * map_size_y;
+	}
+	else if (dimension == Dimensions::THREED)
+	{
+		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
+	}
 }
 
 void ql::load_from_image()

@@ -14,12 +14,12 @@
 #include <NEAT/Header Files/NEAT_Population.h>
 
 extern Languages language;
-extern Dimentions dimention;
+extern Dimensions dimension;
 
 extern std::string path;
 extern sf::Sprite loading;
-extern int auto_exit, fps;
-extern bool from_image, auto_end;
+extern int fps;
+extern bool from_image;
 
 namespace neat
 {
@@ -36,12 +36,12 @@ namespace neat
 	extern sf::Text text[4], controls[3];
 	extern sf::Vector2f goal_pos, dot_pos;
 
-	extern bool map_loaded;
-	extern int population_quantity, layers_quantity;
+	extern bool map_loaded, auto_end;
+	extern int population_quantity, layers_quantity, auto_exit;
 
 	void check();
-	void load_from_file();
 	void create_new_map();
+	void load_map_from_file();
 	void check_from_file();
 	void with_visualization();
 	void without_visualization();

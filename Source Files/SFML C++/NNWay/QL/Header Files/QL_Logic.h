@@ -12,7 +12,7 @@
 #include <QL/Header Files/QL_Agent.h>
 
 extern Languages language;
-extern Dimentions dimention;
+extern Dimensions dimension;
 
 extern int fps;
 extern bool from_image;
@@ -33,8 +33,8 @@ namespace ql
 	extern int map_size_x, map_size_y, width, height, finish_state, iterations;
 
 	void check();
-	void load_from_file();
 	void create_new_map();
+	void load_map_from_file();
 	void load_from_image();
 	void check_from_file();
 	void with_visualization();

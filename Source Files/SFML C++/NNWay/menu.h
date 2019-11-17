@@ -15,10 +15,9 @@
 #include <QL/Header Files/QL_Logic.h>
 #include <QL/Header Files/QL_Agent.h>
 
-Pages page;
 Modes mode;
 Languages language;
-Dimentions dimention;
+Dimensions dimension;
 LearningAlgorythms learning_algorithm;
 
 std::string path;
@@ -27,8 +26,8 @@ sf::Font font;
 sf::Sprite loading;
 sf::Texture loading_texture;
 
-int auto_exit, fps;
-bool visualisation, auto_end, from_image, check_from_file;
+int fps;
+bool visualisation, from_image, check_from_file;
 
 namespace neat
 {
@@ -46,8 +45,8 @@ namespace neat
 	sf::Vector2f goal_pos, dot_pos;
 
 	float goal_radius;
-	bool was_running, map_loaded;
-	int direction_array_size, population_quantity, layers_quantity;
+	bool was_running, map_loaded, auto_end;
+	int direction_array_size, population_quantity, layers_quantity, auto_exit;
 }
 
 namespace ql
@@ -86,6 +85,7 @@ namespace NNWay
 		~menu() { if (components) delete components; }
 	protected:
 
+#pragma region Create components
 	private: System::Windows::Forms::ToolStripMenuItem^ settingsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ languageToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ englishToolStripMenuItem;
@@ -179,6 +179,8 @@ namespace NNWay
 	private: System::Windows::Forms::TextBox^ textBox9;
 	private: System::Windows::Forms::TextBox^ textBox10;
 	private: System::ComponentModel::Container^ components;
+#pragma endregion
+
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
@@ -252,12 +254,14 @@ namespace NNWay
 			this->englishToolStripMenuItem->Name = L"englishToolStripMenuItem";
 			this->englishToolStripMenuItem->Size = System::Drawing::Size(119, 22);
 			this->englishToolStripMenuItem->Text = L"English";
+			this->englishToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::englishToolStripMenuItem_Click);
 			// 
 			// русскийToolStripMenuItem
 			// 
 			this->русскийToolStripMenuItem->Name = L"русскийToolStripMenuItem";
 			this->русскийToolStripMenuItem->Size = System::Drawing::Size(119, 22);
 			this->русскийToolStripMenuItem->Text = L"Русский";
+			this->русскийToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::русскийToolStripMenuItem_Click);
 			// 
 			// modeToolStripMenuItem
 			// 
@@ -274,12 +278,14 @@ namespace NNWay
 			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
 			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
 			this->learnToolStripMenuItem->Text = L"Learn";
+			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
 			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
 			this->checkToolStripMenuItem->Text = L"Check";
+			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
 			// 
 			// dimensionToolStripMenuItem
 			// 
@@ -296,12 +302,14 @@ namespace NNWay
 			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
 			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
 			this->dToolStripMenuItem->Text = L"2D";
+			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::dToolStripMenuItem_Click);
 			// 
 			// dToolStripMenuItem1
 			// 
 			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
 			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
 			this->dToolStripMenuItem1->Text = L"3D";
+			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::dToolStripMenuItem1_Click);
 			// 
 			// learningAlgorithmToolStripMenuItem
 			// 
@@ -318,6 +326,7 @@ namespace NNWay
 			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
 			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
 			this->nEATToolStripMenuItem->Text = L"NEAT";
+			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::nEATToolStripMenuItem_Click);
 			// 
 			// qLearningToolStripMenuItem
 			// 
@@ -347,12 +356,14 @@ namespace NNWay
 			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
 			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
 			this->howToUseToolStripMenuItem->Text = L"How to use";
+			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::howToUseToolStripMenuItem_Click);
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
 			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
 			this->bugReportToolStripMenuItem->Text = L"Bug report";
+			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
 			// 
 			// label1
 			// 
@@ -389,6 +400,7 @@ namespace NNWay
 			this->comboBox1->Size = System::Drawing::Size(147, 21);
 			this->comboBox1->TabIndex = 3;
 			this->comboBox1->SelectedIndex = 0;
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox1_SelectedIndexChanged);
 			// 
 			// comboBox2
 			// 
@@ -400,6 +412,7 @@ namespace NNWay
 			this->comboBox2->Size = System::Drawing::Size(147, 21);
 			this->comboBox2->TabIndex = 5;
 			this->comboBox2->Text = L"Choose action...";
+			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox2_SelectedIndexChanged);
 			// 
 			// label3
 			// 
@@ -423,6 +436,7 @@ namespace NNWay
 			this->comboBox3->Size = System::Drawing::Size(147, 21);
 			this->comboBox3->TabIndex = 7;
 			this->comboBox3->Text = L"Choose action...";
+			this->comboBox3->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox3_SelectedIndexChanged);
 			// 
 			// label4
 			// 
@@ -446,6 +460,7 @@ namespace NNWay
 			this->comboBox4->Size = System::Drawing::Size(147, 21);
 			this->comboBox4->TabIndex = 9;
 			this->comboBox4->Text = L"Choose action...";
+			this->comboBox4->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox4_SelectedIndexChanged);
 			// 
 			// label5
 			// 
@@ -468,6 +483,7 @@ namespace NNWay
 			this->button1->TabIndex = 10;
 			this->button1->Text = L"&Go to";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &menu::button1_Click);
 			// 
 			// menu
 			// 
@@ -497,6 +513,7 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
+
 		}
 
 		void InitializeComponentNEAT2DLearn(void)
@@ -706,6 +723,7 @@ namespace NNWay
 			this->comboBox5->Size = System::Drawing::Size(147, 21);
 			this->comboBox5->TabIndex = 3;
 			this->comboBox5->Text = L"Choose action...";
+			this->comboBox5->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox5_SelectedIndexChanged);
 			// 
 			// label9
 			// 
@@ -735,6 +753,8 @@ namespace NNWay
 			this->textBox2->Size = System::Drawing::Size(147, 20);
 			this->textBox2->TabIndex = 8;
 			this->textBox2->Text = L"250";
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &menu::textBox2_TextChanged);
+			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox2_KeyPress);
 			// 
 			// textBox3
 			// 
@@ -744,6 +764,8 @@ namespace NNWay
 			this->textBox3->Size = System::Drawing::Size(147, 20);
 			this->textBox3->TabIndex = 9;
 			this->textBox3->Text = L"5";
+			this->textBox3->TextChanged += gcnew System::EventHandler(this, &menu::textBox3_TextChanged);
+			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox3_KeyPress);
 			// 
 			// label11
 			// 
@@ -763,6 +785,8 @@ namespace NNWay
 			this->textBox4->Size = System::Drawing::Size(147, 20);
 			this->textBox4->TabIndex = 11;
 			this->textBox4->Text = L"100";
+			this->textBox4->TextChanged += gcnew System::EventHandler(this, &menu::textBox4_TextChanged);
+			this->textBox4->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox4_KeyPress);
 			// 
 			// button2
 			// 
@@ -773,6 +797,7 @@ namespace NNWay
 			this->button2->TabIndex = 12;
 			this->button2->Text = L"&Start";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &menu::button2_Click);
 			// 
 			// menu
 			// 
@@ -802,6 +827,7 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
+
 		}
 		void InitializeComponentNEAT3DLearn(void)
 		{
@@ -1035,48 +1061,53 @@ namespace NNWay
 			this->comboBox6->FormattingEnabled = true;
 			this->comboBox6->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create new map", L"Load map from file" });
 			this->comboBox6->Location = System::Drawing::Point(198, 117);
-			this->comboBox6->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->comboBox6->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox6->Name = L"comboBox6";
 			this->comboBox6->Size = System::Drawing::Size(147, 21);
 			this->comboBox6->TabIndex = 3;
 			this->comboBox6->Text = L"Choose action...";
+			this->comboBox6->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox6_SelectedIndexChanged);
 			// 
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(198, 201);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(147, 20);
 			this->textBox1->TabIndex = 11;
 			this->textBox1->Text = L"100";
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &menu::textBox1_TextChanged);
 			// 
 			// textBox5
 			// 
 			this->textBox5->Location = System::Drawing::Point(198, 145);
-			this->textBox5->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox5->Margin = System::Windows::Forms::Padding(2);
 			this->textBox5->Name = L"textBox5";
 			this->textBox5->Size = System::Drawing::Size(147, 20);
 			this->textBox5->TabIndex = 8;
 			this->textBox5->Text = L"250";
+			this->textBox5->TextChanged += gcnew System::EventHandler(this, &menu::textBox5_TextChanged);
 			// 
 			// textBox6
 			// 
 			this->textBox6->Location = System::Drawing::Point(198, 173);
-			this->textBox6->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox6->Margin = System::Windows::Forms::Padding(2);
 			this->textBox6->Name = L"textBox6";
 			this->textBox6->Size = System::Drawing::Size(147, 20);
 			this->textBox6->TabIndex = 9;
 			this->textBox6->Text = L"5";
+			this->textBox6->TextChanged += gcnew System::EventHandler(this, &menu::textBox6_TextChanged);
 			// 
 			// button3
 			// 
 			this->button3->Location = System::Drawing::Point(140, 300);
-			this->button3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 30);
 			this->button3->TabIndex = 12;
 			this->button3->Text = L"&Start";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &menu::button3_Click);
 			// 
 			// menu
 			// 
@@ -1098,7 +1129,7 @@ namespace NNWay
 				static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"NEAT-QL";
@@ -1106,6 +1137,7 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
+
 		}
 		void InitializeComponentNEAT2DCheck(void)
 		{
@@ -1315,6 +1347,7 @@ namespace NNWay
 			this->button6->TabIndex = 4;
 			this->button6->Text = L"&Load";
 			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &menu::button6_Click);
 			// 
 			// button7
 			// 
@@ -1324,6 +1357,7 @@ namespace NNWay
 			this->button7->TabIndex = 5;
 			this->button7->Text = L"&Load";
 			this->button7->UseVisualStyleBackColor = true;
+			this->button7->Click += gcnew System::EventHandler(this, &menu::button7_Click);
 			// 
 			// button8
 			// 
@@ -1333,6 +1367,7 @@ namespace NNWay
 			this->button8->TabIndex = 6;
 			this->button8->Text = L"&Check";
 			this->button8->UseVisualStyleBackColor = true;
+			this->button8->Click += gcnew System::EventHandler(this, &menu::button8_Click);
 			// 
 			// menu
 			// 
@@ -1568,6 +1603,7 @@ namespace NNWay
 			this->button9->TabIndex = 4;
 			this->button9->Text = L"&Load";
 			this->button9->UseVisualStyleBackColor = true;
+			this->button9->Click += gcnew System::EventHandler(this, &menu::button9_Click);
 			// 
 			// button10
 			// 
@@ -1577,6 +1613,7 @@ namespace NNWay
 			this->button10->TabIndex = 5;
 			this->button10->Text = L"&Load";
 			this->button10->UseVisualStyleBackColor = true;
+			this->button10->Click += gcnew System::EventHandler(this, &menu::button10_Click);
 			// 
 			// button11
 			// 
@@ -1586,6 +1623,7 @@ namespace NNWay
 			this->button11->TabIndex = 6;
 			this->button11->Text = L"&Check";
 			this->button11->UseVisualStyleBackColor = true;
+			this->button11->Click += gcnew System::EventHandler(this, &menu::button11_Click);
 			// 
 			// menu
 			// 
@@ -1814,30 +1852,33 @@ namespace NNWay
 			this->comboBox7->FormattingEnabled = true;
 			this->comboBox7->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create new map", L"Load map from file" });
 			this->comboBox7->Location = System::Drawing::Point(200, 117);
-			this->comboBox7->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->comboBox7->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox7->Name = L"comboBox7";
 			this->comboBox7->Size = System::Drawing::Size(147, 21);
 			this->comboBox7->TabIndex = 3;
 			this->comboBox7->Text = L"Choose action...";
+			this->comboBox7->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox7_SelectedIndexChanged);
 			// 
 			// button4
 			// 
 			this->button4->Location = System::Drawing::Point(140, 300);
-			this->button4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button4->Margin = System::Windows::Forms::Padding(2);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(75, 30);
 			this->button4->TabIndex = 12;
 			this->button4->Text = L"&Start";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &menu::button4_Click);
 			// 
 			// textBox7
 			// 
 			this->textBox7->Location = System::Drawing::Point(200, 145);
-			this->textBox7->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox7->Margin = System::Windows::Forms::Padding(2);
 			this->textBox7->Name = L"textBox7";
 			this->textBox7->Size = System::Drawing::Size(147, 20);
 			this->textBox7->TabIndex = 13;
 			this->textBox7->Text = L"0.8";
+			this->textBox7->TextChanged += gcnew System::EventHandler(this, &menu::textBox7_TextChanged);
 			// 
 			// label17
 			// 
@@ -1857,6 +1898,7 @@ namespace NNWay
 			this->textBox10->Size = System::Drawing::Size(147, 20);
 			this->textBox10->TabIndex = 16;
 			this->textBox10->Text = L"5";
+			this->textBox10->TextChanged += gcnew System::EventHandler(this, &menu::textBox10_TextChanged);
 			// 
 			// label23
 			// 
@@ -1886,7 +1928,7 @@ namespace NNWay
 				static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"NEAT-QL";
@@ -1894,6 +1936,7 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
+
 		}
 		void InitializeComponentQL3DLearn(void)
 		{
@@ -2099,6 +2142,7 @@ namespace NNWay
 			this->comboBox8->Size = System::Drawing::Size(147, 21);
 			this->comboBox8->TabIndex = 3;
 			this->comboBox8->Text = L"Choose action...";
+			this->comboBox8->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox8_SelectedIndexChanged);
 			// 
 			// textBox8
 			// 
@@ -2108,6 +2152,7 @@ namespace NNWay
 			this->textBox8->Size = System::Drawing::Size(147, 20);
 			this->textBox8->TabIndex = 13;
 			this->textBox8->Text = L"0,8";
+			this->textBox8->TextChanged += gcnew System::EventHandler(this, &menu::textBox8_TextChanged);
 			// 
 			// button5
 			// 
@@ -2118,6 +2163,7 @@ namespace NNWay
 			this->button5->TabIndex = 12;
 			this->button5->Text = L"&Start";
 			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &menu::button5_Click);
 			// 
 			// label21
 			// 
@@ -2147,6 +2193,7 @@ namespace NNWay
 			this->textBox9->Size = System::Drawing::Size(147, 20);
 			this->textBox9->TabIndex = 16;
 			this->textBox9->Text = L"5";
+			this->textBox9->TextChanged += gcnew System::EventHandler(this, &menu::textBox9_TextChanged);
 			// 
 			// menu
 			// 
@@ -2383,6 +2430,7 @@ namespace NNWay
 			this->button12->TabIndex = 4;
 			this->button12->Text = L"&Load";
 			this->button12->UseVisualStyleBackColor = true;
+			this->button12->Click += gcnew System::EventHandler(this, &menu::button12_Click);
 			// 
 			// button13
 			// 
@@ -2392,6 +2440,7 @@ namespace NNWay
 			this->button13->TabIndex = 5;
 			this->button13->Text = L"&Load";
 			this->button13->UseVisualStyleBackColor = true;
+			this->button13->Click += gcnew System::EventHandler(this, &menu::button13_Click);
 			// 
 			// button14
 			// 
@@ -2401,6 +2450,7 @@ namespace NNWay
 			this->button14->TabIndex = 6;
 			this->button14->Text = L"&Check";
 			this->button14->UseVisualStyleBackColor = true;
+			this->button14->Click += gcnew System::EventHandler(this, &menu::button14_Click);
 			// 
 			// menu
 			// 
@@ -2636,6 +2686,7 @@ namespace NNWay
 			this->button15->TabIndex = 4;
 			this->button15->Text = L"&Load";
 			this->button15->UseVisualStyleBackColor = true;
+			this->button15->Click += gcnew System::EventHandler(this, &menu::button15_Click);
 			// 
 			// button16
 			// 
@@ -2645,6 +2696,7 @@ namespace NNWay
 			this->button16->TabIndex = 5;
 			this->button16->Text = L"&Load";
 			this->button16->UseVisualStyleBackColor = true;
+			this->button16->Click += gcnew System::EventHandler(this, &menu::button16_Click);
 			// 
 			// button17
 			// 
@@ -2654,6 +2706,7 @@ namespace NNWay
 			this->button17->TabIndex = 6;
 			this->button17->Text = L"&Check";
 			this->button17->UseVisualStyleBackColor = true;
+			this->button17->Click += gcnew System::EventHandler(this, &menu::button17_Click);
 			// 
 			// menu
 			// 
@@ -2684,17 +2737,22 @@ namespace NNWay
 
 		void InitializeVariables(void)
 		{
-			page = Pages::MENU;
 			mode = Modes::LEARN;
 			language = Languages::EN;
-			dimention = Dimentions::TWOD;
+			dimension = Dimensions::TWOD;
 			learning_algorithm = LearningAlgorythms::NEAT;
 
-			auto_exit = 10;
+			from_image = false;
+			visualisation = false;
+			check_from_file = false;
+
+			neat::auto_exit = 10;
 			neat::goal_radius = 10;
 			neat::layers_quantity = 3;
 			neat::population_quantity = 250;
 			neat::direction_array_size = 400;
+			neat::auto_end = false;
+			neat::was_running = false;
 
 			ql::width = 800;
 			ql::height = 800;
@@ -2702,13 +2760,7 @@ namespace NNWay
 			ql::map_size_x = 10;
 			ql::map_size_y = 10;
 			ql::finish_reward = 100;
-
-			auto_end = false;
-			from_image = false;
-			visualisation = false;
-			check_from_file = false;
 			ql::was_running = false;
-			neat::was_running = false;
 			ql::finish_loaded = false;
 
 			loading_texture.loadFromFile("Resource Files/Textures/loading.png");
@@ -2782,94 +2834,262 @@ namespace NNWay
 				neat::controls[i].setOutlineColor(sf::Color::White);
 			}
 		}
-		/*void ChooseInitializer(void)
+		void ChooseInitializer(void)
 		{
+			this->Controls->Clear();
 			if (mode == Modes::LEARN)
 			{
 				if (learning_algorithm == LearningAlgorythms::NEAT)
 				{
-					if (dimention == Dimentions::TWOD)
-					{
-						page = Pages::NEATLEARN2D;
-						if (language == Languages::EN) InitializeComponentNEATLearn2DEN();
-						else if (language == Languages::RU) InitializeComponentNEATLearn2DRU();
-						
-					}
-					else if (dimention == Dimentions::THREED)
-					{
-						page = Pages::NEATLEARN3D;
-						if (language == Languages::EN) InitializeComponentNEATLearn3DEN();
-						else if (language == Languages::RU) InitializeComponentNEATLearn3DRU();
-					}
+					if (dimension == Dimensions::TWOD)
+						InitializeComponentNEAT2DLearn();
+					else if (dimension == Dimensions::THREED)
+						InitializeComponentNEAT3DLearn();
 				}
 				else if (learning_algorithm == LearningAlgorythms::QL)
 				{
-					if (dimention == Dimentions::TWOD)
-					{
-						page = Pages::QLLEARN2D;
-						if (language == Languages::EN) InitializeComponentQLLearn2DEN();
-						else if (language == Languages::RU) InitializeComponentQLLearn2DRU();
-					}
-					else if (dimention == Dimentions::THREED)
-					{
-						page = Pages::QLLEARN3D;
-						if (language == Languages::EN) InitializeComponentQLLearn3DEN();
-						else if (language == Languages::RU) InitializeComponentQLLearn3DRU();
-					}
+					if (dimension == Dimensions::TWOD)
+						InitializeComponentQL2DLearn();
+					else if (dimension == Dimensions::THREED)
+						InitializeComponentQL3DLearn();
 				}
 			}
 			else if (mode == Modes::CHECK)
 			{
 				if (learning_algorithm == LearningAlgorythms::NEAT)
 				{
-					if (dimention == Dimentions::TWOD)
-					{
-						page = Pages::NEATCHECK2D;
-						if (language == Languages::EN) InitializeComponentNEATCheck2DEN();
-						else if (language == Languages::RU) InitializeComponentNEATCheck2DRU();
-					}
-					else if (dimention == Dimentions::THREED)
-					{
-						page = Pages::NEATCHECK3D;
-						if (language == Languages::EN) InitializeComponentNEATCheck3DEN();
-						else if (language == Languages::RU) InitializeComponentNEATCheck3DRU();
-					}
+					if (dimension == Dimensions::TWOD)
+						InitializeComponentNEAT2DCheck();
+					else if (dimension == Dimensions::THREED)
+						InitializeComponentNEAT2DCheck();
 				}
 				else if (learning_algorithm == LearningAlgorythms::QL)
 				{
-					if (dimention == Dimentions::TWOD)
-					{
-						page = Pages::QLCHECK2D;
-						if (language == Languages::EN) InitializeComponentQLCheck2DEN();
-						else if (language == Languages::RU) InitializeComponentQLCheck2DRU();
-					}
-					else if (dimention == Dimentions::THREED)
-					{
-						page = Pages::QLCHECK3D;
-						if (language == Languages::EN) InitializeComponentQLCheck3DEN();
-						else if (language == Languages::RU) InitializeComponentQLCheck3DRU();
-					}
+					if (dimension == Dimensions::TWOD)
+						InitializeComponentQL2DCheck();
+					else if (dimension == Dimensions::THREED)
+						InitializeComponentQL2DCheck();
 				}
 			}
-		}*/
+		}
 #pragma endregion
 
+#pragma region Strip menu actions
+	private: System::Void englishToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void русскийToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void learnToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { mode = Modes::LEARN; }
+	private: System::Void checkToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { mode = Modes::CHECK; }
+	private: System::Void dToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { dimension = Dimensions::TWOD; }
+	private: System::Void dToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) { dimension = Dimensions::THREED; }
+	private: System::Void nEATToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { learning_algorithm = LearningAlgorythms::NEAT; }
+	private: System::Void nEATToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) { learning_algorithm = LearningAlgorythms::QL; }
 	private: System::Void aboutToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (learning_algorithm == LearningAlgorythms::NEAT)
+
+	}
+	private: System::Void howToUseToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void bugReportToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+#pragma endregion
+
+#pragma region Main menu actions
+	private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+		switch (comboBox2->SelectedIndex)
 		{
-			if (language == Languages::EN)
-				MessageBox::Show("The algorithm works according to the following principle: when the program starts, each object randomly forms an array of directions, represented as positions for displacements formed from corners, the size of this array can also be adjusted. After that, each object starts moving in accordance with the elements of the direction array. The object ceases move as soon as it touches a user-defined area, for example, a building on a map, reaches a goal or when elements in an array of directions end (the number of ode). After this, the best object for further study is selected: the “value” of agents is compared and the object with the highest value is remembered as the best (the value is given by a certain formula, for example, for a given algorithm, the value is greater for that object, to the goal is less than the rest).", "About");
-			else
-				MessageBox::Show("Алгоритм работает по следующему принципу: при запуске программы каждый объект случайным образом формирует массив направлений, представленный в виде позиций для перемещений, образованных от углов, размер этого массива также можно регулировать.После этого каждый объект начинает движение в соответствии с элементами массива направлений.Объект перестает двигаться, как только касается заданной пользователем области, например, здание на карте, достигает цели или когда заканчиваются элементы в массиве направлений(заканчивается количество ходов).После этого происходит отбор лучшего объекта для дальнейшего обучения : сравнивается “ценность” объектов и объект с наибольшей ценностью запоминается как лучший(ценность задается по определенной формуле, так, например, для данного алгоритма, ценность больше у того объекта, расстояние у которого до цели меньше чем у остальных).");
-		}
-		else if (learning_algorithm == LearningAlgorythms::QL)
-		{
-			if (language == Languages::EN)
-				MessageBox::Show("When the algorithm starts, an array R (stateXactions) is created, which shows where the agent can go and where not, as well as the location of the targets on the map (the numbering starts at 0 and runs horizontally in ascending order). After this, training takes place: a second array Q is created and filled with zeros. He needs to check any such state (after creating the first array R, an array of initial states is also created). As a result, all possible subsequent actions. After that, the second array with weights is filled in accordance with the formula. After the training is completed, the second array, the user can enter any initial state and get the shortest route.");
-			else
-				MessageBox::Show("При запуске алгоритма создается массив R (stateXactions), который показывает, где агент может проходить, а где нет, а также расположение целей на карте (нумерация начинается с 0 и идет горизонтально по возрастанию). После этого происходит обучение: создаётся второй массив Q и заполняется нулями. Ему необходимо проверить любое такое состояние (после создания первого массива R также создается массив начальных состояний). В результате все возможные последующие действия. После этого второй массив с весами заполняется в соответствии с формулой. После того, как обучение закончено, второй массив пользователь может ввести любое начальное состояние и получить кратчайший маршрут.");
+		case 0:
+			mode = Modes::LEARN;
+			break;
+		case 1:
+			mode = Modes::CHECK;
+		default:
+			break;
 		}
 	}
-};
+	private: System::Void comboBox3_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+		switch (comboBox3->SelectedIndex)
+		{
+		case 0:
+			dimension = Dimensions::TWOD;
+			break;
+		case 1:
+			dimension = Dimensions::THREED;
+		default:
+			break;
+		}
+	}
+	private: System::Void comboBox4_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+		switch (comboBox4->SelectedIndex)
+		{
+		case 0:
+			learning_algorithm = LearningAlgorythms::NEAT;
+			break;
+		case 1:
+			learning_algorithm = LearningAlgorythms::QL;
+		default:
+			break;
+		}
+	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (comboBox1->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("");
+		else if (comboBox2->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("");
+		else if (comboBox3->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("");
+		else if (comboBox4->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("");
+		else
+			ChooseInitializer();
+	}
+#pragma endregion
+
+#pragma region NEAT, 2D, Learn actions
+	private: System::Void comboBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+		switch (comboBox5->SelectedIndex)
+		{
+		case 0:
+			neat::load_map_from_file();
+			break;
+		case 1:
+			neat::create_new_map();
+			break;
+		default:
+			break;
+		}
+	}
+	private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::population_quantity = Convert::ToInt32(textBox2->Text); }
+	private: System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::layers_quantity = Convert::ToInt32(textBox3->Text); }
+	private: System::Void textBox4_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::auto_exit = Convert::ToInt32(textBox4->Text); }
+	private: System::Void textBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
+	private: System::Void textBox3_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
+	private: System::Void textBox4_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (comboBox5->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("");
+		else if (neat::population_quantity == 0)
+			Windows::Forms::MessageBox::Show("");
+		else if (neat::layers_quantity == 0)
+			Windows::Forms::MessageBox::Show("");
+		else
+			ChooseInitializer();
+	}
+#pragma endregion
+
+#pragma region NEAT, 3D, Learn actions
+	private: System::Void comboBox6_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+{
+	switch (comboBox5->SelectedIndex)
+	{
+	case 0:
+		neat::load_map_from_file();
+		break;
+	case 1:
+		neat::create_new_map();
+		break;
+	default:
+		break;
+	}
+}
+	private: System::Void textBox5_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::population_quantity = Convert::ToInt32(textBox2->Text); }
+	private: System::Void textBox6_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::layers_quantity = Convert::ToInt32(textBox3->Text); }
+	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::auto_exit = Convert::ToInt32(textBox4->Text); }
+	private: System::Void textBox5_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
+	private: System::Void textBox6_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
+	private: System::Void textBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (comboBox5->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("");
+		else if (neat::population_quantity == 0)
+			Windows::Forms::MessageBox::Show("");
+		else if (neat::layers_quantity == 0)
+			Windows::Forms::MessageBox::Show("");
+		else
+			ChooseInitializer();
+	}
+#pragma endregion
+
+#pragma region NEAT, 2D, Check actions
+	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_map_from_file(); }
+	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) { /*neat::load_result_from_file();*/ }
+	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) { neat::check_from_file(); }
+#pragma endregion
+
+#pragma region NEAT, 3D, Check actions
+	private: System::Void button9_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_map_from_file(); }
+	private: System::Void button10_Click(System::Object^ sender, System::EventArgs^ e) { /*neat::load_result_from_file();*/ }
+	private: System::Void button11_Click(System::Object^ sender, System::EventArgs^ e) { neat::check_from_file(); }
+#pragma endregion
+
+#pragma region QL, 2D, Learn actions
+	private: System::Void comboBox7_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void textBox7_TextChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void textBox10_TextChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+#pragma endregion
+
+#pragma region QL, 3D, Learn actions
+	private: System::Void comboBox8_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void textBox8_TextChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void textBox9_TextChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+
+	}
+#pragma endregion
+
+#pragma region QL, 2D, Check actions
+	private: System::Void button12_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file(); }
+	private: System::Void button13_Click(System::Object^ sender, System::EventArgs^ e) { /*ql::load_result_from_file();*/ }
+	private: System::Void button14_Click(System::Object^ sender, System::EventArgs^ e) { ql::check_from_file(); }
+#pragma endregion
+
+#pragma region QL, 3D, Check actions
+	private: System::Void button15_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file(); }
+	private: System::Void button16_Click(System::Object^ sender, System::EventArgs^ e) { /*ql::load_result_from_file();*/ }
+	private: System::Void button17_Click(System::Object^ sender, System::EventArgs^ e) { ql::check_from_file(); }
+#pragma endregion
+	};
 }
