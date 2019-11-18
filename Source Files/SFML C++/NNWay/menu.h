@@ -55,6 +55,7 @@ namespace ql
 	std::shared_ptr<Table> table;
 	std::shared_ptr<Agent> agent;
 
+	float gamma;
 	sf::Text text[4];
 	std::string image_path;
 	std::fstream fout, fin;
@@ -2968,10 +2969,10 @@ namespace NNWay
 		switch (comboBox5->SelectedIndex)
 		{
 		case 0:
-			neat::load_map_from_file();
+			neat::create_new_map_2d();
 			break;
 		case 1:
-			neat::create_new_map();
+			neat::load_map_from_file_2d();
 			break;
 		default:
 			break;
@@ -2992,24 +2993,24 @@ namespace NNWay
 		else if (neat::layers_quantity == 0)
 			Windows::Forms::MessageBox::Show("");
 		else
-			ChooseInitializer();
+			neat::with_visualization_2d();
 	}
 #pragma endregion
 
 #pragma region NEAT, 3D, Learn actions
 	private: System::Void comboBox6_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
-{
-	switch (comboBox5->SelectedIndex)
 	{
-	case 0:
-		neat::load_map_from_file();
-		break;
-	case 1:
-		neat::create_new_map();
-		break;
-	default:
-		break;
-	}
+		switch (comboBox5->SelectedIndex)
+		{
+		case 0:
+			neat::create_new_map_3d();
+			break;
+		case 1:
+			neat::load_map_from_file_3d();
+			break;
+		default:
+			break;
+		}
 }
 	private: System::Void textBox5_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::population_quantity = Convert::ToInt32(textBox2->Text); }
 	private: System::Void textBox6_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::layers_quantity = Convert::ToInt32(textBox3->Text); }
@@ -3026,70 +3027,92 @@ namespace NNWay
 		else if (neat::layers_quantity == 0)
 			Windows::Forms::MessageBox::Show("");
 		else
-			ChooseInitializer();
+			neat::with_visualization_3d();
 	}
 #pragma endregion
 
 #pragma region NEAT, 2D, Check actions
-	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_map_from_file(); }
-	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) { /*neat::load_result_from_file();*/ }
-	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) { neat::check_from_file(); }
+	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_map_from_file_2d(); }
+	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_result_from_file_2d(); }
+	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) { neat::check_2d(); }
 #pragma endregion
 
 #pragma region NEAT, 3D, Check actions
-	private: System::Void button9_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_map_from_file(); }
-	private: System::Void button10_Click(System::Object^ sender, System::EventArgs^ e) { /*neat::load_result_from_file();*/ }
-	private: System::Void button11_Click(System::Object^ sender, System::EventArgs^ e) { neat::check_from_file(); }
+	private: System::Void button9_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_map_from_file_3d(); }
+	private: System::Void button10_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_result_from_file_3d(); }
+	private: System::Void button11_Click(System::Object^ sender, System::EventArgs^ e) { neat::check_3d(); }
 #pragma endregion
 
 #pragma region QL, 2D, Learn actions
 	private: System::Void comboBox7_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 	{
-
+		switch (comboBox5->SelectedIndex)
+		{
+		case 0:
+			ql::create_new_map_2d();
+			break;
+		case 1:
+			ql::load_map_from_file_2d();
+			break;
+		default:
+			break;
+		}
 	}
-	private: System::Void textBox7_TextChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-
-	}
-	private: System::Void textBox10_TextChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-
-	}
+	private: System::Void textBox7_TextChanged(System::Object^ sender, System::EventArgs^ e) { ql::gamma = Convert::ToInt32(textBox7->Text); }
+	private: System::Void textBox10_TextChanged(System::Object^ sender, System::EventArgs^ e) { ql::iterations = Convert::ToInt32(textBox10->Text); }
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-
+		if (comboBox7->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("");
+		else if (ql::gamma == 0 || ql::gamma > 1)
+			Windows::Forms::MessageBox::Show("");
+		else if (ql::iterations == 0)
+			Windows::Forms::MessageBox::Show("");
+		else
+			neat::with_visualization_2d();
 	}
 #pragma endregion
 
 #pragma region QL, 3D, Learn actions
 	private: System::Void comboBox8_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 	{
-
+		switch (comboBox5->SelectedIndex)
+		{
+		case 0:
+			ql::create_new_map_3d();
+			break;
+		case 1:
+			ql::load_map_from_file_3d();
+			break;
+		default:
+			break;
+		}
 	}
-	private: System::Void textBox8_TextChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-
-	}
-	private: System::Void textBox9_TextChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-
-	}
+	private: System::Void textBox8_TextChanged(System::Object^ sender, System::EventArgs^ e) { ql::gamma = Convert::ToInt32(textBox7->Text); }
+	private: System::Void textBox9_TextChanged(System::Object^ sender, System::EventArgs^ e) { ql::iterations = Convert::ToInt32(textBox10->Text); }
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-
+		if (comboBox7->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("");
+		else if (ql::gamma == 0 || ql::gamma > 1)
+			Windows::Forms::MessageBox::Show("");
+		else if (ql::iterations == 0)
+			Windows::Forms::MessageBox::Show("");
+		else
+			neat::with_visualization_3d();
 	}
 #pragma endregion
 
 #pragma region QL, 2D, Check actions
-	private: System::Void button12_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file(); }
-	private: System::Void button13_Click(System::Object^ sender, System::EventArgs^ e) { /*ql::load_result_from_file();*/ }
-	private: System::Void button14_Click(System::Object^ sender, System::EventArgs^ e) { ql::check_from_file(); }
+	private: System::Void button12_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file_2d(); }
+	private: System::Void button13_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_result_from_file_2d(); }
+	private: System::Void button14_Click(System::Object^ sender, System::EventArgs^ e) { ql::check_2d(); }
 #pragma endregion
 
 #pragma region QL, 3D, Check actions
-	private: System::Void button15_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file(); }
-	private: System::Void button16_Click(System::Object^ sender, System::EventArgs^ e) { /*ql::load_result_from_file();*/ }
-	private: System::Void button17_Click(System::Object^ sender, System::EventArgs^ e) { ql::check_from_file(); }
+	private: System::Void button15_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file_2d(); }
+	private: System::Void button16_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_result_from_file_2d(); }
+	private: System::Void button17_Click(System::Object^ sender, System::EventArgs^ e) { ql::check_2d(); }
 #pragma endregion
 	};
 }

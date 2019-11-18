@@ -39,10 +39,16 @@ namespace neat
 	extern bool map_loaded, auto_end;
 	extern int population_quantity, layers_quantity, auto_exit;
 
-	void check();
-	void create_new_map();
-	void load_map_from_file();
-	void check_from_file();
-	void with_visualization();
-	void without_visualization();
+	void check_2d();
+	void check_3d();
+	void create_new_map_2d();
+	void create_new_map_3d();
+	void load_map_from_file_2d();
+	void load_map_from_file_3d();
+	void load_result_from_file_2d();
+	void load_result_from_file_3d();
+	void with_visualization_2d();
+	void with_visualization_3d();
+	void without_visualization_2d();
+	void without_visualization_3d();
 }
