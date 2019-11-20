@@ -2884,12 +2884,36 @@ namespace NNWay
 	{
 
 	}
-	private: System::Void learnToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { mode = Modes::LEARN; }
-	private: System::Void checkToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { mode = Modes::CHECK; }
-	private: System::Void dToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { dimension = Dimensions::TWOD; }
-	private: System::Void dToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) { dimension = Dimensions::THREED; }
-	private: System::Void nEATToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { learning_algorithm = LearningAlgorythms::NEAT; }
-	private: System::Void nEATToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) { learning_algorithm = LearningAlgorythms::QL; }
+	private: System::Void learnToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		mode = Modes::LEARN;
+		ChooseInitializer();
+	}
+	private: System::Void checkToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		mode = Modes::CHECK;
+		ChooseInitializer();
+	}
+	private: System::Void dToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		dimension = Dimensions::TWOD;
+		ChooseInitializer();
+	}
+	private: System::Void dToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		dimension = Dimensions::THREED;
+		ChooseInitializer();
+	}
+	private: System::Void nEATToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		learning_algorithm = LearningAlgorythms::NEAT;
+		ChooseInitializer();
+	}
+	private: System::Void nEATToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		learning_algorithm = LearningAlgorythms::QL;
+		ChooseInitializer();
+	}
 	private: System::Void aboutToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 
