@@ -9,12 +9,8 @@ neat::Brain::Brain()
 
 void neat::Brain::randomize()
 {
-	for (auto& directions : directions)
-	{
-		float randomAngle = -180 + float(rand()) / (float(RAND_MAX / 360));
-		directions.x = (float)cos(randomAngle * 3.14159265 / 180);
-		directions.y = (float)sin(randomAngle * 3.14159265 / 180);
-	}
+	for (auto& el : directions)
+		movement(el);
 }
 
 neat::Brain neat::Brain::clone()
@@ -27,15 +23,16 @@ neat::Brain neat::Brain::clone()
 
 void neat::Brain::mutate()
 {
-	float mutationRate = 0.01f;
-	for (auto& directions : directions)
+	for (auto& el : directions)
 	{
 		float randn = float(rand()) / (float(RAND_MAX));
-		if (randn < mutationRate)
-		{
-			float randomAngle = -180.0f + float(rand()) / (float(RAND_MAX / 360.0f));
-			directions.x = cos(randomAngle * 3.14159265f / 180.0f);
-			directions.y = sin(randomAngle * 3.14159265f / 180.0f);
-		}
+		if (randn < mutation_rate)
+			movement(el);
 	}
+}
+
+void neat::Brain::movement(sf::Vector2f& obj)
+{
+	obj.x = static_cast<float>(cos(-180.0f + float(rand()) / (float(RAND_MAX / 360.0f)) * M_PI / 180.0f));
+	obj.y = static_cast<float>(sin(-180.0f + float(rand()) / (float(RAND_MAX / 360.0f)) * M_PI / 180.0f));
 }

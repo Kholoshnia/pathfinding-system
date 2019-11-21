@@ -7,9 +7,9 @@ neat::Population::Population()
 	reached_the_goal = false;
 	fitness_sum = 0;
 	agents.resize(population_quantity);
-	if (layers_quantity != 1)
+	if (layers_quantity > 1)
 		for (auto& el : agents)
-			el.color = color;
+			el.circle.setFillColor(color);
 	gen = 1;
 	min_step = direction_array_size;
 	best_agent = 0;
@@ -94,9 +94,10 @@ void neat::Population::natural_selection()
 		new_agents[i] = parent.get_copy();
 	}
 	agents = new_agents;
-	if (layers_quantity != 1)
+	if (layers_quantity > 1)
 		for (auto& el : agents)
-			el.color = color;
+			el.circle.setFillColor(color);
+	agents[0].circle.setFillColor(sf::Color::Green);
 	gen++;
 }
 

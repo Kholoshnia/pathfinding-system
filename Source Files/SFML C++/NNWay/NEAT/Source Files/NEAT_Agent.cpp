@@ -2,15 +2,17 @@
 
 neat::Agent::Agent()
 {
-	color = sf::Color::Black;
-	this->map = map;
-	fitness = 0;
+	fitness = 0.0f;
+
 	dead = false;
-	reached_goal = false;
 	is_best = false;
-	pos = map.dot_pos;
-	vel = sf::Vector2f(0, 0);
-	acc = sf::Vector2f(0, 0);
+	reached_goal = false;
+
+	pos = map->pos_start;
+	vel = sf::Vector2f(0.0f, 0.0f);
+	acc = sf::Vector2f(0.0f, 0.0f);
+
+	circle.setFillColor(sf::Color::Black);
 	circle.setRadius(4);
 }
 
@@ -29,8 +31,8 @@ void neat::Agent::move()
 		brain.step++;
 	}
 	else dead = true;
-	if (abs(vel.x + acc.x) < 5) vel.x += acc.x;
-	if (abs(vel.y + acc.y) < 5) vel.y += acc.y;
+	if (abs(vel.x + acc.x) < max_speed) vel.x += acc.x;
+	if (abs(vel.y + acc.y) < max_speed) vel.y += acc.y;
 	pos += vel;
 }
 
@@ -39,24 +41,19 @@ void neat::Agent::update()
 	if (!dead && !reached_goal)
 	{
 		move();
-		if (map.touched(pos))
-			dead = true;
-		else if (map.dist(pos) < map.goal_r)
-			reached_goal = true;
+		if (map->touched_wall(pos)) dead = true;
+		else if (map->touched_goal(pos)) reached_goal = true;
 	}
 }
 
 void neat::Agent::calculate_fitness()
 {
-	if (reached_goal)
-		fitness = 100000.0f / float(brain.step * brain.step);
-	else
-		fitness = 1.0f / (map.dist(pos) * map.dist(pos));
+	if (reached_goal) fitness = static_cast<float>(brain.directions.size() / (brain.step * brain.step));
+	else fitness = 1.0f / (map->dist(pos) * map->dist(pos));
 }
 
 void neat::Agent::show(sf::RenderWindow& window)
 {
-	circle.setPosition(pos.x, pos.y);
-	is_best ? circle.setFillColor(sf::Color::Green) : circle.setFillColor(color);
+	circle.setPosition(pos);
 	window.draw(circle);
 }

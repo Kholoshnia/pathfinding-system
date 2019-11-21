@@ -1,10 +1,13 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+
 #include <SFML/Graphics.hpp>
 #include <vector>
 
 namespace neat
 {
+	extern float mutation_rate;
 	extern int direction_array_size;
 
 	struct Brain
@@ -16,5 +19,6 @@ namespace neat
 		Brain clone();
 		void mutate();
 		void randomize();
+		void movement(sf::Vector2f& obj);
 	};
 }

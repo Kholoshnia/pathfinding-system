@@ -42,11 +42,11 @@ namespace neat
 	sf::RectangleShape rect;
 	sf::CircleShape circle[2];
 	sf::Text text[4], controls[3];
-	sf::Vector2f goal_pos, dot_pos;
+	sf::Vector2f goal_pos, pos_goal;
 
-	float goal_radius;
 	bool was_running, map_loaded, auto_end;
-	int direction_array_size, population_quantity, layers_quantity, auto_exit;
+	float goal_radius, max_speed, mutation_rate;
+	int map_size_x, map_size_y, direction_array_size, population_quantity, layers_quantity, auto_exit;
 }
 
 namespace ql
@@ -179,12 +179,21 @@ namespace NNWay
 	private: System::Windows::Forms::TextBox^ textBox8;
 	private: System::Windows::Forms::TextBox^ textBox9;
 	private: System::Windows::Forms::TextBox^ textBox10;
+private: System::Windows::Forms::TextBox^ textBox11;
+private: System::Windows::Forms::Label^ label36;
+private: System::Windows::Forms::TextBox^ textBox12;
+private: System::Windows::Forms::Label^ label37;
+private: System::Windows::Forms::TextBox^ textBox13;
+private: System::Windows::Forms::Label^ label38;
+private: System::Windows::Forms::TextBox^ textBox14;
+private: System::Windows::Forms::Label^ label39;
 	private: System::ComponentModel::Container^ components;
 #pragma endregion
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(menu::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->languageToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -218,7 +227,6 @@ namespace NNWay
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->settingsToolStripMenuItem,
@@ -248,7 +256,7 @@ namespace NNWay
 					this->ðóññêèéToolStripMenuItem
 			});
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
-			this->languageToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->languageToolStripMenuItem->Text = L"Language";
 			// 
 			// englishToolStripMenuItem
@@ -272,7 +280,7 @@ namespace NNWay
 					this->checkToolStripMenuItem
 			});
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
-			this->modeToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->modeToolStripMenuItem->Text = L"Mode";
 			// 
 			// learnToolStripMenuItem
@@ -296,7 +304,7 @@ namespace NNWay
 					this->dToolStripMenuItem1
 			});
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
-			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
 			// 
 			// dToolStripMenuItem
@@ -320,20 +328,20 @@ namespace NNWay
 					this->qLearningToolStripMenuItem
 			});
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
-			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
 			// 
 			// nEATToolStripMenuItem
 			// 
 			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
-			this->nEATToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->nEATToolStripMenuItem->Text = L"NEAT";
 			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::nEATToolStripMenuItem_Click);
 			// 
 			// qLearningToolStripMenuItem
 			// 
 			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
-			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
 			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::qLearningToolStripMenuItem_Click);
 			// 
@@ -508,6 +516,7 @@ namespace NNWay
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"menu";
@@ -550,23 +559,12 @@ namespace NNWay
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->textBox11 = (gcnew System::Windows::Forms::TextBox());
+			this->label36 = (gcnew System::Windows::Forms::Label());
+			this->textBox13 = (gcnew System::Windows::Forms::TextBox());
+			this->label38 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
-			// 
-			// menuStrip1
-			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
-			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(16, 5, 0, 5);
-			this->menuStrip1->Size = System::Drawing::Size(623, 44);
-			this->menuStrip1->TabIndex = 0;
-			this->menuStrip1->Text = L"menuStrip1";
 			// 
 			// settingsToolStripMenuItem
 			// 
@@ -585,7 +583,7 @@ namespace NNWay
 					this->ðóññêèéToolStripMenuItem
 			});
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
-			this->languageToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->languageToolStripMenuItem->Text = L"Language";
 			// 
 			// englishToolStripMenuItem
@@ -609,7 +607,7 @@ namespace NNWay
 					this->checkToolStripMenuItem
 			});
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
-			this->modeToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->modeToolStripMenuItem->Text = L"Mode";
 			// 
 			// learnToolStripMenuItem
@@ -633,7 +631,7 @@ namespace NNWay
 					this->dToolStripMenuItem1
 			});
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
-			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
 			// 
 			// dToolStripMenuItem
@@ -657,20 +655,20 @@ namespace NNWay
 					this->qLearningToolStripMenuItem
 			});
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
-			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
 			// 
 			// nEATToolStripMenuItem
 			// 
 			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
-			this->nEATToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->nEATToolStripMenuItem->Text = L"NEAT";
 			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::nEATToolStripMenuItem_Click);
 			// 
 			// qLearningToolStripMenuItem
 			// 
 			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
-			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
 			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::qLearningToolStripMenuItem_Click);
 			// 
@@ -705,26 +703,41 @@ namespace NNWay
 			this->bugReportToolStripMenuItem->Text = L"Bug report";
 			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->settingsToolStripMenuItem,
+					this->informationToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(28, 9, 0, 9);
+			this->menuStrip1->Size = System::Drawing::Size(623, 52);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
 			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->label6->ForeColor = System::Drawing::Color::Blue;
-			this->label6->Location = System::Drawing::Point(45, 50);
-			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label6->Location = System::Drawing::Point(79, 88);
+			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(263, 37);
+			this->label6->Size = System::Drawing::Size(452, 64);
 			this->label6->TabIndex = 1;
 			this->label6->Text = L"NEAT, 2D, Learn";
 			// 
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(11, 120);
-			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label7->Location = System::Drawing::Point(19, 210);
+			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(95, 13);
+			this->label7->Size = System::Drawing::Size(173, 25);
 			this->label7->TabIndex = 2;
 			this->label7->Text = L"Map configuration:";
 			// 
@@ -732,10 +745,10 @@ namespace NNWay
 			// 
 			this->comboBox5->FormattingEnabled = true;
 			this->comboBox5->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create new map", L"Load map from file" });
-			this->comboBox5->Location = System::Drawing::Point(199, 117);
-			this->comboBox5->Margin = System::Windows::Forms::Padding(2);
+			this->comboBox5->Location = System::Drawing::Point(348, 205);
+			this->comboBox5->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox5->Name = L"comboBox5";
-			this->comboBox5->Size = System::Drawing::Size(147, 21);
+			this->comboBox5->Size = System::Drawing::Size(254, 32);
 			this->comboBox5->TabIndex = 3;
 			this->comboBox5->Text = L"Choose action...";
 			this->comboBox5->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox5_SelectedIndexChanged);
@@ -743,82 +756,123 @@ namespace NNWay
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(11, 148);
-			this->label9->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label9->Location = System::Drawing::Point(19, 259);
+			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(94, 13);
+			this->label9->Size = System::Drawing::Size(172, 25);
 			this->label9->TabIndex = 5;
 			this->label9->Text = L"Number of agents:";
 			// 
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(11, 175);
-			this->label10->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label10->Location = System::Drawing::Point(19, 308);
+			this->label10->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(89, 13);
+			this->label10->Size = System::Drawing::Size(165, 25);
 			this->label10->TabIndex = 6;
 			this->label10->Text = L"Number of layers:";
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(199, 145);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2);
+			this->textBox2->Location = System::Drawing::Point(348, 254);
+			this->textBox2->Margin = System::Windows::Forms::Padding(4);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(147, 20);
+			this->textBox2->Size = System::Drawing::Size(254, 29);
 			this->textBox2->TabIndex = 8;
 			this->textBox2->Text = L"250";
-			this->textBox2->TextChanged += gcnew System::EventHandler(this, &menu::textBox2_TextChanged);
 			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox2_KeyPress);
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(199, 172);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2);
+			this->textBox3->Location = System::Drawing::Point(348, 305);
+			this->textBox3->Margin = System::Windows::Forms::Padding(4);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(147, 20);
+			this->textBox3->Size = System::Drawing::Size(254, 29);
 			this->textBox3->TabIndex = 9;
 			this->textBox3->Text = L"5";
-			this->textBox3->TextChanged += gcnew System::EventHandler(this, &menu::textBox3_TextChanged);
 			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox3_KeyPress);
 			// 
 			// label11
 			// 
 			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(11, 202);
-			this->label11->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label11->Location = System::Drawing::Point(19, 357);
+			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(86, 13);
+			this->label11->Size = System::Drawing::Size(258, 25);
 			this->label11->TabIndex = 10;
-			this->label11->Text = L"Auto ñompletion:";
+			this->label11->Text = L"Maximum movement speed:";
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(199, 199);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2);
+			this->textBox4->Location = System::Drawing::Point(348, 354);
+			this->textBox4->Margin = System::Windows::Forms::Padding(4);
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(147, 20);
+			this->textBox4->Size = System::Drawing::Size(254, 29);
 			this->textBox4->TabIndex = 11;
-			this->textBox4->Text = L"100";
-			this->textBox4->TextChanged += gcnew System::EventHandler(this, &menu::textBox4_TextChanged);
+			this->textBox4->Text = L"5";
 			this->textBox4->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox4_KeyPress);
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(140, 300);
-			this->button2->Margin = System::Windows::Forms::Padding(2);
+			this->button2->Location = System::Drawing::Point(245, 525);
+			this->button2->Margin = System::Windows::Forms::Padding(4);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 30);
+			this->button2->Size = System::Drawing::Size(131, 52);
 			this->button2->TabIndex = 12;
 			this->button2->Text = L"&Start";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &menu::button2_Click);
 			// 
+			// textBox11
+			// 
+			this->textBox11->Location = System::Drawing::Point(348, 452);
+			this->textBox11->Margin = System::Windows::Forms::Padding(4);
+			this->textBox11->Name = L"textBox11";
+			this->textBox11->Size = System::Drawing::Size(254, 29);
+			this->textBox11->TabIndex = 14;
+			this->textBox11->Text = L"100";
+			this->textBox11->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox11_KeyPress);
+			// 
+			// label36
+			// 
+			this->label36->AutoSize = true;
+			this->label36->Location = System::Drawing::Point(20, 455);
+			this->label36->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label36->Name = L"label36";
+			this->label36->Size = System::Drawing::Size(158, 25);
+			this->label36->TabIndex = 13;
+			this->label36->Text = L"Auto ñompletion:";
+			// 
+			// textBox13
+			// 
+			this->textBox13->Location = System::Drawing::Point(348, 403);
+			this->textBox13->Margin = System::Windows::Forms::Padding(4);
+			this->textBox13->Name = L"textBox13";
+			this->textBox13->Size = System::Drawing::Size(254, 29);
+			this->textBox13->TabIndex = 16;
+			this->textBox13->Text = L"0,01";
+			this->textBox13->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox13_KeyPress);
+			// 
+			// label38
+			// 
+			this->label38->AutoSize = true;
+			this->label38->Location = System::Drawing::Point(20, 406);
+			this->label38->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label38->Name = L"label38";
+			this->label38->Size = System::Drawing::Size(131, 25);
+			this->label38->TabIndex = 15;
+			this->label38->Text = L"Mutation rate:";
+			// 
 			// menu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
+			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(356, 361);
+			this->ClientSize = System::Drawing::Size(623, 632);
+			this->Controls->Add(this->textBox13);
+			this->Controls->Add(this->label38);
+			this->Controls->Add(this->textBox11);
+			this->Controls->Add(this->label36);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->textBox4);
 			this->Controls->Add(this->label11);
@@ -834,7 +888,7 @@ namespace NNWay
 				static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"NEAT-QL";
@@ -874,23 +928,12 @@ namespace NNWay
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->textBox12 = (gcnew System::Windows::Forms::TextBox());
+			this->label37 = (gcnew System::Windows::Forms::Label());
+			this->textBox14 = (gcnew System::Windows::Forms::TextBox());
+			this->label39 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
-			// 
-			// menuStrip1
-			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
-			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(16, 5, 0, 5);
-			this->menuStrip1->Size = System::Drawing::Size(623, 44);
-			this->menuStrip1->TabIndex = 0;
-			this->menuStrip1->Text = L"menuStrip1";
 			// 
 			// settingsToolStripMenuItem
 			// 
@@ -909,7 +952,7 @@ namespace NNWay
 					this->ðóññêèéToolStripMenuItem
 			});
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
-			this->languageToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->languageToolStripMenuItem->Text = L"Language";
 			// 
 			// englishToolStripMenuItem
@@ -933,7 +976,7 @@ namespace NNWay
 					this->checkToolStripMenuItem
 			});
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
-			this->modeToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->modeToolStripMenuItem->Text = L"Mode";
 			// 
 			// learnToolStripMenuItem
@@ -957,7 +1000,7 @@ namespace NNWay
 					this->dToolStripMenuItem1
 			});
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
-			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
 			// 
 			// dToolStripMenuItem
@@ -981,20 +1024,20 @@ namespace NNWay
 					this->qLearningToolStripMenuItem
 			});
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
-			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
 			// 
 			// nEATToolStripMenuItem
 			// 
 			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
-			this->nEATToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->nEATToolStripMenuItem->Text = L"NEAT";
 			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::nEATToolStripMenuItem_Click);
 			// 
 			// qLearningToolStripMenuItem
 			// 
 			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
-			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
 			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::qLearningToolStripMenuItem_Click);
 			// 
@@ -1029,117 +1072,173 @@ namespace NNWay
 			this->bugReportToolStripMenuItem->Text = L"Bug report";
 			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->settingsToolStripMenuItem,
+					this->informationToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(28, 9, 0, 9);
+			this->menuStrip1->Size = System::Drawing::Size(623, 52);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
 			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->label8->ForeColor = System::Drawing::Color::Blue;
-			this->label8->Location = System::Drawing::Point(45, 50);
-			this->label8->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label8->Location = System::Drawing::Point(79, 88);
+			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(263, 37);
+			this->label8->Size = System::Drawing::Size(452, 64);
 			this->label8->TabIndex = 1;
 			this->label8->Text = L"NEAT, 3D, Learn";
 			// 
 			// label12
 			// 
 			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(11, 120);
-			this->label12->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label12->Location = System::Drawing::Point(19, 210);
+			this->label12->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(95, 13);
+			this->label12->Size = System::Drawing::Size(173, 25);
 			this->label12->TabIndex = 2;
 			this->label12->Text = L"Map configuration:";
 			// 
 			// label13
 			// 
 			this->label13->AutoSize = true;
-			this->label13->Location = System::Drawing::Point(11, 148);
-			this->label13->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label13->Location = System::Drawing::Point(19, 259);
+			this->label13->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(94, 13);
+			this->label13->Size = System::Drawing::Size(172, 25);
 			this->label13->TabIndex = 5;
 			this->label13->Text = L"Number of agents:";
 			// 
 			// label14
 			// 
 			this->label14->AutoSize = true;
-			this->label14->Location = System::Drawing::Point(11, 176);
-			this->label14->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label14->Location = System::Drawing::Point(19, 308);
+			this->label14->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label14->Name = L"label14";
-			this->label14->Size = System::Drawing::Size(89, 13);
+			this->label14->Size = System::Drawing::Size(165, 25);
 			this->label14->TabIndex = 6;
 			this->label14->Text = L"Number of layers:";
 			// 
 			// label15
 			// 
 			this->label15->AutoSize = true;
-			this->label15->Location = System::Drawing::Point(11, 204);
-			this->label15->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label15->Location = System::Drawing::Point(19, 357);
+			this->label15->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label15->Name = L"label15";
-			this->label15->Size = System::Drawing::Size(86, 13);
+			this->label15->Size = System::Drawing::Size(258, 25);
 			this->label15->TabIndex = 10;
-			this->label15->Text = L"Auto ñompletion:";
+			this->label15->Text = L"Maximum movement speed:";
 			// 
 			// comboBox6
 			// 
 			this->comboBox6->FormattingEnabled = true;
 			this->comboBox6->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create new map", L"Load map from file" });
-			this->comboBox6->Location = System::Drawing::Point(198, 117);
-			this->comboBox6->Margin = System::Windows::Forms::Padding(2);
+			this->comboBox6->Location = System::Drawing::Point(346, 205);
+			this->comboBox6->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox6->Name = L"comboBox6";
-			this->comboBox6->Size = System::Drawing::Size(147, 21);
+			this->comboBox6->Size = System::Drawing::Size(254, 32);
 			this->comboBox6->TabIndex = 3;
 			this->comboBox6->Text = L"Choose action...";
 			this->comboBox6->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox6_SelectedIndexChanged);
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(198, 201);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2);
+			this->textBox1->Location = System::Drawing::Point(346, 352);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(147, 20);
+			this->textBox1->Size = System::Drawing::Size(254, 29);
 			this->textBox1->TabIndex = 11;
-			this->textBox1->Text = L"100";
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &menu::textBox1_TextChanged);
+			this->textBox1->Text = L"5";
 			// 
 			// textBox5
 			// 
-			this->textBox5->Location = System::Drawing::Point(198, 145);
-			this->textBox5->Margin = System::Windows::Forms::Padding(2);
+			this->textBox5->Location = System::Drawing::Point(346, 254);
+			this->textBox5->Margin = System::Windows::Forms::Padding(4);
 			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(147, 20);
+			this->textBox5->Size = System::Drawing::Size(254, 29);
 			this->textBox5->TabIndex = 8;
 			this->textBox5->Text = L"250";
-			this->textBox5->TextChanged += gcnew System::EventHandler(this, &menu::textBox5_TextChanged);
 			// 
 			// textBox6
 			// 
-			this->textBox6->Location = System::Drawing::Point(198, 173);
-			this->textBox6->Margin = System::Windows::Forms::Padding(2);
+			this->textBox6->Location = System::Drawing::Point(346, 303);
+			this->textBox6->Margin = System::Windows::Forms::Padding(4);
 			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(147, 20);
+			this->textBox6->Size = System::Drawing::Size(254, 29);
 			this->textBox6->TabIndex = 9;
 			this->textBox6->Text = L"5";
-			this->textBox6->TextChanged += gcnew System::EventHandler(this, &menu::textBox6_TextChanged);
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(140, 300);
-			this->button3->Margin = System::Windows::Forms::Padding(2);
+			this->button3->Location = System::Drawing::Point(245, 525);
+			this->button3->Margin = System::Windows::Forms::Padding(4);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 30);
+			this->button3->Size = System::Drawing::Size(131, 52);
 			this->button3->TabIndex = 12;
 			this->button3->Text = L"&Start";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &menu::button3_Click);
 			// 
+			// textBox12
+			// 
+			this->textBox12->Location = System::Drawing::Point(346, 452);
+			this->textBox12->Margin = System::Windows::Forms::Padding(4);
+			this->textBox12->Name = L"textBox12";
+			this->textBox12->Size = System::Drawing::Size(254, 29);
+			this->textBox12->TabIndex = 14;
+			this->textBox12->Text = L"100";
+			this->textBox12->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox12_KeyPress);
+			// 
+			// label37
+			// 
+			this->label37->AutoSize = true;
+			this->label37->Location = System::Drawing::Point(21, 455);
+			this->label37->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label37->Name = L"label37";
+			this->label37->Size = System::Drawing::Size(158, 25);
+			this->label37->TabIndex = 13;
+			this->label37->Text = L"Auto ñompletion:";
+			// 
+			// textBox14
+			// 
+			this->textBox14->Location = System::Drawing::Point(346, 403);
+			this->textBox14->Margin = System::Windows::Forms::Padding(4);
+			this->textBox14->Name = L"textBox14";
+			this->textBox14->Size = System::Drawing::Size(254, 29);
+			this->textBox14->TabIndex = 16;
+			this->textBox14->Text = L"0,01";
+			this->textBox14->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox14_KeyPress);
+			// 
+			// label39
+			// 
+			this->label39->AutoSize = true;
+			this->label39->Location = System::Drawing::Point(21, 406);
+			this->label39->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label39->Name = L"label39";
+			this->label39->Size = System::Drawing::Size(131, 25);
+			this->label39->TabIndex = 15;
+			this->label39->Text = L"Mutation rate:";
+			// 
 			// menu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
+			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(356, 361);
+			this->ClientSize = System::Drawing::Size(623, 632);
+			this->Controls->Add(this->textBox14);
+			this->Controls->Add(this->label39);
+			this->Controls->Add(this->textBox12);
+			this->Controls->Add(this->label37);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->textBox6);
 			this->Controls->Add(this->textBox5);
@@ -1155,7 +1254,7 @@ namespace NNWay
 				static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"NEAT-QL";
@@ -1731,21 +1830,6 @@ namespace NNWay
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// menuStrip1
-			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
-			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(16, 5, 0, 5);
-			this->menuStrip1->Size = System::Drawing::Size(623, 44);
-			this->menuStrip1->TabIndex = 0;
-			this->menuStrip1->Text = L"menuStrip1";
-			// 
 			// settingsToolStripMenuItem
 			// 
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
@@ -1763,7 +1847,7 @@ namespace NNWay
 					this->ðóññêèéToolStripMenuItem
 			});
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
-			this->languageToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->languageToolStripMenuItem->Text = L"Language";
 			// 
 			// englishToolStripMenuItem
@@ -1787,7 +1871,7 @@ namespace NNWay
 					this->checkToolStripMenuItem
 			});
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
-			this->modeToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->modeToolStripMenuItem->Text = L"Mode";
 			// 
 			// learnToolStripMenuItem
@@ -1811,7 +1895,7 @@ namespace NNWay
 					this->dToolStripMenuItem1
 			});
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
-			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
 			// 
 			// dToolStripMenuItem
@@ -1835,20 +1919,20 @@ namespace NNWay
 					this->qLearningToolStripMenuItem
 			});
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
-			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
 			// 
 			// nEATToolStripMenuItem
 			// 
 			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
-			this->nEATToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->nEATToolStripMenuItem->Text = L"NEAT";
 			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::nEATToolStripMenuItem_Click);
 			// 
 			// qLearningToolStripMenuItem
 			// 
 			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
-			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
 			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::qLearningToolStripMenuItem_Click);
 			// 
@@ -1883,26 +1967,41 @@ namespace NNWay
 			this->bugReportToolStripMenuItem->Text = L"Bug report";
 			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->settingsToolStripMenuItem,
+					this->informationToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(28, 9, 0, 9);
+			this->menuStrip1->Size = System::Drawing::Size(623, 52);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
 			// label16
 			// 
 			this->label16->AutoSize = true;
 			this->label16->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->label16->ForeColor = System::Drawing::Color::Blue;
-			this->label16->Location = System::Drawing::Point(11, 50);
-			this->label16->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label16->Location = System::Drawing::Point(19, 88);
+			this->label16->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label16->Name = L"label16";
-			this->label16->Size = System::Drawing::Size(336, 37);
+			this->label16->Size = System::Drawing::Size(585, 64);
 			this->label16->TabIndex = 1;
 			this->label16->Text = L"Q-Learning, 2D, Learn";
 			// 
 			// label18
 			// 
 			this->label18->AutoSize = true;
-			this->label18->Location = System::Drawing::Point(11, 148);
-			this->label18->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label18->Location = System::Drawing::Point(19, 259);
+			this->label18->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label18->Name = L"label18";
-			this->label18->Size = System::Drawing::Size(46, 13);
+			this->label18->Size = System::Drawing::Size(87, 25);
 			this->label18->TabIndex = 5;
 			this->label18->Text = L"Gamma:";
 			// 
@@ -1910,20 +2009,20 @@ namespace NNWay
 			// 
 			this->comboBox7->FormattingEnabled = true;
 			this->comboBox7->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create new map", L"Load map from file" });
-			this->comboBox7->Location = System::Drawing::Point(200, 117);
-			this->comboBox7->Margin = System::Windows::Forms::Padding(2);
+			this->comboBox7->Location = System::Drawing::Point(350, 205);
+			this->comboBox7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->comboBox7->Name = L"comboBox7";
-			this->comboBox7->Size = System::Drawing::Size(147, 21);
+			this->comboBox7->Size = System::Drawing::Size(254, 32);
 			this->comboBox7->TabIndex = 3;
 			this->comboBox7->Text = L"Choose action...";
 			this->comboBox7->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox7_SelectedIndexChanged);
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(140, 300);
-			this->button4->Margin = System::Windows::Forms::Padding(2);
+			this->button4->Location = System::Drawing::Point(245, 525);
+			this->button4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 30);
+			this->button4->Size = System::Drawing::Size(131, 52);
 			this->button4->TabIndex = 12;
 			this->button4->Text = L"&Start";
 			this->button4->UseVisualStyleBackColor = true;
@@ -1931,49 +2030,49 @@ namespace NNWay
 			// 
 			// textBox7
 			// 
-			this->textBox7->Location = System::Drawing::Point(200, 145);
-			this->textBox7->Margin = System::Windows::Forms::Padding(2);
+			this->textBox7->Location = System::Drawing::Point(350, 254);
+			this->textBox7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox7->Name = L"textBox7";
-			this->textBox7->Size = System::Drawing::Size(147, 20);
+			this->textBox7->Size = System::Drawing::Size(254, 29);
 			this->textBox7->TabIndex = 13;
 			this->textBox7->Text = L"0.8";
-			this->textBox7->TextChanged += gcnew System::EventHandler(this, &menu::textBox7_TextChanged);
+			this->textBox7->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox7_KeyPress);
 			// 
 			// label17
 			// 
 			this->label17->AutoSize = true;
-			this->label17->Location = System::Drawing::Point(11, 120);
-			this->label17->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label17->Location = System::Drawing::Point(19, 210);
+			this->label17->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(95, 13);
+			this->label17->Size = System::Drawing::Size(173, 25);
 			this->label17->TabIndex = 14;
 			this->label17->Text = L"Map configuration:";
 			// 
 			// textBox10
 			// 
-			this->textBox10->Location = System::Drawing::Point(200, 173);
-			this->textBox10->Margin = System::Windows::Forms::Padding(2);
+			this->textBox10->Location = System::Drawing::Point(350, 303);
+			this->textBox10->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox10->Name = L"textBox10";
-			this->textBox10->Size = System::Drawing::Size(147, 20);
+			this->textBox10->Size = System::Drawing::Size(254, 29);
 			this->textBox10->TabIndex = 16;
 			this->textBox10->Text = L"5";
-			this->textBox10->TextChanged += gcnew System::EventHandler(this, &menu::textBox10_TextChanged);
+			this->textBox10->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox10_KeyPress);
 			// 
 			// label23
 			// 
 			this->label23->AutoSize = true;
-			this->label23->Location = System::Drawing::Point(11, 176);
-			this->label23->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label23->Location = System::Drawing::Point(19, 308);
+			this->label23->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label23->Name = L"label23";
-			this->label23->Size = System::Drawing::Size(104, 13);
+			this->label23->Size = System::Drawing::Size(191, 25);
 			this->label23->TabIndex = 15;
 			this->label23->Text = L"Number of iterations:";
 			// 
 			// menu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
+			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(356, 361);
+			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->textBox10);
 			this->Controls->Add(this->label23);
 			this->Controls->Add(this->label17);
@@ -1987,7 +2086,7 @@ namespace NNWay
 				static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"NEAT-QL";
@@ -2017,31 +2116,16 @@ namespace NNWay
 			this->howToUseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bugReportToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->label19 = (gcnew System::Windows::Forms::Label());
-			this->label20 = (gcnew System::Windows::Forms::Label());
-			this->comboBox8 = (gcnew System::Windows::Forms::ComboBox());
-			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
-			this->button5 = (gcnew System::Windows::Forms::Button());
-			this->label21 = (gcnew System::Windows::Forms::Label());
 			this->label22 = (gcnew System::Windows::Forms::Label());
+			this->label21 = (gcnew System::Windows::Forms::Label());
+			this->comboBox8 = (gcnew System::Windows::Forms::ComboBox());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
+			this->label20 = (gcnew System::Windows::Forms::Label());
+			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
+			this->label19 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
-			// 
-			// menuStrip1
-			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
-			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->settingsToolStripMenuItem,
-					this->informationToolStripMenuItem
-			});
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(16, 5, 0, 5);
-			this->menuStrip1->Size = System::Drawing::Size(623, 44);
-			this->menuStrip1->TabIndex = 0;
-			this->menuStrip1->Text = L"menuStrip1";
 			// 
 			// settingsToolStripMenuItem
 			// 
@@ -2060,7 +2144,7 @@ namespace NNWay
 					this->ðóññêèéToolStripMenuItem
 			});
 			this->languageToolStripMenuItem->Name = L"languageToolStripMenuItem";
-			this->languageToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->languageToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->languageToolStripMenuItem->Text = L"Language";
 			// 
 			// englishToolStripMenuItem
@@ -2084,7 +2168,7 @@ namespace NNWay
 					this->checkToolStripMenuItem
 			});
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
-			this->modeToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->modeToolStripMenuItem->Text = L"Mode";
 			// 
 			// learnToolStripMenuItem
@@ -2108,7 +2192,7 @@ namespace NNWay
 					this->dToolStripMenuItem1
 			});
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
-			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
 			// 
 			// dToolStripMenuItem
@@ -2132,20 +2216,20 @@ namespace NNWay
 					this->qLearningToolStripMenuItem
 			});
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
-			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(306, 40);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
 			// 
 			// nEATToolStripMenuItem
 			// 
 			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
-			this->nEATToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->nEATToolStripMenuItem->Text = L"NEAT";
 			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::nEATToolStripMenuItem_Click);
 			// 
 			// qLearningToolStripMenuItem
 			// 
 			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
-			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(315, 40);
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(235, 40);
 			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
 			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::qLearningToolStripMenuItem_Click);
 			// 
@@ -2180,96 +2264,112 @@ namespace NNWay
 			this->bugReportToolStripMenuItem->Text = L"Bug report";
 			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
 			// 
-			// label19
+			// menuStrip1
 			// 
-			this->label19->AutoSize = true;
-			this->label19->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->label19->ForeColor = System::Drawing::Color::Blue;
-			this->label19->Location = System::Drawing::Point(10, 50);
-			this->label19->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
-			this->label19->Name = L"label19";
-			this->label19->Size = System::Drawing::Size(336, 37);
-			this->label19->TabIndex = 1;
-			this->label19->Text = L"Q-Learning, 3D, Learn";
-			// 
-			// label20
-			// 
-			this->label20->AutoSize = true;
-			this->label20->Location = System::Drawing::Point(10, 120);
-			this->label20->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
-			this->label20->Name = L"label20";
-			this->label20->Size = System::Drawing::Size(95, 13);
-			this->label20->TabIndex = 14;
-			this->label20->Text = L"Map configuration:";
-			// 
-			// comboBox8
-			// 
-			this->comboBox8->FormattingEnabled = true;
-			this->comboBox8->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create new", L"Load from file" });
-			this->comboBox8->Location = System::Drawing::Point(199, 117);
-			this->comboBox8->Margin = System::Windows::Forms::Padding(2);
-			this->comboBox8->Name = L"comboBox8";
-			this->comboBox8->Size = System::Drawing::Size(147, 21);
-			this->comboBox8->TabIndex = 3;
-			this->comboBox8->Text = L"Choose action...";
-			this->comboBox8->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox8_SelectedIndexChanged);
-			// 
-			// textBox8
-			// 
-			this->textBox8->Location = System::Drawing::Point(199, 145);
-			this->textBox8->Margin = System::Windows::Forms::Padding(2);
-			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(147, 20);
-			this->textBox8->TabIndex = 13;
-			this->textBox8->Text = L"0,8";
-			this->textBox8->TextChanged += gcnew System::EventHandler(this, &menu::textBox8_TextChanged);
-			// 
-			// button5
-			// 
-			this->button5->Location = System::Drawing::Point(140, 300);
-			this->button5->Margin = System::Windows::Forms::Padding(2);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 30);
-			this->button5->TabIndex = 12;
-			this->button5->Text = L"&Start";
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &menu::button5_Click);
-			// 
-			// label21
-			// 
-			this->label21->AutoSize = true;
-			this->label21->Location = System::Drawing::Point(10, 148);
-			this->label21->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
-			this->label21->Name = L"label21";
-			this->label21->Size = System::Drawing::Size(46, 13);
-			this->label21->TabIndex = 15;
-			this->label21->Text = L"Gamma:";
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->settingsToolStripMenuItem,
+					this->informationToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(28, 9, 0, 9);
+			this->menuStrip1->Size = System::Drawing::Size(623, 52);
+			this->menuStrip1->TabIndex = 0;
+			this->menuStrip1->Text = L"menuStrip1";
 			// 
 			// label22
 			// 
 			this->label22->AutoSize = true;
-			this->label22->Location = System::Drawing::Point(10, 175);
-			this->label22->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
+			this->label22->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label22->ForeColor = System::Drawing::Color::Blue;
+			this->label22->Location = System::Drawing::Point(19, 88);
+			this->label22->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label22->Name = L"label22";
-			this->label22->Size = System::Drawing::Size(104, 13);
-			this->label22->TabIndex = 17;
-			this->label22->Text = L"Number of iterations:";
+			this->label22->Size = System::Drawing::Size(585, 64);
+			this->label22->TabIndex = 1;
+			this->label22->Text = L"Q-Learning, 2D, Learn";
+			// 
+			// label21
+			// 
+			this->label21->AutoSize = true;
+			this->label21->Location = System::Drawing::Point(19, 259);
+			this->label21->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label21->Name = L"label21";
+			this->label21->Size = System::Drawing::Size(87, 25);
+			this->label21->TabIndex = 5;
+			this->label21->Text = L"Gamma:";
+			// 
+			// comboBox8
+			// 
+			this->comboBox8->FormattingEnabled = true;
+			this->comboBox8->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create new map", L"Load map from file" });
+			this->comboBox8->Location = System::Drawing::Point(350, 205);
+			this->comboBox8->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->comboBox8->Name = L"comboBox8";
+			this->comboBox8->Size = System::Drawing::Size(254, 32);
+			this->comboBox8->TabIndex = 3;
+			this->comboBox8->Text = L"Choose action...";
+			this->comboBox8->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox7_SelectedIndexChanged);
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(245, 525);
+			this->button5->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(131, 52);
+			this->button5->TabIndex = 12;
+			this->button5->Text = L"&Start";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &menu::button4_Click);
 			// 
 			// textBox9
 			// 
-			this->textBox9->Location = System::Drawing::Point(199, 172);
-			this->textBox9->Margin = System::Windows::Forms::Padding(2);
+			this->textBox9->Location = System::Drawing::Point(350, 254);
+			this->textBox9->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox9->Name = L"textBox9";
-			this->textBox9->Size = System::Drawing::Size(147, 20);
-			this->textBox9->TabIndex = 16;
-			this->textBox9->Text = L"5";
-			this->textBox9->TextChanged += gcnew System::EventHandler(this, &menu::textBox9_TextChanged);
+			this->textBox9->Size = System::Drawing::Size(254, 29);
+			this->textBox9->TabIndex = 13;
+			this->textBox9->Text = L"0.8";
+			this->textBox9->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox7_KeyPress);
+			// 
+			// label20
+			// 
+			this->label20->AutoSize = true;
+			this->label20->Location = System::Drawing::Point(19, 210);
+			this->label20->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label20->Name = L"label20";
+			this->label20->Size = System::Drawing::Size(173, 25);
+			this->label20->TabIndex = 14;
+			this->label20->Text = L"Map configuration:";
+			// 
+			// textBox8
+			// 
+			this->textBox8->Location = System::Drawing::Point(350, 303);
+			this->textBox8->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->textBox8->Name = L"textBox8";
+			this->textBox8->Size = System::Drawing::Size(254, 29);
+			this->textBox8->TabIndex = 16;
+			this->textBox8->Text = L"5";
+			this->textBox8->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox10_KeyPress);
+			// 
+			// label19
+			// 
+			this->label19->AutoSize = true;
+			this->label19->Location = System::Drawing::Point(19, 308);
+			this->label19->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label19->Name = L"label19";
+			this->label19->Size = System::Drawing::Size(191, 25);
+			this->label19->TabIndex = 15;
+			this->label19->Text = L"Number of iterations:";
 			// 
 			// menu
 			// 
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
-			this->ClientSize = System::Drawing::Size(356, 361);
+			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->label22);
 			this->Controls->Add(this->textBox9);
 			this->Controls->Add(this->label21);
@@ -2283,7 +2383,7 @@ namespace NNWay
 				static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"NEAT-QL";
@@ -2839,11 +2939,14 @@ namespace NNWay
 			visualisation = false;
 			check_from_file = false;
 
+			neat::max_speed = 5;
 			neat::auto_exit = 10;
 			neat::goal_radius = 10;
 			neat::layers_quantity = 3;
+			neat::mutation_rate = 0.01f;
 			neat::population_quantity = 250;
 			neat::direction_array_size = 400;
+
 			neat::auto_end = false;
 			neat::was_running = false;
 
@@ -2854,6 +2957,7 @@ namespace NNWay
 			ql::map_size_x = 10;
 			ql::map_size_y = 10;
 			ql::finish_reward = 100;
+
 			ql::was_running = false;
 			ql::finish_loaded = false;
 
@@ -2968,7 +3072,7 @@ namespace NNWay
 		}
 #pragma endregion
 
-#pragma region Strip menu actions
+#pragma region Tool strip menu actions
 	private: System::Void englishToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 
@@ -3100,19 +3204,33 @@ namespace NNWay
 			break;
 		}
 	}
-	private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::population_quantity = Convert::ToInt32(textBox2->Text); }
-	private: System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::layers_quantity = Convert::ToInt32(textBox3->Text); }
-	private: System::Void textBox4_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::auto_exit = Convert::ToInt32(textBox4->Text); }
-	private: System::Void textBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
-	private: System::Void textBox3_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
-	private: System::Void textBox4_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
+	private: System::Void textBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox3_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox11_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox13_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != 0x08; }
+	private: System::Void textBox4_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		neat::population_quantity = Convert::ToInt32(textBox2->Text);
+		neat::layers_quantity = Convert::ToInt32(textBox3->Text);
+		neat::max_speed = Convert::ToSingle(textBox4->Text);
+		try { neat::mutation_rate = Convert::ToSingle(textBox13->Text); }
+		catch (System::FormatException^ ex)
+		{
+			Windows::Forms::MessageBox::Show("");
+			return;
+		}
+		neat::auto_exit = Convert::ToInt32(textBox11->Text);
+
 		if (comboBox5->SelectedIndex == -1)
 			Windows::Forms::MessageBox::Show("");
 		else if (neat::population_quantity == 0)
 			Windows::Forms::MessageBox::Show("");
 		else if (neat::layers_quantity == 0)
+			Windows::Forms::MessageBox::Show("");
+		else if (neat::max_speed == 0)
+			Windows::Forms::MessageBox::Show("");
+		else if (neat::mutation_rate == 0)
 			Windows::Forms::MessageBox::Show("");
 		else
 			neat::with_visualization_2d();
@@ -3133,20 +3251,34 @@ namespace NNWay
 		default:
 			break;
 		}
-}
-	private: System::Void textBox5_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::population_quantity = Convert::ToInt32(textBox2->Text); }
-	private: System::Void textBox6_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::layers_quantity = Convert::ToInt32(textBox3->Text); }
-	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) { neat::auto_exit = Convert::ToInt32(textBox4->Text); }
-	private: System::Void textBox5_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
-	private: System::Void textBox6_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
-	private: System::Void textBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { if (!Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08) e->Handled = true; }
+	}
+	private: System::Void textBox5_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox6_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox12_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox14_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != 0x08; }
+	private: System::Void textBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		neat::population_quantity = Convert::ToInt32(textBox2->Text);
+		neat::layers_quantity = Convert::ToInt32(textBox3->Text);
+		neat::max_speed = Convert::ToSingle(textBox12->Text);
+		try { neat::mutation_rate = Convert::ToSingle(textBox14->Text); }
+		catch (System::FormatException ^ ex)
+		{
+			Windows::Forms::MessageBox::Show("");
+			return;
+		}
+		neat::auto_exit = Convert::ToInt32(textBox4->Text);
+
 		if (comboBox5->SelectedIndex == -1)
 			Windows::Forms::MessageBox::Show("");
 		else if (neat::population_quantity == 0)
 			Windows::Forms::MessageBox::Show("");
 		else if (neat::layers_quantity == 0)
+			Windows::Forms::MessageBox::Show("");
+		else if (neat::max_speed == 0)
+			Windows::Forms::MessageBox::Show("");
+		else if (neat::mutation_rate == 0)
 			Windows::Forms::MessageBox::Show("");
 		else
 			neat::with_visualization_3d();
@@ -3166,6 +3298,8 @@ namespace NNWay
 #pragma endregion
 
 #pragma region QL, 2D, Learn actions
+	private: System::Void textBox7_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox10_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
 	private: System::Void comboBox7_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 	{
 		switch (comboBox7->SelectedIndex)
@@ -3180,10 +3314,11 @@ namespace NNWay
 			break;
 		}
 	}
-	private: System::Void textBox7_TextChanged(System::Object^ sender, System::EventArgs^ e) { ql::gamma = Convert::ToInt32(textBox7->Text); }
-	private: System::Void textBox10_TextChanged(System::Object^ sender, System::EventArgs^ e) { ql::iterations = Convert::ToInt32(textBox10->Text); }
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		ql::gamma = Convert::ToSingle(textBox7->Text);
+		ql::iterations = Convert::ToInt32(textBox10->Text);
+
 		if (comboBox7->SelectedIndex == -1)
 			Windows::Forms::MessageBox::Show("");
 		else if (ql::gamma == 0 || ql::gamma > 1)
@@ -3196,6 +3331,8 @@ namespace NNWay
 #pragma endregion
 
 #pragma region QL, 3D, Learn actions
+	private: System::Void textBox8_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox9_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
 	private: System::Void comboBox8_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 	{
 		switch (comboBox8->SelectedIndex)
@@ -3210,10 +3347,11 @@ namespace NNWay
 			break;
 		}
 	}
-	private: System::Void textBox8_TextChanged(System::Object^ sender, System::EventArgs^ e) { ql::gamma = Convert::ToInt32(textBox7->Text); }
-	private: System::Void textBox9_TextChanged(System::Object^ sender, System::EventArgs^ e) { ql::iterations = Convert::ToInt32(textBox10->Text); }
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
 	{
+		ql::gamma = Convert::ToSingle(textBox7->Text);
+		ql::iterations = Convert::ToInt32(textBox10->Text);
+
 		if (comboBox7->SelectedIndex == -1)
 			Windows::Forms::MessageBox::Show("");
 		else if (ql::gamma == 0 || ql::gamma > 1)

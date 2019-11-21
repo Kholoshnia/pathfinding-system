@@ -90,8 +90,8 @@ void neat::create_new_map_2d()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.mouseMove.y > 1 && event.mouseMove.x > 1 && event.mouseMove.y != 250 && event.mouseMove.x != 37)
 			circle[1].setPosition((float)event.mouseMove.x, (float)event.mouseMove.y);
 
-		dot_pos = sf::Vector2f(circle[1].getPosition().x / 10.0f, circle[1].getPosition().y / 10.0f);
-		circle[1].setPosition(dot_pos.x * 10.0f, dot_pos.y * 10.0f);
+		pos_goal = sf::Vector2f(circle[1].getPosition().x / 10.0f, circle[1].getPosition().y / 10.0f);
+		circle[1].setPosition(pos_goal.x * 10.0f, pos_goal.y * 10.0f);
 		circle[0].setOrigin(sf::Vector2f(circle[0].getRadius(), circle[0].getRadius()));
 		goal_pos = sf::Vector2f(circle[0].getPosition().x / 10.0f, circle[0].getPosition().y / 10.0f);
 		circle[0].setPosition(goal_pos.x * 10.0f, goal_pos.y * 10.0f);
@@ -110,34 +110,28 @@ void neat::create_new_map_2d()
 			window.draw(loading);
 			window.display();
 
-			fout.open("Resource Files/Data/NEAT/map.txt");
+			fout.open("Resource Files/Data/input.txt");
 			if (fout.is_open())
 			{
-				bool alreadyThere = false;
-
 				for (int i = 0; i < 80; i++)
 				{
 					for (int j = 0; j < 80; j++)
 					{
-						if (i == dot_pos.y && j == dot_pos.x)
+						if (i == pos_goal.y && j == pos_goal.x)
 							fout << '*';
 						else if (i == goal_pos.y && j == goal_pos.x)
 							fout << '0';
-						else
+						else if ([&i, &j]
 						{
 							for (int l = 0; l < pos.size(); l++)
-							{
 								if (i == pos[l].y && j == pos[l].x)
 								{
 									fout << '#';
-									alreadyThere = true;
-									break;
+									return false;
 								}
-								else alreadyThere = false;
-							}
-							if (!alreadyThere)
-								fout << '.';
-						}
+							return true;
+						}())
+							fout << '.';
 					}
 					fout << std::endl;
 				}
@@ -146,8 +140,6 @@ void neat::create_new_map_2d()
 			}
 			else System::Windows::Forms::MessageBox::Show("Error opening file \"map.txt\"");
 			fout.open("Resource Files/Data/NEAT/map.txt");
-
-			map_loaded = true;
 
 			if (fout.is_open())
 			{
@@ -231,6 +223,7 @@ void neat::load_map_from_file_2d()
 				for (int i = 0; i < 80; i++)
 					fout >> map_markup[i];
 			fout >> goal_radius;
+			fout >> map_size_x >> map_size_y;
 			map.reset(new Map());
 			fout.close();
 			map_loaded = true;
@@ -281,6 +274,7 @@ void neat::load_result_from_file_3d()
 void neat::with_visualization_2d()
 {
 	layers.reset(new Layers());
+	neat::direction_array_size = neat::map_size_x * neat::map_size_y / static_cast<int>(neat::layers->populations[0].agents[0].circle.getRadius());
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Learning");
 	while (window.isOpen())

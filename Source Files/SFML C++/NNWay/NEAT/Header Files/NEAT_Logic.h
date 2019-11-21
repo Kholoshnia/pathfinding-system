@@ -34,10 +34,10 @@ namespace neat
 	extern sf::RectangleShape rect;
 	extern sf::CircleShape circle[2];
 	extern sf::Text text[4], controls[3];
-	extern sf::Vector2f goal_pos, dot_pos;
+	extern sf::Vector2f goal_pos, pos_goal;
 
 	extern bool map_loaded, auto_end;
-	extern int population_quantity, layers_quantity, auto_exit;
+	extern int map_size_x, map_size_y, population_quantity, layers_quantity, direction_array_size, auto_exit;
 
 	void check_2d();
 	void check_3d();
