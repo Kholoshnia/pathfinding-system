@@ -4,8 +4,6 @@ void ql::check_2d()
 {
 	sf::RenderWindow window(sf::VideoMode(width, height), "Map");
 
-	window.setFramerateLimit(fps);
-
 	std::vector<int> moves;
 
 	int position, k = 0;
@@ -278,8 +276,6 @@ void ql::with_visualization_2d()
 	agent.reset(new Agent());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Map");
-
-	window.setFramerateLimit(fps);
 
 	int iterations_k = 0, initials_k = 0;
 

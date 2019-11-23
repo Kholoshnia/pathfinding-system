@@ -4,7 +4,6 @@ neat::Population::Population()
 {
 	srand(clock());
 	color = sf::Color(rand() & 255, rand() & 255, rand() & 255);
-	reached_the_goal = false;
 	fitness_sum = 0;
 	agents.resize(population_quantity);
 	if (layers_quantity > 1)
@@ -46,14 +45,14 @@ void neat::Population::mutate()
 
 void neat::Population::update()
 {
-	for (auto& agent : agents)
+	for (auto& el : agents)
 	{
-		if (agent.brain.step > min_step)
-			agent.dead = true;
+		if (el.brain.step > min_step)
+			el.dead = true;
 		else
-			agent.update();
-		if (agent.reached_goal)
-			reached_the_goal = true;
+			el.update();
+		if (el.reached_goal)
+			min_step = el.brain.step;
 	}
 }
 
@@ -61,17 +60,7 @@ void neat::Population::set_best_agent()
 {
 	float max = 0;
 	int max_index = 0;
-	for (int i = 0; i < agents.size(); ++i)
-	{
-		if (agents[i].fitness > max)
-		{
-			max = agents[i].fitness;
-			max_index = i;
-		}
-	}
-	best_agent = max_index;
-	if (agents[best_agent].reached_goal)
-		min_step = agents[best_agent].brain.step;
+	best_agent = std::max_element(agents.begin(), agents.end(), [&](Agent& agent_1, Agent& agent_2) { return agent_1.fitness < agent_2.fitness;}) - agents.begin();
 }
 
 void neat::Population::calculate_fitness()

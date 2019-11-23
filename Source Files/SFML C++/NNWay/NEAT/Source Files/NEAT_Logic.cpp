@@ -26,7 +26,7 @@ void neat::check_2d()
 
 		population->show(window);
 
-		if (!population->reached_the_goal) check.emplace_back(population->agents[0].circle.getPosition());
+		if (!population->agents[population->best_agent].reached_goal) check.emplace_back(population->agents[0].circle.getPosition());
 
 		for (auto& check : check)
 		{
@@ -309,7 +309,7 @@ void neat::with_visualization_2d()
 		layers->update();
 		layers->show(window);
 
-		if (layers->get_best_population().reached_the_goal) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
+		if (layers->get_best_population().agents[layers->get_best_population().best_agent].reached_goal) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
 		else language == Languages::EN ? text[1].setString(L"No") : text[1].setString(L"Нет");
 
 		std::ostringstream str;

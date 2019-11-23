@@ -1,6 +1,12 @@
 #include "NEAT/Header Files/NEAT_Layers.h"
 
-neat::Layers::Layers() { populations.resize(layers_quantity); }
+neat::Layers::Layers()
+{
+	populations.resize(layers_quantity);
+	threads.resize(layers_quantity);
+	for (int i = 0; i < layers_quantity; i++)
+		threads[i].reset(new sf::Thread(std::bind(&Layers::update_selected, this, i)));
+}
 
 bool neat::Layers::all_populations_dead()
 {
@@ -25,14 +31,10 @@ neat::Population neat::Layers::get_best_population()
 
 void neat::Layers::update()
 {
-	for (int i = 0; i < populations.size(); ++i)
-		threads.emplace_back(&Layers::update_selected, this, i);
-	for (int i = 0; i < threads.size(); ++i)
-		if (threads[i].joinable())
-		{
-			threads[i].join();
-			threads.erase(threads.begin() + i);
-		}
+	for (auto& el : threads)
+		el->launch();
+	for (auto& el : threads)
+		el->wait();
 }
 
 void neat::Layers::update_selected(const int& i)
@@ -42,7 +44,7 @@ void neat::Layers::update_selected(const int& i)
 		populations[i].calculate_fitness();
 		populations[i].natural_selection();
 		populations[i].mutate();
-		if (populations[i].reached_the_goal) populations[i].after_reach++;
+		if (populations[i].agents[populations[i].best_agent].reached_goal) populations[i].after_reach++;
 	}
 	else
 		populations[i].update();

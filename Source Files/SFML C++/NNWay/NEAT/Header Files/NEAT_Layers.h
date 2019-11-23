@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <functional>
 #include <sstream>
 #include <vector>
 #include <thread>
@@ -15,7 +16,7 @@ namespace neat
 
 	struct Layers
 	{
-		std::vector<std::thread> threads;
+		std::vector<std::shared_ptr<sf::Thread>> threads;
 		std::vector<Population> populations;
 
 		Layers();
