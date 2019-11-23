@@ -17,7 +17,7 @@ extern Languages language;
 extern Dimensions dimension;
 
 extern int fps;
-extern bool from_image;
+extern bool visualization, from_image;
 extern std::string path;
 extern sf::Sprite loading;
 

@@ -27,7 +27,7 @@ sf::Sprite loading;
 sf::Texture loading_texture;
 
 int fps;
-bool visualisation, from_image, check_from_file;
+bool visualization, from_image, check_from_file;
 
 namespace neat
 {
@@ -2938,7 +2938,7 @@ private: System::Windows::Forms::Label^ label39;
 			learning_algorithm = LearningAlgorythms::NEAT;
 
 			from_image = false;
-			visualisation = false;
+			visualization = false;
 			check_from_file = false;
 
 			neat::max_speed = 5;

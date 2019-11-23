@@ -2,17 +2,17 @@
 
 neat::Population::Population()
 {
+	agents.resize(population_quantity);
+	gen = 1;
+	best_agent = 0;
+	fitness_sum = 0;
+	after_reach = 0;
+	min_step = direction_array_size;
 	srand(clock());
 	color = sf::Color(rand() & 255, rand() & 255, rand() & 255);
-	fitness_sum = 0;
-	agents.resize(population_quantity);
 	if (layers_quantity > 1)
 		for (auto& el : agents)
 			el.circle.setFillColor(color);
-	gen = 1;
-	min_step = direction_array_size;
-	best_agent = 0;
-	after_reach = 0;
 }
 
 neat::Agent neat::Population::select_parent()
@@ -47,12 +47,9 @@ void neat::Population::update()
 {
 	for (auto& el : agents)
 	{
-		if (el.brain.step > min_step)
-			el.dead = true;
-		else
-			el.update();
-		if (el.reached_goal)
-			min_step = el.brain.step;
+		if (el.brain.step > min_step) el.dead = true;
+		else el.update();
+		if (el.reached_goal) min_step = el.brain.step;
 	}
 }
 

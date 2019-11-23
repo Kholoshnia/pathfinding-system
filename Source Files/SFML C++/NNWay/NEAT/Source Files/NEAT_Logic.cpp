@@ -408,7 +408,14 @@ void neat::without_visualization_3d()
 	fout.open(path, std::fstream::app);
 	if (fout.is_open())
 	{
-		fout << '0' << std::endl << direction_array_size << std::endl << population_quantity << std::endl << layers_quantity << std::endl << auto_end << auto_exit << std::endl << language;
+		fout << "info" << std::endl;
+		fout << "visualization:;" << visualization << std::endl;
+		fout << "direction-array-size:;" << direction_array_size << std::endl;
+		fout << "population-quantity:;" << population_quantity << std::endl;
+		fout << "layers-quantity:;" << layers_quantity << std::endl;
+		fout << "auto-completion:;" << auto_end << ';' << auto_exit;
+		fout << "speed:;" << 0.1 << ';' << max_speed;
+		fout << "mutation-rate" << mutation_rate;
 		fout.close();
 	}
 	else

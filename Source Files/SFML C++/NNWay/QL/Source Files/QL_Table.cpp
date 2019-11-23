@@ -28,7 +28,6 @@ ql::Table::Table()
 			if (map_size.y * y + x == 146)
 				a = 0;
 
-
 			if (x - 1 >= 0)
 				if (map->map[y][x - 1] == 'B')
 					R[map_size.y * y + x][map_size.y * y + x - 1] = 0;
@@ -88,59 +87,52 @@ void ql::Table::episode(int init_state)
 
 int ql::Table::inference_best_action(int now_state)
 {
-	long long temp_max_q = 0;
 	int best_action = 0;
-	for (int i = 0; i < map_size.x * map_size.y; ++i) {
-		if (Q[now_state][i] > temp_max_q) {
+	long long temp_max_q = 0;
+
+	for (int i = 0; i < map_size.x * map_size.y; ++i)
+		if (Q[now_state][i] > temp_max_q)
+		{
 			temp_max_q = Q[now_state][i];
 			best_action = i;
 		}
-	}
+
 	return best_action;
 }
 
 long long ql::Table::maximum(int st, bool return_index_only)
 {
-	int winner;
-	bool found_new_winner;
-	bool done = false;
-
-	winner = 0;
+	int winner = 0;
+	bool found_new_winner = false, done = false;
 
 	do
 	{
 		found_new_winner = false;
 		for (int i = 0; i < map_size.x * map_size.y; i++)
-		{
 			if ((i < winner) || (i > winner))
 				if (Q[st][i] > Q[st][winner])
 				{
 					winner = i;
 					found_new_winner = true;
 				}
-		}
 
 		if (found_new_winner == false)
 			done = true;
 	} while (done == false);
 
-	if (return_index_only == true)
-		return winner;
-	else
-		return Q[st][winner];
+	if (return_index_only == true) return winner;
+	else return Q[st][winner];
 }
 
 int ql::Table::get_random_action(int lower_bound, int upper_bound)
 {
 	int act;
 	bool choice_is_valid = false;
-	int range = (upper_bound - lower_bound) + 1;
 
 	do
 	{
-		act = lower_bound + int(range * rand() / (RAND_MAX + 1.0));
-		if (R[state][act] > -1)
-			choice_is_valid = true;
+		act = lower_bound + (((upper_bound - lower_bound) + 1) * static_cast<int>(rand()) / (static_cast<int>(RAND_MAX) + 1));
+		if (R[state][act] > -1) choice_is_valid = true;
 	} while (choice_is_valid == false);
 
 	return act;
