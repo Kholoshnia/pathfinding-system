@@ -45,7 +45,7 @@ namespace neat
 	sf::Vector2f goal_pos, pos_goal;
 
 	bool was_running, map_loaded, auto_end;
-	float goal_radius, max_speed, mutation_rate;
+	float agent_radius, goal_radius, max_speed, mutation_rate;
 	int map_size_x, map_size_y, direction_array_size, population_quantity, layers_quantity, auto_exit;
 }
 
@@ -3217,7 +3217,7 @@ private: System::Windows::Forms::Label^ label39;
 		try { neat::mutation_rate = Convert::ToSingle(textBox13->Text); }
 		catch (System::FormatException^ ex)
 		{
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show(ex->Message);
 			return;
 		}
 		neat::auto_exit = Convert::ToInt32(textBox11->Text);
@@ -3265,7 +3265,7 @@ private: System::Windows::Forms::Label^ label39;
 		try { neat::mutation_rate = Convert::ToSingle(textBox14->Text); }
 		catch (System::FormatException ^ ex)
 		{
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show(ex->Message);
 			return;
 		}
 		neat::auto_exit = Convert::ToInt32(textBox4->Text);

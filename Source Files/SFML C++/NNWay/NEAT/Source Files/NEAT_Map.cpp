@@ -10,32 +10,34 @@ neat::Map::Map()
 	for (int i = 0; i < 80; i++)
 		for (int j = 0; j < 80; j++)
 			if (map_markup[i][j] == '#')
-				pos_rects.emplace_back((float)j * 10.0f, (float)i * 10.0f);
+				pos_rects.emplace_back(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 			else if (map_markup[i][j] == '0')
-				pos_goal = sf::Vector2f((float)j * 10.0f, (float)i * 10.0f);
+				pos_goal = sf::Vector2f(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 			else if (map_markup[i][j] == '*')
-				pos_start = sf::Vector2f((float)j * 10.0f, (float)i * 10.0f);
+				pos_start = sf::Vector2f(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 			else if (map_markup[i][j] == 'b')
-				pos_additional_rewards.emplace_back((float)j * 10.0f, (float)i * 10.0f);
+				pos_additional_rewards.emplace_back(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 }
 
 float neat::Map::dist(sf::Vector2f& obj) { return sqrt((pos_goal.x - obj.x) * (pos_goal.x - obj.x) + (pos_goal.y - obj.y) * (pos_goal.y - obj.y)); }
 
-bool neat::Map::bonus(sf::Vector2f& obj)
-{
-	for (auto& pos_additional_rewards : pos_additional_rewards)
-		if (obj.x >= pos_additional_rewards.x && obj.x <= pos_additional_rewards.x + 10 && obj.y >= pos_additional_rewards.y && obj.y <= pos_additional_rewards.y + 10) return true;
-	return false;
-}
-
 bool neat::Map::touched_wall(sf::Vector2f& obj)
 {
-	for (auto& pos_rects : pos_rects)
-		if (obj.x >= pos_rects.x && obj.x <= pos_rects.x + 10 && obj.y >= pos_rects.y && obj.y <= pos_rects.y + 10) return true;
+	for (auto& el : pos_rects)
+		if (sf::FloatRect(el, sf::Vector2f(10.0f, 10.0f)).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
+			return true;
 	return false;
 }
 
 bool neat::Map::touched_goal(sf::Vector2f& obj) { return dist(obj) < goal_r; }
+
+bool neat::Map::touched_additional_reward(sf::Vector2f& obj)
+{
+	for (auto& el : pos_rects)
+		if (sf::FloatRect(el, sf::Vector2f(10.0f, 10.0f)).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
+			return true;
+	return false;
+}
 
 void neat::Map::show(sf::RenderWindow& window)
 {

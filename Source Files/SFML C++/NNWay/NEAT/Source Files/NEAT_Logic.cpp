@@ -64,7 +64,7 @@ void neat::create_new_map_2d()
 			int x = int(event.mouseMove.x / 10);
 			int y = int(event.mouseMove.y / 10);
 			for (auto& el : pos)
-				if (el == sf::Vector2f((float)x, (float)y))
+				if (el == sf::Vector2f(static_cast<float>(x), static_cast<float>(y)))
 					alreadyThere = true;
 			if (!alreadyThere)
 				pos.emplace_back(x, y);
@@ -80,7 +80,7 @@ void neat::create_new_map_2d()
 			}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-			circle[0].setPosition((float)event.mouseMove.x, (float)event.mouseMove.y);
+			circle[0].setPosition(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			circle[0].setRadius(circle[0].getRadius() + 0.1f);
@@ -88,7 +88,7 @@ void neat::create_new_map_2d()
 			circle[0].setRadius(circle[0].getRadius() - 0.1f);
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.mouseMove.y > 1 && event.mouseMove.x > 1 && event.mouseMove.y != 250 && event.mouseMove.x != 37)
-			circle[1].setPosition((float)event.mouseMove.x, (float)event.mouseMove.y);
+			circle[1].setPosition(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 
 		pos_goal = sf::Vector2f(circle[1].getPosition().x / 10.0f, circle[1].getPosition().y / 10.0f);
 		circle[1].setPosition(pos_goal.x * 10.0f, pos_goal.y * 10.0f);
@@ -145,6 +145,7 @@ void neat::create_new_map_2d()
 			{
 				for (int i = 0; i < 80; i++)
 					fout >> map_markup[i];
+				fout >> agent_radius;
 				fout >> goal_radius;
 				map.reset(new Map());
 				fout.close();
@@ -222,6 +223,7 @@ void neat::load_map_from_file_2d()
 			if (fout.is_open())
 				for (int i = 0; i < 80; i++)
 					fout >> map_markup[i];
+			fout >> agent_radius;
 			fout >> goal_radius;
 			fout >> map_size_x >> map_size_y;
 			map.reset(new Map());

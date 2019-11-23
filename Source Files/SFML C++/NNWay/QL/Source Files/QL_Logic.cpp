@@ -88,7 +88,7 @@ void ql::create_new_map_2d()
 		{
 			map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
 			bool alreadyThere = false;
-			sf::Vector2f mouse_pos((float)(event.mouseMove.x / (height / map_size_x)), (float)(event.mouseMove.y / (width / map_size_y)));
+			sf::Vector2f mouse_pos(static_cast<float>(event.mouseMove.x / (height / map_size_x)), static_cast<float>(event.mouseMove.y / (width / map_size_y)));
 			for (auto& el : map->wall_pos)
 				if (el == mouse_pos)
 					alreadyThere = true;
@@ -110,7 +110,7 @@ void ql::create_new_map_2d()
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-			map->finish.setPosition((float)(event.mouseMove.x / (height / map_size_x) * (height / map_size_x)), (float)(event.mouseMove.y / (width / map_size_y) * (height / map_size_y)));
+			map->finish.setPosition(static_cast<float>(event.mouseMove.x / (height / map_size_x) * (height / map_size_x)), static_cast<float>(event.mouseMove.y / (width / map_size_y) * (height / map_size_y)));
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{

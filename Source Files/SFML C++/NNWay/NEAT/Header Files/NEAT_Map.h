@@ -5,8 +5,8 @@
 namespace neat
 {
 	extern int map_size;
-	extern float goal_radius;
 	extern std::string map_markup[80];
+	extern float agent_radius, goal_radius;
 
 	struct Map
 	{
@@ -19,9 +19,9 @@ namespace neat
 
 		Map();
 		float dist(sf::Vector2f& obj);
-		bool bonus(sf::Vector2f& obj);
 		bool touched_wall(sf::Vector2f& obj);
 		bool touched_goal(sf::Vector2f& obj);
+		bool touched_additional_reward(sf::Vector2f& obj);
 		void show(sf::RenderWindow& window);
 	};
 }
