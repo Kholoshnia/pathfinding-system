@@ -5,11 +5,11 @@ ql::Map::Map()
 	background.setOutlineThickness(2.5F);
 	background.setFillColor(sf::Color::White);
 	background.setOutlineColor(sf::Color::Black);
-	background.setSize(sf::Vector2f(static_cast<float>(width / map_size_x), static_cast<float>(height / map_size_y)));
+	background.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));
 	
-	wall.setSize(sf::Vector2f(static_cast<float>(width / map_size_x), static_cast<float>(height / map_size_y)));
-	finish.setSize(sf::Vector2f(static_cast<float>(width / map_size_x), static_cast<float>(height / map_size_y)));
-	background.setSize(sf::Vector2f(static_cast<float>(width / map_size_x), static_cast<float>(height / map_size_y)));
+	wall.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));
+	finish.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));
+	background.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));
 
 	wall.setFillColor(sf::Color::Blue);
 	finish.setFillColor(sf::Color::Red);
@@ -25,37 +25,37 @@ void ql::Map::update()
 	background_pos.clear();
 
 	int k = 0;
-	for (size_t y = 0; y < map_size_y; y++)
-		for (size_t x = 0; x < map_size_x; x++)
+	for (size_t y = 0; y < map_size.y; y++)
+		for (size_t x = 0; x < map_size.x; x++)
 		{
 			if (map[y][x] == 'B')
 			{
-				background_pos.emplace_back(static_cast<float>(x * (height / map_size_x)), static_cast<float>(y * (width / map_size_y)));
+				background_pos.emplace_back(static_cast<float>(x * (height / map_size.x)), static_cast<float>(y * (width / map_size.y)));
 				initials.emplace_back(k);
 				k++;
 			}
 			else if (map[y][x] == 'W')
 			{
-				wall_pos.emplace_back(static_cast<float>(x * (height / map_size_x)), static_cast<float>(y * (width / map_size_y)));
+				wall_pos.emplace_back(static_cast<float>(x * (height / map_size.x)), static_cast<float>(y * (width / map_size.y)));
 				k++;
 			}
 			else if (map[y][x] == 'F')
 			{
-				finish.setPosition(static_cast<float>(x * (height / map_size_x)), static_cast<float>(y * (width / map_size_y)));
+				finish.setPosition(static_cast<float>(x * (height / map_size.x)), static_cast<float>(y * (width / map_size.y)));
 				k++;
 			}
 		}
 	
-	wall.setSize(sf::Vector2f(static_cast<float>(width / map_size_x), static_cast<float>(height / map_size_y)));
-	finish.setSize(sf::Vector2f(static_cast<float>(width / map_size_x), static_cast<float>(height / map_size_y)));
-	background.setSize(sf::Vector2f(static_cast<float>(width / map_size_x), static_cast<float>(height / map_size_y)));
+	wall.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));
+	finish.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));
+	background.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));
 }
 
 void ql::Map::update_size()
 {
-	map.resize(map_size_y);
+	map.resize(map_size.y);
 	for (auto& el : map)
-		for (size_t i = 0; i < map_size_x; i++)
+		for (size_t i = 0; i < map_size.x; i++)
 			el.emplace_back('B');
 }
 

@@ -16,10 +16,10 @@
 extern Languages language;
 extern Dimensions dimension;
 
-extern std::string path;
-extern sf::Sprite loading;
 extern int fps;
 extern bool from_image;
+extern std::string path;
+extern sf::Sprite loading;
 
 namespace neat
 {
@@ -27,17 +27,18 @@ namespace neat
 	extern std::shared_ptr<Layers> layers;
 	extern std::shared_ptr<Population> population;
 
-	extern std::fstream fout;
+	extern std::fstream fout, fin;
 	extern std::string map_markup[80];
 	extern std::vector<sf::Vector2f> pos;
 
+	extern sf::Vector2i map_size;
 	extern sf::RectangleShape rect;
 	extern sf::CircleShape circle[2];
 	extern sf::Text text[4], controls[3];
 	extern sf::Vector2f goal_pos, pos_goal;
 
 	extern bool map_loaded, auto_end;
-	extern int map_size_x, map_size_y, population_quantity, layers_quantity, direction_array_size, auto_exit;
+	extern int population_quantity, layers_quantity, direction_array_size, auto_exit;
 
 	void check_2d();
 	void check_3d();

@@ -28,9 +28,9 @@ void neat::check_2d()
 
 		if (!population->agents[population->best_agent].reached_goal) check.emplace_back(population->agents[0].circle.getPosition());
 
-		for (auto& check : check)
+		for (auto& el : check)
 		{
-			circle[1].setPosition(check);
+			circle[1].setPosition(el);
 			window.draw(circle[1]);
 		}
 
@@ -41,7 +41,17 @@ void neat::check_2d()
 
 void neat::check_3d()
 {
-	language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\", enable \"cheker\" in main script (Goal object) and run") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\", включите \"cheker\" в галвном скрипте (объект Goal) и запустите");
+	switch (language)
+	{
+	case EN:
+		System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\", enable \"cheker\" in main script (Goal object) and run");
+		break;
+	case RU:
+		System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\", включите \"cheker\" в главном скрипте (объект Goal) и запустите");
+		break;
+	default:
+		break;
+	}
 }
 
 void neat::create_new_map_2d()
@@ -87,6 +97,11 @@ void neat::create_new_map_2d()
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && circle[0].getRadius() > 0)
 			circle[0].setRadius(circle[0].getRadius() - 0.1f);
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			circle[1].setRadius(circle[1].getRadius() + 0.1f);
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && circle[1].getRadius() > 0)
+			circle[1].setRadius(circle[1].getRadius() - 0.1f);
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.mouseMove.y > 1 && event.mouseMove.x > 1 && event.mouseMove.y != 250 && event.mouseMove.x != 37)
 			circle[1].setPosition(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 
@@ -110,12 +125,14 @@ void neat::create_new_map_2d()
 			window.draw(loading);
 			window.display();
 
-			fout.open("Resource Files/Data/input.txt");
+			fout.open("Resource Files/Data/NEAT/input.csv");
 			if (fout.is_open())
 			{
-				for (int i = 0; i < 80; i++)
+				fout << "Map size x:;" << map_size.x << std::endl;
+				fout <<	"Map size y:;" << map_size.y << std::endl;
+				for (int i = 0; i < map_size.y; i++)
 				{
-					for (int j = 0; j < 80; j++)
+					for (int j = 0; j < map_size.x; j++)
 					{
 						if (i == pos_goal.y && j == pos_goal.x)
 							fout << '*';
@@ -125,30 +142,36 @@ void neat::create_new_map_2d()
 						{
 							for (int l = 0; l < pos.size(); l++)
 								if (i == pos[l].y && j == pos[l].x)
-								{
-									fout << '#';
-									return false;
-								}
-							return true;
+									return true;
+							return false;
 						}())
+							fout << '#';
+						else
 							fout << '.';
+						fout << ';';
 					}
 					fout << std::endl;
 				}
-				fout << circle[0].getRadius();
+				fout << "Agent radius:;" << circle[1].getRadius() << std::endl;
+				fout << "Goal radius:;" << circle[0].getRadius() << std::endl;
 				fout.close();
 			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"map.txt\"");
-			fout.open("Resource Files/Data/NEAT/map.txt");
+			else System::Windows::Forms::MessageBox::Show("Error opening file \"input.csv\"");
 
-			if (fout.is_open())
+			fin.open("Resource Files/Data/NEAT/input.csv");
+			if (fin.is_open())
 			{
-				for (int i = 0; i < 80; i++)
-					fout >> map_markup[i];
-				fout >> agent_radius;
-				fout >> goal_radius;
+				fin;
+				fin >> map_size.x;
+				fin;
+				fin >> map_size.y;
+				std::string line;
+				for (int i = 0; i < map_size.y; i++)
+					map_markup[i] = *line.erase(std::remove(line.begin(), line.end(), ';'), line.end());;
+				fin >> agent_radius;
+				fin >> goal_radius;
 				map.reset(new Map());
-				fout.close();
+				fin.close();
 				window.close();
 				map_loaded = true;
 			}
@@ -161,7 +184,17 @@ void neat::create_new_map_2d()
 
 void neat::create_new_map_3d()
 {
-	language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
+	switch (language)
+	{
+	case EN:
+		System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
+		break;
+	case RU:
+		System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
+		break;
+	default:
+		break;
+	}
 }
 
 void neat::load_map_from_file_2d()
@@ -181,7 +214,10 @@ void neat::load_map_from_file_2d()
 
 	if (from_image)
 	{
+		
 		sf::Image map_image;
+		map_image.getSize();
+		map_size.x =
 		map_image.loadFromFile(path);
 		for (unsigned int y = 0; y < 80; y++)
 		{
@@ -225,7 +261,7 @@ void neat::load_map_from_file_2d()
 					fout >> map_markup[i];
 			fout >> agent_radius;
 			fout >> goal_radius;
-			fout >> map_size_x >> map_size_y;
+			fout >> map_size.x >> map_size.y;
 			map.reset(new Map());
 			fout.close();
 			map_loaded = true;
@@ -276,7 +312,7 @@ void neat::load_result_from_file_3d()
 void neat::with_visualization_2d()
 {
 	layers.reset(new Layers());
-	neat::direction_array_size = neat::map_size_x * neat::map_size_y / static_cast<int>(neat::layers->populations[0].agents[0].circle.getRadius());
+	neat::direction_array_size = neat::map_size.x * neat::map_size.y / static_cast<int>(neat::layers->populations[0].agents[0].circle.getRadius());
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Learning");
 	while (window.isOpen())

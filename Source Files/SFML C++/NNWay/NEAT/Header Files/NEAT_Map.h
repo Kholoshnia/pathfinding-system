@@ -4,7 +4,7 @@
 
 namespace neat
 {
-	extern int map_size;
+	extern sf::Vector2i map_size;
 	extern std::string map_markup[80];
 	extern float agent_radius, goal_radius;
 

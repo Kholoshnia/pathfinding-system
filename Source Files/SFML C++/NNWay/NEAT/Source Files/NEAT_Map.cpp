@@ -7,8 +7,8 @@ neat::Map::Map()
 	circle.setFillColor(sf::Color::Red);
 	circle.setRadius(goal_radius);
 	rect.setSize(sf::Vector2f(10.0f, 10.0f));
-	for (int i = 0; i < 80; i++)
-		for (int j = 0; j < 80; j++)
+	for (int i = 0; i < map_size.y; i++)
+		for (int j = 0; j < map_size.x; j++)
 			if (map_markup[i][j] == '#')
 				pos_rects.emplace_back(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 			else if (map_markup[i][j] == '0')

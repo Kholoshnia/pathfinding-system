@@ -39,6 +39,7 @@ namespace neat
 	std::string map_markup[80];
 	std::vector<sf::Vector2f> pos;
 
+	sf::Vector2i map_size;
 	sf::RectangleShape rect;
 	sf::CircleShape circle[2];
 	sf::Text text[4], controls[3];
@@ -46,7 +47,7 @@ namespace neat
 
 	bool was_running, map_loaded, auto_end;
 	float agent_radius, goal_radius, max_speed, mutation_rate;
-	int map_size_x, map_size_y, direction_array_size, population_quantity, layers_quantity, auto_exit;
+	int direction_array_size, population_quantity, layers_quantity, auto_exit;
 }
 
 namespace ql
@@ -57,12 +58,13 @@ namespace ql
 
 	float gamma;
 	sf::Text text[4];
+	sf::Vector2i map_size;
 	std::string image_path;
 	std::fstream fout, fin;
 	std::vector<int> initials;
 	long long int finish_reward;
 	bool was_running, map_loaded, finish_loaded;
-	int map_size_x, map_size_y, width, height, finish_state, iterations;
+	int width, height, finish_state, iterations;
 }
 
 namespace NNWay
@@ -2954,8 +2956,8 @@ private: System::Windows::Forms::Label^ label39;
 			ql::height = 800;
 			ql::gamma = 0.8f;
 			ql::iterations = 5;
-			ql::map_size_x = 10;
-			ql::map_size_y = 10;
+			ql::map_size.x = 10;
+			ql::map_size.y = 10;
 			ql::finish_reward = 100;
 
 			ql::was_running = false;

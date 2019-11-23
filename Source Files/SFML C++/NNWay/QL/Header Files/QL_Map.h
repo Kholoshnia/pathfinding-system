@@ -8,8 +8,9 @@ extern std::string path;
 
 namespace ql
 {
+	extern int width, height;
+	extern sf::Vector2i map_size;
 	extern std::vector<int> initials;
-	extern int map_size_x, map_size_y, width, height;
 
 	struct Map
 	{

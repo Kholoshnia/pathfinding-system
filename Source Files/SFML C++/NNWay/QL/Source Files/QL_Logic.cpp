@@ -23,7 +23,7 @@ void ql::check_2d()
 		{
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
 			{
-				position = map_size_y * (event.mouseMove.y / (width / map_size_y)) + event.mouseMove.x / (width / map_size_x);
+				position = map_size.y * (event.mouseMove.y / (width / map_size.y)) + event.mouseMove.x / (width / map_size.x);
 				moves.emplace_back(position);
 				if (std::find(initials.begin(), initials.end(), position) != initials.end())
 				{
@@ -86,23 +86,23 @@ void ql::create_new_map_2d()
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
 		{
-			map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
+			map->map[static_cast<int>(map->finish.getPosition().y) / (width / map_size.y)][static_cast<int>(map->finish.getPosition().x) / (height / map_size.x)] = 'F';
 			bool alreadyThere = false;
-			sf::Vector2f mouse_pos(static_cast<float>(event.mouseMove.x / (height / map_size_x)), static_cast<float>(event.mouseMove.y / (width / map_size_y)));
+			sf::Vector2f mouse_pos(static_cast<float>(event.mouseMove.x / (height / map_size.x)), static_cast<float>(event.mouseMove.y / (width / map_size.y)));
 			for (auto& el : map->wall_pos)
 				if (el == mouse_pos)
 					alreadyThere = true;
 			if (!alreadyThere)
-				map->map[(int)mouse_pos.y][(int)mouse_pos.x] = 'W';
+				map->map[static_cast<int>(mouse_pos.y)][static_cast<int>(mouse_pos.x)] = 'W';
 			map->update();
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !space_pressed)
 		{
-			for (int y = 0; y < map_size_y; y++)
-				for (int x = 0; x < map_size_x; x++)
+			for (int y = 0; y < map_size.y; y++)
+				for (int x = 0; x < map_size.x; x++)
 				{
-					if (x == 0 || x == map_size_x - 1 || y == 0 || y == map_size_y - 1)
+					if (x == 0 || x == map_size.x - 1 || y == 0 || y == map_size.y - 1)
 						map->map[x][y] = 'W';
 					space_pressed = true;
 				}
@@ -110,34 +110,34 @@ void ql::create_new_map_2d()
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-			map->finish.setPosition(static_cast<float>(event.mouseMove.x / (height / map_size_x) * (height / map_size_x)), static_cast<float>(event.mouseMove.y / (width / map_size_y) * (height / map_size_y)));
+			map->finish.setPosition(static_cast<float>(event.mouseMove.x / (height / map_size.x) * (height / map_size.x)), static_cast<float>(event.mouseMove.y / (width / map_size.y) * (height / map_size.y)));
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
-			for (size_t y = 0; y < map_size_y; y++)
+			map->map[static_cast<int>(map->finish.getPosition().y) / (width / map_size.y)][static_cast<int>(map->finish.getPosition().x) / (height / map_size.x)] = 'F';
+			for (size_t y = 0; y < map_size.y; y++)
 				map->map[y].emplace_back('B');
 
 			std::vector<char> line;
-			for (size_t x = 0; x < map_size_x + 1; x++)
+			for (size_t x = 0; x < map_size.x + 1; x++)
 				line.emplace_back('B');
 			map->map.emplace_back(line);
 
-			map_size_x += 1;
-			map_size_y += 1;
+			map_size.x += 1;
+			map_size.y += 1;
 			map->update();
 			space_pressed = false;
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && map_size_x >= 1 && map_size_y >= 1)
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && map_size.x >= 1 && map_size.y >= 1)
 		{
-			if (map_size_x > 10 && map_size_y > 10)
+			if (map_size.x > 10 && map_size.y > 10)
 			{
-				map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
-				for (size_t y = 0; y < map_size_y; y++)
+				map->map[static_cast<int>(map->finish.getPosition().y) / (width / map_size.y)][static_cast<int>(map->finish.getPosition().x) / (height / map_size.x)] = 'F';
+				for (size_t y = 0; y < map_size.y; y++)
 					map->map[y].pop_back();
 				map->map.pop_back();
-				map_size_x -= 1;
-				map_size_y -= 1;
+				map_size.x -= 1;
+				map_size.y -= 1;
 				map->update();
 				space_pressed = false;
 			}
@@ -145,7 +145,7 @@ void ql::create_new_map_2d()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 		{
-			map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
+			map->map[static_cast<int>(map->finish.getPosition().y) / (width / map_size.y)][static_cast<int>(map->finish.getPosition().x) / (height / map_size.x)] = 'F';
 			map->update();
 			window.close();
 		}
@@ -154,7 +154,7 @@ void ql::create_new_map_2d()
 		window.display();
 	}
 
-	finish_reward = map_size_x * map_size_x * map_size_y * map_size_y;
+	finish_reward = map_size.x * map_size.x * map_size.y * map_size.y;
 
 	map_loaded = true;
 }
@@ -172,7 +172,7 @@ void ql::load_map_from_file_2d()
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
 	std::string str;
-	for (int i = (int)path.length() - 1; i >= 0; i--)
+	for (int i = static_cast<int>(path.length()) - 1; i >= 0; i--)
 		if (path[i] != '.') str += path[i];
 		else break;
 	if (str == "gnp" || str == "gepj" || str == "fig") from_image = true;
@@ -184,15 +184,15 @@ void ql::load_map_from_file_2d()
 		map->update_size();
 		sf::Image map_image;
 		map_image.loadFromFile(image_path);
-		for (int y = 0; y < map_size_y; y++)
-			for (int x = 0; x < map_size_x; x++)
+		for (int y = 0; y < map_size.y; y++)
+			for (int x = 0; x < map_size.x; x++)
 			{
-				if (map_image.getPixel(x * (height / map_size_x), y * (width / map_size_y)) == sf::Color::Red && !finish_loaded)
+				if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Red && !finish_loaded)
 				{
 					map->map[y][x] = 'F';
 					finish_loaded = true;
 				}
-				else if (map_image.getPixel(x * (height / map_size_x), y * (width / map_size_y)) == sf::Color::Black)
+				else if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Black)
 					map->map[y][x] = 'W';
 				else
 					map->map[y][x] = 'B';
@@ -206,14 +206,14 @@ void ql::load_map_from_file_2d()
 		fin.open(path);
 		if (fin.is_open())
 		{
-			fin >> map_size_x >> map_size_y;
+			fin >> map_size.x >> map_size.y;
 
-			map->map.resize(map_size_y);
-			for (int y = 0; y < map_size_y; y++)
-				map->map[y].resize(map_size_x);
+			map->map.resize(map_size.y);
+			for (int y = 0; y < map_size.y; y++)
+				map->map[y].resize(map_size.x);
 
-			for (int y = 0; y < map_size_y; y++)
-				for (int x = 0; x < map_size_x; x++)
+			for (int y = 0; y < map_size.y; y++)
+				for (int x = 0; x < map_size.x; x++)
 					fin >> map->map[y][x];
 
 			fin.close();
@@ -230,7 +230,7 @@ void ql::load_map_from_file_2d()
 	}
 	map->update();
 	table.reset(new Table());
-	finish_reward = map_size_x * map_size_x * map_size_y * map_size_y;
+	finish_reward = map_size.x * map_size.x * map_size.y * map_size.y;
 }
 
 void ql::load_map_from_file_3d()
@@ -309,9 +309,9 @@ void ql::with_visualization_2d()
 			fout.open("Resource Files/Data/QL/way.txt");
 			if (fout.is_open())
 			{
-				for (size_t y = 0; y < map_size_x * map_size_y; y++)
+				for (size_t y = 0; y < map_size.x * map_size.y; y++)
 				{
-					for (size_t x = 0; x < map_size_x * map_size_y; x++)
+					for (size_t x = 0; x < map_size.x * map_size.y; x++)
 						fout << table->Q[y][x] << ' ';
 					fout << std::endl;
 				}
@@ -351,9 +351,9 @@ void ql::without_visualization_2d()
 	fout.open("Resource Files/Data/QL/way.txt");
 	if (fout.is_open())
 	{
-		for (size_t y = 0; y < map_size_x * map_size_y; y++)
+		for (size_t y = 0; y < map_size.x * map_size.y; y++)
 		{
-			for (size_t x = 0; x < map_size_x * map_size_y; x++)
+			for (size_t x = 0; x < map_size.x * map_size.y; x++)
 				fout << table->Q[y][x] << ' ';
 			fout << std::endl;
 		}

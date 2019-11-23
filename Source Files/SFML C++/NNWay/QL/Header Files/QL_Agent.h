@@ -4,7 +4,8 @@
 
 namespace ql
 {
-	extern int map_size_x, map_size_y, width, height;
+	extern int width, height;
+	extern sf::Vector2i map_size;
 
 	struct Agent
 	{

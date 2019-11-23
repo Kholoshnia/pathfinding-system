@@ -60,7 +60,7 @@ void neat::Population::set_best_agent()
 {
 	float max = 0;
 	int max_index = 0;
-	best_agent = std::max_element(agents.begin(), agents.end(), [&](Agent& agent_1, Agent& agent_2) { return agent_1.fitness < agent_2.fitness;}) - agents.begin();
+	best_agent = static_cast<int>(std::max_element(agents.begin(), agents.end(), [&](Agent& agent_1, Agent& agent_2) { return agent_1.fitness < agent_2.fitness;}) - agents.begin());
 }
 
 void neat::Population::calculate_fitness()

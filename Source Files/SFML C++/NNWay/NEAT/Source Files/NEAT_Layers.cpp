@@ -18,15 +18,8 @@ bool neat::Layers::all_populations_dead()
 
 neat::Population neat::Layers::get_best_population()
 {
-	float max = 0;
-	int max_index = 0;
-	for (int i = 0; i < populations.size(); ++i)
-		if (populations[i].agents[populations[i].best_agent].fitness > max)
-		{
-			max = populations[i].agents[populations[i].best_agent].fitness;
-			max_index = i;
-		}
-	return populations[max_index];
+	return *std::max_element(populations.begin(), populations.end(), [](const Population& population_1, const Population& population_2)
+	{ return population_1.agents[population_1.best_agent].fitness < population_2.agents[population_2.best_agent].fitness; });
 }
 
 void neat::Layers::update()

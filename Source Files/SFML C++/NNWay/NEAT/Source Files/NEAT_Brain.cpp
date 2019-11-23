@@ -16,8 +16,7 @@ void neat::Brain::randomize()
 neat::Brain neat::Brain::clone()
 {
 	Brain clone;
-	for (int i = 0; i < directions.size(); ++i)
-		clone.directions[i] = directions[i];
+	clone.directions = directions;
 	return clone;
 }
 
@@ -25,7 +24,7 @@ void neat::Brain::mutate()
 {
 	for (auto& el : directions)
 	{
-		float randn = float(rand()) / (float(RAND_MAX));
+		float randn = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX));
 		if (randn < mutation_rate)
 			movement(el);
 	}
@@ -33,6 +32,6 @@ void neat::Brain::mutate()
 
 void neat::Brain::movement(sf::Vector2f& obj)
 {
-	obj.x = static_cast<float>(cos(-180.0f + float(rand()) / (float(RAND_MAX / 360.0f)) * M_PI / 180.0f));
-	obj.y = static_cast<float>(sin(-180.0f + float(rand()) / (float(RAND_MAX / 360.0f)) * M_PI / 180.0f));
+	obj.x = cos(-180.0f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 360.0f) * static_cast<float>(M_PI) / 180.0f);
+	obj.y = sin(-180.0f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 360.0f) * static_cast<float>(M_PI) / 180.0f);
 }

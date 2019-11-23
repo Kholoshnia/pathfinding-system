@@ -3,12 +3,12 @@
 ql::Agent::Agent()
 {
 	rect.setFillColor(sf::Color::Yellow);
-	rect.setSize(sf::Vector2f(static_cast<float>(height / map_size_x), static_cast<float>(width / map_size_y)));
+	rect.setSize(sf::Vector2f(static_cast<float>(height / map_size.x), static_cast<float>(width / map_size.y)));
 }
 
 void ql::Agent::update(const int n)
 {
-	pos = sf::Vector2f(static_cast<float>((n - map_size_x * (n / map_size_x)) * (width / map_size_y)), static_cast<float>((n / map_size_x) * (height / map_size_x)));
+	pos = sf::Vector2f(static_cast<float>((n - map_size.x * (n / map_size.x)) * (width / map_size.y)), static_cast<float>((n / map_size.x) * (height / map_size.x)));
 }
 
 void ql::Agent::show(sf::RenderWindow& window)

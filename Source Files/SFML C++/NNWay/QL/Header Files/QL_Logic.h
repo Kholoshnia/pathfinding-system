@@ -24,12 +24,13 @@ namespace ql
 	extern std::shared_ptr<Agent> agent;
 
 	extern sf::Text text[4];
+	extern sf::Vector2i map_size;
 	extern std::string image_path;
 	extern std::fstream fout, fin;
 	extern std::vector<int> initials;
 	extern long long int finish_reward;
 	extern bool map_loaded, finish_loaded;
-	extern int map_size_x, map_size_y, width, height, finish_state, iterations;
+	extern int width, height, finish_state, iterations;
 
 	void check_2d();
 	void check_3d();
