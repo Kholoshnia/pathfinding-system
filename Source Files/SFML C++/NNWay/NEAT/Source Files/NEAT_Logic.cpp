@@ -203,7 +203,7 @@ void neat::load_map_from_file_2d()
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
 	std::string str;
-	for (int i = (int)path.length() - 1; i >= 0; i--)
+	for (int i = static_cast<int>(path.length()) - 1; i >= 0; i--)
 		if (path[i] != '.')
 			str += path[i];
 		else
