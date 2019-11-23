@@ -18,13 +18,13 @@ public class Main : MonoBehaviour
         switch (Application.platform)
         {
             case RuntimePlatform.WindowsEditor:
-                path = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Demo Files/3D/Data Files/data-neat.csv";
+                path = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Demo Files/3D/Data Files/data-ql.csv";
                 break;
             case RuntimePlatform.WindowsPlayer:
                 path = Application.dataPath.Remove(Application.dataPath.Length - 30) + "data/info.csv";
                 break;
             case RuntimePlatform.OSXEditor:
-                path = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Demo Files/3D/Data Files/data-neat.csv";
+                path = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Demo Files/3D/Data Files/data-ql.csv";
                 break;
             case RuntimePlatform.OSXPlayer:
                 path = Application.dataPath.Remove(Application.dataPath.Length - 30) + "data/info.csv";
