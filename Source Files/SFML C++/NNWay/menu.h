@@ -2945,6 +2945,7 @@ private: System::Windows::Forms::Label^ label39;
 
 			neat::max_speed = 5;
 			neat::auto_exit = 10;
+			neat::agent_radius = 4;
 			neat::goal_radius = 10;
 			neat::layers_quantity = 3;
 			neat::mutation_rate = 0.01f;
