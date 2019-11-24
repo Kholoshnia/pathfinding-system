@@ -68,7 +68,7 @@ void ql::create_new_map_2d()
 	bool space_pressed = false;
 	sf::RectangleShape rects[2];
 
-	sf::RenderWindow window(sf::VideoMode(800, 800), "Map creator");
+	sf::RenderWindow window(sf::VideoMode(width, height), "Map creator");
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -170,7 +170,7 @@ void ql::load_map_from_file_2d()
 
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 	std::string str;
 	for (int i = static_cast<int>(path.length()) - 1; i >= 0; i--)
 		if (path[i] != '.') str += path[i];
@@ -237,7 +237,7 @@ void ql::load_map_from_file_3d()
 {
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 }
 
 void ql::load_result_from_file_2d()
@@ -246,7 +246,7 @@ void ql::load_result_from_file_2d()
 
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 	fout.open(path);
 
 	if (fout.is_open())

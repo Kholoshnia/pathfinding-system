@@ -5,10 +5,10 @@
 #include <fstream>
 
 extern std::string path;
+extern int width, height;
 
 namespace ql
 {
-	extern int width, height;
 	extern sf::Vector2i map_size;
 	extern std::vector<int> initials;
 

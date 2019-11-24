@@ -78,8 +78,10 @@ namespace Assets.Scripts.NEAT
 
                 values = reader.ReadLine().Split(';');
                 directionArraySize = Convert.ToInt32(values[1]);
-                populationQuantity = Convert.ToInt32(values[2]);
-                layersQuantity = Convert.ToInt32(values[3]);
+                values = reader.ReadLine().Split(';');
+                populationQuantity = Convert.ToInt32(values[1]);
+                values = reader.ReadLine().Split(';');
+                layersQuantity = Convert.ToInt32(values[1]);
 
                 values = reader.ReadLine().Split(';');
                 if (Convert.ToInt32(values[1]) == 1) autoEnd = true;

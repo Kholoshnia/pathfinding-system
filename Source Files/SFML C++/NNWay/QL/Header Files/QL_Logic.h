@@ -13,9 +13,9 @@
 
 extern Languages language;
 
-extern int fps;
 extern bool from_image;
 extern sf::Sprite loading;
+extern int fps, width, height;
 
 namespace ql
 {
@@ -29,8 +29,8 @@ namespace ql
 	extern std::fstream fout, fin;
 	extern std::vector<int> initials;
 	extern long long int finish_reward;
+	extern int finish_state, iterations;
 	extern bool map_loaded, finish_loaded;
-	extern int width, height, finish_state, iterations;
 
 	void check_2d();
 	void check_3d();

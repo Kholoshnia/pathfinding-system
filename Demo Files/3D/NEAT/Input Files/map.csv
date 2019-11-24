@@ -57,7 +57,9 @@ localScale:;10;0.1;1
 
 info
 visualisation:;1
-parameters:;100;250;1
-auto:;0;10
+direction-array-size:;100
+population-quantity:;250
+layers-quantity:;1
+auto-completion:;0;10
 speed:;0.1;5
 mutation-rate:;0.01;

@@ -2,9 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 
+extern int width, height;
+
 namespace ql
 {
-	extern int width, height;
 	extern sf::Vector2i map_size;
 
 	struct Agent

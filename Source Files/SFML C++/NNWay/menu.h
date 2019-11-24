@@ -26,7 +26,7 @@ sf::Font font;
 sf::Sprite loading;
 sf::Texture loading_texture;
 
-int fps;
+int fps, width, height;
 bool visualization, from_image, check_from_file;
 
 namespace neat
@@ -39,11 +39,11 @@ namespace neat
 	std::string map_markup[80];
 	std::vector<sf::Vector2f> pos;
 
-	sf::Vector2i map_size;
 	sf::RectangleShape rect;
 	sf::CircleShape circle[2];
 	sf::Text text[4], controls[3];
 	sf::Vector2f goal_pos, pos_goal;
+	sf::Vector2i map_size, wall_size;
 
 	bool was_running, map_loaded, auto_end;
 	float agent_radius, goal_radius, max_speed, mutation_rate;
@@ -64,7 +64,7 @@ namespace ql
 	std::vector<int> initials;
 	long long int finish_reward;
 	bool was_running, map_loaded, finish_loaded;
-	int width, height, finish_state, iterations;
+	int finish_state, iterations;
 }
 
 namespace NNWay
@@ -2937,6 +2937,8 @@ private: System::Windows::Forms::Label^ label39;
 			dimension = Dimensions::TWOD;
 			learning_algorithm = LearningAlgorythms::NEAT;
 
+			width = 800;
+			height = 800;
 			from_image = false;
 			visualization = false;
 			check_from_file = false;
@@ -2952,8 +2954,6 @@ private: System::Windows::Forms::Label^ label39;
 			neat::auto_end = false;
 			neat::was_running = false;
 
-			ql::width = 800;
-			ql::height = 800;
 			ql::gamma = 0.8f;
 			ql::iterations = 5;
 			ql::map_size.x = 10;
