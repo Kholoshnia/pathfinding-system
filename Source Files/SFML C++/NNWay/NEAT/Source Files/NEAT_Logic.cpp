@@ -39,7 +39,10 @@ void neat::check_2d()
 	}
 }
 
-void neat::check_3d() { system("OpenUnity.exe"); }
+void neat::check_3d()
+{
+	system("OpenUnity.exe");
+}
 
 void neat::create_new_map_2d()
 {
@@ -71,12 +74,12 @@ void neat::create_new_map_2d()
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-			for (int i = 0; i < map_size.x; i++)
+			for (int x = 0; x < map_size.x; x++)
 			{
-				pos.emplace_back(0, i);
-				pos.emplace_back(map_size.y, i);
-				pos.emplace_back(i, 0);
-				pos.emplace_back(i, map_size.y);
+				pos.emplace_back(0, x);
+				pos.emplace_back(map_size.y - 1, x);
+				pos.emplace_back(x, 0);
+				pos.emplace_back(x, map_size.y - 1);
 			}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
@@ -95,11 +98,13 @@ void neat::create_new_map_2d()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.mouseMove.y > 1 && event.mouseMove.x > 1 && event.mouseMove.y != 250 && event.mouseMove.x != 37)
 			circle[1].setPosition(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 
-		pos_goal = sf::Vector2f(circle[1].getPosition().x / 10.0f, circle[1].getPosition().y / 10.0f);
-		circle[1].setPosition(pos_goal.x * 10.0f, pos_goal.y * 10.0f);
+		pos_agent = sf::Vector2f(circle[1].getPosition().x / 10.0f, circle[1].getPosition().y / 10.0f);
+		circle[1].setPosition(pos_agent.x * 10.0f, pos_agent.y * 10.0f);
+		circle[1].setOrigin(sf::Vector2f(circle[1].getRadius(), circle[1].getRadius()));
+
+		pos_goal = sf::Vector2f(circle[0].getPosition().x / 10.0f, circle[0].getPosition().y / 10.0f);
+		circle[0].setPosition(pos_goal.x * 10.0f, pos_goal.y * 10.0f);
 		circle[0].setOrigin(sf::Vector2f(circle[0].getRadius(), circle[0].getRadius()));
-		goal_pos = sf::Vector2f(circle[0].getPosition().x / 10.0f, circle[0].getPosition().y / 10.0f);
-		circle[0].setPosition(goal_pos.x * 10.0f, goal_pos.y * 10.0f);
 
 		for (auto& el : pos)
 		{
@@ -120,18 +125,18 @@ void neat::create_new_map_2d()
 			{
 				fout << "map-size-x:;" << map_size.x << std::endl;
 				fout <<	"map-size-y:;" << map_size.y << std::endl;
-				for (int i = 0; i < map_size.y; i++)
+				for (int y = 0; y < map_size.y; y++)
 				{
-					for (int j = 0; j < map_size.x; j++)
+					for (int x = 0; x < map_size.x; x++)
 					{
-						if (i == pos_goal.y && j == pos_goal.x)
+						if (x == pos_agent.x && y == pos_agent.y)
 							fout << '*';
-						else if (i == goal_pos.y && j == goal_pos.x)
+						else if (x == pos_goal.x && y == pos_goal.y)
 							fout << '0';
-						else if ([&i, &j]
+						else if ([&x, &y]
 						{
 							for (int l = 0; l < pos.size(); l++)
-								if (i == pos[l].y && j == pos[l].x)
+								if (x == pos[l].x && y == pos[l].y)
 									return true;
 							return false;
 						}())
@@ -151,24 +156,31 @@ void neat::create_new_map_2d()
 			fin.open("Resource Files/Data/NEAT/input.csv");
 			if (fin.is_open())
 			{
-				char ch;
+				char ch = '\0';
 				while (ch != ';') fin.get(ch);
 				fin >> map_size.x;
+				fin.get(ch);
 				while (ch != ';') fin.get(ch);
 				fin >> map_size.y;
+				fin.get(ch);
 				std::string line;
-				std::getline(fin, line);
 				for (int y = 0; y < map_size.y; y++)
-					map_markup[y] = *line.erase(std::remove(line.begin(), line.end(), ';'), line.end());
+				{
+					std::getline(fin, line);
+					line.erase(std::remove(line.begin(), line.end(), ';'), line.end());
+					map_markup[y] = line;
+				}
 				while (ch != ';') fin.get(ch);
 				fin >> agent_radius;
+				fin.get(ch);
 				while (ch != ';') fin.get(ch);
 				fin >> goal_radius;
 				map.reset(new Map());
 				fin.close();
 				map_loaded = true;
+				window.close();
 			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"map.txt\"");
+			else System::Windows::Forms::MessageBox::Show("Error opening file: \"input.csv\"");
 		}
 		window.draw(controls[2]);
 		window.display();
@@ -213,7 +225,7 @@ void neat::load_map_from_file_2d()
 		for (int y = 0; y < map_size.y; y++)
 		{
 			map_markup[y].resize(map_size.y);
-			for (unsigned int x = 0; x < map_size.x; x++)
+			for (int x = 0; x < map_size.x; x++)
 			{
 				if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Black)
 					map_markup[y][x] = '#';
@@ -235,27 +247,23 @@ void neat::load_map_from_file_2d()
 		fin.open(path);
 		if (fin.is_open())
 		{
-			/*fout >> map_size.x >> map_size.y;
-			if (fout.is_open())
-				for (int y = 0; y < map_size.y; y++)
-					fout >> map_markup[y];
-			fout >> agent_radius;
-			fout >> goal_radius;
-			map.reset(new Map());
-			fout.close();
-			map_loaded = true;*/
-
-			char ch;
+			char ch = '\0';
 			while (ch != ';') fin.get(ch);
 			fin >> map_size.x;
+			fin.get(ch);
 			while (ch != ';') fin.get(ch);
 			fin >> map_size.y;
+			fin.get(ch);
 			std::string line;
-			std::getline(fin, line);
 			for (int y = 0; y < map_size.y; y++)
-				map_markup[y] = *line.erase(std::remove(line.begin(), line.end(), ';'), line.end());
+			{
+				std::getline(fin, line);
+				line.erase(std::remove(line.begin(), line.end(), ';'), line.end());
+				map_markup[y] = line;
+			}
 			while (ch != ';') fin.get(ch);
 			fin >> agent_radius;
+			fin.get(ch);
 			while (ch != ';') fin.get(ch);
 			fin >> goal_radius;
 			map.reset(new Map());

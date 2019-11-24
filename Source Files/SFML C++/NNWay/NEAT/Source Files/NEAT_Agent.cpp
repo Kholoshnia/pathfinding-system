@@ -14,7 +14,7 @@ neat::Agent::Agent()
 
 	circle.setFillColor(sf::Color::Black);
 	circle.setRadius(agent_radius);
-	circle.setOrigin(agent_radius / 2.0f, agent_radius / 2.0f);
+	circle.setOrigin(agent_radius, agent_radius);
 }
 
 neat::Agent neat::Agent::get_copy()

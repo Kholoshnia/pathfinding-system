@@ -34,7 +34,7 @@ namespace neat
 	extern sf::RectangleShape rect;
 	extern sf::CircleShape circle[2];
 	extern sf::Text text[4], controls[3];
-	extern sf::Vector2f goal_pos, pos_goal;
+	extern sf::Vector2f pos_agent, pos_goal;
 	extern sf::Vector2i map_size, wall_size;
 
 	extern bool map_loaded, auto_end;

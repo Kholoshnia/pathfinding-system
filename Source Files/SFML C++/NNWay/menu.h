@@ -42,7 +42,7 @@ namespace neat
 	sf::RectangleShape rect;
 	sf::CircleShape circle[2];
 	sf::Text text[4], controls[3];
-	sf::Vector2f goal_pos, pos_goal;
+	sf::Vector2f pos_agent, pos_goal;
 	sf::Vector2i map_size, wall_size;
 
 	bool was_running, map_loaded, auto_end;
