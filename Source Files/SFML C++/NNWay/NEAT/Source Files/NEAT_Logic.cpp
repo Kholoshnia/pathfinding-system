@@ -3,8 +3,6 @@
 void neat::check_2d()
 {
 	std::vector<sf::Vector2f> check;
-	population_quantity = 1;
-	population.reset(new Population());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Check");
 	while (window.isOpen())
@@ -26,7 +24,7 @@ void neat::check_2d()
 
 		population->show(window);
 
-		if (!population->agents[population->best_agent].reached_goal) check.emplace_back(population->agents[0].circle.getPosition());
+		if (!population->reached_the_goal) check.emplace_back(population->agents[0].circle.getPosition());
 
 		for (auto& el : check)
 		{
@@ -98,13 +96,13 @@ void neat::create_new_map_2d()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.mouseMove.y > 1 && event.mouseMove.x > 1 && event.mouseMove.y != 250 && event.mouseMove.x != 37)
 			circle[1].setPosition(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 
-		pos_agent = sf::Vector2f(circle[1].getPosition().x / 10.0f, circle[1].getPosition().y / 10.0f);
-		circle[1].setPosition(pos_agent.x * 10.0f, pos_agent.y * 10.0f);
-		circle[1].setOrigin(sf::Vector2f(circle[1].getRadius(), circle[1].getRadius()));
+		pos_agent = sf::Vector2i(static_cast<int>(circle[1].getPosition().x) / 10, static_cast<int>(circle[1].getPosition().y) / 10);
+		circle[1].setPosition(static_cast<float>(pos_agent.x) * 10.0f, static_cast<float>(pos_agent.y) * 10.0f);
+		circle[1].setOrigin(circle[1].getRadius(), circle[1].getRadius());
 
-		pos_goal = sf::Vector2f(circle[0].getPosition().x / 10.0f, circle[0].getPosition().y / 10.0f);
-		circle[0].setPosition(pos_goal.x * 10.0f, pos_goal.y * 10.0f);
-		circle[0].setOrigin(sf::Vector2f(circle[0].getRadius(), circle[0].getRadius()));
+		pos_goal = sf::Vector2i(static_cast<int>(circle[0].getPosition().x) / 10, static_cast<int>(circle[0].getPosition().y) / 10);
+		circle[0].setPosition(static_cast<float>(pos_goal.x) * 10.0f, static_cast<float>(pos_goal.y) * 10.0f);
+		circle[0].setOrigin(circle[0].getRadius(), circle[0].getRadius());
 
 		for (auto& el : pos)
 		{
@@ -289,14 +287,24 @@ void neat::load_map_from_file_3d()
 
 void neat::load_result_from_file_2d()
 {
+	population_quantity = 1;
+
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	
 	fout.open(path);
 	if (fout.is_open())
 	{
-		for (auto& directions : population->agents[population->best_agent].brain.directions)
-			fout >> directions.x >> directions.y;
+		fout >> direction_array_size;
+		population.reset(new Population());
+
+		for (auto& el : population->agents[population->best_agent].brain.directions)
+		{
+			fin >> el.x;
+			fin;
+			fin >> el.y;
+		}
 		fout.close();
 	}
 	else
@@ -331,15 +339,16 @@ void neat::with_visualization_2d()
 			window.draw(loading);
 			window.display();
 
-			fout.open("Resource Files/Data/NEAT/way.txt");
+			fout.open("Resource Files/Data/NEAT/output.csv");
 			if (fout.is_open())
 			{
-				for (auto& el : layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions)
-					fout << el.x << ' ' << el.y << std::endl;
+				fout << layers->get_best_population().min_step << std::endl;
+				for (int i = 0; i < layers->get_best_population().min_step; ++i)
+					fout << layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions[i].x << " ; " << layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions[i].y << std::endl;
 				fout.close();
 				window.close();
 			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"way.txt\"");
+			else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -348,7 +357,7 @@ void neat::with_visualization_2d()
 		window.clear(sf::Color::White);
 		map->show(window);
 
-		/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
 		{
 			bool alreadyThere = false;
 			int x = int(event.mouseMove.x / 10);
@@ -358,12 +367,12 @@ void neat::with_visualization_2d()
 					alreadyThere = true;
 			if (!alreadyThere)
 				pos.emplace_back(x, y);
-		}*/
+		}
 
 		layers->update();
 		layers->show(window);
 
-		if (layers->get_best_population().agents[layers->get_best_population().best_agent].reached_goal) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
+		if (layers->get_best_population().reached_the_goal) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
 		else language == Languages::EN ? text[1].setString(L"No") : text[1].setString(L"Нет");
 
 		std::ostringstream str;
@@ -410,16 +419,16 @@ void neat::without_visualization_2d()
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->get_best_population().after_reach > auto_exit))
 		{
-			calculating = false;
-
 			fout.open("Resource Files/Data/NEAT/output.csv");
 			if (fout.is_open())
 			{
-				for (auto& el : layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions)
-					fout << el.x << ';' << el.y << std::endl;
+				fout << layers->get_best_population().min_step << std::endl;
+				for (int i = 0; i < layers->get_best_population().min_step; ++i)
+					fout << layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions[i].x << " ; " << layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions[i].y << std::endl;
 				fout.close();
+				calculating = false;
 			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file: \"output.csv\"");
+			else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
 		}
 
 		layers->update();

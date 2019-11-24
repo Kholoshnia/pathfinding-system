@@ -14,6 +14,7 @@ namespace neat
 	{
 		sf::Color color;
 		float fitness_sum;
+		bool reached_the_goal;
 		std::vector<Agent> agents;
 		int gen, min_step, best_agent, after_reach;
 

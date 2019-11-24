@@ -19,7 +19,7 @@ extern Dimensions dimension;
 extern std::string path;
 extern sf::Sprite loading;
 extern int fps, width, height;
-extern bool visualization, from_image;
+extern bool visualization, from_image, map_loaded;
 
 namespace neat
 {
@@ -34,10 +34,9 @@ namespace neat
 	extern sf::RectangleShape rect;
 	extern sf::CircleShape circle[2];
 	extern sf::Text text[4], controls[3];
-	extern sf::Vector2f pos_agent, pos_goal;
-	extern sf::Vector2i map_size, wall_size;
+	extern sf::Vector2i map_size, wall_size, pos_agent, pos_goal;
 
-	extern bool map_loaded, auto_end;
+	extern bool auto_end;
 	extern int population_quantity, layers_quantity, direction_array_size, auto_exit;
 
 	void check_2d();

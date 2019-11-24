@@ -2,6 +2,7 @@
 
 neat::Population::Population()
 {
+	reached_the_goal = false;
 	agents.resize(population_quantity);
 	gen = 1;
 	best_agent = 0;
@@ -49,7 +50,11 @@ void neat::Population::update()
 	{
 		if (el.brain.step > min_step) el.dead = true;
 		else el.update();
-		if (el.reached_goal) min_step = el.brain.step;
+		if (el.reached_goal)
+		{
+			min_step = el.brain.step;
+			reached_the_goal = true;
+		}
 	}
 }
 

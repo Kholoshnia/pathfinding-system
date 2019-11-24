@@ -27,7 +27,7 @@ sf::Sprite loading;
 sf::Texture loading_texture;
 
 int fps, width, height;
-bool visualization, from_image, check_from_file;
+bool visualization, from_image, check_from_file, map_loaded;
 
 namespace neat
 {
@@ -42,8 +42,7 @@ namespace neat
 	sf::RectangleShape rect;
 	sf::CircleShape circle[2];
 	sf::Text text[4], controls[3];
-	sf::Vector2f pos_agent, pos_goal;
-	sf::Vector2i map_size, wall_size;
+	sf::Vector2i map_size, wall_size, pos_agent, pos_goal;
 
 	bool was_running, map_loaded, auto_end;
 	float agent_radius, goal_radius, max_speed, mutation_rate;
@@ -3291,7 +3290,11 @@ private: System::Windows::Forms::Label^ label39;
 #pragma region NEAT, 2D, Check actions
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_map_from_file_2d(); }
 	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_result_from_file_2d(); }
-	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) { neat::check_2d(); }
+	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (!map_loaded) Windows::Forms::MessageBox::Show("");
+		else neat::check_2d();
+	}
 #pragma endregion
 
 #pragma region NEAT, 3D, Check actions
