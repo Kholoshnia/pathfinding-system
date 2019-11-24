@@ -16,12 +16,13 @@ namespace neat
 
 	struct Layers
 	{
-		std::vector<std::shared_ptr<sf::Thread>> threads;
+		int best_population;
 		std::vector<Population> populations;
+		std::vector<std::shared_ptr<sf::Thread>> threads;
 
 		Layers();
 		bool all_populations_dead();
-		Population get_best_population();
+		void set_best_population();
 		void update();
 		void update_selected(const int& i);
 		void show(sf::RenderWindow& window);

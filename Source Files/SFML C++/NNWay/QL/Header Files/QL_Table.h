@@ -4,7 +4,6 @@
 
 #include <ctime>
 #include <vector>
-#include <iostream>
 
 #include <QL/Header Files/QL_Map.h>
 #include <QL/Header Files/QL_Agent.h>

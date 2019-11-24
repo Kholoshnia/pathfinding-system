@@ -3061,14 +3061,14 @@ private: System::Windows::Forms::Label^ label39;
 					if (dimension == Dimensions::TWOD)
 						InitializeComponentNEAT2DCheck();
 					else if (dimension == Dimensions::THREED)
-						InitializeComponentNEAT2DCheck();
+						InitializeComponentNEAT3DCheck();
 				}
 				else if (learning_algorithm == LearningAlgorythms::QL)
 				{
 					if (dimension == Dimensions::TWOD)
 						InitializeComponentQL2DCheck();
 					else if (dimension == Dimensions::THREED)
-						InitializeComponentQL2DCheck();
+						InitializeComponentQL3DCheck();
 				}
 			}
 		}

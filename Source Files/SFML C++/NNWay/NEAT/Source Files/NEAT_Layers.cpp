@@ -2,6 +2,7 @@
 
 neat::Layers::Layers()
 {
+	best_population = 0;
 	populations.resize(layers_quantity);
 	threads.resize(layers_quantity);
 	for (int i = 0; i < layers_quantity; i++)
@@ -16,10 +17,10 @@ bool neat::Layers::all_populations_dead()
 	return true;
 }
 
-neat::Population neat::Layers::get_best_population()
+void neat::Layers::set_best_population()
 {
-	return *std::max_element(populations.begin(), populations.end(), [](const Population& population_1, const Population& population_2)
-	{ return population_1.agents[population_1.best_agent].fitness < population_2.agents[population_2.best_agent].fitness; });
+	best_population = static_cast<int>(std::max_element(populations.begin(), populations.end(), [](const Population& population_1, const Population& population_2)
+	{ return population_1.fitness_sum < population_2.fitness_sum; }) - populations.begin());
 }
 
 void neat::Layers::update()
@@ -34,6 +35,7 @@ void neat::Layers::update_selected(const int& i)
 {
 	if (populations[i].all_agents_dead())
 	{
+		set_best_population();
 		populations[i].calculate_fitness();
 		populations[i].natural_selection();
 		populations[i].mutate();

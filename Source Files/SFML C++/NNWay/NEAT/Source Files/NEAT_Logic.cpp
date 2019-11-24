@@ -270,10 +270,8 @@ void neat::load_map_from_file_2d()
 		}
 		else
 		{
-			std::string message;
-			language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-			System::String^ str = gcnew System::String(message.c_str());
-			System::Windows::Forms::MessageBox::Show(str);
+			std::string message = "Error opening file \"" + path + "\"";
+			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
 		}
 	}
 }
@@ -287,32 +285,32 @@ void neat::load_map_from_file_3d()
 
 void neat::load_result_from_file_2d()
 {
-	population_quantity = 1;
-
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 	
-	fout.open(path);
-	if (fout.is_open())
+	fin.open(path);
+	if (fin.is_open())
 	{
-		fout >> direction_array_size;
+		fin >> max_speed;
+		fin >> direction_array_size;
+
+		population_quantity = 1;
 		population.reset(new Population());
 
-		for (auto& el : population->agents[population->best_agent].brain.directions)
+		for (auto& el : population->agents[0].brain.directions)
 		{
 			fin >> el.x;
-			fin;
+			fin.get();
+			fin.get();
 			fin >> el.y;
 		}
 		fout.close();
 	}
 	else
 	{
-		std::string message;
-		language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-		System::String^ str = gcnew System::String(message.c_str());
-		System::Windows::Forms::MessageBox::Show(str);
+		std::string message = "Error opening file \"" + path + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
 	}
 }
 
@@ -323,10 +321,11 @@ void neat::load_result_from_file_3d()
 
 void neat::with_visualization_2d()
 {
+	neat::direction_array_size = neat::map_size.x * neat::map_size.y / static_cast<int>(neat::agent_radius);
 	layers.reset(new Layers());
-	neat::direction_array_size = neat::map_size.x * neat::map_size.y / static_cast<int>(neat::layers->populations[0].agents[0].circle.getRadius());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Learning");
+	window.setFramerateLimit(60);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -334,7 +333,7 @@ void neat::with_visualization_2d()
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->get_best_population().after_reach > auto_exit))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->populations[layers->best_population].after_reach > auto_exit))
 		{
 			window.draw(loading);
 			window.display();
@@ -342,9 +341,10 @@ void neat::with_visualization_2d()
 			fout.open("Resource Files/Data/NEAT/output.csv");
 			if (fout.is_open())
 			{
-				fout << layers->get_best_population().min_step << std::endl;
-				for (int i = 0; i < layers->get_best_population().min_step; ++i)
-					fout << layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions[i].x << " ; " << layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions[i].y << std::endl;
+				fout << max_speed << std::endl;
+				fout << layers->populations[layers->best_population].min_step << std::endl;
+				for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
+					fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
 				fout.close();
 				window.close();
 			}
@@ -360,23 +360,26 @@ void neat::with_visualization_2d()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
 		{
 			bool alreadyThere = false;
-			int x = int(event.mouseMove.x / 10);
-			int y = int(event.mouseMove.y / 10);
-			for (auto& el : pos)
-				if (el == sf::Vector2f(static_cast<float>(x), static_cast<float>(y)))
-					alreadyThere = true;
-			if (!alreadyThere)
-				pos.emplace_back(x, y);
+			int x = int(event.mouseMove.x / 10) * 10;
+			int y = int(event.mouseMove.y / 10) * 10;
+			if ([&]
+			{
+				for (auto& el : map->pos_rects)
+					if (el == sf::Vector2f(static_cast<float>(x), static_cast<float>(y)))
+						return false;
+				return true;
+			}())
+				map->pos_rects.emplace_back(x, y);
 		}
 
 		layers->update();
 		layers->show(window);
 
-		if (layers->get_best_population().reached_the_goal) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
+		if (layers->best_population) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
 		else language == Languages::EN ? text[1].setString(L"No") : text[1].setString(L"Нет");
 
 		std::ostringstream str;
-		str << layers->get_best_population().gen;
+		str << layers->populations[layers->best_population].gen;
 		text[3].setString(str.str());
 
 		for (int i = 0; i < 4; i++)
@@ -412,19 +415,21 @@ void neat::with_visualization_3d()
 
 void neat::without_visualization_2d()
 {
+	neat::direction_array_size = neat::map_size.x * neat::map_size.y / static_cast<int>(neat::agent_radius);
 	layers.reset(new Layers());
 	bool calculating = true;
 
 	while (calculating)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->get_best_population().after_reach > auto_exit))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->populations[layers->best_population].after_reach > auto_exit))
 		{
 			fout.open("Resource Files/Data/NEAT/output.csv");
 			if (fout.is_open())
 			{
-				fout << layers->get_best_population().min_step << std::endl;
-				for (int i = 0; i < layers->get_best_population().min_step; ++i)
-					fout << layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions[i].x << " ; " << layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions[i].y << std::endl;
+				fout << max_speed << std::endl;
+				fout << layers->populations[layers->best_population].min_step << std::endl;
+				for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
+					fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
 				fout.close();
 				calculating = false;
 			}
