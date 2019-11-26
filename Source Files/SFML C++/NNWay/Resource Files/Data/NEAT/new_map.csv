@@ -12,6 +12,7 @@ S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;G;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
@@ -30,21 +31,14 @@ S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;A;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;W;W;W;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;S;S;S;W;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;S;S;S;S;S;S;S;G;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;S;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;W;W;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
-S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;S;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;W;W;W;S;S;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;W;W;W;W;W;W;W;W;W;W;W;W;W;S;S;S;S;S;W;S;S;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;W;W;W;W;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;W;W;W;W;W;W;W;W;W;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
@@ -56,6 +50,12 @@ S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
+S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;A;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
@@ -82,8 +82,9 @@ S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;S;
 agent-radius:;4
 goal-radius:;10
-
-0.99848 ; -0.788144
+:;10
+001
+ -0.788144
 -0.675951 ; 0.663999
 0.976135 ; -0.954875
 0.329876 ; -0.881856
