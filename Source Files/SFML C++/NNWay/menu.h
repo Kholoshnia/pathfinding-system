@@ -26,7 +26,7 @@ sf::Sprite loading;
 sf::Texture loading_texture;
 
 int fps, width, height;
-bool visualization, from_image, check_from_file, map_loaded;
+bool visualization, from_image, check_from_file, map_loaded, result_loaded, pause;
 
 namespace neat
 {
@@ -39,7 +39,6 @@ namespace neat
 	std::vector<sf::Vector2f> pos;
 
 	sf::RectangleShape rect;
-	sf::CircleShape circle[2];
 	sf::Text text[4], controls[3];
 	sf::Vector2i map_size, wall_size, pos_agent, pos_goal;
 
@@ -88,9 +87,6 @@ namespace NNWay
 
 #pragma region Create components
 	private: System::Windows::Forms::ToolStripMenuItem^ settingsToolStripMenuItem;
-
-
-
 	private: System::Windows::Forms::ToolStripMenuItem^ modeToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ learnToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ checkToolStripMenuItem;
@@ -146,7 +142,6 @@ namespace NNWay
 	private: System::Windows::Forms::Label^ label38;
 	private: System::Windows::Forms::Label^ label39;
 
-
 	private: System::Windows::Forms::ComboBox^ comboBox2;
 	private: System::Windows::Forms::ComboBox^ comboBox3;
 	private: System::Windows::Forms::ComboBox^ comboBox4;
@@ -187,6 +182,7 @@ namespace NNWay
 	private: System::Windows::Forms::TextBox^ textBox12;
 	private: System::Windows::Forms::TextBox^ textBox13;
 	private: System::Windows::Forms::TextBox^ textBox14;
+
 	private: System::ComponentModel::Container^ components;
 #pragma endregion
 
@@ -798,6 +794,7 @@ namespace NNWay
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->textBox13);
 			this->Controls->Add(this->label38);
 			this->Controls->Add(this->textBox11);
@@ -1135,6 +1132,7 @@ namespace NNWay
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->textBox14);
 			this->Controls->Add(this->label39);
 			this->Controls->Add(this->textBox12);
@@ -1891,6 +1889,7 @@ namespace NNWay
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->textBox10);
 			this->Controls->Add(this->label23);
 			this->Controls->Add(this->label17);
@@ -2160,6 +2159,7 @@ namespace NNWay
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->label22);
 			this->Controls->Add(this->textBox9);
 			this->Controls->Add(this->label21);
@@ -2672,12 +2672,17 @@ namespace NNWay
 
 			width = 800;
 			height = 800;
+			pause = false;
 			from_image = false;
+			map_loaded = false;
+			result_loaded = false;
 			visualization = false;
 			check_from_file = false;
-
+			
 			neat::max_speed = 5;
 			neat::auto_exit = 10;
+			neat::map_size.x = 80;
+			neat::map_size.y = 80;
 			neat::agent_radius = 4;
 			neat::goal_radius = 10;
 			neat::layers_quantity = 3;
@@ -2701,15 +2706,6 @@ namespace NNWay
 			loading.setOrigin(100, 25);
 			loading.setPosition(400, 400);
 			loading.setTexture(loading_texture);
-
-			neat::circle[0].setRadius(neat::goal_radius);
-			neat::circle[0].setFillColor(sf::Color::Red);
-			neat::circle[0].setPosition(400, 400);
-
-			neat::circle[1].setOrigin(4, 4);
-			neat::circle[1].setFillColor(sf::Color::Black);
-			neat::circle[1].setRadius(4.0f);
-			neat::circle[1].setPosition(400, 300);
 
 			neat::rect.setFillColor(sf::Color::Blue);
 			neat::rect.setSize(sf::Vector2f(10, 10));
@@ -2768,9 +2764,44 @@ namespace NNWay
 				neat::controls[i].setOutlineColor(sf::Color::White);
 			}
 		}
+		void ResetVariables(void)
+		{
+			width = 800;
+			height = 800;
+			pause = false;
+			from_image = false;
+			map_loaded = false;
+			result_loaded = false;
+			visualization = false;
+			check_from_file = false;
+
+			neat::max_speed = 5;
+			neat::auto_exit = 10;
+			neat::map_size.x = 80;
+			neat::map_size.y = 80;
+			neat::agent_radius = 4;
+			neat::goal_radius = 10;
+			neat::layers_quantity = 3;
+			neat::mutation_rate = 0.01f;
+			neat::population_quantity = 250;
+			neat::direction_array_size = 400;
+
+			neat::auto_end = false;
+			neat::was_running = false;
+
+			ql::gamma = 0.8f;
+			ql::iterations = 5;
+			ql::map_size.x = 10;
+			ql::map_size.y = 10;
+			ql::finish_reward = 100;
+
+			ql::was_running = false;
+			ql::finish_loaded = false;
+		}
 		void ChooseInitializer(void)
 		{
 			this->Controls->Clear();
+			ResetVariables();
 			if (mode == Modes::LEARN)
 			{
 				if (learning_algorithm == LearningAlgorythms::NEAT)
@@ -2901,11 +2932,11 @@ namespace NNWay
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (comboBox2->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("Error: Select mode", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			Windows::Forms::MessageBox::Show("Error: Please, select mode", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (comboBox3->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("Error: Select dimension", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			Windows::Forms::MessageBox::Show("Error: Please, select dimension", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (comboBox4->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("Error: Select learning algorithm", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			Windows::Forms::MessageBox::Show("Error: Please, select learning algorithm", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
 			ChooseInitializer();
 	}
@@ -2928,32 +2959,32 @@ namespace NNWay
 	}
 	private: System::Void textBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
 	private: System::Void textBox3_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
-	private: System::Void textBox11_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
-	private: System::Void textBox13_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != 0x08; }
 	private: System::Void textBox4_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox13_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != 0x08; }
+	private: System::Void textBox11_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		neat::population_quantity = Convert::ToInt32(textBox2->Text);
 		neat::layers_quantity = Convert::ToInt32(textBox3->Text);
 		neat::max_speed = Convert::ToSingle(textBox4->Text);
 		try { neat::mutation_rate = Convert::ToSingle(textBox13->Text); }
-		catch (System::FormatException^ ex)
+		catch (System::FormatException^)
 		{
-			Windows::Forms::MessageBox::Show(ex->Message);
+			Windows::Forms::MessageBox::Show("Error: Check mutation rate value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 			return;
 		}
 		neat::auto_exit = Convert::ToInt32(textBox11->Text);
 
 		if (comboBox5->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Please, choose action with map", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::population_quantity == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check number of populations value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::layers_quantity == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check number of layers value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::max_speed == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check maximum movement speed value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::mutation_rate == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check mutation rate value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
 			neat::with_visualization_2d();
 	}
@@ -2981,27 +3012,27 @@ namespace NNWay
 	private: System::Void textBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		neat::population_quantity = Convert::ToInt32(textBox2->Text);
-		neat::layers_quantity = Convert::ToInt32(textBox3->Text);
+		neat::population_quantity = Convert::ToInt32(textBox5->Text);
+		neat::layers_quantity = Convert::ToInt32(textBox6->Text);
 		neat::max_speed = Convert::ToSingle(textBox12->Text);
 		try { neat::mutation_rate = Convert::ToSingle(textBox14->Text); }
-		catch (System::FormatException ^ ex)
+		catch (System::FormatException^)
 		{
-			Windows::Forms::MessageBox::Show(ex->Message);
+			Windows::Forms::MessageBox::Show("Error: Check mutation rate value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 			return;
 		}
-		neat::auto_exit = Convert::ToInt32(textBox4->Text);
+		neat::auto_exit = Convert::ToInt32(textBox1->Text);
 
-		if (comboBox5->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("");
+		if (comboBox6->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("Error: Please, choose action with map", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::population_quantity == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check number of populations value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::layers_quantity == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check number of layers value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::max_speed == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check maximum movement speed value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::mutation_rate == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check mutation rate value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
 			neat::with_visualization_3d();
 	}
@@ -3012,15 +3043,23 @@ namespace NNWay
 	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_result_from_file_2d(); }
 	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		if (!map_loaded) Windows::Forms::MessageBox::Show("");
-		else neat::check_2d();
+		if (!map_loaded)
+			Windows::Forms::MessageBox::Show("Error: Map wasn't loaded", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+		else
+			neat::check_2d();
 	}
 #pragma endregion
 
 #pragma region NEAT, 3D, Check actions
 	private: System::Void button9_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_map_from_file_3d(); }
 	private: System::Void button10_Click(System::Object^ sender, System::EventArgs^ e) { neat::load_result_from_file_3d(); }
-	private: System::Void button11_Click(System::Object^ sender, System::EventArgs^ e) { neat::check_3d(); }
+	private: System::Void button11_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (!map_loaded)
+			Windows::Forms::MessageBox::Show("Error: Map wasn't loaded", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+		else
+			neat::check_3d();
+	}
 #pragma endregion
 
 #pragma region QL, 2D, Learn actions
@@ -3046,11 +3085,11 @@ namespace NNWay
 		ql::iterations = Convert::ToInt32(textBox10->Text);
 
 		if (comboBox7->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Please, choose action with map", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (ql::gamma == 0 || ql::gamma > 1)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check gamma value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (ql::iterations == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
 			neat::with_visualization_2d();
 	}
@@ -3075,30 +3114,46 @@ namespace NNWay
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		ql::gamma = Convert::ToSingle(textBox7->Text);
-		ql::iterations = Convert::ToInt32(textBox10->Text);
+		ql::gamma = Convert::ToSingle(textBox8->Text);
+		ql::iterations = Convert::ToInt32(textBox9->Text);
 
-		if (comboBox7->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("");
+		if (comboBox8->SelectedIndex == -1)
+			Windows::Forms::MessageBox::Show("Error: Please, choose action with map", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (ql::gamma == 0 || ql::gamma > 1)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check gamma value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (ql::iterations == 0)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
-			neat::with_visualization_3d();
+			neat::with_visualization_2d();
 	}
 #pragma endregion
 
 #pragma region QL, 2D, Check actions
 	private: System::Void button12_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file_2d(); }
 	private: System::Void button13_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_result_from_file_2d(); }
-	private: System::Void button14_Click(System::Object^ sender, System::EventArgs^ e) { ql::check_2d(); }
+	private: System::Void button14_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (!map_loaded)
+			Windows::Forms::MessageBox::Show("Error: Map wasn't loaded", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+		else if (!result_loaded)
+			Windows::Forms::MessageBox::Show("Error: Result wasn't loaded", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+		else
+			ql::check_2d();
+	}
 #pragma endregion
 
 #pragma region QL, 3D, Check actions
-	private: System::Void button15_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file_2d(); }
-	private: System::Void button16_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_result_from_file_2d(); }
-	private: System::Void button17_Click(System::Object^ sender, System::EventArgs^ e) { ql::check_2d(); }
+	private: System::Void button15_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_map_from_file_3d(); }
+	private: System::Void button16_Click(System::Object^ sender, System::EventArgs^ e) { ql::load_result_from_file_3d(); }
+	private: System::Void button17_Click(System::Object^ sender, System::EventArgs^ e)
+	{
+		if (!map_loaded)
+			Windows::Forms::MessageBox::Show("Error: Map wasn't loaded", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+		else if (!result_loaded)
+			Windows::Forms::MessageBox::Show("Error: Result wasn't loaded", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+		else
+			ql::check_3d();
+	}
 #pragma endregion
 	};
 }

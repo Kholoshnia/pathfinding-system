@@ -1,5 +1,65 @@
 #include <NEAT/Header Files/NEAT_Logic.h>
 
+void neat::draw(sf::Event &event)
+{
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.type == event.MouseMoved)
+	{
+		if ([&]
+		{
+			for (auto& el : map->pos_rects)
+				if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
+					return false;
+				return true;
+		}())
+			map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
+	}
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && event.type == event.MouseMoved)
+	{
+		if ([&]
+		{
+			for (auto& el : map->pos_additional_rewards)
+				if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
+					return false;
+				return true;
+		}())
+			map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && map->pos_rects.size() > 0)
+		map->pos_rects.pop_back();
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) && map->pos_additional_rewards.size() > 0)
+		map->pos_additional_rewards.pop_back();
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+	{
+		for (int y = 0; y < map_size.y; y++)
+		{
+			map->pos_rects.emplace_back(0, y * 10);
+			map->pos_rects.emplace_back(map_size.x - 1, y * 10);
+		}
+
+		for (int x = 0; x < map_size.x; x++)
+		{
+			map->pos_rects.emplace_back(x * 10, 0);
+			map->pos_rects.emplace_back(x * 10, map_size.y - 1);
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.type == event.MouseMoved)
+		map->pos_goal = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.type == event.MouseMoved)
+		map->pos_agent = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) goal_radius += 0.1f;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && goal_radius > 0) goal_radius -= 0.1f;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) agent_radius += 0.1f;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && agent_radius > 0) agent_radius -= 0.1f;
+}
+
 void neat::check_2d()
 {
 	std::vector<sf::Vector2f> check;
@@ -28,8 +88,8 @@ void neat::check_2d()
 
 		for (auto& el : check)
 		{
-			circle[1].setPosition(el);
-			window.draw(circle[1]);
+			map->circle_agent.setPosition(el);
+			window.draw(map->circle_agent);
 		}
 
 		window.draw(controls[0]);
@@ -46,6 +106,7 @@ void neat::create_new_map_2d()
 {
 	map_size.x = 80;
 	map_size.y = 80;
+	map.reset(new Map());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Map creator");
 	while (window.isOpen())
@@ -56,62 +117,9 @@ void neat::create_new_map_2d()
 				window.close();
 		window.clear(sf::Color::White);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && pos.size() > 0)
-			pos.pop_back();
+		draw(event);
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-		{
-			bool alreadyThere = false;
-			int x = int(event.mouseMove.x / 10);
-			int y = int(event.mouseMove.y / 10);
-			for (auto& el : pos)
-				if (el == sf::Vector2f(static_cast<float>(x), static_cast<float>(y)))
-					alreadyThere = true;
-			if (!alreadyThere)
-				pos.emplace_back(x, y);
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-			for (int x = 0; x < map_size.x; x++)
-			{
-				pos.emplace_back(0, x);
-				pos.emplace_back(map_size.y - 1, x);
-				pos.emplace_back(x, 0);
-				pos.emplace_back(x, map_size.y - 1);
-			}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-			circle[0].setPosition(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			circle[0].setRadius(circle[0].getRadius() + 0.1f);
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && circle[0].getRadius() > 0)
-			circle[0].setRadius(circle[0].getRadius() - 0.1f);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			circle[1].setRadius(circle[1].getRadius() + 0.1f);
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && circle[1].getRadius() > 0)
-			circle[1].setRadius(circle[1].getRadius() - 0.1f);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.mouseMove.y > 1 && event.mouseMove.x > 1 && event.mouseMove.y != 250 && event.mouseMove.x != 37)
-			circle[1].setPosition(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
-
-		pos_agent = sf::Vector2i(static_cast<int>(circle[1].getPosition().x) / 10, static_cast<int>(circle[1].getPosition().y) / 10);
-		circle[1].setPosition(static_cast<float>(pos_agent.x) * 10.0f, static_cast<float>(pos_agent.y) * 10.0f);
-		circle[1].setOrigin(circle[1].getRadius(), circle[1].getRadius());
-
-		pos_goal = sf::Vector2i(static_cast<int>(circle[0].getPosition().x) / 10, static_cast<int>(circle[0].getPosition().y) / 10);
-		circle[0].setPosition(static_cast<float>(pos_goal.x) * 10.0f, static_cast<float>(pos_goal.y) * 10.0f);
-		circle[0].setOrigin(circle[0].getRadius(), circle[0].getRadius());
-
-		for (auto& el : pos)
-		{
-			rect.setPosition(el.x * 10.0f, el.y * 10.0f);
-			window.draw(rect);
-		}
-
-		for (int i = 0; i < 2; i++)
-			window.draw(circle[i]);
+		map->show(window);
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 		{
@@ -127,58 +135,38 @@ void neat::create_new_map_2d()
 				{
 					for (int x = 0; x < map_size.x; x++)
 					{
-						if (x == pos_agent.x && y == pos_agent.y)
-							fout << '*';
-						else if (x == pos_goal.x && y == pos_goal.y)
-							fout << '0';
+						if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
+							fout << 'A';
+						else if (x == map->pos_goal.x / 10  && y == map->pos_goal.y / 10)
+							fout << 'G';
 						else if ([&x, &y]
 						{
-							for (int l = 0; l < pos.size(); l++)
-								if (x == pos[l].x && y == pos[l].y)
+							for (auto& el : map->pos_rects)
+								if (x == el.x / 10 && y == el.y / 10)
 									return true;
 							return false;
 						}())
-							fout << '#';
+							fout << 'W';
+						else if ([&x, &y]
+						{
+							for (auto& el : map->pos_additional_rewards)
+								if (x == el.x / 10 && y == el.y / 10)
+									return true;
+							return false;
+						}())
+							fout << 'B';
 						else
-							fout << '.';
+							fout << 'S';
 						fout << ';';
 					}
 					fout << std::endl;
 				}
-				fout << "agent-radius:;" << circle[1].getRadius() << std::endl;
-				fout << "goal-radius:;" << circle[0].getRadius() << std::endl;
+				fout << "agent-radius:;" << agent_radius << std::endl;
+				fout << "goal-radius:;" << goal_radius << std::endl;
 				fout.close();
-			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"input.csv\"");
-
-			fin.open("Resource Files/Data/NEAT/input.csv");
-			if (fin.is_open())
-			{
-				char ch = '\0';
-				while (ch != ';') fin.get(ch);
-				fin >> map_size.x;
-				fin.get(ch);
-				while (ch != ';') fin.get(ch);
-				fin >> map_size.y;
-				fin.get(ch);
-				std::string line;
-				for (int y = 0; y < map_size.y; y++)
-				{
-					std::getline(fin, line);
-					line.erase(std::remove(line.begin(), line.end(), ';'), line.end());
-					map_markup[y] = line;
-				}
-				while (ch != ';') fin.get(ch);
-				fin >> agent_radius;
-				fin.get(ch);
-				while (ch != ';') fin.get(ch);
-				fin >> goal_radius;
-				map.reset(new Map());
-				fin.close();
-				map_loaded = true;
 				window.close();
 			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file: \"input.csv\"");
+			else System::Windows::Forms::MessageBox::Show("Error opening file \"input.csv\"");
 		}
 		window.draw(controls[2]);
 		window.display();
@@ -188,21 +176,28 @@ void neat::create_new_map_2d()
 void neat::create_new_map_3d()
 {
 	System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
+	map_loaded = true;
 }
 
 void neat::load_map_from_file_2d()
 {
+	map_size.x = 80;
+	map_size.y = 80;
+	map.reset(new Map);
+
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	
 	std::string str;
 	for (int i = static_cast<int>(path.length()) - 1; i >= 0; i--)
 		if (path[i] != '.') str += path[i];
 		else break;
 
-	if (str == "pmb" || str == "gnp" || str == "agt" || str == "gpj" || 
+	if (str == "pmb" || str == "gnp" || str == "agt" || str == "gpj" ||
 		str == "fig" || str == "dsp" || str == "rdh" || str == "cip") from_image = true;
 	else from_image = false;
+
 	str.clear();
 
 	if (from_image)
@@ -210,24 +205,26 @@ void neat::load_map_from_file_2d()
 		sf::Image map_image;
 		map_image.getSize();
 		map_image.loadFromFile(path);
+
 		for (int y = 0; y < map_size.y; y++)
 		{
-			map_markup[y].resize(map_size.y);
+			map_markup[y].resize(map_size.x);
 			for (int x = 0; x < map_size.x; x++)
 			{
 				if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Black)
-					map_markup[y][x] = '#';
+					map_markup[y][x] = 'A';
 				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Red)
-					map_markup[y][x] = '0';
+					map_markup[y][x] = 'G';
 				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Blue)
-					map_markup[y][x] = '*';
+					map_markup[y][x] = 'W';
 				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Yellow)
-					map_markup[y][x] = 'b';
+					map_markup[y][x] = 'B';
 				else
-					map_markup[y][x] = '.';
+					map_markup[y][x] = 'S';
 			}
 		}
 
+		map->from_file();
 		map_loaded = true;
 	}
 	else
@@ -254,7 +251,7 @@ void neat::load_map_from_file_2d()
 			fin.get(ch);
 			while (ch != ';') fin.get(ch);
 			fin >> goal_radius;
-			map.reset(new Map());
+			map->from_file();
 			fin.close();
 			map_loaded = true;
 		}
@@ -271,6 +268,8 @@ void neat::load_map_from_file_3d()
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	if (path != "")
+		map_loaded = true;
 }
 
 void neat::load_result_from_file_2d()
@@ -296,6 +295,8 @@ void neat::load_result_from_file_2d()
 			fin >> el.y;
 		}
 		fout.close();
+
+		result_loaded = true;
 	}
 	else
 	{
@@ -306,7 +307,11 @@ void neat::load_result_from_file_2d()
 
 void neat::load_result_from_file_3d()
 {
-
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	if (path != "")
+		result_loaded = true;
 }
 
 void neat::with_visualization_2d()
@@ -315,7 +320,6 @@ void neat::with_visualization_2d()
 	layers.reset(new Layers());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Learning");
-	window.setFramerateLimit(60);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -339,6 +343,40 @@ void neat::with_visualization_2d()
 				window.close();
 			}
 			else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
+
+			fout.open("Resource Files/Data/NEAT/new_map.csv");
+			if (fout.is_open())
+			{
+				fout << "map-size-x:;" << map_size.x << std::endl;
+				fout << "map-size-y:;" << map_size.y << std::endl;
+				for (int y = 0; y < map_size.y; y++)
+				{
+					for (int x = 0; x < map_size.x; x++)
+					{
+						if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
+							fout << 'A';
+						else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
+							fout << 'G';
+						else if ([&x, &y]
+						{
+							for (auto& el : map->pos_rects)
+								if (x == el.x / 10 && y == el.y / 10)
+									return true;
+								return false;
+						}())
+							fout << 'W';
+						else
+							fout << 'S';
+						fout << ';';
+					}
+					fout << std::endl;
+				}
+				fout << "agent-radius:;" << agent_radius << std::endl;
+				fout << "goal-radius:;" << goal_radius << std::endl;
+				fout.close();
+				window.close();
+			}
+			else System::Windows::Forms::MessageBox::Show("Error opening file \"new_map.csv\"");
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -347,22 +385,11 @@ void neat::with_visualization_2d()
 		window.clear(sf::Color::White);
 		map->show(window);
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-		{
-			bool alreadyThere = false;
-			int x = int(event.mouseMove.x / 10) * 10;
-			int y = int(event.mouseMove.y / 10) * 10;
-			if ([&]
-			{
-				for (auto& el : map->pos_rects)
-					if (el == sf::Vector2f(static_cast<float>(x), static_cast<float>(y)))
-						return false;
-				return true;
-			}())
-				map->pos_rects.emplace_back(x, y);
-		}
+		draw(event);
 
-		layers->update();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) pause = !pause;
+		if (!pause) layers->update();
+
 		layers->show(window);
 
 		if (layers->best_population) text[1].setString(L"Yes");

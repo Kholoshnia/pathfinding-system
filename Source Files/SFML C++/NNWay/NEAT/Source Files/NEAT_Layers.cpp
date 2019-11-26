@@ -20,7 +20,7 @@ bool neat::Layers::all_populations_dead()
 void neat::Layers::set_best_population()
 {
 	best_population = static_cast<int>(std::max_element(populations.begin(), populations.end(), [](const Population& population_1, const Population& population_2)
-	{ return population_1.fitness_sum < population_2.fitness_sum; }) - populations.begin());
+	{ return population_1.agents[population_1.best_agent].fitness < population_2.agents[population_2.best_agent].fitness; }) - populations.begin());
 }
 
 void neat::Layers::update()

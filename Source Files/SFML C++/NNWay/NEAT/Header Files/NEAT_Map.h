@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace neat
 {
@@ -11,13 +11,14 @@ namespace neat
 	struct Map
 	{
 		int size;
-		float goal_r;
-		sf::CircleShape circle;
 		sf::RectangleShape rect;
-		sf::Vector2f pos_goal, pos_start;
-		std::vector<sf::Vector2f> pos_rects, pos_additional_rewards;
+		sf::Vector2i pos_goal, pos_agent;
+		sf::CircleShape circle_goal, circle_agent;
+		std::vector<sf::Vector2i> pos_rects, pos_additional_rewards;
 
 		Map();
+		void from_file();
+		void map_changed();
 		float dist(sf::Vector2f& obj);
 		bool touched_wall(sf::Vector2f& obj);
 		bool touched_goal(sf::Vector2f& obj);

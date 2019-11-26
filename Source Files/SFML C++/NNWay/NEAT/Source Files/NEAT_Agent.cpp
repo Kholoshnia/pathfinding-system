@@ -8,7 +8,7 @@ neat::Agent::Agent()
 	is_best = false;
 	reached_goal = false;
 
-	pos = map->pos_start;
+	pos = sf::Vector2f(static_cast<float>(map->pos_agent.x), static_cast<float>(map->pos_agent.y));
 	vel = sf::Vector2f(0.0f, 0.0f);
 	acc = sf::Vector2f(0.0f, 0.0f);
 
@@ -42,7 +42,8 @@ void neat::Agent::update()
 	if (!dead && !reached_goal)
 	{
 		move();
-		if (map->touched_wall(pos)) dead = true;
+		if (map->touched_additional_reward(pos)) fitness++;
+		else if (map->touched_wall(pos)) dead = true;
 		else if (map->touched_goal(pos)) reached_goal = true;
 	}
 }

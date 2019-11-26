@@ -171,6 +171,11 @@
     <ClInclude Include="QL\Header Files\QL_Map.h" />
     <ClInclude Include="QL\Header Files\QL_Table.h" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="menu.resx">
+      <DependentUpon>menu.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
