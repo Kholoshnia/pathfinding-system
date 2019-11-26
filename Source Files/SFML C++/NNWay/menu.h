@@ -142,6 +142,10 @@ namespace NNWay
 	private: System::Windows::Forms::Label^ label33;
 	private: System::Windows::Forms::Label^ label34;
 	private: System::Windows::Forms::Label^ label35;
+	private: System::Windows::Forms::Label^ label36;
+	private: System::Windows::Forms::Label^ label37;
+	private: System::Windows::Forms::Label^ label38;
+	private: System::Windows::Forms::Label^ label39;
 
 	private: System::Windows::Forms::ComboBox^ comboBox1;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
@@ -180,14 +184,10 @@ namespace NNWay
 	private: System::Windows::Forms::TextBox^ textBox8;
 	private: System::Windows::Forms::TextBox^ textBox9;
 	private: System::Windows::Forms::TextBox^ textBox10;
-private: System::Windows::Forms::TextBox^ textBox11;
-private: System::Windows::Forms::Label^ label36;
-private: System::Windows::Forms::TextBox^ textBox12;
-private: System::Windows::Forms::Label^ label37;
-private: System::Windows::Forms::TextBox^ textBox13;
-private: System::Windows::Forms::Label^ label38;
-private: System::Windows::Forms::TextBox^ textBox14;
-private: System::Windows::Forms::Label^ label39;
+	private: System::Windows::Forms::TextBox^ textBox11;
+	private: System::Windows::Forms::TextBox^ textBox12;
+	private: System::Windows::Forms::TextBox^ textBox13;
+	private: System::Windows::Forms::TextBox^ textBox14;
 	private: System::ComponentModel::Container^ components;
 #pragma endregion
 
@@ -228,6 +228,7 @@ private: System::Windows::Forms::Label^ label39;
 			// 
 			// menuStrip1
 			// 
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->settingsToolStripMenuItem,
@@ -413,7 +414,6 @@ private: System::Windows::Forms::Label^ label39;
 			this->comboBox1->Size = System::Drawing::Size(254, 32);
 			this->comboBox1->TabIndex = 3;
 			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox1_SelectedIndexChanged);
-			this->comboBox1->SelectedIndex = 0;
 			// 
 			// comboBox2
 			// 
@@ -423,7 +423,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->comboBox2->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(254, 32);
-			this->comboBox2->TabIndex = 5;
+			this->comboBox2->TabIndex = 4;
 			this->comboBox2->Text = L"Choose action...";
 			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox2_SelectedIndexChanged);
 			// 
@@ -436,7 +436,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(68, 25);
-			this->label3->TabIndex = 4;
+			this->label3->TabIndex = 5;
 			this->label3->Text = L"Mode:";
 			// 
 			// comboBox3
@@ -447,7 +447,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->comboBox3->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox3->Name = L"comboBox3";
 			this->comboBox3->Size = System::Drawing::Size(254, 32);
-			this->comboBox3->TabIndex = 7;
+			this->comboBox3->TabIndex = 6;
 			this->comboBox3->Text = L"Choose action...";
 			this->comboBox3->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox3_SelectedIndexChanged);
 			// 
@@ -460,7 +460,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(110, 25);
-			this->label4->TabIndex = 6;
+			this->label4->TabIndex = 7;
 			this->label4->Text = L"Dimension:";
 			// 
 			// comboBox4
@@ -471,7 +471,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->comboBox4->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox4->Name = L"comboBox4";
 			this->comboBox4->Size = System::Drawing::Size(254, 32);
-			this->comboBox4->TabIndex = 9;
+			this->comboBox4->TabIndex = 8;
 			this->comboBox4->Text = L"Choose action...";
 			this->comboBox4->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox4_SelectedIndexChanged);
 			// 
@@ -484,7 +484,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(178, 25);
-			this->label5->TabIndex = 8;
+			this->label5->TabIndex = 9;
 			this->label5->Text = L"Learning algorithm:";
 			// 
 			// button1
@@ -729,7 +729,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(452, 64);
-			this->label6->TabIndex = 1;
+			this->label6->TabIndex = 11;
 			this->label6->Text = L"NEAT, 2D, Learn";
 			// 
 			// label7
@@ -739,7 +739,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(173, 25);
-			this->label7->TabIndex = 2;
+			this->label7->TabIndex = 12;
 			this->label7->Text = L"Map configuration:";
 			// 
 			// comboBox5
@@ -750,7 +750,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->comboBox5->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox5->Name = L"comboBox5";
 			this->comboBox5->Size = System::Drawing::Size(254, 32);
-			this->comboBox5->TabIndex = 3;
+			this->comboBox5->TabIndex = 13;
 			this->comboBox5->Text = L"Choose action...";
 			this->comboBox5->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox5_SelectedIndexChanged);
 			// 
@@ -761,7 +761,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(172, 25);
-			this->label9->TabIndex = 5;
+			this->label9->TabIndex = 14;
 			this->label9->Text = L"Number of agents:";
 			// 
 			// label10
@@ -771,7 +771,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label10->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(165, 25);
-			this->label10->TabIndex = 6;
+			this->label10->TabIndex = 15;
 			this->label10->Text = L"Number of layers:";
 			// 
 			// textBox2
@@ -780,7 +780,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox2->Margin = System::Windows::Forms::Padding(4);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(254, 29);
-			this->textBox2->TabIndex = 8;
+			this->textBox2->TabIndex = 16;
 			this->textBox2->Text = L"250";
 			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox2_KeyPress);
 			// 
@@ -790,7 +790,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox3->Margin = System::Windows::Forms::Padding(4);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(254, 29);
-			this->textBox3->TabIndex = 9;
+			this->textBox3->TabIndex = 17;
 			this->textBox3->Text = L"5";
 			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox3_KeyPress);
 			// 
@@ -801,7 +801,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label11->Name = L"label11";
 			this->label11->Size = System::Drawing::Size(258, 25);
-			this->label11->TabIndex = 10;
+			this->label11->TabIndex = 18;
 			this->label11->Text = L"Maximum movement speed:";
 			// 
 			// textBox4
@@ -810,7 +810,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox4->Margin = System::Windows::Forms::Padding(4);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(254, 29);
-			this->textBox4->TabIndex = 11;
+			this->textBox4->TabIndex = 19;
 			this->textBox4->Text = L"5";
 			this->textBox4->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox4_KeyPress);
 			// 
@@ -820,7 +820,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button2->Margin = System::Windows::Forms::Padding(4);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(131, 52);
-			this->button2->TabIndex = 12;
+			this->button2->TabIndex = 20;
 			this->button2->Text = L"&Start";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &menu::button2_Click);
@@ -831,7 +831,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox11->Margin = System::Windows::Forms::Padding(4);
 			this->textBox11->Name = L"textBox11";
 			this->textBox11->Size = System::Drawing::Size(254, 29);
-			this->textBox11->TabIndex = 14;
+			this->textBox11->TabIndex = 21;
 			this->textBox11->Text = L"100";
 			this->textBox11->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox11_KeyPress);
 			// 
@@ -842,7 +842,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label36->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label36->Name = L"label36";
 			this->label36->Size = System::Drawing::Size(158, 25);
-			this->label36->TabIndex = 13;
+			this->label36->TabIndex = 22;
 			this->label36->Text = L"Auto ñompletion:";
 			// 
 			// textBox13
@@ -851,7 +851,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox13->Margin = System::Windows::Forms::Padding(4);
 			this->textBox13->Name = L"textBox13";
 			this->textBox13->Size = System::Drawing::Size(254, 29);
-			this->textBox13->TabIndex = 16;
+			this->textBox13->TabIndex = 23;
 			this->textBox13->Text = L"0,01";
 			this->textBox13->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox13_KeyPress);
 			// 
@@ -862,7 +862,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label38->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label38->Name = L"label38";
 			this->label38->Size = System::Drawing::Size(131, 25);
-			this->label38->TabIndex = 15;
+			this->label38->TabIndex = 24;
 			this->label38->Text = L"Mutation rate:";
 			// 
 			// menu
@@ -1098,7 +1098,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(452, 64);
-			this->label8->TabIndex = 1;
+			this->label8->TabIndex = 25;
 			this->label8->Text = L"NEAT, 3D, Learn";
 			// 
 			// label12
@@ -1108,7 +1108,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label12->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label12->Name = L"label12";
 			this->label12->Size = System::Drawing::Size(173, 25);
-			this->label12->TabIndex = 2;
+			this->label12->TabIndex = 26;
 			this->label12->Text = L"Map configuration:";
 			// 
 			// label13
@@ -1118,7 +1118,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label13->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label13->Name = L"label13";
 			this->label13->Size = System::Drawing::Size(172, 25);
-			this->label13->TabIndex = 5;
+			this->label13->TabIndex = 27;
 			this->label13->Text = L"Number of agents:";
 			// 
 			// label14
@@ -1128,7 +1128,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label14->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label14->Name = L"label14";
 			this->label14->Size = System::Drawing::Size(165, 25);
-			this->label14->TabIndex = 6;
+			this->label14->TabIndex = 28;
 			this->label14->Text = L"Number of layers:";
 			// 
 			// label15
@@ -1138,7 +1138,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label15->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label15->Name = L"label15";
 			this->label15->Size = System::Drawing::Size(258, 25);
-			this->label15->TabIndex = 10;
+			this->label15->TabIndex = 29;
 			this->label15->Text = L"Maximum movement speed:";
 			// 
 			// comboBox6
@@ -1149,7 +1149,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->comboBox6->Margin = System::Windows::Forms::Padding(4);
 			this->comboBox6->Name = L"comboBox6";
 			this->comboBox6->Size = System::Drawing::Size(254, 32);
-			this->comboBox6->TabIndex = 3;
+			this->comboBox6->TabIndex = 30;
 			this->comboBox6->Text = L"Choose action...";
 			this->comboBox6->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox6_SelectedIndexChanged);
 			// 
@@ -1159,7 +1159,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox1->Margin = System::Windows::Forms::Padding(4);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(254, 29);
-			this->textBox1->TabIndex = 11;
+			this->textBox1->TabIndex = 31;
 			this->textBox1->Text = L"5";
 			// 
 			// textBox5
@@ -1168,7 +1168,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox5->Margin = System::Windows::Forms::Padding(4);
 			this->textBox5->Name = L"textBox5";
 			this->textBox5->Size = System::Drawing::Size(254, 29);
-			this->textBox5->TabIndex = 8;
+			this->textBox5->TabIndex = 32;
 			this->textBox5->Text = L"250";
 			// 
 			// textBox6
@@ -1177,7 +1177,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox6->Margin = System::Windows::Forms::Padding(4);
 			this->textBox6->Name = L"textBox6";
 			this->textBox6->Size = System::Drawing::Size(254, 29);
-			this->textBox6->TabIndex = 9;
+			this->textBox6->TabIndex = 33;
 			this->textBox6->Text = L"5";
 			// 
 			// button3
@@ -1186,7 +1186,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button3->Margin = System::Windows::Forms::Padding(4);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(131, 52);
-			this->button3->TabIndex = 12;
+			this->button3->TabIndex = 34;
 			this->button3->Text = L"&Start";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &menu::button3_Click);
@@ -1197,7 +1197,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox12->Margin = System::Windows::Forms::Padding(4);
 			this->textBox12->Name = L"textBox12";
 			this->textBox12->Size = System::Drawing::Size(254, 29);
-			this->textBox12->TabIndex = 14;
+			this->textBox12->TabIndex = 35;
 			this->textBox12->Text = L"100";
 			this->textBox12->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox12_KeyPress);
 			// 
@@ -1208,7 +1208,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label37->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label37->Name = L"label37";
 			this->label37->Size = System::Drawing::Size(158, 25);
-			this->label37->TabIndex = 13;
+			this->label37->TabIndex = 36;
 			this->label37->Text = L"Auto ñompletion:";
 			// 
 			// textBox14
@@ -1217,7 +1217,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox14->Margin = System::Windows::Forms::Padding(4);
 			this->textBox14->Name = L"textBox14";
 			this->textBox14->Size = System::Drawing::Size(254, 29);
-			this->textBox14->TabIndex = 16;
+			this->textBox14->TabIndex = 37;
 			this->textBox14->Text = L"0,01";
 			this->textBox14->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox14_KeyPress);
 			// 
@@ -1228,7 +1228,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label39->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label39->Name = L"label39";
 			this->label39->Size = System::Drawing::Size(131, 25);
-			this->label39->TabIndex = 15;
+			this->label39->TabIndex = 38;
 			this->label39->Text = L"Mutation rate:";
 			// 
 			// menu
@@ -1455,7 +1455,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label24->Location = System::Drawing::Point(42, 50);
 			this->label24->Name = L"label24";
 			this->label24->Size = System::Drawing::Size(271, 37);
-			this->label24->TabIndex = 1;
+			this->label24->TabIndex = 39;
 			this->label24->Text = L"NEAT, 2D, Check";
 			// 
 			// label25
@@ -1464,7 +1464,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label25->Location = System::Drawing::Point(12, 120);
 			this->label25->Name = L"label25";
 			this->label25->Size = System::Drawing::Size(96, 13);
-			this->label25->TabIndex = 2;
+			this->label25->TabIndex = 40;
 			this->label25->Text = L"Lead map from file:";
 			// 
 			// label26
@@ -1473,7 +1473,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label26->Location = System::Drawing::Point(12, 148);
 			this->label26->Name = L"label26";
 			this->label26->Size = System::Drawing::Size(101, 13);
-			this->label26->TabIndex = 3;
+			this->label26->TabIndex = 41;
 			this->label26->Text = L"Load result from file:";
 			// 
 			// button6
@@ -1481,7 +1481,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button6->Location = System::Drawing::Point(197, 116);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(147, 21);
-			this->button6->TabIndex = 4;
+			this->button6->TabIndex = 42;
 			this->button6->Text = L"&Load";
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &menu::button6_Click);
@@ -1491,7 +1491,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button7->Location = System::Drawing::Point(197, 144);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(147, 21);
-			this->button7->TabIndex = 5;
+			this->button7->TabIndex = 43;
 			this->button7->Text = L"&Load";
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &menu::button7_Click);
@@ -1501,7 +1501,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button8->Location = System::Drawing::Point(140, 300);
 			this->button8->Name = L"button8";
 			this->button8->Size = System::Drawing::Size(75, 30);
-			this->button8->TabIndex = 6;
+			this->button8->TabIndex = 44;
 			this->button8->Text = L"&Check";
 			this->button8->UseVisualStyleBackColor = true;
 			this->button8->Click += gcnew System::EventHandler(this, &menu::button8_Click);
@@ -1722,7 +1722,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label27->Location = System::Drawing::Point(42, 50);
 			this->label27->Name = L"label27";
 			this->label27->Size = System::Drawing::Size(271, 37);
-			this->label27->TabIndex = 1;
+			this->label27->TabIndex = 45;
 			this->label27->Text = L"NEAT, 3D, Check";
 			// 
 			// label28
@@ -1731,7 +1731,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label28->Location = System::Drawing::Point(12, 120);
 			this->label28->Name = L"label28";
 			this->label28->Size = System::Drawing::Size(96, 13);
-			this->label28->TabIndex = 2;
+			this->label28->TabIndex = 46;
 			this->label28->Text = L"Lead map from file:";
 			// 
 			// label29
@@ -1740,7 +1740,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label29->Location = System::Drawing::Point(12, 148);
 			this->label29->Name = L"label29";
 			this->label29->Size = System::Drawing::Size(101, 13);
-			this->label29->TabIndex = 3;
+			this->label29->TabIndex = 47;
 			this->label29->Text = L"Load result from file:";
 			// 
 			// button9
@@ -1748,7 +1748,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button9->Location = System::Drawing::Point(197, 116);
 			this->button9->Name = L"button9";
 			this->button9->Size = System::Drawing::Size(147, 21);
-			this->button9->TabIndex = 4;
+			this->button9->TabIndex = 48;
 			this->button9->Text = L"&Load";
 			this->button9->UseVisualStyleBackColor = true;
 			this->button9->Click += gcnew System::EventHandler(this, &menu::button9_Click);
@@ -1758,7 +1758,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button10->Location = System::Drawing::Point(197, 144);
 			this->button10->Name = L"button10";
 			this->button10->Size = System::Drawing::Size(147, 21);
-			this->button10->TabIndex = 5;
+			this->button10->TabIndex = 49;
 			this->button10->Text = L"&Load";
 			this->button10->UseVisualStyleBackColor = true;
 			this->button10->Click += gcnew System::EventHandler(this, &menu::button10_Click);
@@ -1768,7 +1768,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button11->Location = System::Drawing::Point(140, 300);
 			this->button11->Name = L"button11";
 			this->button11->Size = System::Drawing::Size(75, 30);
-			this->button11->TabIndex = 6;
+			this->button11->TabIndex = 50;
 			this->button11->Text = L"&Check";
 			this->button11->UseVisualStyleBackColor = true;
 			this->button11->Click += gcnew System::EventHandler(this, &menu::button11_Click);
@@ -1993,7 +1993,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label16->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label16->Name = L"label16";
 			this->label16->Size = System::Drawing::Size(585, 64);
-			this->label16->TabIndex = 1;
+			this->label16->TabIndex = 51;
 			this->label16->Text = L"Q-Learning, 2D, Learn";
 			// 
 			// label18
@@ -2003,7 +2003,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label18->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(87, 25);
-			this->label18->TabIndex = 5;
+			this->label18->TabIndex = 52;
 			this->label18->Text = L"Gamma:";
 			// 
 			// comboBox7
@@ -2014,7 +2014,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->comboBox7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->comboBox7->Name = L"comboBox7";
 			this->comboBox7->Size = System::Drawing::Size(254, 32);
-			this->comboBox7->TabIndex = 3;
+			this->comboBox7->TabIndex = 53;
 			this->comboBox7->Text = L"Choose action...";
 			this->comboBox7->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox7_SelectedIndexChanged);
 			// 
@@ -2024,7 +2024,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(131, 52);
-			this->button4->TabIndex = 12;
+			this->button4->TabIndex = 54;
 			this->button4->Text = L"&Start";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &menu::button4_Click);
@@ -2035,7 +2035,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox7->Name = L"textBox7";
 			this->textBox7->Size = System::Drawing::Size(254, 29);
-			this->textBox7->TabIndex = 13;
+			this->textBox7->TabIndex = 55;
 			this->textBox7->Text = L"0.8";
 			this->textBox7->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox7_KeyPress);
 			// 
@@ -2046,7 +2046,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label17->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label17->Name = L"label17";
 			this->label17->Size = System::Drawing::Size(173, 25);
-			this->label17->TabIndex = 14;
+			this->label17->TabIndex = 56;
 			this->label17->Text = L"Map configuration:";
 			// 
 			// textBox10
@@ -2055,7 +2055,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox10->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox10->Name = L"textBox10";
 			this->textBox10->Size = System::Drawing::Size(254, 29);
-			this->textBox10->TabIndex = 16;
+			this->textBox10->TabIndex = 57;
 			this->textBox10->Text = L"5";
 			this->textBox10->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox10_KeyPress);
 			// 
@@ -2066,7 +2066,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label23->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label23->Name = L"label23";
 			this->label23->Size = System::Drawing::Size(191, 25);
-			this->label23->TabIndex = 15;
+			this->label23->TabIndex = 57;
 			this->label23->Text = L"Number of iterations:";
 			// 
 			// menu
@@ -2290,7 +2290,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label22->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label22->Name = L"label22";
 			this->label22->Size = System::Drawing::Size(585, 64);
-			this->label22->TabIndex = 1;
+			this->label22->TabIndex = 59;
 			this->label22->Text = L"Q-Learning, 2D, Learn";
 			// 
 			// label21
@@ -2300,7 +2300,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label21->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label21->Name = L"label21";
 			this->label21->Size = System::Drawing::Size(87, 25);
-			this->label21->TabIndex = 5;
+			this->label21->TabIndex = 60;
 			this->label21->Text = L"Gamma:";
 			// 
 			// comboBox8
@@ -2311,7 +2311,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->comboBox8->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->comboBox8->Name = L"comboBox8";
 			this->comboBox8->Size = System::Drawing::Size(254, 32);
-			this->comboBox8->TabIndex = 3;
+			this->comboBox8->TabIndex = 61;
 			this->comboBox8->Text = L"Choose action...";
 			this->comboBox8->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox7_SelectedIndexChanged);
 			// 
@@ -2321,7 +2321,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button5->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(131, 52);
-			this->button5->TabIndex = 12;
+			this->button5->TabIndex = 62;
 			this->button5->Text = L"&Start";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &menu::button4_Click);
@@ -2332,7 +2332,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox9->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox9->Name = L"textBox9";
 			this->textBox9->Size = System::Drawing::Size(254, 29);
-			this->textBox9->TabIndex = 13;
+			this->textBox9->TabIndex = 63;
 			this->textBox9->Text = L"0.8";
 			this->textBox9->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox7_KeyPress);
 			// 
@@ -2343,7 +2343,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label20->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label20->Name = L"label20";
 			this->label20->Size = System::Drawing::Size(173, 25);
-			this->label20->TabIndex = 14;
+			this->label20->TabIndex = 64;
 			this->label20->Text = L"Map configuration:";
 			// 
 			// textBox8
@@ -2352,7 +2352,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->textBox8->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox8->Name = L"textBox8";
 			this->textBox8->Size = System::Drawing::Size(254, 29);
-			this->textBox8->TabIndex = 16;
+			this->textBox8->TabIndex = 65;
 			this->textBox8->Text = L"5";
 			this->textBox8->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox10_KeyPress);
 			// 
@@ -2363,7 +2363,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label19->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(191, 25);
-			this->label19->TabIndex = 15;
+			this->label19->TabIndex = 66;
 			this->label19->Text = L"Number of iterations:";
 			// 
 			// menu
@@ -2584,7 +2584,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label30->Location = System::Drawing::Point(6, 50);
 			this->label30->Name = L"label30";
 			this->label30->Size = System::Drawing::Size(344, 37);
-			this->label30->TabIndex = 1;
+			this->label30->TabIndex = 67;
 			this->label30->Text = L"Q-Learning, 2D, Check";
 			// 
 			// label31
@@ -2593,7 +2593,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label31->Location = System::Drawing::Point(12, 120);
 			this->label31->Name = L"label31";
 			this->label31->Size = System::Drawing::Size(96, 13);
-			this->label31->TabIndex = 2;
+			this->label31->TabIndex = 68;
 			this->label31->Text = L"Lead map from file:";
 			// 
 			// label32
@@ -2602,7 +2602,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label32->Location = System::Drawing::Point(12, 148);
 			this->label32->Name = L"label32";
 			this->label32->Size = System::Drawing::Size(101, 13);
-			this->label32->TabIndex = 3;
+			this->label32->TabIndex = 69;
 			this->label32->Text = L"Load result from file:";
 			// 
 			// button12
@@ -2610,7 +2610,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button12->Location = System::Drawing::Point(197, 116);
 			this->button12->Name = L"button12";
 			this->button12->Size = System::Drawing::Size(147, 21);
-			this->button12->TabIndex = 4;
+			this->button12->TabIndex = 70;
 			this->button12->Text = L"&Load";
 			this->button12->UseVisualStyleBackColor = true;
 			this->button12->Click += gcnew System::EventHandler(this, &menu::button12_Click);
@@ -2620,7 +2620,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button13->Location = System::Drawing::Point(197, 144);
 			this->button13->Name = L"button13";
 			this->button13->Size = System::Drawing::Size(147, 21);
-			this->button13->TabIndex = 5;
+			this->button13->TabIndex = 71;
 			this->button13->Text = L"&Load";
 			this->button13->UseVisualStyleBackColor = true;
 			this->button13->Click += gcnew System::EventHandler(this, &menu::button13_Click);
@@ -2630,7 +2630,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button14->Location = System::Drawing::Point(140, 300);
 			this->button14->Name = L"button14";
 			this->button14->Size = System::Drawing::Size(75, 30);
-			this->button14->TabIndex = 6;
+			this->button14->TabIndex = 72;
 			this->button14->Text = L"&Check";
 			this->button14->UseVisualStyleBackColor = true;
 			this->button14->Click += gcnew System::EventHandler(this, &menu::button14_Click);
@@ -2851,7 +2851,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label33->Location = System::Drawing::Point(6, 50);
 			this->label33->Name = L"label33";
 			this->label33->Size = System::Drawing::Size(344, 37);
-			this->label33->TabIndex = 1;
+			this->label33->TabIndex = 73;
 			this->label33->Text = L"Q-Learning, 3D, Check";
 			// 
 			// label34
@@ -2860,7 +2860,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label34->Location = System::Drawing::Point(12, 120);
 			this->label34->Name = L"label34";
 			this->label34->Size = System::Drawing::Size(96, 13);
-			this->label34->TabIndex = 2;
+			this->label34->TabIndex = 74;
 			this->label34->Text = L"Lead map from file:";
 			// 
 			// label35
@@ -2869,7 +2869,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->label35->Location = System::Drawing::Point(12, 148);
 			this->label35->Name = L"label35";
 			this->label35->Size = System::Drawing::Size(101, 13);
-			this->label35->TabIndex = 3;
+			this->label35->TabIndex = 75;
 			this->label35->Text = L"Load result from file:";
 			// 
 			// button15
@@ -2877,7 +2877,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button15->Location = System::Drawing::Point(197, 116);
 			this->button15->Name = L"button15";
 			this->button15->Size = System::Drawing::Size(147, 21);
-			this->button15->TabIndex = 4;
+			this->button15->TabIndex = 76;
 			this->button15->Text = L"&Load";
 			this->button15->UseVisualStyleBackColor = true;
 			this->button15->Click += gcnew System::EventHandler(this, &menu::button15_Click);
@@ -2887,7 +2887,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button16->Location = System::Drawing::Point(197, 144);
 			this->button16->Name = L"button16";
 			this->button16->Size = System::Drawing::Size(147, 21);
-			this->button16->TabIndex = 5;
+			this->button16->TabIndex = 77;
 			this->button16->Text = L"&Load";
 			this->button16->UseVisualStyleBackColor = true;
 			this->button16->Click += gcnew System::EventHandler(this, &menu::button16_Click);
@@ -2897,7 +2897,7 @@ private: System::Windows::Forms::Label^ label39;
 			this->button17->Location = System::Drawing::Point(140, 300);
 			this->button17->Name = L"button17";
 			this->button17->Size = System::Drawing::Size(75, 30);
-			this->button17->TabIndex = 6;
+			this->button17->TabIndex = 78;
 			this->button17->Text = L"&Check";
 			this->button17->UseVisualStyleBackColor = true;
 			this->button17->Click += gcnew System::EventHandler(this, &menu::button17_Click);
