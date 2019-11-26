@@ -42,7 +42,7 @@ namespace neat
 	sf::Text text[4], controls[3];
 	sf::Vector2i map_size, wall_size, pos_agent, pos_goal;
 
-	bool was_running, map_loaded, auto_end;
+	bool was_running, map_loaded, auto_end, around;
 	float agent_radius, goal_radius, max_speed, mutation_rate;
 	int direction_array_size, population_quantity, layers_quantity, auto_exit;
 }
@@ -60,8 +60,8 @@ namespace ql
 	std::fstream fout, fin;
 	std::vector<int> initials;
 	long long int finish_reward;
-	bool was_running, map_loaded, finish_loaded;
 	int finish_state, iterations;
+	bool was_running, map_loaded, finish_loaded;
 }
 
 namespace NNWay
@@ -2690,6 +2690,7 @@ namespace NNWay
 			neat::population_quantity = 250;
 			neat::direction_array_size = 400;
 
+			neat::around = false;
 			neat::auto_end = false;
 			neat::was_running = false;
 

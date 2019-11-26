@@ -32,18 +32,20 @@ void neat::draw(sf::Event &event)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) && map->pos_additional_rewards.size() > 0)
 		map->pos_additional_rewards.pop_back();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !around)
 	{
+		around = true;
+
 		for (int y = 0; y < map_size.y; y++)
 		{
 			map->pos_rects.emplace_back(0, y * 10);
-			map->pos_rects.emplace_back(map_size.x - 1, y * 10);
+			map->pos_rects.emplace_back(map_size.x * 10 - 10, y * 10);
 		}
 
 		for (int x = 0; x < map_size.x; x++)
 		{
 			map->pos_rects.emplace_back(x * 10, 0);
-			map->pos_rects.emplace_back(x * 10, map_size.y - 1);
+			map->pos_rects.emplace_back(x * 10, map_size.y * 10 - 10);
 		}
 	}
 

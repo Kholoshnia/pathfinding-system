@@ -33,7 +33,7 @@ namespace neat
 	extern sf::Text text[4], controls[3];
 	extern sf::Vector2i map_size, wall_size;
 
-	extern bool auto_end;
+	extern bool auto_end, around;
 	extern int population_quantity, layers_quantity, direction_array_size, auto_exit;
 
 	void check_2d();
