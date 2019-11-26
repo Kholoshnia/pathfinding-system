@@ -161,7 +161,7 @@ void ql::create_new_map_2d()
 
 void ql::create_new_map_3d()
 {
-	language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
+	System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
 }
 
 void ql::load_map_from_file_2d()
@@ -222,10 +222,8 @@ void ql::load_map_from_file_2d()
 		}
 		else
 		{
-			std::string message;
-			language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-			System::String^ str = gcnew System::String(message.c_str());
-			System::Windows::Forms::MessageBox::Show(str);
+			std::string message = "Error opening file \"" + path + "\"";
+			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
 		}
 	}
 	map->update();
@@ -258,10 +256,8 @@ void ql::load_result_from_file_2d()
 	}
 	else
 	{
-		std::string message;
-		language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-		System::String^ str = gcnew System::String(message.c_str());
-		System::Windows::Forms::MessageBox::Show(str);
+		std::string message = "Error opening file \"" + path + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
 	}
 }
 

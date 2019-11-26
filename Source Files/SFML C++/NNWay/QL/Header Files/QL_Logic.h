@@ -11,8 +11,6 @@
 #include <QL/Header Files/QL_Table.h>
 #include <QL/Header Files/QL_Agent.h>
 
-extern Languages language;
-
 extern bool from_image;
 extern sf::Sprite loading;
 extern int fps, width, height;

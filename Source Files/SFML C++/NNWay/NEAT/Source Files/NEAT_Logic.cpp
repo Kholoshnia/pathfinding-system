@@ -187,17 +187,7 @@ void neat::create_new_map_2d()
 
 void neat::create_new_map_3d()
 {
-	switch (language)
-	{
-	case EN:
-		System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
-		break;
-	case RU:
-		System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
-		break;
-	default:
-		break;
-	}
+	System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
 }
 
 void neat::load_map_from_file_2d()
@@ -375,8 +365,8 @@ void neat::with_visualization_2d()
 		layers->update();
 		layers->show(window);
 
-		if (layers->best_population) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
-		else language == Languages::EN ? text[1].setString(L"No") : text[1].setString(L"Нет");
+		if (layers->best_population) text[1].setString(L"Yes");
+		else text[1].setString(L"No");
 
 		std::ostringstream str;
 		str << layers->populations[layers->best_population].gen;

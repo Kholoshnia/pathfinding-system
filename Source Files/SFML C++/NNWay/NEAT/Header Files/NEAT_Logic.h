@@ -13,7 +13,6 @@
 #include <NEAT/Header Files/NEAT_Layers.h>
 #include <NEAT/Header Files/NEAT_Population.h>
 
-extern Languages language;
 extern Dimensions dimension;
 
 extern std::string path;
