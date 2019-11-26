@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -772,7 +772,7 @@ namespace NNWay
 			this->label36->Name = L"label36";
 			this->label36->Size = System::Drawing::Size(158, 25);
 			this->label36->TabIndex = 22;
-			this->label36->Text = L"Auto ñompletion:";
+			this->label36->Text = L"Auto Ñompletion:";
 			// 
 			// textBox13
 			// 
@@ -798,7 +798,6 @@ namespace NNWay
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->textBox13);
 			this->Controls->Add(this->label38);
 			this->Controls->Add(this->textBox11);
@@ -826,7 +825,6 @@ namespace NNWay
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 		void InitializeComponentNEAT3DLearn(void)
 		{
@@ -1111,7 +1109,7 @@ namespace NNWay
 			this->label37->Name = L"label37";
 			this->label37->Size = System::Drawing::Size(158, 25);
 			this->label37->TabIndex = 36;
-			this->label37->Text = L"Auto ñompletion:";
+			this->label37->Text = L"Auto Ñompletion:";
 			// 
 			// textBox14
 			// 
@@ -1137,7 +1135,6 @@ namespace NNWay
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->textBox14);
 			this->Controls->Add(this->label39);
 			this->Controls->Add(this->textBox12);
@@ -1894,7 +1891,6 @@ namespace NNWay
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->textBox10);
 			this->Controls->Add(this->label23);
 			this->Controls->Add(this->label17);
@@ -2164,7 +2160,6 @@ namespace NNWay
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(168, 168);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(623, 632);
 			this->Controls->Add(this->label22);
 			this->Controls->Add(this->textBox9);
 			this->Controls->Add(this->label21);
@@ -2851,23 +2846,19 @@ namespace NNWay
 	}
 	private: System::Void aboutToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-
+		System::Windows::Forms::MessageBox::Show("A universal and adaptable algorithm for finding the shortest path based on a self-learning neural network and its software implementation. The universality of the algorithm lies in the fact that the User can independently determine the script for the execution of the algorithm - choose the optimal learning algorithm, create the necessary map of the area and set the logic of the movement of the object. To demonstrate these features, a user interface was developed for an effective software implementation of the algorithm. An algorithm for visualizing the learning process of the genetic algorithm and reinforcement learning for finding the shortest path has been developed.", "About");
 	}
 	private: System::Void howToUseToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-
+		System::Windows::Forms::MessageBox::Show("Choose parameterers and then press start or check to begin learning or cheking. For the genetic algorithm, the User can choose the speed of training and, accordingly, obtain the desired result. The speed and accuracy of training is regulated by changing the number of agents (the more agents, the higher the training speed), but for this it is necessary to increase the computing power - a separate processor stream is allocated for each layer. For reinforcement learning, the User can select the learning speed by adjusting the parameter gamma. The larger the parameter, the higher the learning speed, but also the likelihood of missing a useful learning outcome. To implement the ability to use spatial grid as a map, an algorithm for representing the terrain map in the form of a two-dimensional array of possible states and actions was compiled.", "How to use");
 	}
 	private: System::Void bugReportToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-
+		System::Windows::Forms::MessageBox::Show("Email: vhd-ru@yandex.ru", "Bug report");
 	}
 #pragma endregion
 
 #pragma region Main menu actions
-	private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-
-	}
 	private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 	{
 		switch (comboBox2->SelectedIndex)
@@ -2910,11 +2901,11 @@ namespace NNWay
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (comboBox2->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Select mode", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (comboBox3->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Select dimension", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (comboBox4->SelectedIndex == -1)
-			Windows::Forms::MessageBox::Show("");
+			Windows::Forms::MessageBox::Show("Error: Select learning algorithm", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
 			ChooseInitializer();
 	}
