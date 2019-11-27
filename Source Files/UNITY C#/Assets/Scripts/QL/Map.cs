@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.QL
 {
@@ -29,26 +29,25 @@ namespace Assets.Scripts.QL
                     {
                         space.transform.position = new Vector3(x, mapSize.y - 1 - y, mapSize.z - 1 - z);
 
-                        if (map[z, y, x] == 'S')
+                        switch (map[z, y, x])
                         {
-                            Spaces.Add(Object.Instantiate(space));
-                            Initials.Add(k);
-                            k++;
+                            case 'G':
+                                goal.transform.position = new Vector3(x, y, z);
+                                Spaces.Add(Object.Instantiate(space));
+                                Finish = Object.Instantiate(goal);
+                                break;
+                            case 'W':
+                                wall.transform.position = new Vector3(x, y, z);
+                                Spaces.Add(Object.Instantiate(space));
+                                Walls.Add(Object.Instantiate(wall));
+                                break;
+                            case 'S':
+                                Spaces.Add(Object.Instantiate(space));
+                                Initials.Add(k);
+                                break;
                         }
-                        if (map[z, y, x] == 'W')
-                        {
-                            wall.transform.position = new Vector3(x, y, z);
-                            Spaces.Add(Object.Instantiate(space));
-                            Walls.Add(Object.Instantiate(wall));
-                            k++;
-                        }
-                        if (map[z, y, x] == 'G')
-                        {
-                            goal.transform.position = new Vector3(x, y, z);
-                            Spaces.Add(Object.Instantiate(space));
-                            Finish = Object.Instantiate(goal);
-                            k++;
-                        }
+
+                        k++;
                     }
 
             for (int i = 0; i < Spaces.Count; i++)

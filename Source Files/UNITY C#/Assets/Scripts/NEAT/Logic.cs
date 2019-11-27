@@ -78,7 +78,6 @@ namespace Assets.Scripts.NEAT
                 reader.ReadLine();
                 reader.ReadLine();
                 reader.ReadLine();
-                reader.ReadLine();
 
                 var values = reader.ReadLine().Split(';');
                 visualization |= Convert.ToInt32(values[1]) == 1;
