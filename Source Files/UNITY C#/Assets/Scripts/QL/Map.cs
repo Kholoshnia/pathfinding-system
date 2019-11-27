@@ -29,7 +29,7 @@ namespace Assets.Scripts.QL
                     {
                         space.transform.position = new Vector3(x, mapSize.y - 1 - y, mapSize.z - 1 - z);
 
-                        if (map[z, y, x] == 'B')
+                        if (map[z, y, x] == 'S')
                         {
                             Spaces.Add(Object.Instantiate(space));
                             Initials.Add(k);
@@ -42,7 +42,7 @@ namespace Assets.Scripts.QL
                             Walls.Add(Object.Instantiate(wall));
                             k++;
                         }
-                        if (map[z, y, x] == 'F')
+                        if (map[z, y, x] == 'G')
                         {
                             goal.transform.position = new Vector3(x, y, z);
                             Spaces.Add(Object.Instantiate(space));

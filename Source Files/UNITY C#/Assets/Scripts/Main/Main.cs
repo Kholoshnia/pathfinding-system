@@ -4,10 +4,9 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     private Modes mode;
-    private Languages language;
     private LearningAlgorithms learningAlgorithm;
 
-    private string path, pathIn, pathOut;
+    private string pathInfoIn, pathInfoOut, pathInfo;
 
     private Assets.Scripts.NEAT.Logic NEAT_logic;
     private Assets.Scripts.QL.Logic QL_logic;
@@ -18,36 +17,23 @@ public class Main : MonoBehaviour
         switch (Application.platform)
         {
             case RuntimePlatform.WindowsEditor:
-                path = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Release Files/data/info.csv";
+                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Release Files/data/info.csv";
                 break;
             case RuntimePlatform.WindowsPlayer:
-                path = Application.dataPath.Remove(Application.dataPath.Length - 19) + "data/info.csv";
+                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 19) + "data/info.csv";
                 break;
             case RuntimePlatform.OSXEditor:
-                path = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Release Files/data/info.csv";
+                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Release Files/data/info.csv";
                 break;
             case RuntimePlatform.OSXPlayer:
-                path = Application.dataPath.Remove(Application.dataPath.Length - 19) + "data/info.csv";
+                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 19) + "data/info.csv";
                 break;
         }
 
-        FileStream fin = new FileStream(path, FileMode.Open);
+        FileStream fin = new FileStream(pathInfo, FileMode.Open);
 
         using (StreamReader reader = new StreamReader(fin))
         {
-            switch (reader.ReadLine())
-            {
-                case "EN":
-                    language = Languages.EN;
-                    break;
-                case "RU":
-                    language = Languages.RU;
-                    break;
-                default:
-                    Debug.Log("Incorrect language");
-                    break;
-            }
-
             switch (reader.ReadLine())
             {
                 case "NEAT":
@@ -74,8 +60,8 @@ public class Main : MonoBehaviour
                     break;
             }
 
-            pathIn = reader.ReadLine();
-            pathOut = reader.ReadLine();
+            pathInfoIn = reader.ReadLine();
+            pathInfoOut = reader.ReadLine();
         }
         fin.Close();
     }
@@ -85,10 +71,10 @@ public class Main : MonoBehaviour
         switch (learningAlgorithm)
         {
             case LearningAlgorithms.NEAT:
-                NEAT_logic = new Assets.Scripts.NEAT.Logic(mode, language, pathIn, pathOut);
+                NEAT_logic = new Assets.Scripts.NEAT.Logic(mode, pathInfoIn, pathInfoOut, pathInfo);
                 break;
             case LearningAlgorithms.QL:
-                QL_logic = new Assets.Scripts.QL.Logic(mode, language, pathIn, pathOut);
+                QL_logic = new Assets.Scripts.QL.Logic(mode, pathInfoIn, pathInfoOut, pathInfo);
                 break;
         }
     }

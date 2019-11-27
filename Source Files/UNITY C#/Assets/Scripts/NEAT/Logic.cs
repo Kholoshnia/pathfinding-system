@@ -16,20 +16,18 @@ namespace Assets.Scripts.NEAT
         private readonly GameObject[] walls;
 
         private readonly string pathOut;
-        private readonly Languages language;
 
         private int steps, k;
         private readonly bool visualization, autoEnd;
         private readonly float mutationRate, speed, maxSpeed;
         private readonly int directionArraySize, populationQuantity, layersQuantity, autoExit;
 
-        public Logic(Modes mode, Languages language, string pathIn, string pathOut)
+        public Logic(Modes mode, string pathIn, string pathOut, string pathInfo)
         {
             UnityEngine.Object.Destroy(GameObject.Find("QL"));
             UnityEngine.Object.Destroy(GameObject.Find("QL_Canvas"));
 
             this.pathOut = pathOut;
-            this.language = language;
 
             FileStream fin = new FileStream(pathIn, FileMode.Open);
 
@@ -69,11 +67,20 @@ namespace Assets.Scripts.NEAT
                     values = reader.ReadLine().Split(';');
                     walls[i].transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
                 }
+            }
+            fin.Close();
 
+            FileStream finInfo = new FileStream(pathInfo, FileMode.Open);
+
+            using (StreamReader reader = new StreamReader(finInfo))
+            {
                 reader.ReadLine();
                 reader.ReadLine();
+                reader.ReadLine();
+                reader.ReadLine();
+                reader.ReadLine();
 
-                values = reader.ReadLine().Split(';');
+                var values = reader.ReadLine().Split(';');
                 visualization |= Convert.ToInt32(values[1]) == 1;
 
                 values = reader.ReadLine().Split(';');
@@ -95,7 +102,7 @@ namespace Assets.Scripts.NEAT
                 values = reader.ReadLine().Split(';');
                 mutationRate = Convert.ToSingle(values[1]);
             }
-            fin.Close();
+            finInfo.Close();
 
             UnityEngine.Object.Destroy(GameObject.FindWithTag("Wall"));
 
@@ -179,18 +186,9 @@ namespace Assets.Scripts.NEAT
                 Application.Quit();
             }
 
-            if (language == Languages.EN)
-            {
-                if (layers.GetBestPopulation().ReachedTheGoal) GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Reached the goal: Yes";
-                else GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Reached the goal: No";
-                GameObject.FindWithTag("TextGen").GetComponent<Text>().text = "Gen: " + layers.GetBestPopulation().Gen;
-            }
-            else if (language == Languages.RU)
-            {
-                if (layers.GetBestPopulation().ReachedTheGoal) GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Достиг цели: Да";
-                else GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Достиг цели: Нет";
-                GameObject.FindWithTag("TextGen").GetComponent<Text>().text = "Поколение: " + layers.GetBestPopulation().Gen;
-            }
+            if (layers.GetBestPopulation().ReachedTheGoal) GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Reached the goal: Yes";
+            else GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Reached the goal: No";
+            GameObject.FindWithTag("TextGen").GetComponent<Text>().text = "Gen: " + layers.GetBestPopulation().Gen;
         }
 
         public void Check()

@@ -22,7 +22,6 @@ namespace Assets.Scripts.QL
         private readonly GameObject agent;
 
         private readonly Modes mode;
-        private readonly Languages language;
 
         private bool pause;
         private readonly string pathOut;
@@ -31,7 +30,7 @@ namespace Assets.Scripts.QL
         private int iterationsK, initialsK;
         private readonly bool visualization;
 
-        public Logic(Modes mode, Languages language, string pathIn, string pathOut)
+        public Logic(Modes mode, string pathIn, string pathOut, string pathInfo)
         {
             k = 0;
 
@@ -41,7 +40,6 @@ namespace Assets.Scripts.QL
             this.pathOut = pathOut;
 
             this.mode = mode;
-            this.language = language;
 
             map = new Map();
 
@@ -53,16 +51,20 @@ namespace Assets.Scripts.QL
             using (StreamReader reader = new StreamReader(fin))
             {
                 values = reader.ReadLine().Split(';');
+                reader.ReadLine();
                 mapSize = new Vector3Int(Convert.ToInt32(values[1]), Convert.ToInt32(values[2]), Convert.ToInt32(values[3]));
                 map.map = new char[mapSize.z, mapSize.y, mapSize.x];
 
                 for (int z = mapSize.z - 1; z >= 0; z--)
+                {
                     for (int y = mapSize.y - 1; y >= 0; y--)
                     {
                         values = reader.ReadLine().Split(';');
                         for (int x = 0; x < mapSize.x; x++)
                             map.map[z, y, x] = Convert.ToChar(values[x]);
                     }
+                    reader.ReadLine();
+                }
 
                 values = reader.ReadLine().Split(';');
                 gamma = Convert.ToSingle(values[1]);
@@ -179,16 +181,8 @@ namespace Assets.Scripts.QL
                     pause = true;
                 }
 
-                if (language == Languages.EN)
-                {
-                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK];
-                    GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + iterationsK;
-                }
-                else if (language == Languages.RU)
-                {
-                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Позиция: " + map.Initials[initialsK];
-                    GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Итерация: " + iterationsK;
-                }
+                GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK];
+                GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + iterationsK;
             }
         }
 

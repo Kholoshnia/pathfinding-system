@@ -54,12 +54,3 @@ wall (8)
 position:;5;15;0
 rotation:;0;0;0;1
 localScale:;10;0,1;1
-
-info
-visualisation:;1
-direction-array-size:;100
-population-quantity:;250
-layers-quantity:;1
-auto-completion:;0;10
-speed:;0,1;5
-mutation-rate:;0,01;
