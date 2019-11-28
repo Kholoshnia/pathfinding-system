@@ -1,7 +1,8 @@
 QL
-CHECK
+LEARN
 /Users/vadim/Documents/GitHub/NEAT-QL/Release Files/data/input-ql.csv
 /Users/vadim/Documents/GitHub/NEAT-QL/Release Files/data/output.csv
 gamma:;0.8
-iterations:;30
+iterations:;10
+repetitions:;1
 visualization:;0

@@ -101,12 +101,12 @@ namespace Assets.Scripts.QL
             return act;
         }
 
-        public void Episode(int initState, VisualizationType visualization)
+        public void Episode(int initState, int iterations, VisualizationType visualization)
         {
             state = initState;
             if (state != finishState)
                 do { ChooseAnAction(visualization); } while (state == finishState);
-            for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)
+            for (int i = 0; i < iterations; i++)
                 ChooseAnAction(visualization);
             if (visualization == VisualizationType.ITERATIONS)
                 GameObject.FindWithTag("Start").transform.position = GameObject.Find("Position " + initState).transform.position;

@@ -26,9 +26,9 @@ namespace Assets.Scripts.QL
 
         private bool pause;
         private readonly string pathOut;
-        private readonly int iterations;
-        private readonly long finishReward;
         private int iterationsK, initialsK;
+        private readonly long finishReward;
+        private readonly int iterations, repetitions;
 
         public Logic(Modes mode, string pathIn, string pathOut, string pathInfo)
         {
@@ -81,7 +81,18 @@ namespace Assets.Scripts.QL
                 gamma = Convert.ToSingle(values[1]);
 
                 values = reader.ReadLine().Split(';');
-                iterations = Convert.ToInt32(values[1]);
+                switch (Convert.ToInt32(values[1]))
+                {
+                    case 0:
+                        iterations = mapSize.x * mapSize.y * mapSize.z;
+                        break;
+                    default:
+                        iterations = Convert.ToInt32(values[1]);
+                        break;
+                }
+
+                values = reader.ReadLine().Split(';');
+                repetitions = Convert.ToInt32(values[1]);
 
                 values = reader.ReadLine().Split(';');
                 switch (Convert.ToInt32(values[1]))
@@ -108,7 +119,7 @@ namespace Assets.Scripts.QL
                 initialsK = 0;
                 iterationsK = 0;
 
-                finishReward = (long)Math.Pow(mapSize.x * mapSize.y * mapSize.z, 3);
+                finishReward = mapSize.x * mapSize.y * mapSize.z;
 
                 table = new Table(finishReward, mapSize, map, gamma);
 
@@ -168,7 +179,7 @@ namespace Assets.Scripts.QL
         {
             if (!pause)
             {
-                table.Episode(map.Initials[initialsK], visualization);
+                table.Episode(map.Initials[initialsK], iterations, visualization);
 
                 initialsK++;
 
@@ -178,7 +189,7 @@ namespace Assets.Scripts.QL
                     iterationsK++;
                 }
 
-                if (iterationsK >= iterations)
+                if (iterationsK >= repetitions)
                 {
                     FileStream fout = new FileStream(pathOut, FileMode.Create);
 
