@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 394}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
     y: 0
     width: 1440
     height: 900
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 394}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -111,8 +111,8 @@ MonoBehaviour:
     y: 30
     width: 1440
     height: 850
-  m_MinSize: {x: 681, y: 344}
-  m_MaxSize: {x: 12006, y: 8044}
+  m_MinSize: {x: 683, y: 344}
+  m_MaxSize: {x: 12008, y: 8044}
   vertical: 0
   controlID: 30
 --- !u!114 &6
@@ -265,8 +265,8 @@ MonoBehaviour:
     y: 0
     width: 279
     height: 850
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 72}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -309,9 +309,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -8.063487, y: -6.53048, z: -1.5291091}
+    m_Target: {x: -6.625449, y: -11.728606, z: 14.921225}
     speed: 2
-    m_Value: {x: -8.063487, y: -6.53048, z: -1.5291091}
+    m_Value: {x: -6.625449, y: -11.728606, z: 14.921225}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -340,13 +340,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.18178736, y: 0.7687756, z: -0.24949554, w: -0.5601598}
+    m_Target: {x: -0.1967047, y: 0.24049973, z: -0.049769312, w: -0.94926935}
     speed: 2
-    m_Value: {x: -0.18261912, y: 0.7683661, z: -0.2506373, w: -0.5598615}
+    m_Value: {x: -0.19669269, y: 0.24048506, z: -0.049766276, w: -0.9492114}
   m_Size:
-    m_Target: 31.436724
+    m_Target: 57.15768
     speed: 2
-    m_Value: 31.436724
+    m_Value: 57.157677
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -403,18 +403,18 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c260f4ff9ad9ffffeae8ffff90f9ffff6efbffff
+      m_ExpandedIDs: 4afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: grid
-        m_OriginalName: grid
+        m_Name: goal
+        m_OriginalName: goal
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -1648
+        m_UserData: 12726
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -573,11 +573,11 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Examples/WhiteCity/Prefabs/Buildings
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Examples/WhiteCity/Prefabs/Buildings
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/vadim/Documents/GitHub/NEAT-QL/Release Files/unity/QL
     Map Creator
@@ -585,9 +585,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 3a2d0000
-    m_LastClickedID: 11578
-    m_ExpandedIDs: 00000000962c000000ca9a3b
+    m_SelectedIDs: 0e2e0000
+    m_LastClickedID: 11790
+    m_ExpandedIDs: 00000000ea2c00004a2d00009e2d0000482e0000682f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -615,7 +615,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000962c0000
+    m_ExpandedIDs: 00000000ea2c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -640,8 +640,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 5ae5ffff
-    m_LastClickedInstanceID: -6822
+    m_SelectedInstanceIDs: a8310000
+    m_LastClickedInstanceID: 12712
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000ba130100966e000000000000
     m_RenameOverlay:
@@ -734,7 +734,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 38
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52

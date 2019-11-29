@@ -4,13 +4,13 @@ public class OnCollision : MonoBehaviour
 {
     public bool wall, goal;
 
-    void Awake()
+    private void Awake()
     {
         wall = false;
         goal = false;
     }
 
-    void OnCollisionStay(Collision collision)
+    public void OnCollisionStay(Collision collision)
     {
         switch (collision.collider.tag)
         {
@@ -23,4 +23,16 @@ public class OnCollision : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.collider.tag)
+        {
+            case "goal":
+                goal = true;
+                break;
+            case "wall":
+                wall = true;
+                break;
+        }
+    }
 }
