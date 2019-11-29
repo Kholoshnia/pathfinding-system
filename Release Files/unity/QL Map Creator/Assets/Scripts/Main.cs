@@ -1,72 +1,79 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class Main : MonoBehaviour
 {
-    [SerializeField] private Vector3 mapSize;
-    private bool isPlaying;
+    [SerializeField] private GameObject space;
+    [SerializeField] private Transform spaceTransform;
+
     private string path;
+    private Vector3Int mapSize;
 
     void Start()
     {
-        isPlaying = true;
-        
-        List<Vector3> walls = new List<Vector3>();
+        mapSize.x = Convert.ToInt32(spaceTransform.localScale.x);
+        mapSize.y = Convert.ToInt32(spaceTransform.localScale.y);
+        mapSize.z = Convert.ToInt32(spaceTransform.localScale.z);
 
-        for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
-        {
-            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "wall")
-                walls.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].transform.position);
-        }
+        List<GameObject> grid = new List<GameObject>();
 
-        if (isPlaying)
-        {
-            path = EditorUtility.SaveFilePanel("Save new map", "", "Map", "csv");
-
-            FileStream fout = new FileStream(path, FileMode.Create);
-            using (StreamWriter writer = new StreamWriter(fout))
-            {
-                writer.Write("map-size:;");
-                writer.Write(mapSize.x);
-                writer.Write(';');
-                writer.Write(mapSize.y);
-                writer.Write(';');
-                writer.WriteLine(mapSize.z);
-                writer.WriteLine();
-
-                int k = 0;
-                for (int z = 0; z < mapSize.z; z++)
+        for (int z = 0; z < mapSize.z; z++)
+            for (int y = 0; y < mapSize.y; y++)
+                for (int x = 0; x < mapSize.x; x++)
                 {
-                    for (int y = 0; y < mapSize.y; y++)
-                    {
-                        for (int x = 0; x < mapSize.x; x++)
-                        {
-                            bool wallThere = false;
-                            for (int i = 0; i < walls.Count; i++)
-                                if (walls[i] == GameObject.Find("space (" + k + ')').transform.position)
-                                    wallThere = true;
+                    GameObject newSpace = Instantiate(space);
+                    newSpace.transform.position = new Vector3(x, y, z);// - spaceTransform.localScale / 2;
+                    grid.Add(newSpace);
+                }
 
-                            if (GameObject.FindWithTag("goal").transform.position == GameObject.Find("space (" + k + ')').transform.position)
-                                writer.Write('G');
-                            else if (wallThere)
-                                writer.Write('W');
-                            else
-                                writer.Write('S');
-                            writer.Write(';');
-                            k++;
-                        }
-                        writer.WriteLine();
+        Destroy(space);
+
+        for (int i = 0; i < grid.Count; i++)
+            if (grid[i].GetComponent<OnCollision>().goal)
+                Debug.Log("true");
+
+        path = EditorUtility.SaveFilePanel("Save new map", "", "Map", "csv");
+
+        FileStream fout = new FileStream(path, FileMode.Create);
+        using (StreamWriter writer = new StreamWriter(fout))
+        {
+            writer.Write("map-size:;");
+            writer.Write(mapSize.x);
+            writer.Write(';');
+            writer.Write(mapSize.y);
+            writer.Write(';');
+            writer.WriteLine(mapSize.z);
+            writer.WriteLine();
+
+            for (int z = 0; z < mapSize.z; z++)
+            {
+                for (int y = 0; y < mapSize.y; y++)
+                {
+                    for (int x = 0; x < mapSize.x; x++)
+                    {
+                        int k = mapSize.y * mapSize.x * z + mapSize.y * y + x;
+
+                        if (grid[k].GetComponent<OnCollision>().goal)
+                            writer.Write('G');
+                        else if (grid[k].GetComponent<OnCollision>().wall)
+                            writer.Write('W');
+                        else
+                            writer.Write('S');
+
+                        writer.Write(';');
                     }
                     writer.WriteLine();
                 }
+                writer.WriteLine();
             }
-            fout.Close();
-
-            Application.Quit();
-            isPlaying = false;
         }
+        fout.Close();
+
+        for (int i = 0; i < grid.Count; i++)
+            Destroy(grid[i]);
+        Application.Quit();
     }
 }
