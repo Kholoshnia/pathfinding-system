@@ -36,8 +36,8 @@ namespace neat
 	std::shared_ptr<Population> population;
 
 	std::fstream fout, fin;
-	std::string map_markup[80];
 	std::vector<sf::Vector2f> pos;
+	std::vector<std::string> map_markup;
 
 	sf::RectangleShape rect;
 	sf::Text text[4], controls[2];
@@ -54,15 +54,17 @@ namespace ql
 	std::shared_ptr<Table> table;
 	std::shared_ptr<Agent> agent;
 
-	float gamma;
-	sf::Text text[4];
+	float gamma, thickness;
+	std::vector<std::vector<char>> map_markup;
+
 	sf::Vector2i map_size;
 	std::string image_path;
 	std::fstream fout, fin;
 	std::vector<int> initials;
-	long long int finish_reward;
-	int finish_state, iterations;
-	bool was_running, map_loaded, finish_loaded, show_controls;
+	long long int goal_reward;
+	int goal_state, iterations;
+	sf::Text text[4], controls[2];
+	bool was_running, map_loaded, goal_loaded, show_controls, around;
 }
 #pragma endregion
 
@@ -1853,7 +1855,7 @@ namespace NNWay
 			this->textBox7->Name = L"textBox7";
 			this->textBox7->Size = System::Drawing::Size(254, 29);
 			this->textBox7->TabIndex = 55;
-			this->textBox7->Text = L"0.8";
+			this->textBox7->Text = L"0,8";
 			this->textBox7->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox7_KeyPress);
 			// 
 			// label17
@@ -2669,9 +2671,16 @@ namespace NNWay
 #pragma region functions
 		void InitializeVariables(void)
 		{
+			font.loadFromFile("Resource Files/Fonts/sans-serif.ttf");
+
+			loading_texture.loadFromFile("Resource Files/Textures/loading.png");
+			loading.setOrigin(100, 25);
+			loading.setPosition(400, 400);
+			loading.setTexture(loading_texture);
+
 			mode = Modes::LEARN;
 			dimension = Dimensions::TWOD;
-			learning_algorithm = LearningAlgorythms::NEAT;
+			learning_algorithm = LearningAlgorythms::QL;
 
 			width = 800;
 			height = 800;
@@ -2698,24 +2707,22 @@ namespace NNWay
 			neat::auto_end = false;
 			neat::was_running = false;
 
-			ql::gamma = 0.8f;
-			ql::iterations = 5;
-			ql::map_size.x = 10;
-			ql::map_size.y = 10;
-			ql::finish_reward = 100;
+			neat::controls[0].setPosition(685, 10);
+			neat::controls[0].setString(L"[Esc] - Exit");
+			neat::controls[1].setPosition(612, 10);
+			neat::controls[1].setString(L"[E] - Show controls");
 
-			ql::was_running = false;
-			ql::finish_loaded = false;
-
-			loading_texture.loadFromFile("Resource Files/Textures/loading.png");
-			loading.setOrigin(100, 25);
-			loading.setPosition(400, 400);
-			loading.setTexture(loading_texture);
+			for (int i = 0; i < 2; i++)
+			{
+				neat::controls[i].setCharacterSize(20);
+				neat::controls[i].setFont(font);
+				neat::controls[i].setFillColor(sf::Color::Black);
+				neat::controls[i].setOutlineThickness(3);
+				neat::controls[i].setOutlineColor(sf::Color::White);
+			}
 
 			neat::rect.setFillColor(sf::Color::Blue);
 			neat::rect.setSize(sf::Vector2f(10, 10));
-
-			font.loadFromFile("Resource Files/Fonts/sans-serif.ttf");
 
 			neat::text[0].setPosition(15, 10);
 			neat::text[0].setString(L"Reached the goal: ");
@@ -2735,6 +2742,17 @@ namespace NNWay
 				neat::text[i].setOutlineColor(sf::Color::White);
 			}
 
+			ql::gamma = 0.8f;
+			ql::iterations = 5;
+			ql::map_size.x = 10;
+			ql::map_size.y = 10;
+			ql::thickness = 2.5f;
+			ql::goal_reward = 100;
+
+			ql::around = false;
+			ql::was_running = false;
+			ql::goal_loaded = false;
+
 			ql::text[0].setPosition(15, 10);
 			ql::text[0].setString(L"Position: ");
 			ql::text[1].setPosition(100, 10);
@@ -2753,18 +2771,18 @@ namespace NNWay
 				ql::text[i].setOutlineColor(sf::Color::White);
 			}
 
-			neat::controls[0].setPosition(685, 10);
-			neat::controls[0].setString(L"[Esc] - Exit");
-			neat::controls[1].setPosition(612, 10);
-			neat::controls[1].setString(L"[E] - Show controls");
+			ql::controls[0].setPosition(685, 10);
+			ql::controls[0].setString(L"[Esc] - Exit");
+			ql::controls[1].setPosition(612, 10);
+			ql::controls[1].setString(L"[E] - Show controls");
 
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 2; i++)
 			{
-				neat::controls[i].setCharacterSize(20);
-				neat::controls[i].setFont(font);
-				neat::controls[i].setFillColor(sf::Color::Black);
-				neat::controls[i].setOutlineThickness(3);
-				neat::controls[i].setOutlineColor(sf::Color::White);
+				ql::controls[i].setCharacterSize(20);
+				ql::controls[i].setFont(font);
+				ql::controls[i].setFillColor(sf::Color::Black);
+				ql::controls[i].setOutlineThickness(3);
+				ql::controls[i].setOutlineColor(sf::Color::White);
 			}
 		}
 		void ResetVariables(void)
@@ -2798,10 +2816,10 @@ namespace NNWay
 			ql::iterations = 5;
 			ql::map_size.x = 10;
 			ql::map_size.y = 10;
-			ql::finish_reward = 100;
+			ql::goal_reward = 100;
 
 			ql::was_running = false;
-			ql::finish_loaded = false;
+			ql::goal_loaded = false;
 
 			neat::controls[1].setPosition(612, 10);
 			neat::controls[1].setString(L"[E] - Show controls");
@@ -3099,7 +3117,7 @@ namespace NNWay
 		else if (ql::iterations == 0)
 			Windows::Forms::MessageBox::Show("Error: Check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
-			neat::with_visualization_2d();
+			ql::with_visualization_2d();
 	}
 #pragma endregion
 
@@ -3132,7 +3150,7 @@ namespace NNWay
 		else if (ql::iterations == 0)
 			Windows::Forms::MessageBox::Show("Error: Check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
-			neat::with_visualization_2d();
+			ql::with_visualization_2d();
 	}
 #pragma endregion
 

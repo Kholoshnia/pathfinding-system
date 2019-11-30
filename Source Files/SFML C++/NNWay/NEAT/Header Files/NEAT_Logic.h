@@ -27,7 +27,7 @@ namespace neat
 	extern std::shared_ptr<Population> population;
 
 	extern std::fstream fout, fin;
-	extern std::string map_markup[80];
+	extern std::vector<std::string> map_markup;
 
 	extern sf::RectangleShape rect;
 	extern sf::Text text[4], controls[2];

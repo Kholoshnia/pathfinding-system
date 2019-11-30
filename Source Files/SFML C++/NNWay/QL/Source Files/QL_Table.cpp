@@ -10,14 +10,14 @@ ql::Table::Table()
 	for (auto& el : Q)
 		el.resize(map_size.y * map_size.y);
 
-	for (size_t state_y = 0; state_y < map_size.y * map_size.y; state_y++)
-		for (size_t action_x = 0; action_x < map_size.x * map_size.x; action_x++)
+	for (int state_y = 0; state_y < map_size.y * map_size.y; state_y++)
+		for (int action_x = 0; action_x < map_size.x * map_size.x; action_x++)
 			Q[state_y][action_x] = 0;
 
 	srand((unsigned int)time(NULL));
 
-	for (size_t state_y = 0; state_y < map_size.y * map_size.y; state_y++)
-		for (size_t action_x = 0; action_x < map_size.x * map_size.x; action_x++)
+	for (int state_y = 0; state_y < map_size.y * map_size.y; state_y++)
+		for (int action_x = 0; action_x < map_size.x * map_size.x; action_x++)
 			R[state_y][action_x] = -1;
 
 	for (int y = 0; y < map_size.y; y++)
@@ -29,33 +29,33 @@ ql::Table::Table()
 				a = 0;
 
 			if (x - 1 >= 0)
-				if (map->map[y][x - 1] == 'B')
+				if (map->map_markup[y][x - 1] == 'B')
 					R[map_size.y * y + x][map_size.y * y + x - 1] = 0;
-				else if (map->map[y][x - 1] == 'F')
-					R[map_size.y * y + x][map_size.y * y + x - 1] = finish_reward;
+				else if (map->map_markup[y][x - 1] == 'F')
+					R[map_size.y * y + x][map_size.y * y + x - 1] = goal_reward;
 
 			if (x + 1 < map_size.x)
-				if (map->map[y][x + 1] == 'B')
+				if (map->map_markup[y][x + 1] == 'B')
 					R[map_size.y * y + x][map_size.y * y + x + 1] = 0;
-				else if (map->map[y][x + 1] == 'F')
-					R[map_size.y * y + x][map_size.y * y + x + 1] = finish_reward;
+				else if (map->map_markup[y][x + 1] == 'F')
+					R[map_size.y * y + x][map_size.y * y + x + 1] = goal_reward;
 
 			if (y - 1 >= 0)
-				if (map->map[y - 1][x] == 'B')
+				if (map->map_markup[y - 1][x] == 'B')
 					R[map_size.y * y + x][map_size.y * (y - 1) + x] = 0;
-				else if (map->map[y - 1][x] == 'F')
-					R[map_size.y * y + x][map_size.y * (y - 1) + x] = finish_reward;
+				else if (map->map_markup[y - 1][x] == 'F')
+					R[map_size.y * y + x][map_size.y * (y - 1) + x] = goal_reward;
 
 			if (y + 1 < map_size.y)
-				if (map->map[y + 1][x] == 'B')
+				if (map->map_markup[y + 1][x] == 'B')
 					R[map_size.y * y + x][map_size.y * (y + 1) + x] = 0;
-				else if (map->map[y + 1][x] == 'F')
-					R[map_size.y * y + x][map_size.y * (y + 1) + x] = finish_reward;
+				else if (map->map_markup[y + 1][x] == 'F')
+					R[map_size.y * y + x][map_size.y * (y + 1) + x] = goal_reward;
 
-			if (map->map[y][x] == 'F')
+			if (map->map_markup[y][x] == 'F')
 			{
-				R[map_size.y * y + x][map_size.y * y + x] = finish_reward;
-				finish_state = map_size.y * y + x;
+				R[map_size.y * y + x][map_size.y * y + x] = goal_reward;
+				goal_state = map_size.y * y + x;
 			}
 		}
 	}
@@ -75,12 +75,12 @@ void ql::Table::choose_an_action()
 void ql::Table::episode(int init_state)
 {
 	state = init_state;
-	if (state != finish_state)
+	if (state != goal_state)
 		do
 		{
 			choose_an_action();
 			agent->update(state);
-		} while (state == finish_state);
+		} while (state == goal_state);
 	for (int i = 0; i < map_size.x * map_size.y; i++)
 		choose_an_action();
 }
