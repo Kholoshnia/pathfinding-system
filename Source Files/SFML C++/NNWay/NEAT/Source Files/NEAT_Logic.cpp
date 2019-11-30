@@ -2,64 +2,85 @@
 
 void neat::draw(sf::Event &event)
 {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.type == event.MouseMoved)
+	if (event.type == event.KeyPressed)
 	{
-		if ([&]
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && map->pos_rects.size() > 0)
+			map->pos_rects.pop_back();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::RControl) && map->pos_additional_rewards.size() > 0)
+			map->pos_additional_rewards.pop_back();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !around)
 		{
-			for (auto& el : map->pos_rects)
-				if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
-					return false;
-				return true;
-		}())
-			map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
-	}
+			around = true;
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && event.type == event.MouseMoved)
-	{
-		if ([&]
-		{
-			for (auto& el : map->pos_additional_rewards)
-				if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
-					return false;
-				return true;
-		}())
-			map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
-	}
+			for (int y = 0; y < map_size.y; y++)
+			{
+				map->pos_rects.emplace_back(0, y * 10);
+				map->pos_rects.emplace_back(map_size.x * 10 - 10, y * 10);
+			}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && map->pos_rects.size() > 0)
-		map->pos_rects.pop_back();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) && map->pos_additional_rewards.size() > 0)
-		map->pos_additional_rewards.pop_back();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !around)
-	{
-		around = true;
-
-		for (int y = 0; y < map_size.y; y++)
-		{
-			map->pos_rects.emplace_back(0, y * 10);
-			map->pos_rects.emplace_back(map_size.x * 10 - 10, y * 10);
+			for (int x = 0; x < map_size.x; x++)
+			{
+				map->pos_rects.emplace_back(x * 10, 0);
+				map->pos_rects.emplace_back(x * 10, map_size.y * 10 - 10);
+			}
 		}
 
-		for (int x = 0; x < map_size.x; x++)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) goal_radius += 1.0f;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && goal_radius > 0) goal_radius -= 1.0f;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) agent_radius += 1.0f;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && agent_radius > 0) agent_radius -= 1.0f;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 		{
-			map->pos_rects.emplace_back(x * 10, 0);
-			map->pos_rects.emplace_back(x * 10, map_size.y * 10 - 10);
+			show_controls = !show_controls;
+			if (show_controls)
+			{
+				neat::controls[1].setPosition(612, 10);
+				neat::controls[1].setString(L"[E] - Show controls");
+			}
+			else
+			{
+				neat::controls[1].setPosition(552, 10);
+				neat::controls[1].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[Esc] - Exit without saving\n[Enter] - save&exit\n[E] - Hide controls");
+			}
 		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.type == event.MouseMoved)
-		map->pos_goal = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
+	if (event.type == event.MouseMoved)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			if ([&]
+				{
+					for (auto& el : map->pos_rects)
+						if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
+							return false;
+						return true;
+				}())
+				map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
+		}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.type == event.MouseMoved)
-		map->pos_agent = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+		{
+			if ([&]
+				{
+					for (auto& el : map->pos_additional_rewards)
+						if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
+							return false;
+						return true;
+				}())
+				map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
+		}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) goal_radius += 0.1f;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && goal_radius > 0) goal_radius -= 0.1f;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+			map->pos_goal = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) agent_radius += 0.1f;
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && agent_radius > 0) agent_radius -= 0.1f;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+			map->pos_agent = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
+	}
 }
 
 void neat::check_2d()
@@ -71,19 +92,15 @@ void neat::check_2d()
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed || (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && event.type == event.KeyPressed))
 				window.close();
 
 		window.clear(sf::Color::White);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-			window.close();
-
-		map->show(window);
-
 		if (population->gen == 1)
 			population->update();
 
+		map->show(window);
 		population->show(window);
 
 		if (!population->reached_the_goal) check.emplace_back(population->agents[0].circle.getPosition());
@@ -115,62 +132,65 @@ void neat::create_new_map_2d()
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
+		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-		window.clear(sf::Color::White);
+			draw(event);
 
-		draw(event);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) && event.type == event.KeyPressed)
+			{
+				window.draw(loading);
+				window.display();
+
+				fout.open("Resource Files/Data/NEAT/input.csv");
+				if (fout.is_open())
+				{
+					fout << "map-size-x:;" << map_size.x << std::endl;
+					fout << "map-size-y:;" << map_size.y << std::endl;
+					for (int y = 0; y < map_size.y; y++)
+					{
+						for (int x = 0; x < map_size.x; x++)
+						{
+							if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
+								fout << 'A';
+							else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
+								fout << 'G';
+							else if ([&x, &y]
+								{
+									for (auto& el : map->pos_rects)
+										if (x == el.x / 10 && y == el.y / 10)
+											return true;
+										return false;
+								}())
+								fout << 'W';
+							else if ([&x, &y]
+								{
+									for (auto& el : map->pos_additional_rewards)
+										if (x == el.x / 10 && y == el.y / 10)
+											return true;
+										return false;
+								}())
+								fout << 'B';
+							else
+								fout << 'S';
+							fout << ';';
+						}
+						fout << std::endl;
+					}
+					fout << "agent-radius:;" << agent_radius << std::endl;
+					fout << "goal-radius:;" << goal_radius << std::endl;
+					fout.close();
+					window.close();
+				}
+				else System::Windows::Forms::MessageBox::Show("Error opening file \"input.csv\"");
+			}
+		}
+			
+		window.clear(sf::Color::White);
 
 		map->show(window);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-		{
-			window.draw(loading);
-			window.display();
-
-			fout.open("Resource Files/Data/NEAT/input.csv");
-			if (fout.is_open())
-			{
-				fout << "map-size-x:;" << map_size.x << std::endl;
-				fout <<	"map-size-y:;" << map_size.y << std::endl;
-				for (int y = 0; y < map_size.y; y++)
-				{
-					for (int x = 0; x < map_size.x; x++)
-					{
-						if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
-							fout << 'A';
-						else if (x == map->pos_goal.x / 10  && y == map->pos_goal.y / 10)
-							fout << 'G';
-						else if ([&x, &y]
-						{
-							for (auto& el : map->pos_rects)
-								if (x == el.x / 10 && y == el.y / 10)
-									return true;
-							return false;
-						}())
-							fout << 'W';
-						else if ([&x, &y]
-						{
-							for (auto& el : map->pos_additional_rewards)
-								if (x == el.x / 10 && y == el.y / 10)
-									return true;
-							return false;
-						}())
-							fout << 'B';
-						else
-							fout << 'S';
-						fout << ';';
-					}
-					fout << std::endl;
-				}
-				fout << "agent-radius:;" << agent_radius << std::endl;
-				fout << "goal-radius:;" << goal_radius << std::endl;
-				fout.close();
-				window.close();
-			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"input.csv\"");
-		}
-		window.draw(controls[2]);
+		window.draw(controls[1]);
 		window.display();
 	}
 }
@@ -326,72 +346,73 @@ void neat::with_visualization_2d()
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
-			if (event.type == sf::Event::Closed)
-				window.close();
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->populations[layers->best_population].after_reach > auto_exit))
 		{
-			window.draw(loading);
-			window.display();
-
-			fout.open("Resource Files/Data/NEAT/output.csv");
-			if (fout.is_open())
-			{
-				fout << max_speed << std::endl;
-				fout << layers->populations[layers->best_population].min_step << std::endl;
-				for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
-					fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
-				fout.close();
+			if (event.type == sf::Event::Closed || (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && event.type == event.KeyPressed))
 				window.close();
-			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
+			draw(event);
 
-			fout.open("Resource Files/Data/NEAT/new_map.csv");
-			if (fout.is_open())
+			if (event.type == event.KeyPressed)
 			{
-				fout << "map-size-x:;" << map_size.x << std::endl;
-				fout << "map-size-y:;" << map_size.y << std::endl;
-				for (int y = 0; y < map_size.y; y++)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->populations[layers->best_population].after_reach > auto_exit))
 				{
-					for (int x = 0; x < map_size.x; x++)
+					window.draw(loading);
+					window.display();
+
+					fout.open("Resource Files/Data/NEAT/output.csv");
+					if (fout.is_open())
 					{
-						if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
-							fout << 'A';
-						else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
-							fout << 'G';
-						else if ([&x, &y]
-						{
-							for (auto& el : map->pos_rects)
-								if (x == el.x / 10 && y == el.y / 10)
-									return true;
-								return false;
-						}())
-							fout << 'W';
-						else
-							fout << 'S';
-						fout << ';';
+						fout << max_speed << std::endl;
+						fout << layers->populations[layers->best_population].min_step << std::endl;
+						for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
+							fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
+						fout.close();
+						window.close();
 					}
-					fout << std::endl;
+					else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
+
+					fout.open("Resource Files/Data/NEAT/new_map.csv");
+					if (fout.is_open())
+					{
+						fout << "map-size-x:;" << map_size.x << std::endl;
+						fout << "map-size-y:;" << map_size.y << std::endl;
+						for (int y = 0; y < map_size.y; y++)
+						{
+							for (int x = 0; x < map_size.x; x++)
+							{
+								if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
+									fout << 'A';
+								else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
+									fout << 'G';
+								else if ([&x, &y]
+									{
+										for (auto& el : map->pos_rects)
+											if (x == el.x / 10 && y == el.y / 10)
+												return true;
+											return false;
+									}())
+									fout << 'W';
+								else
+									fout << 'S';
+								fout << ';';
+							}
+							fout << std::endl;
+						}
+						fout << "agent-radius:;" << agent_radius << std::endl;
+						fout << "goal-radius:;" << goal_radius << std::endl;
+						fout.close();
+						window.close();
+					}
+					else System::Windows::Forms::MessageBox::Show("Error opening file \"new_map.csv\"");
 				}
-				fout << "agent-radius:;" << agent_radius << std::endl;
-				fout << "goal-radius:;" << goal_radius << std::endl;
-				fout.close();
-				window.close();
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) pause = !pause;
 			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"new_map.csv\"");
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-			window.close();
-
 		window.clear(sf::Color::White);
-		map->show(window);
 
-		draw(event);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) pause = !pause;
 		if (!pause) layers->update();
 
+		map->show(window);
 		layers->show(window);
 
 		if (layers->best_population) text[1].setString(L"Yes");
@@ -419,7 +440,7 @@ void neat::with_visualization_3d()
 		fout << "population-quantity:;" << population_quantity << std::endl;
 		fout << "layers-quantity:;" << layers_quantity << std::endl;
 		fout << "auto-completion:;" << auto_end << ';' << auto_exit;
-		fout << "speed:;" << 0.1f << ';' << max_speed;
+		fout << "speed:;" << 1.0f << ';' << max_speed;
 		fout << "mutation-rate" << mutation_rate;
 		fout.close();
 	}
@@ -440,7 +461,7 @@ void neat::without_visualization_2d()
 
 	while (calculating)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->populations[layers->best_population].after_reach > auto_exit))
+		if (auto_end && layers->populations[layers->best_population].after_reach > auto_exit)
 		{
 			fout.open("Resource Files/Data/NEAT/output.csv");
 			if (fout.is_open())
@@ -471,7 +492,7 @@ void neat::without_visualization_3d()
 		fout << "population-quantity:;" << population_quantity << std::endl;
 		fout << "layers-quantity:;" << layers_quantity << std::endl;
 		fout << "auto-completion:;" << auto_end << ';' << auto_exit;
-		fout << "speed:;" << 0.1f << ';' << max_speed;
+		fout << "speed:;" << 1.0f << ';' << max_speed;
 		fout << "mutation-rate" << mutation_rate;
 		fout.close();
 	}

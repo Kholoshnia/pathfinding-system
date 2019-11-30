@@ -15,6 +15,7 @@
 #include <QL/Header Files/QL_Logic.h>
 #include <QL/Header Files/QL_Agent.h>
 
+#pragma region variables
 Modes mode;
 Dimensions dimension;
 LearningAlgorythms learning_algorithm;
@@ -26,7 +27,7 @@ sf::Sprite loading;
 sf::Texture loading_texture;
 
 int fps, width, height;
-bool visualization, from_image, check_from_file, map_loaded, result_loaded, pause;
+bool visualization, from_image, check_from_file, map_loaded, result_loaded, pause, show_controls;
 
 namespace neat
 {
@@ -39,7 +40,7 @@ namespace neat
 	std::vector<sf::Vector2f> pos;
 
 	sf::RectangleShape rect;
-	sf::Text text[4], controls[3];
+	sf::Text text[4], controls[2];
 	sf::Vector2i map_size, wall_size, pos_agent, pos_goal;
 
 	bool was_running, map_loaded, auto_end, around;
@@ -61,8 +62,9 @@ namespace ql
 	std::vector<int> initials;
 	long long int finish_reward;
 	int finish_state, iterations;
-	bool was_running, map_loaded, finish_loaded;
+	bool was_running, map_loaded, finish_loaded, show_controls;
 }
+#pragma endregion
 
 namespace NNWay
 {
@@ -84,7 +86,6 @@ namespace NNWay
 	protected:
 		~menu() { if (components) delete components; }
 	protected:
-
 #pragma region Create components
 	private: System::Windows::Forms::ToolStripMenuItem^ settingsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ modeToolStripMenuItem;
@@ -2663,7 +2664,9 @@ namespace NNWay
 			this->PerformLayout();
 
 		}
+#pragma endregion
 
+#pragma region functions
 		void InitializeVariables(void)
 		{
 			mode = Modes::LEARN;
@@ -2675,10 +2678,11 @@ namespace NNWay
 			pause = false;
 			from_image = false;
 			map_loaded = false;
+			show_controls = false;
 			result_loaded = false;
 			visualization = false;
 			check_from_file = false;
-			
+
 			neat::max_speed = 5;
 			neat::auto_exit = 10;
 			neat::map_size.x = 80;
@@ -2711,7 +2715,7 @@ namespace NNWay
 			neat::rect.setFillColor(sf::Color::Blue);
 			neat::rect.setSize(sf::Vector2f(10, 10));
 
-			font.loadFromFile("Resource Files/Fonts/arial.TTF");
+			font.loadFromFile("Resource Files/Fonts/sans-serif.ttf");
 
 			neat::text[0].setPosition(15, 10);
 			neat::text[0].setString(L"Reached the goal: ");
@@ -2750,11 +2754,9 @@ namespace NNWay
 			}
 
 			neat::controls[0].setPosition(685, 10);
-			neat::controls[0].setString(L"[Esc] - exit");
-			neat::controls[1].setPosition(552, 10);
-			neat::controls[1].setString(L"[Esc] - exit without saving\n[Enter] - save&exit");
-			neat::controls[2].setPosition(612, 10);
-			neat::controls[2].setString(L"[Alt] - move goal\n[LCtrl] - move object\n[Space] - fill around");
+			neat::controls[0].setString(L"[Esc] - Exit");
+			neat::controls[1].setPosition(612, 10);
+			neat::controls[1].setString(L"[E] - Show controls");
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -2772,6 +2774,7 @@ namespace NNWay
 			pause = false;
 			from_image = false;
 			map_loaded = false;
+			show_controls = false;
 			result_loaded = false;
 			visualization = false;
 			check_from_file = false;
@@ -2787,6 +2790,7 @@ namespace NNWay
 			neat::population_quantity = 250;
 			neat::direction_array_size = 400;
 
+			neat::around = false;
 			neat::auto_end = false;
 			neat::was_running = false;
 
@@ -2798,6 +2802,9 @@ namespace NNWay
 
 			ql::was_running = false;
 			ql::finish_loaded = false;
+
+			neat::controls[1].setPosition(612, 10);
+			neat::controls[1].setString(L"[E] - Show controls");
 		}
 		void ChooseInitializer(void)
 		{

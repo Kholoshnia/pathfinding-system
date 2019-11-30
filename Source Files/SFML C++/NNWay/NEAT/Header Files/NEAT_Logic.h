@@ -18,7 +18,7 @@ extern Dimensions dimension;
 extern std::string path;
 extern sf::Sprite loading;
 extern int fps, width, height;
-extern bool visualization, from_image, map_loaded, result_loaded, pause;
+extern bool visualization, from_image, map_loaded, result_loaded, pause, show_controls;
 
 namespace neat
 {
@@ -30,7 +30,7 @@ namespace neat
 	extern std::string map_markup[80];
 
 	extern sf::RectangleShape rect;
-	extern sf::Text text[4], controls[3];
+	extern sf::Text text[4], controls[2];
 	extern sf::Vector2i map_size, wall_size;
 
 	extern bool auto_end, around;
@@ -40,7 +40,6 @@ namespace neat
 	void check_3d();
 	void create_new_map_2d();
 	void create_new_map_3d();
-	void draw(sf::Event& event);
 	void load_map_from_file_2d();
 	void load_map_from_file_3d();
 	void load_result_from_file_2d();
@@ -49,4 +48,5 @@ namespace neat
 	void with_visualization_3d();
 	void without_visualization_2d();
 	void without_visualization_3d();
+	void draw(sf::Event& event);
 }
