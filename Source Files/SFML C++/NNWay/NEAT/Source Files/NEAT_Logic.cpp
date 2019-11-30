@@ -146,7 +146,7 @@ void neat::create_new_map_2d()
 				fout.open("Resource Files/Data/NEAT/input.csv");
 				if (fout.is_open())
 				{
-					fout << "map-size:;" << map_size.x << ';' << std::endl;
+					fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
 					for (int y = 0; y < map_size.y; y++)
 					{
 						for (int x = 0; x < map_size.x; x++)
@@ -260,6 +260,7 @@ void neat::load_map_from_file_2d()
 			fin >> map_size.x;
 			fin.get(ch);
 			fin >> map_size.y;
+			fin.get(ch);
 
 			std::string line;
 			for (int y = 0; y < map_size.y; y++)
@@ -373,10 +374,10 @@ void neat::with_visualization_2d()
 					}
 					else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
 
-					fout.open("Resource Files/Data/NEAT/new_map.csv");
+					fout.open("Resource Files/Data/NEAT/new_input.csv");
 					if (fout.is_open())
 					{
-						fout << "map-size:;" << map_size.x << ';' << std::endl;
+						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
 						for (int y = 0; y < map_size.y; y++)
 						{
 							for (int x = 0; x < map_size.x; x++)
