@@ -8,7 +8,7 @@
 namespace neat
 {
 	extern float mutation_rate;
-	extern int direction_array_size;
+	extern int directions_array_size;
 
 	struct Brain
 	{

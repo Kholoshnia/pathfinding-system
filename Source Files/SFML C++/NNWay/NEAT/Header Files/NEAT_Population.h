@@ -8,7 +8,7 @@
 
 namespace neat
 {
-	extern int direction_array_size, population_quantity, layers_quantity;
+	extern int directions_array_size, population_quantity, layers_quantity;
 
 	struct Population
 	{

@@ -10,6 +10,7 @@
 
 namespace ql
 {
+	extern int iterations;
 	extern std::shared_ptr<Agent> agent;
 	extern int goal_state;
 	extern std::shared_ptr<Map> map;

@@ -8,7 +8,7 @@ neat::Population::Population()
 	best_agent = 0;
 	fitness_sum = 0;
 	after_reach = 0;
-	min_step = direction_array_size;
+	min_step = directions_array_size;
 	srand(clock());
 	color = sf::Color(rand() & 255, rand() & 255, rand() & 255);
 	if (layers_quantity > 1)
@@ -76,7 +76,6 @@ void neat::Population::natural_selection()
 	calculate_fitness_sum();
 	std::vector<Agent>new_agents;
 	new_agents.resize(agents.size());
-	set_best_agent();
 	new_agents[0] = agents[best_agent].get_copy();
 	new_agents[0].is_best = true;
 	for (int i = 1; i < agents.size(); ++i)

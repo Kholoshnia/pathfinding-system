@@ -18,10 +18,12 @@ extern Dimensions dimension;
 extern std::string path;
 extern sf::Sprite loading;
 extern int fps, width, height;
-extern bool visualization, from_image, map_loaded, result_loaded, pause, show_controls;
+extern bool from_image, map_loaded, result_loaded, pause, show_controls;
 
 namespace neat
 {
+	extern VisualizatoinTypes visualization_type;
+
 	extern std::shared_ptr<Map> map;
 	extern std::shared_ptr<Layers> layers;
 	extern std::shared_ptr<Population> population;
@@ -30,11 +32,11 @@ namespace neat
 	extern std::vector<std::string> map_markup;
 
 	extern sf::RectangleShape rect;
-	extern sf::Text text[4], controls[2];
+	extern sf::Text text[4], controls[3];
 	extern sf::Vector2i map_size, wall_size;
 
-	extern bool auto_end, around;
-	extern int population_quantity, layers_quantity, direction_array_size, auto_exit;
+	extern bool around;
+	extern int population_quantity, layers_quantity, directions_array_size, auto_exit;
 
 	void check_2d();
 	void check_3d();

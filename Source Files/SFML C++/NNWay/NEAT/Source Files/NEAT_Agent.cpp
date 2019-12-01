@@ -50,7 +50,7 @@ void neat::Agent::update()
 
 void neat::Agent::calculate_fitness()
 {
-	if (reached_goal) fitness = static_cast<float>(brain.directions.size() / (brain.step * brain.step));
+	if (reached_goal) fitness = brain.directions.size() + 1.0f / static_cast<float>(brain.step * brain.step);
 	else fitness = 1.0f / (map->dist(pos) * map->dist(pos));
 }
 

@@ -3,7 +3,7 @@
 neat::Brain::Brain()
 {
 	step = 0;
-	directions.resize(direction_array_size);
+	directions.resize(directions_array_size);
 	randomize();
 }
 

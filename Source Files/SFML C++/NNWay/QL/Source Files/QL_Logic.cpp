@@ -286,7 +286,7 @@ void ql::with_visualization_2d()
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Map");
 
-	int iterations_k = 0, initials_k = 0;
+	int repetitions_k = 0, initials_k = 0;
 
 	while (window.isOpen())
 	{
@@ -301,19 +301,19 @@ void ql::with_visualization_2d()
 		initials_str << initials[initials_k];
 		text[1].setString(initials_str.str());
 
-		std::ostringstream iterations_str;
-		iterations_str << iterations_k;
-		text[3].setString(iterations_str.str());
+		std::ostringstream repetitions_str;
+		repetitions_str << repetitions_k;
+		text[3].setString(repetitions_str.str());
 
 		initials_k++;
 
 		if (initials_k > initials.size() - 1)
 		{
 			initials_k = 0;
-			iterations_k++;
+			repetitions_k++;
 		}
 
-		if (iterations_k > iterations)
+		if (repetitions_k > repetitions)
 		{
 			fout.open("Resource Files/Data/QL/output.csv");
 			if (fout.is_open())
@@ -353,7 +353,7 @@ void ql::without_visualization_2d()
 	table.reset(new Table());
 	agent.reset(new Agent());
 
-	for (int i = 0; i < iterations; i++)
+	for (int i = 0; i < repetitions; i++)
 		for (auto& el : initials)
 			table->episode(el);
 

@@ -81,7 +81,7 @@ void ql::Table::episode(int init_state)
 			choose_an_action();
 			agent->update(state);
 		} while (state == goal_state);
-	for (int i = 0; i < map_size.x * map_size.y; i++)
+	for (int i = 0; i < iterations; i++)
 		choose_an_action();
 }
 

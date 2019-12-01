@@ -35,11 +35,12 @@ void neat::Layers::update_selected(const int& i)
 {
 	if (populations[i].all_agents_dead())
 	{
-		set_best_population();
 		populations[i].calculate_fitness();
+		populations[i].set_best_agent();
+		set_best_population();
 		populations[i].natural_selection();
 		populations[i].mutate();
-		if (populations[i].agents[populations[i].best_agent].reached_goal) populations[i].after_reach++;
+		if (populations[i].reached_the_goal) populations[i].after_reach++;
 	}
 	else
 		populations[i].update();

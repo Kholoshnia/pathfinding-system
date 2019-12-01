@@ -27,7 +27,7 @@ namespace ql
 	extern std::fstream fout, fin;
 	extern std::vector<int> initials;
 	extern long long int goal_reward;
-	extern int goal_state, iterations;
+	extern int goal_state, repetitions;
 	extern bool map_loaded, goal_loaded, around;
 
 	void check_2d();
