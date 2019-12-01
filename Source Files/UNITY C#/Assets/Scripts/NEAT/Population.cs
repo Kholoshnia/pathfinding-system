@@ -16,9 +16,7 @@ namespace Assets.Scripts.NEAT
 
         public Population(int directionArraySize, int populationQuantity, int layersQuantity, float mutationRate, float speed, float maxSpeed)
         {
-            if (layersQuantity != 1)
-                color = Random.ColorHSV();
-            ReachedTheGoal = false;
+            if (layersQuantity != 1) color = Random.ColorHSV();
             fitnessSum = 0;
             Agents = new Agent[populationQuantity];
             if (layersQuantity != 1)
@@ -37,11 +35,13 @@ namespace Assets.Scripts.NEAT
         {
             for (int i = 0; i < Agents.Length; i++)
             {
-                if (Agents[i].Brain.Step > MinStep)
-                    Agents[i].Dead = true;
-                else
-                    Agents[i].Update();
-                ReachedTheGoal |= Agents[i].ReachedGoal;
+                if (Agents[i].Brain.Step > MinStep) Agents[i].Dead = true;
+                else Agents[i].Update();
+                if (Agents[i].ReachedGoal)
+                {
+                    MinStep = Agents[i].Brain.Step;
+                    ReachedTheGoal = true;
+                }
             }
         }
 

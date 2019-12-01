@@ -48,6 +48,9 @@ public class CameraMovement : MonoBehaviour
             transform.Translate(-Vector3.forward * xSpeed * Time.deltaTime / 10.0f);
         if (Input.GetKey(KeyCode.D))
             transform.Translate(Vector3.right * ySpeed * Time.deltaTime / 10.0f);
+
+        if (Input.GetKeyUp(KeyCode.P))
+            GameObject.Find("Main Camera").GetComponent<Camera>().orthographic = !GameObject.Find("Main Camera").GetComponent<Camera>().orthographic;
     }
 
     private static float ClampAngle(float angle, float min, float max)

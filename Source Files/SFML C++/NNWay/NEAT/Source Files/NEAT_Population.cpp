@@ -2,18 +2,18 @@
 
 neat::Population::Population()
 {
+	reached_the_goal = false;
+	agents.resize(population_quantity);
+	gen = 1;
+	best_agent = 0;
+	fitness_sum = 0;
+	after_reach = 0;
+	min_step = directions_array_size;
 	srand(clock());
 	color = sf::Color(rand() & 255, rand() & 255, rand() & 255);
-	reached_the_goal = false;
-	fitness_sum = 0;
-	agents.resize(population_quantity);
-	if (layers_quantity != 1)
+	if (layers_quantity > 1)
 		for (auto& el : agents)
-			el.color = color;
-	gen = 1;
-	min_step = direction_array_size;
-	best_agent = 0;
-	after_reach = 0;
+			el.circle.setFillColor(color);
 }
 
 neat::Agent neat::Population::select_parent()
@@ -46,14 +46,15 @@ void neat::Population::mutate()
 
 void neat::Population::update()
 {
-	for (auto& agent : agents)
+	for (auto& el : agents)
 	{
-		if (agent.brain.step > min_step)
-			agent.dead = true;
-		else
-			agent.update();
-		if (agent.reached_goal)
+		if (el.brain.step > min_step) el.dead = true;
+		else el.update();
+		if (el.reached_goal)
+		{
+			min_step = el.brain.step;
 			reached_the_goal = true;
+		}
 	}
 }
 
@@ -61,17 +62,7 @@ void neat::Population::set_best_agent()
 {
 	float max = 0;
 	int max_index = 0;
-	for (int i = 0; i < agents.size(); ++i)
-	{
-		if (agents[i].fitness > max)
-		{
-			max = agents[i].fitness;
-			max_index = i;
-		}
-	}
-	best_agent = max_index;
-	if (agents[best_agent].reached_goal)
-		min_step = agents[best_agent].brain.step;
+	best_agent = static_cast<int>(std::max_element(agents.begin(), agents.end(), [&](Agent& agent_1, Agent& agent_2) { return agent_1.fitness < agent_2.fitness;}) - agents.begin());
 }
 
 void neat::Population::calculate_fitness()
@@ -85,7 +76,6 @@ void neat::Population::natural_selection()
 	calculate_fitness_sum();
 	std::vector<Agent>new_agents;
 	new_agents.resize(agents.size());
-	set_best_agent();
 	new_agents[0] = agents[best_agent].get_copy();
 	new_agents[0].is_best = true;
 	for (int i = 1; i < agents.size(); ++i)
@@ -94,9 +84,10 @@ void neat::Population::natural_selection()
 		new_agents[i] = parent.get_copy();
 	}
 	agents = new_agents;
-	if (layers_quantity != 1)
+	if (layers_quantity > 1)
 		for (auto& el : agents)
-			el.color = color;
+			el.circle.setFillColor(color);
+	agents[0].circle.setFillColor(sf::Color::Green);
 	gen++;
 }
 

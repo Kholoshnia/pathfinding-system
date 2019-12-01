@@ -7,9 +7,11 @@
 
 namespace neat
 {
+	extern float max_speed;
+	extern std::shared_ptr<Map> map;
+
 	struct Agent
 	{
-		Map map;
 		Brain brain;
 		float fitness;
 		sf::Color color;

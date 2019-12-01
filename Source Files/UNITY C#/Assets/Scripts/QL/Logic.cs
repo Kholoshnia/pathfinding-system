@@ -22,16 +22,15 @@ namespace Assets.Scripts.QL
         private readonly GameObject agent;
 
         private readonly Modes mode;
-        private readonly Languages language;
+        private readonly VisualizationType visualization;
 
         private bool pause;
         private readonly string pathOut;
-        private readonly int iterations;
+        private int repetitionsK, initialsK;
         private readonly long finishReward;
-        private int iterationsK, initialsK;
-        private readonly bool visualization;
+        private readonly int iterations, repetitions;
 
-        public Logic(Modes mode, Languages language, string pathIn, string pathOut)
+        public Logic(Modes mode, string pathIn, string pathOut, string pathInfo)
         {
             k = 0;
 
@@ -41,7 +40,6 @@ namespace Assets.Scripts.QL
             this.pathOut = pathOut;
 
             this.mode = mode;
-            this.language = language;
 
             map = new Map();
 
@@ -53,27 +51,64 @@ namespace Assets.Scripts.QL
             using (StreamReader reader = new StreamReader(fin))
             {
                 values = reader.ReadLine().Split(';');
+                reader.ReadLine();
                 mapSize = new Vector3Int(Convert.ToInt32(values[1]), Convert.ToInt32(values[2]), Convert.ToInt32(values[3]));
                 map.map = new char[mapSize.z, mapSize.y, mapSize.x];
 
                 for (int z = mapSize.z - 1; z >= 0; z--)
+                {
                     for (int y = mapSize.y - 1; y >= 0; y--)
                     {
                         values = reader.ReadLine().Split(';');
                         for (int x = 0; x < mapSize.x; x++)
                             map.map[z, y, x] = Convert.ToChar(values[x]);
                     }
+                    reader.ReadLine();
+                }
+            }
+            fin.Close();
+
+            FileStream finInfo = new FileStream(pathInfo, FileMode.Open);
+
+            using (StreamReader reader = new StreamReader(finInfo))
+            {
+                reader.ReadLine();
+                reader.ReadLine();
+                reader.ReadLine();
+                reader.ReadLine();
 
                 values = reader.ReadLine().Split(';');
                 gamma = Convert.ToSingle(values[1]);
 
                 values = reader.ReadLine().Split(';');
-                iterations = Convert.ToInt32(values[1]);
+                switch (Convert.ToInt32(values[1]))
+                {
+                    case 0:
+                        iterations = mapSize.x * mapSize.y * mapSize.z;
+                        break;
+                    default:
+                        iterations = Convert.ToInt32(values[1]);
+                        break;
+                }
 
                 values = reader.ReadLine().Split(';');
-                visualization |= Convert.ToInt32(values[1]) == 1;
+                repetitions = Convert.ToInt32(values[1]);
+
+                values = reader.ReadLine().Split(';');
+                switch (Convert.ToInt32(values[1]))
+                {
+                    case 0:
+                        visualization = VisualizationType.NOVISUALIZATION;
+                        break;
+                    case 1:
+                        visualization = VisualizationType.ITERATIONS;
+                        break;
+                    case 2:
+                        visualization = VisualizationType.STATES;
+                        break;
+                }
             }
-            fin.Close();
+            finInfo.Close();
 
             map.Initialize(mapSize);
 
@@ -82,18 +117,15 @@ namespace Assets.Scripts.QL
             if (mode == Modes.LEARN)
             {
                 initialsK = 0;
-                iterationsK = 0;
+                repetitionsK = 0;
 
-                finishReward = (long)Math.Pow(mapSize.x * mapSize.y * mapSize.z, 3);
+                finishReward = mapSize.x * mapSize.y * mapSize.z;
 
                 table = new Table(finishReward, mapSize, map, gamma);
 
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("StartPositions"));
 
-                for (int j = 0; j < map.Walls.Count; j++)
-                    GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.Walls[j].name });
-
-                if (!visualization)
+                if (visualization == VisualizationType.NOVISUALIZATION)
                 {
                     UnityEngine.Object.Destroy(agent);
                     for (int i = 0; i < map.Spaces.Count; i++)
@@ -138,26 +170,26 @@ namespace Assets.Scripts.QL
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextPosition"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextIteration"));
             }
+
+            for (int j = 0; j < map.Walls.Count; j++)
+                GameObject.FindWithTag("Walls").GetComponent<Dropdown>().options.Add(new Dropdown.OptionData { text = map.Walls[j].name });
         }
 
         public void Learn()
         {
             if (!pause)
             {
-                table.Episode(map.Initials[initialsK]);
-
-                if (visualization)
-                    agent.transform.position = GameObject.Find("Position " + map.Initials[initialsK]).transform.position;
+                table.Episode(map.Initials[initialsK], iterations, visualization);
 
                 initialsK++;
 
                 if (initialsK > map.Initials.Count - 1)
                 {
                     initialsK = 0;
-                    iterationsK++;
+                    repetitionsK++;
                 }
 
-                if (iterationsK >= iterations)
+                if (repetitionsK >= repetitions)
                 {
                     FileStream fout = new FileStream(pathOut, FileMode.Create);
 
@@ -179,16 +211,8 @@ namespace Assets.Scripts.QL
                     pause = true;
                 }
 
-                if (language == Languages.EN)
-                {
-                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK];
-                    GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + iterationsK;
-                }
-                else if (language == Languages.RU)
-                {
-                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Позиция: " + map.Initials[initialsK];
-                    GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Итерация: " + iterationsK;
-                }
+                GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK];
+                GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + repetitionsK;
             }
         }
 
@@ -214,7 +238,7 @@ namespace Assets.Scripts.QL
                     {
                         while (true)
                         {
-                            nowState = table.InferenceBestAction(nowState);
+                            nowState = Convert.ToInt32(table.Maximum(nowState, true));
                             Vector3 bestAction = map.Spaces[nowState].transform.position;
                             moves.Add(bestAction);
                             if (bestAction == map.Finish.transform.position) break;

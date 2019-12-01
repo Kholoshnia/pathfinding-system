@@ -32,42 +32,42 @@ namespace Assets.Scripts.QL
                     for (int x = 0; x < mapSize.x; x++)
                     {
                         if (x - 1 >= 0)
-                            if (map.map[z, y, x - 1] == 'B')
+                            if (map.map[z, y, x - 1] == 'S')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + (x - 1)] = 0;
-                            else if (map.map[z, y, x - 1] == 'F')
+                            else if (map.map[z, y, x - 1] == 'G')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + (x - 1)] = finishReward;
 
                         if (x + 1 < mapSize.x)
-                            if (map.map[z, y, x + 1] == 'B')
+                            if (map.map[z, y, x + 1] == 'S')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x + 1] = 0;
-                            else if (map.map[z, y, x + 1] == 'F')
+                            else if (map.map[z, y, x + 1] == 'G')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x + 1] = finishReward;
 
                         if (y - 1 >= 0)
-                            if (map.map[z, y - 1, x] == 'B')
+                            if (map.map[z, y - 1, x] == 'S')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * (y - 1) + x] = 0;
-                            else if (map.map[z, y - 1, x] == 'F')
+                            else if (map.map[z, y - 1, x] == 'G')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * (y - 1) + x] = finishReward;
 
                         if (y + 1 < mapSize.y)
-                            if (map.map[z, y + 1, x] == 'B')
+                            if (map.map[z, y + 1, x] == 'S')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * (y + 1) + x] = 0;
-                            else if (map.map[z, y + 1, x] == 'F')
+                            else if (map.map[z, y + 1, x] == 'G')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * (y + 1) + x] = finishReward;
 
                         if (z - 1 >= 0)
-                            if (map.map[z - 1, y, x] == 'B')
+                            if (map.map[z - 1, y, x] == 'S')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * (z - 1) + mapSize.y * y + x] = 0;
-                            else if (map.map[z - 1, y, x] == 'F')
+                            else if (map.map[z - 1, y, x] == 'G')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * (z - 1) + mapSize.y * y + x] = finishReward;
 
                         if (z + 1 < mapSize.z)
-                            if (map.map[z + 1, y, x] == 'B')
+                            if (map.map[z + 1, y, x] == 'S')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * (z + 1) + mapSize.y * y + x] = 0;
-                            else if (map.map[z + 1, y, x] == 'F')
+                            else if (map.map[z + 1, y, x] == 'G')
                                 R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * (z + 1) + mapSize.y * y + x] = finishReward;
 
-                        if (map.map[z, y, x] == 'F')
+                        if (map.map[z, y, x] == 'G')
                         {
                             R[mapSize.y * mapSize.x * z + mapSize.y * y + x, mapSize.y * mapSize.x * z + mapSize.y * y + x] = finishReward;
                             for (int i = 0; i < map.Spaces.Count; i++)
@@ -75,19 +75,18 @@ namespace Assets.Scripts.QL
                                     finishState = i;
                         }
                     }
-
-            if (finishState == 0)
-                Debug.Log("Finish not found");
         }
 
-        void ChooseAnAction()
+        void ChooseAnAction(VisualizationType visualization)
         {
             int possibleAction = GetRandomAction();
             if (R[state, possibleAction] >= 0)
             {
-                Q[state, possibleAction] = (long)(R[state, possibleAction] + gamma * Maximum(possibleAction, false));
+                Q[state, possibleAction] = R[state, possibleAction] + System.Convert.ToInt64(gamma * Maximum(possibleAction, false));
                 state = possibleAction;
             }
+            if (visualization == VisualizationType.STATES)
+                GameObject.FindWithTag("Start").transform.position = GameObject.Find("Position " + state).transform.position;
         }
 
         int GetRandomAction()
@@ -102,53 +101,30 @@ namespace Assets.Scripts.QL
             return act;
         }
 
-        public void Episode(int initState)
+        public void Episode(int initState, int iterations, VisualizationType visualization)
         {
             state = initState;
             if (state != finishState)
-                do
-                {
-                    ChooseAnAction();
-                } while (state == finishState);
-            for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)
-                ChooseAnAction();
+                do { ChooseAnAction(visualization); } while (state == finishState);
+            for (int i = 0; i < iterations; i++)
+                ChooseAnAction(visualization);
+            if (visualization == VisualizationType.ITERATIONS)
+                GameObject.FindWithTag("Start").transform.position = GameObject.Find("Position " + initState).transform.position;
         }
 
-        public int InferenceBestAction(int nowState)
+        public long Maximum(int nowState, bool returnIntdex)
         {
             int bestAction = 0;
             double tempMaxQ = 0;
-            for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)
-                if (Q[nowState, i] > tempMaxQ)
+            for (int action = 0; action < mapSize.x * mapSize.y * mapSize.z; action++)
+                if (Q[nowState, action] > tempMaxQ)
                 {
-                    tempMaxQ = Q[nowState, i];
-                    bestAction = i;
+                    tempMaxQ = Q[nowState, action];
+                    bestAction = action;
                 }
-            return bestAction;
-        }
-
-        public long Maximum(int st, bool returnIndexOnly)
-        {
-            int winner = 0;
-            bool done = false;
-            bool foundNewWinner;
-
-            do
-            {
-                foundNewWinner = false;
-                for (int i = 0; i < mapSize.x * mapSize.y * mapSize.z; i++)
-                    if ((i < winner) || (i > winner))
-                        if (Q[st, i] > Q[st, winner])
-                        {
-                            winner = i;
-                            foundNewWinner = true;
-                        }
-                done |= foundNewWinner == false;
-            } while (done == false);
-
-            if (returnIndexOnly == true)
-                return winner;
-            return Q[st, winner];
+            if (returnIntdex)
+                return bestAction;
+            return Q[nowState, bestAction];
         }
     };
 }

@@ -466,7 +466,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: f2cce4a731f9c6018296b4674e6ea6cc
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraMovement
@@ -563,5 +563,5 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/Main.unity
-  playerPath: /Users/vadim/Documents/GitHub/NEAT-QL/Release Files/NEAT-QL/bin/win32/UNITY
+  playerPath: /Users/vadim/Documents/GitHub/NEAT-QL/Release Files/bin/win32/unity-c#/UNITY
     C#.exe

@@ -1,311 +1,99 @@
 #include <NEAT/Header Files/NEAT_Logic.h>
 
-void neat::check()
+void neat::draw(sf::Event &event)
 {
-	if (dimention == Dimentions::TWOD)
+	if (event.type == event.KeyPressed)
 	{
-		std::vector<sf::Vector2f> check;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && map->pos_rects.size() > 0)
+			map->pos_rects.pop_back();
 
-		population_quantity = 1;
-		population.reset(new Population());
-		population->agents[population->best_agent].brain.directions = layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::RControl) && map->pos_additional_rewards.size() > 0)
+			map->pos_additional_rewards.pop_back();
 
-		sf::RenderWindow window(sf::VideoMode(800, 800), "Check");
-		while (window.isOpen())
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !around)
 		{
-			sf::Event event;
-			while (window.pollEvent(event))
-				if (event.type == sf::Event::Closed)
-					window.close();
+			around = true;
 
-			window.clear(sf::Color::White);
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-				window.close();
-
-			map->show(window);
-
-			if (population->gen == 1)
-				population->update();
-
-			population->show(window);
-
-			if (!population->reached_the_goal) check.emplace_back(population->agents[0].circle.getPosition());
-
-			for (auto& check : check)
+			for (int x = 0; x < map_size.x; x++)
 			{
-				circle[1].setPosition(check);
-				window.draw(circle[1]);
+				map->pos_rects.emplace_back(x * 10, 0);
+				map->pos_rects.emplace_back(x * 10, map_size.y * 10 - 10);
 			}
 
-			window.draw(controls[0]);
-			window.display();
+			for (int y = 0; y < map_size.y; y++)
+			{
+				map->pos_rects.emplace_back(0, y * 10);
+				map->pos_rects.emplace_back(map_size.x * 10 - 10, y * 10);
+			}
 		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) goal_radius += 1.0f;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && goal_radius > 0) goal_radius -= 1.0f;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) agent_radius += 1.0f;
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && agent_radius > 0) agent_radius -= 1.0f;
 	}
-	else if (dimention == Dimentions::THREED)
-		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\", enable \"cheker\" in main script (Goal object) and run") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\", включите \"cheker\" в галвном скрипте (объект Goal) и запустите");
-}
 
-void neat::load_from_file()
-{
-	if (dimention == Dimentions::TWOD)
+	if (event.type == event.MouseMoved)
 	{
-		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-		std::string str;
-		for (int i = (int)path.length() - 1; i >= 0; i--)
-			if (path[i] != '.')
-				str += path[i];
-			else
-				break;
-		if (str == "gnp" || str == "gepj") from_image = true;
-		else from_image = false;
-		str.clear();
-
-		if (from_image)
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			sf::Image map_image;
-			map_image.loadFromFile(path);
-			for (unsigned int y = 0; y < 80; y++)
+			if ([&]
 			{
-				map_markup[y].resize(80);
-				for (unsigned int x = 0; x < 80; x++)
-				{
-					if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Black)
-						map_markup[y][x] = '#';
-					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Red)
-						map_markup[y][x] = '0';
-					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Blue)
-						map_markup[y][x] = '*';
-					else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Yellow)
-						map_markup[y][x] = 'b';
-					else
-						map_markup[y][x] = '.';
-				}
-			}
-
-			map_loaded = true;
-
-			fout.open("Resource Files/Data/NEAT/map_image.txt");
-			if (fout.is_open())
-			{
-				for (int i = 0; i < 80; i++)
-					fout >> map_markup[i];
-				fout >> goal_radius;
-				map.reset(new Map());
-				fout.close();
-				map_loaded = true;
-			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"map_image.txt\"");
+				for (auto& el : map->pos_rects)
+					if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
+						return false;
+					return true;
+			}())
+				map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
 		}
-		else
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
-			fout.open(path);
-			if (fout.is_open())
+			if ([&]
 			{
-				if (fout.is_open())
-					for (int i = 0; i < 80; i++)
-						fout >> map_markup[i];
-				fout >> goal_radius;
-				map.reset(new Map());
-				fout.close();
-				map_loaded = true;
-			}
-			else
-			{
-				std::string message;
-				language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-				System::String^ str = gcnew System::String(message.c_str());
-				System::Windows::Forms::MessageBox::Show(str);
-			}
+				for (auto& el : map->pos_additional_rewards)
+					if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
+						return false;
+					return true;
+			}())
+				map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
 		}
-	}
-	else if (dimention == Dimentions::THREED)
-	{
-		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+			map->pos_goal = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+			map->pos_agent = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
 	}
 }
 
-void neat::create_new_map()
+void neat::check_2d()
 {
-	if (dimention == Dimentions::TWOD)
-	{
-		sf::RenderWindow window(sf::VideoMode(800, 800), "Map creator");
-		while (window.isOpen())
-		{
-			sf::Event event;
-			while (window.pollEvent(event))
-				if (event.type == sf::Event::Closed)
-					window.close();
-			window.clear(sf::Color::White);
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && pos.size() > 0)
-				pos.pop_back();
-
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-			{
-				bool alreadyThere = false;
-				int x = int(event.mouseMove.x / 10);
-				int y = int(event.mouseMove.y / 10);
-				for (auto& el : pos)
-					if (el == sf::Vector2f((float)x, (float)y))
-						alreadyThere = true;
-				if (!alreadyThere)
-					pos.emplace_back(x, y);
-			}
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-				for (int i = 0; i < 80; i++)
-				{
-					pos.emplace_back(0, i);
-					pos.emplace_back(79, i);
-					pos.emplace_back(i, 0);
-					pos.emplace_back(i, 79);
-				}
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-				circle[0].setPosition((float)event.mouseMove.x, (float)event.mouseMove.y);
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-				circle[0].setRadius(circle[0].getRadius() + 0.1f);
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && circle[0].getRadius() > 0)
-				circle[0].setRadius(circle[0].getRadius() - 0.1f);
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.mouseMove.y > 1 && event.mouseMove.x > 1 && event.mouseMove.y != 250 && event.mouseMove.x != 37)
-				circle[1].setPosition((float)event.mouseMove.x, (float)event.mouseMove.y);
-
-			dot_pos = sf::Vector2f(circle[1].getPosition().x / 10.0f, circle[1].getPosition().y / 10.0f);
-			circle[1].setPosition(dot_pos.x * 10.0f, dot_pos.y * 10.0f);
-			circle[0].setOrigin(sf::Vector2f(circle[0].getRadius(), circle[0].getRadius()));
-			goal_pos = sf::Vector2f(circle[0].getPosition().x / 10.0f, circle[0].getPosition().y / 10.0f);
-			circle[0].setPosition(goal_pos.x * 10.0f, goal_pos.y * 10.0f);
-
-			for (auto& el : pos)
-			{
-				rect.setPosition(el.x * 10.0f, el.y * 10.0f);
-				window.draw(rect);
-			}
-
-			for (int i = 0; i < 2; i++)
-				window.draw(circle[i]);
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-			{
-				window.draw(loading);
-				window.display();
-
-				fout.open("Resource Files/Data/NEAT/map.txt");
-				if (fout.is_open())
-				{
-					bool alreadyThere = false;
-
-					for (int i = 0; i < 80; i++)
-					{
-						for (int j = 0; j < 80; j++)
-						{
-							if (i == dot_pos.y && j == dot_pos.x)
-								fout << '*';
-							else if (i == goal_pos.y && j == goal_pos.x)
-								fout << '0';
-							else
-							{
-								for (int l = 0; l < pos.size(); l++)
-								{
-									if (i == pos[l].y && j == pos[l].x)
-									{
-										fout << '#';
-										alreadyThere = true;
-										break;
-									}
-									else alreadyThere = false;
-								}
-								if (!alreadyThere)
-									fout << '.';
-							}
-						}
-						fout << std::endl;
-					}
-					fout << circle[0].getRadius();
-					fout.close();
-				}
-				else System::Windows::Forms::MessageBox::Show("Error opening file \"map.txt\"");
-				fout.open("Resource Files/Data/NEAT/map.txt");
-
-				map_loaded = true;
-
-				if (fout.is_open())
-				{
-					for (int i = 0; i < 80; i++)
-						fout >> map_markup[i];
-					fout >> goal_radius;
-					map.reset(new Map());
-					fout.close();
-					window.close();
-					map_loaded = true;
-				}
-				else System::Windows::Forms::MessageBox::Show("Error opening file \"map.txt\"");
-			}
-			window.draw(controls[2]);
-			window.display();
-		}
-	}
-	else if (dimention == Dimentions::THREED)
-		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
-}
-
-void neat::check_from_file()
-{
-	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-	fout.open(path);
-	if (fout.is_open())
-	{
-		for (auto& directions : population->agents[population->best_agent].brain.directions)
-			fout >> directions.x >> directions.y;
-		fout.close();
-	}
-	else
-	{
-		std::string message;
-		language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-		System::String^ str = gcnew System::String(message.c_str());
-		System::Windows::Forms::MessageBox::Show(str);
-	}
-
 	std::vector<sf::Vector2f> check;
-	population_quantity = 1;
-	population.reset(new Population());
 
-	sf::RenderWindow window(sf::VideoMode(800, 800), "Check");
+	sf::RenderWindow window(sf::VideoMode(width, height), "Check");
 	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed || (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && event.type == event.KeyPressed))
 				window.close();
 
 		window.clear(sf::Color::White);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-			window.close();
-
-		map->show(window);
-
 		if (population->gen == 1)
 			population->update();
 
+		map->show(window);
 		population->show(window);
 
 		if (!population->reached_the_goal) check.emplace_back(population->agents[0].circle.getPosition());
 
-		for (auto& check : check)
+		for (auto& el : check)
 		{
-			circle[1].setPosition(check);
-			window.draw(circle[1]);
+			map->circle_agent.setPosition(el);
+			window.draw(map->circle_agent);
 		}
 
 		window.draw(controls[0]);
@@ -313,117 +101,432 @@ void neat::check_from_file()
 	}
 }
 
-void neat::with_visualization()
+void neat::check_3d()
 {
-	if (dimention == Dimentions::TWOD)
+	system("OpenUnity.exe");
+}
+
+void neat::create_new_map_2d()
+{
+	map_size.x = 80;
+	map_size.y = 80;
+	map.reset(new Map());
+
+	sf::RenderWindow window(sf::VideoMode(width, height), "Map creator");
+	while (window.isOpen())
 	{
-		layers.reset(new Layers());
-
-		sf::RenderWindow window(sf::VideoMode(800, 800), "Learning");
-		while (window.isOpen())
+		sf::Event event;
+		while (window.pollEvent(event))
 		{
-			sf::Event event;
-			while (window.pollEvent(event))
-				if (event.type == sf::Event::Closed)
-					window.close();
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->get_best_population().after_reach > auto_exit))
-			{
-				window.draw(loading);
-				window.display();
-
-				fout.open("Resource Files/Data/NEAT/way.txt");
-				if (fout.is_open())
-				{
-					for (auto& el : layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions)
-						fout << el.x << ' ' << el.y << std::endl;
-					fout.close();
-					window.close();
-				}
-				else System::Windows::Forms::MessageBox::Show("Error opening file \"way.txt\"");
-			}
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			if (event.type == sf::Event::Closed)
 				window.close();
 
-			window.clear(sf::Color::White);
-			map->show(window);
+			if (event.type == event.KeyPressed)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+				{
+					window.draw(loading);
+					window.display();
 
-			layers->update();
-			layers->show(window);
+					fout.open("Resource Files/Data/NEAT/input.csv");
+					if (fout.is_open())
+					{
+						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
+						for (int y = 0; y < map_size.y; y++)
+						{
+							for (int x = 0; x < map_size.x; x++)
+							{
+								if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
+									fout << 'A';
+								else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
+									fout << 'G';
+								else if ([&x, &y]
+									{
+										for (auto& el : map->pos_rects)
+											if (x == el.x / 10 && y == el.y / 10)
+												return true;
+											return false;
+									}())
+									fout << 'W';
+								else if ([&x, &y]
+									{
+										for (auto& el : map->pos_additional_rewards)
+											if (x == el.x / 10 && y == el.y / 10)
+												return true;
+											return false;
+									}())
+									fout << 'B';
+								else
+									fout << 'S';
+								fout << ';';
+							}
+							fout << std::endl;
+						}
+						fout << "agent-radius:;" << agent_radius << std::endl;
+						fout << "goal-radius:;" << goal_radius << std::endl;
+						fout.close();
+						window.close();
+					}
+					else System::Windows::Forms::MessageBox::Show("Error opening file: \"input.csv\"");
+				}
 
-			if (layers->get_best_population().reached_the_goal) language == Languages::EN ? text[1].setString(L"Yes") : text[1].setString(L"Да");
-			else language == Languages::EN ? text[1].setString(L"No") : text[1].setString(L"Нет");
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				{
+					show_controls = !show_controls;
+					if (show_controls)
+					{
+						neat::controls[1].setPosition(612, 10);
+						neat::controls[1].setString(L"[E] - Show controls");
+					}
+					else
+					{
+						neat::controls[1].setPosition(552, 10);
+						neat::controls[1].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[Esc] - Exit without saving\n[Enter] - save&exit\n[E] - Hide controls");
+					}
+				}
+			}
 
-			std::ostringstream str;
-			str << layers->get_best_population().gen;
-			text[3].setString(str.str());
-
-			for (int i = 0; i < 4; i++)
-				window.draw(text[i]);
-			window.draw(controls[1]);
-			window.display();
+			draw(event);
 		}
-	}
-	else if (dimention == Dimentions::THREED)
-	{
-		fout.open(path, std::fstream::app);
-		if (fout.is_open())
-		{
-			fout << '1' << std::endl << direction_array_size << std::endl << population_quantity << std::endl << layers_quantity << std::endl << auto_end << std::endl << auto_exit << std::endl << language;
-			fout.close();
-		}
-		else
-		{
-			std::string message;
-			language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-			System::String^ str = gcnew System::String(message.c_str());
-			System::Windows::Forms::MessageBox::Show(str);
-		}
+			
+		window.clear(sf::Color::White);
 
-		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\" and start with map file") : System::Windows::Forms::MessageBox::Show("Откройте \"NNWay3D\" и запустите с файлом карты");
+		map->show(window);
+
+		window.draw(controls[1]);
+		window.display();
 	}
 }
 
-void neat::without_visualization()
+void neat::create_new_map_3d()
 {
-	if (dimention == Dimentions::TWOD)
-	{
-		layers.reset(new Layers());
-		bool calculating = true;
+	System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
+	map_loaded = true;
+}
 
-		while (calculating)
+void neat::load_map_from_file_2d()
+{
+	map_size.x = 80;
+	map_size.y = 80;
+	map.reset(new Map);
+
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	
+	std::string str;
+	for (int i = static_cast<int>(path.length()) - 1; i >= 0; i--)
+		if (path[i] != '.') str += path[i];
+		else break;
+
+	if (str == "pmb" || str == "gnp" || str == "agt" || str == "gpj" ||
+		str == "fig" || str == "dsp" || str == "rdh" || str == "cip") from_image = true;
+	else from_image = false;
+
+	str.clear();
+
+	if (from_image)
+	{
+		sf::Image map_image;
+		map_image.getSize();
+		map_image.loadFromFile(path);
+
+		for (int y = 0; y < map_size.y; y++)
 		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (auto_end && layers->get_best_population().after_reach > auto_exit))
+			map_markup[y].resize(map_size.x);
+			for (int x = 0; x < map_size.x; x++)
 			{
-				fout.open("Resource Files/Data/NEAT/way.txt");
-				if (fout.is_open())
-				{
-					for (auto& el : layers->get_best_population().agents[layers->get_best_population().best_agent].brain.directions)
-						fout << el.x << ' ' << el.y << std::endl;
-					fout.close();
-				}
-				else System::Windows::Forms::MessageBox::Show("Error opening file \"way.txt\"");
+				if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Black)
+					map_markup[y][x] = 'A';
+				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Red)
+					map_markup[y][x] = 'G';
+				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Blue)
+					map_markup[y][x] = 'W';
+				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Yellow)
+					map_markup[y][x] = 'B';
+				else
+					map_markup[y][x] = 'S';
+			}
+		}
+
+		map->from_file();
+		map_loaded = true;
+	}
+	else
+	{
+		fin.open(path);
+		if (fin.is_open())
+		{
+			char ch = '\0';
+
+			while (ch != ';') fin.get(ch);
+			fin >> map_size.x;
+			fin.get(ch);
+			fin >> map_size.y;
+			fin.get(ch);
+
+			std::string line;
+			for (int y = 0; y < map_size.y; y++)
+			{
+				std::getline(fin, line);
+				line.erase(std::remove(line.begin(), line.end(), ';'), line.end());
+				map_markup[y] = line;
 			}
 
-			layers->update();
-		}
-	}
-	else if (dimention == Dimentions::THREED)
-	{
-		fout.open(path, std::fstream::app);
-		if (fout.is_open())
-		{
-			fout << '0' << std::endl << direction_array_size << std::endl << population_quantity << std::endl << layers_quantity << std::endl << auto_end << auto_exit << std::endl << language;
-			fout.close();
+			while (ch != ';') fin.get(ch);
+			fin >> agent_radius;
+			fin.get(ch);
+
+			while (ch != ';') fin.get(ch);
+			fin >> goal_radius;
+
+			map->from_file();
+			fin.close();
+			map_loaded = true;
 		}
 		else
 		{
-			std::string message;
-			language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-			System::String^ str = gcnew System::String(message.c_str());
-			System::Windows::Forms::MessageBox::Show(str);
+			std::string message = "Error opening file \"" + path + "\"";
+			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
 		}
-		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"NNWay3D\" and start with map file") : System::Windows::Forms::MessageBox::Show("Откройте \"NNWay3D\" и запустите с файлом карты");
 	}
+}
+
+void neat::load_map_from_file_3d()
+{
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	if (path != "")
+		map_loaded = true;
+}
+
+void neat::load_result_from_file_2d()
+{
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	
+	fin.open(path);
+	if (fin.is_open())
+	{
+		fin >> max_speed;
+		fin >> directions_array_size;
+
+		population_quantity = 1;
+		population.reset(new Population());
+
+		for (auto& el : population->agents[0].brain.directions)
+		{
+			fin >> el.x;
+			fin.get();
+			fin.get();
+			fin >> el.y;
+		}
+		fout.close();
+
+		result_loaded = true;
+	}
+	else
+	{
+		std::string message = "Error opening file \"" + path + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+	}
+}
+
+void neat::load_result_from_file_3d()
+{
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	if (path != "")
+		result_loaded = true;
+}
+
+void neat::with_visualization_2d()
+{
+	layers.reset(new Layers());
+
+	sf::RenderWindow window(sf::VideoMode(width, height), "Learn");
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed || (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && event.type == event.KeyPressed))
+				window.close();
+
+			draw(event);
+
+			if (event.type == event.KeyPressed || (layers->populations[layers->best_population].after_reach > auto_exit))
+			{
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+					for (auto& el : layers->populations)
+						el.min_step = directions_array_size;
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (layers->populations[layers->best_population].after_reach > auto_exit))
+				{
+					window.draw(loading);
+					window.display();
+
+					fout.open("Resource Files/Data/NEAT/output.csv");
+					if (fout.is_open())
+					{
+						fout << max_speed << std::endl;
+						fout << layers->populations[layers->best_population].min_step << std::endl;
+						for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
+							fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
+						fout.close();
+						window.close();
+					}
+					else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
+
+					fout.open("Resource Files/Data/NEAT/new_input.csv");
+					if (fout.is_open())
+					{
+						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
+						for (int y = 0; y < map_size.y; y++)
+						{
+							for (int x = 0; x < map_size.x; x++)
+							{
+								if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
+									fout << 'A';
+								else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
+									fout << 'G';
+								else if ([&x, &y]
+									{
+										for (auto& el : map->pos_rects)
+											if (x == el.x / 10 && y == el.y / 10)
+												return true;
+											return false;
+									}())
+									fout << 'W';
+								else
+									fout << 'S';
+								fout << ';';
+							}
+							fout << std::endl;
+						}
+						fout << "agent-radius:;" << agent_radius << std::endl;
+						fout << "goal-radius:;" << goal_radius << std::endl;
+						fout.close();
+						window.close();
+					}
+					else System::Windows::Forms::MessageBox::Show("Error opening file \"new_map.csv\"");
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) pause = !pause;
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				{
+					show_controls = !show_controls;
+					if (show_controls)
+					{
+						neat::controls[2].setPosition(612, 10);
+						neat::controls[2].setString(L"[E] - Show controls");
+					}
+					else
+					{
+						neat::controls[2].setPosition(552, 10);
+						neat::controls[2].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[R] - Reset minimum steps\n[Esc] - Exit without saving\n[Enter] - save&exit\n[E] - Hide controls");
+					}
+				}
+			}
+		}
+
+		window.clear(sf::Color::White);
+
+		if (!pause) layers->update();
+
+		map->show(window);
+		layers->show(window);
+
+		if (layers->populations[layers->best_population].reached_the_goal) text[1].setString(L"Yes");
+		else text[1].setString(L"No");
+
+		std::ostringstream str;
+		str << layers->populations[layers->best_population].gen;
+		text[3].setString(str.str());
+
+		for (int i = 0; i < 4; i++)
+			window.draw(text[i]);
+		window.draw(controls[2]);
+		window.display();
+	}
+}
+
+void neat::with_visualization_3d()
+{
+	fout.open(path, std::fstream::app);
+	if (fout.is_open())
+	{
+		fout << "info" << std::endl;
+		fout << "visualization:;" << 1 << std::endl;
+		fout << "direction-array-size:;" << directions_array_size << std::endl;
+		fout << "population-quantity:;" << population_quantity << std::endl;
+		fout << "layers-quantity:;" << layers_quantity << std::endl;
+		fout << "auto-completion:;" << auto_exit;
+		fout << "speed:;" << 1.0f << ';' << max_speed;
+		fout << "mutation-rate" << mutation_rate;
+		fout.close();
+	}
+	else
+	{
+		std::string message = "Error opening file: \"" + path + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+	}
+
+	system("OpenUnity.exe");
+}
+
+void neat::without_visualization_2d()
+{
+	layers.reset(new Layers());
+	bool calculating = true;
+
+	while (calculating)
+	{
+		if (layers->populations[layers->best_population].after_reach > auto_exit)
+		{
+			fout.open("Resource Files/Data/NEAT/output.csv");
+			if (fout.is_open())
+			{
+				fout << max_speed << std::endl;
+				fout << layers->populations[layers->best_population].min_step << std::endl;
+				for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
+					fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
+				fout.close();
+				calculating = false;
+			}
+			else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
+		}
+
+		layers->update();
+	}
+}
+
+void neat::without_visualization_3d()
+{
+	fout.open(path, std::fstream::app);
+
+	if (fout.is_open())
+	{
+		fout << "info" << std::endl;
+		fout << "visualization:;" << 0 << std::endl;
+		fout << "direction-array-size:;" << directions_array_size << std::endl;
+		fout << "population-quantity:;" << population_quantity << std::endl;
+		fout << "layers-quantity:;" << layers_quantity << std::endl;
+		fout << "auto-completion:;" << auto_exit;
+		fout << "speed:;" << 1.0f << ';' << max_speed;
+		fout << "mutation-rate" << mutation_rate;
+		fout.close();
+	}
+	else
+	{
+		std::string message = "Error opening file: \"" + path + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+	}
+
+	system("OpenUnity.exe");
 }

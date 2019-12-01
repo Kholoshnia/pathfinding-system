@@ -4,17 +4,20 @@
 
 #include <ctime>
 #include <vector>
-#include <iostream>
+
+#include <Enums.h>
 
 #include <QL/Header Files/QL_Map.h>
 #include <QL/Header Files/QL_Agent.h>
 
 namespace ql
 {
+	extern VisualizationTypes visualization_type;
+	extern int iterations;
 	extern std::shared_ptr<Agent> agent;
-	extern int finish_state;
+	extern int goal_state;
 	extern std::shared_ptr<Map> map;
-	extern long long int finish_reward;
+	extern long long int goal_reward;
 
 	struct Table
 	{
@@ -26,8 +29,7 @@ namespace ql
 		Table();
 		void choose_an_action();
 		void episode(int init_state);
-		int inference_best_action(int now_state);
-		long long maximum(int st, bool return_index_only);
+		long long maximum(int now_state, bool return_index);
 		int get_random_action(int lower_bound, int upper_bound);
 	};
 }

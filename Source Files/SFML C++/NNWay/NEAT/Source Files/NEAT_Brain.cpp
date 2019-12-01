@@ -3,39 +3,35 @@
 neat::Brain::Brain()
 {
 	step = 0;
-	directions.resize(direction_array_size);
+	directions.resize(directions_array_size);
 	randomize();
 }
 
 void neat::Brain::randomize()
 {
-	for (auto& directions : directions)
-	{
-		float randomAngle = -180 + float(rand()) / (float(RAND_MAX / 360));
-		directions.x = (float)cos(randomAngle * 3.14159265 / 180);
-		directions.y = (float)sin(randomAngle * 3.14159265 / 180);
-	}
+	for (auto& el : directions)
+		movement(el);
 }
 
 neat::Brain neat::Brain::clone()
 {
 	Brain clone;
-	for (int i = 0; i < directions.size(); ++i)
-		clone.directions[i] = directions[i];
+	clone.directions = directions;
 	return clone;
 }
 
 void neat::Brain::mutate()
 {
-	float mutationRate = 0.01f;
-	for (auto& directions : directions)
+	for (auto& el : directions)
 	{
-		float randn = float(rand()) / (float(RAND_MAX));
-		if (randn < mutationRate)
-		{
-			float randomAngle = -180.0f + float(rand()) / (float(RAND_MAX / 360.0f));
-			directions.x = cos(randomAngle * 3.14159265f / 180.0f);
-			directions.y = sin(randomAngle * 3.14159265f / 180.0f);
-		}
+		float randn = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX));
+		if (randn < mutation_rate)
+			movement(el);
 	}
+}
+
+void neat::Brain::movement(sf::Vector2f& obj)
+{
+	obj.x = cos(-180.0f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 360.0f) * static_cast<float>(M_PI) / 180.0f);
+	obj.y = sin(-180.0f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 360.0f) * static_cast<float>(M_PI) / 180.0f);
 }

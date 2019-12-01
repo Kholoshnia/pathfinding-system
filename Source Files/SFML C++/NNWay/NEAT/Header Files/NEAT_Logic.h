@@ -13,36 +13,42 @@
 #include <NEAT/Header Files/NEAT_Layers.h>
 #include <NEAT/Header Files/NEAT_Population.h>
 
-extern Languages language;
-extern Dimentions dimention;
+extern Dimensions dimension;
 
 extern std::string path;
 extern sf::Sprite loading;
-extern int auto_exit, fps;
-extern bool from_image, auto_end;
+extern int fps, width, height;
+extern bool from_image, map_loaded, result_loaded, pause, show_controls;
 
 namespace neat
 {
+	extern VisualizationTypes visualization_type;
+
 	extern std::shared_ptr<Map> map;
 	extern std::shared_ptr<Layers> layers;
 	extern std::shared_ptr<Population> population;
 
-	extern std::fstream fout;
-	extern std::string map_markup[80];
-	extern std::vector<sf::Vector2f> pos;
+	extern std::fstream fout, fin;
+	extern std::vector<std::string> map_markup;
 
 	extern sf::RectangleShape rect;
-	extern sf::CircleShape circle[2];
 	extern sf::Text text[4], controls[3];
-	extern sf::Vector2f goal_pos, dot_pos;
+	extern sf::Vector2i map_size, wall_size;
 
-	extern bool map_loaded;
-	extern int population_quantity, layers_quantity;
+	extern bool around;
+	extern int population_quantity, layers_quantity, directions_array_size, auto_exit;
 
-	void check();
-	void load_from_file();
-	void create_new_map();
-	void check_from_file();
-	void with_visualization();
-	void without_visualization();
+	void check_2d();
+	void check_3d();
+	void create_new_map_2d();
+	void create_new_map_3d();
+	void load_map_from_file_2d();
+	void load_map_from_file_3d();
+	void load_result_from_file_2d();
+	void load_result_from_file_3d();
+	void with_visualization_2d();
+	void with_visualization_3d();
+	void without_visualization_2d();
+	void without_visualization_3d();
+	void draw(sf::Event& event);
 }

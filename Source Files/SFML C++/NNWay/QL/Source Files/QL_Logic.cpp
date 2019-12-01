@@ -1,10 +1,46 @@
 #include <QL/Header Files/QL_Logic.h>
 
-void ql::check()
+void ql::draw(sf::Event& event)
 {
-	sf::RenderWindow window(sf::VideoMode(width, height), "Check");
+	if (event.type == event.KeyPressed)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+			map->pos_walls_pop_back();
 
-	window.setFramerateLimit(fps);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !around)
+		{
+			around = true;
+			map->fill_around();
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			around = false;
+			map->inc_map_size();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			around = false;
+			map->dec_map_size();
+		}
+	}
+
+	if (event.type == event.MouseMoved)
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			if (event.mouseMove.x < (height / map_size.x) * map_size.x && event.mouseMove.y < (width / map_size.y) * map_size.y)
+				map->pos_walls_push_back(event.mouseMove);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+			map->set_goal_pos(event.mouseMove);
+	}
+}
+
+void ql::check_2d()
+{
+	agent.reset(new Agent());
+
+	sf::RenderWindow window(sf::VideoMode(width, height), "Check");
 
 	std::vector<int> moves;
 
@@ -15,38 +51,65 @@ void ql::check()
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
+		{
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-		window.clear();
-		map->show(window);
-
-		if (!done)
-		{
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.type == event.MouseMoved)
 			{
-				position = map_size_y * (event.mouseMove.y / (width / map_size_y)) + event.mouseMove.x / (width / map_size_x);
+				moves.clear();
+
+				position = map_size.y * (event.mouseMove.y / (width / map_size.y)) + event.mouseMove.x / (width / map_size.x);
 				moves.emplace_back(position);
 				if (std::find(initials.begin(), initials.end(), position) != initials.end())
 				{
 					moves.emplace_back(position);
 					while (true)
 					{
-						int best_action = table->inference_best_action(position);
+						int best_action = table->maximum(position, true);
 						moves.emplace_back(best_action);
-						if (best_action == finish_state)
-							break;
+						if (best_action == goal_state) break;
 						else position = best_action;
 					}
 					done = true;
 				}
+
+				moves.pop_back();
+			}
+
+			if (event.type == event.KeyPressed)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+					window.close();
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				{
+					show_controls = !show_controls;
+					if (show_controls)
+					{
+						controls[1].setPosition(612, 10);
+						controls[1].setString(L"[E] - Show controls");
+					}
+					else
+					{
+						controls[1].setPosition(552, 10);
+						controls[1].setString(L"[LMB] - Choose state\n[Esc] - Exit without saving\n[E] - Hide controls");
+					}
+				}
 			}
 		}
-		else
+
+		window.clear();
+		map->show(window);
+		window.draw(controls[1]);
+
+		if (done)
 		{
-			agent->show(window);
-			agent->update(moves[k]);
-			k++;
+			for (auto& el : moves)
+			{
+				agent->update(el);
+				agent->show(window);
+			}
 
 			if (k > moves.size() - 1)
 			{
@@ -60,287 +123,235 @@ void ql::check()
 	}
 }
 
-void ql::load_from_file()
+void ql::check_3d()
 {
-	if (dimention == Dimentions::TWOD)
-	{
-		map.reset(new Map());
 
-		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-		std::string str;
-		for (int i = (int)path.length() - 1; i >= 0; i--)
-			if (path[i] != '.') str += path[i];
-			else break;
-		if (str == "gnp" || str == "gepj" || str == "fig") from_image = true;
-		else from_image = false;
-		str.clear();
-
-		if (from_image)
-			image_path = path;
-		else
-		{
-			fin.open(path);
-			if (fin.is_open())
-			{
-				fin >> map_size_x >> map_size_y;
-
-				map->map.resize(map_size_y);
-				for (int y = 0; y < map_size_y; y++)
-					map->map[y].resize(map_size_x);
-
-				for (int y = 0; y < map_size_y; y++)
-					for (int x = 0; x < map_size_x; x++)
-						fin >> map->map[y][x];
-
-				fin.close();
-
-				map_loaded = true;
-			}
-			else
-			{
-				std::string message;
-				language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-				System::String^ str = gcnew System::String(message.c_str());
-				System::Windows::Forms::MessageBox::Show(str);
-			}
-		}
-		map->update();
-		table.reset(new Table());
-		finish_reward = map_size_x * map_size_x * map_size_y * map_size_y;
-	}
-	else if (dimention == Dimentions::THREED)
-	{
-		System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-		if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-	}
 }
 
-void ql::create_new_map()
+void ql::create_new_map_2d()
 {
-	if (dimention == Dimentions::TWOD)
+	map.reset(new Map());
+
+	sf::RenderWindow window(sf::VideoMode(width, height), "Map creator");
+	while (window.isOpen())
 	{
-		map.reset(new Map());
-		bool space_pressed = false;
-		sf::RectangleShape rects[2];
-
-		sf::RenderWindow window(sf::VideoMode(800, 800), "Map creator");
-		while (window.isOpen())
+		sf::Event event;
+		while (window.pollEvent(event))
 		{
-			sf::Event event;
-			while (window.pollEvent(event))
-				if (event.type == sf::Event::Closed)
-					window.close();
+			if (event.type == sf::Event::Closed)
+				window.close();
 
-			window.clear(sf::Color::White);
+			draw(event);
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace) && map->wall_pos.size() > 0)
+			if (event.type == event.KeyPressed)
 			{
-				map->wall_pos.pop_back();
-				map->update();
-			}
-
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-			{
-				map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
-				bool alreadyThere = false;
-				sf::Vector2f mouse_pos((float)(event.mouseMove.x / (height / map_size_x)), (float)(event.mouseMove.y / (width / map_size_y)));
-				for (auto& el : map->wall_pos)
-					if (el == mouse_pos)
-						alreadyThere = true;
-				if (!alreadyThere)
-					map->map[(int)mouse_pos.y][(int)mouse_pos.x] = 'W';
-				map->update();
-			}
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !space_pressed)
-			{
-				for (int y = 0; y < map_size_y; y++)
-					for (int x = 0; x < map_size_x; x++)
-					{
-						if (x == 0 || x == map_size_x - 1 || y == 0 || y == map_size_y - 1)
-							map->map[x][y] = 'W';
-						space_pressed = true;
-					}
-				map->update();
-			}
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
-				map->finish.setPosition((float)(event.mouseMove.x / (height / map_size_x) * (height / map_size_x)), (float)(event.mouseMove.y / (width / map_size_y) * (height / map_size_y)));
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			{
-				map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
-				for (size_t y = 0; y < map_size_y; y++)
-					map->map[y].emplace_back('B');
-
-				std::vector<char> line;
-				for (size_t x = 0; x < map_size_x + 1; x++)
-					line.emplace_back('B');
-				map->map.emplace_back(line);
-
-				map_size_x += 1;
-				map_size_y += 1;
-				map->update();
-				space_pressed = false;
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && map_size_x >= 1 && map_size_y >=1)
-			{
-				if (map_size_x > 10 && map_size_y > 10)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 				{
-					map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
-					for (size_t y = 0; y < map_size_y; y++)
-						map->map[y].pop_back();
-					map->map.pop_back();
-					map_size_x -= 1;
-					map_size_y -= 1;
-					map->update();
-					space_pressed = false;
+					window.draw(loading);
+					window.display();
+
+					map->save();
+
+					fout.open("Resource Files/Data/QL/input.csv");
+					if (fout.is_open())
+					{
+						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
+
+						for (int y = 0; y < map_size.y; y++)
+						{
+							for (int x = 0; x < map_size.x; x++)
+								fout << map->map_markup[y][x] << ';';
+							fout << std::endl;
+						}
+
+						fout.close();
+
+						map_loaded = true;
+					}
+					else
+					{
+						std::string message = "Error opening file: \"input.csv\"";
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+					}
+
+					window.close();
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				{
+					show_controls = !show_controls;
+					if (show_controls)
+					{
+						controls[2].setPosition(612, 10);
+						controls[2].setString(L"[E] - Show controls");
+					}
+					else
+					{
+						controls[2].setPosition(552, 10);
+						controls[2].setString(L"[LShift] - Move goal\n[Up][Down] - Resize map\n[Tab] - Fill around\n[LMB] - Draw map\n[RCtrl] - Erase map\n[Esc] - Exit without saving\n[Enter] - save&exit\n[E] - Hide controls");
+					}
 				}
 			}
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-			{
-				map->map[(int)map->finish.getPosition().y / (width / map_size_y)][(int)map->finish.getPosition().x / (height / map_size_x)] = 'F';
-				map->update();
-				window.close();
-			}
-
-			map->show(window);
-			window.display();
 		}
 
-		finish_reward = map_size_x * map_size_x * map_size_y * map_size_y;
+		window.clear(sf::Color::White);
 
-		map_loaded = true;
+		map->show(window);
+		window.draw(controls[2]);
+
+		window.display();
 	}
-	else if (dimention == Dimentions::THREED)
-		language == Languages::EN ? System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file") : System::Windows::Forms::MessageBox::Show("Откройте \"Map Creator\" и запустите, когда закончите создание новой карты и затем загрузите из файла");
-}
 
-void ql::load_from_image()
-{
-	map->update_size();
-	sf::Image map_image;
-	map_image.loadFromFile(image_path);
-	for (int y = 0; y < map_size_y; y++)
-		for (int x = 0; x < map_size_x; x++)
-		{
-			if (map_image.getPixel(x * (height / map_size_x), y * (width / map_size_y)) == sf::Color::Red && !finish_loaded)
-			{
-				map->map[y][x] = 'F';
-				finish_loaded = true;
-			}
-			else if (map_image.getPixel(x * (height / map_size_x), y * (width / map_size_y)) == sf::Color::Black)
-				map->map[y][x] = 'W';
-			else
-				map->map[y][x] = 'B';
-		}
-	map->update();
-
+	goal_reward = std::pow(map_size.x * map_size.y, 3);
+	table.reset(new Table());
 	map_loaded = true;
 }
 
-void ql::check_from_file()
+void ql::create_new_map_3d()
 {
-	table.reset(new Table());
+	System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
+}
+
+void ql::load_map_from_file_2d()
+{
+	map.reset(new Map());
 
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = (char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer();
-	fout.open(path);
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 
-	if (fout.is_open())
+	std::string str;
+	for (int i = static_cast<int>(path.length()) - 1; i >= 0; i--)
+		if (path[i] != '.') str += path[i];
+		else break;
+
+	if (str == "pmb" || str == "gnp" || str == "agt" || str == "gpj" ||
+		str == "fig" || str == "dsp" || str == "rdh" || str == "cip") from_image = true;
+	else from_image = false;
+
+	if (from_image)
 	{
-		for (auto& row : table->R)
-			for (auto& el : row)
-				fout >> el;
-		fout.close();
+		sf::Image map_image;
+		map_image.loadFromFile(image_path);
+		for (int y = 0; y < map_size.y; y++)
+			for (int x = 0; x < map_size.x; x++)
+			{
+				if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Red && !goal_loaded)
+				{
+					map->map_markup[y][x] = 'G';
+					goal_loaded = true;
+				}
+				else if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Black)
+					map->map_markup[y][x] = 'W';
+				else
+					map->map_markup[y][x] = 'S';
+			}
+
+		map_loaded = true;
 	}
 	else
 	{
-		std::string message;
-		language == Languages::EN ? message = "Error opening file \"" + path + "\"" : message = "Ошибка открытия файла \"" + path + "\"";
-		System::String^ str = gcnew System::String(message.c_str());
-		System::Windows::Forms::MessageBox::Show(str);
-	}
-
-	sf::RenderWindow window(sf::VideoMode(width, height), "Map");
-
-	window.setFramerateLimit(fps);
-
-	std::vector<int> moves;
-
-	int position, k = 0;
-	bool done = false;
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-			if (event.type == sf::Event::Closed)
-				window.close();
-
-		window.clear();
-		map->show(window);
-
-		if (!done)
+		fin.open(path);
+		if (fin.is_open())
 		{
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.y > 1 && event.mouseMove.x > 1)
+			char ch = '\0';
+			while (ch != ';') fin.get(ch);
+
+			fin >> map_size.x;
+			fin.get();
+
+			fin >> map_size.y;
+			fin.get();
+
+			map->map_markup.resize(map_size.y);
+			for (int y = 0; y < map_size.y; y++)
+				map->map_markup[y].resize(map_size.x);
+
+			std::string line;
+			for (int y = 0; y < map_size.y; y++)
 			{
-				position = map_size_y * (event.mouseMove.y / (width / map_size_y)) + event.mouseMove.x / (width / map_size_x);
-				moves.emplace_back(position);
-				if (std::find(initials.begin(), initials.end(), position) != initials.end())
-				{
-					moves.emplace_back(position);
-					while (true)
-					{
-						int best_action = table->inference_best_action(position);
-						moves.emplace_back(best_action);
-						if (best_action == finish_state) break;
-						else position = best_action;
-					}
-					done = true;
-				}
+				std::getline(fin, line);
+				line.erase(std::remove(line.begin(), line.end(), ';'), line.end());
+				for (int x = 0; x < map_size.x; x++)
+					map->map_markup[y][x] = line[x];
 			}
+
+			fin.close();
+
+			map_loaded = true;
 		}
 		else
 		{
-			agent->show(window);
-			agent->update(moves[k]);
-			k++;
-
-			if (k > moves.size() - 1)
-			{
-				moves.clear();
-				k = 0;
-				done = false;
-			}
+			std::string message = "Error opening file \"" + path + "\"";
+			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
 		}
-
-		window.display();
 	}
+
+	map->update();
+	goal_reward = std::pow(map_size.x * map_size.y, 3);
+	table.reset(new Table());
 }
 
-void ql::with_visualization()
+void ql::load_map_from_file_3d()
 {
-	table.reset(new Table());
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+}
+
+void ql::load_result_from_file_2d()
+{
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	
+	fin.open(path);
+	if (fin.is_open())
+	{
+		std::string line;
+		for (int y = 0; y < map_size.x * map_size.y; y++)
+			for (int x = 0; x < map_size.x * map_size.y; x++)
+			{
+				std::getline(fin, line, ';');
+				line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());
+				table->Q[y][x] = System::Convert::ToInt64(gcnew System::String(line.c_str()), 10);
+			}
+		fin.close();
+	}
+	else
+	{
+		std::string message = "Error opening file \"" + path + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+	}
+
+	result_loaded = true;
+}
+
+void ql::load_result_from_file_3d()
+{
+
+}
+
+void ql::with_visualization_2d()
+{
 	agent.reset(new Agent());
 
-	sf::RenderWindow window(sf::VideoMode(width, height), "Map");
+	sf::RenderWindow window(sf::VideoMode(width, height), "Learn");
 
-	window.setFramerateLimit(fps);
-
-	int iterations_k = 0, initials_k = 0;
+	int repetitions_k = 0, initials_k = 0;
 
 	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
+		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			if (event.type == event.KeyPressed)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+					window.close();
+		}
 
 		table->episode(initials[initials_k]);
 
@@ -348,34 +359,16 @@ void ql::with_visualization()
 		initials_str << initials[initials_k];
 		text[1].setString(initials_str.str());
 
-		std::ostringstream iterations_str;
-		iterations_str << iterations_k;
-		text[3].setString(iterations_str.str());
+		std::ostringstream repetitions_str;
+		repetitions_str << repetitions_k;
+		text[3].setString(repetitions_str.str());
 
 		initials_k++;
 
 		if (initials_k > initials.size() - 1)
 		{
 			initials_k = 0;
-			iterations_k++;
-		}
-
-		if (iterations_k > iterations)
-		{
-			fout.open("Resource Files/Data/QL/way.txt");
-			if (fout.is_open())
-			{
-				for (size_t y = 0; y < map_size_x * map_size_y; y++)
-				{
-					for (size_t x = 0; x < map_size_x * map_size_y; x++)
-						fout << table->Q[y][x] << ' ';
-					fout << std::endl;
-				}
-				fout.close();
-			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"way.txt\"");
-
-			window.close();
+			repetitions_k++;
 		}
 
 		window.clear();
@@ -386,29 +379,59 @@ void ql::with_visualization()
 		for (int i = 0; i < 4; i++)
 			window.draw(text[i]);
 
+		window.draw(controls[0]);
+
 		window.display();
+
+		if (repetitions_k > repetitions - 1)
+		{
+			fout.open("Resource Files/Data/QL/output.csv");
+			if (fout.is_open())
+			{
+				for (int y = 0; y < map_size.x * map_size.y; y++)
+				{
+					for (int x = 0; x < map_size.x * map_size.y; x++)
+						fout << table->Q[y][x] << ';';
+					fout << std::endl;
+				}
+				fout.close();
+			}
+			else System::Windows::Forms::MessageBox::Show("Error opening file: \"output.csv\"");
+
+			window.close();
+		}
 	}
 }
 
-void ql::without_visualization()
+void ql::with_visualization_3d()
+{
+
+}
+
+void ql::without_visualization_2d()
 {
 	table.reset(new Table());
 	agent.reset(new Agent());
 
-	for (size_t i = 0; i < iterations; i++)
+	for (int i = 0; i < repetitions; i++)
 		for (auto& el : initials)
 			table->episode(el);
 
-	fout.open("Resource Files/Data/QL/way.txt");
+	fout.open("Resource Files/Data/QL/output.csv");
 	if (fout.is_open())
 	{
-		for (size_t y = 0; y < map_size_x * map_size_y; y++)
+		for (int y = 0; y < map_size.x * map_size.y; y++)
 		{
-			for (size_t x = 0; x < map_size_x * map_size_y; x++)
-				fout << table->Q[y][x] << ' ';
+			for (int x = 0; x < map_size.x * map_size.y; x++)
+				fout << table->Q[y][x] << ';';
 			fout << std::endl;
 		}
 		fout.close();
 	}
-	else System::Windows::Forms::MessageBox::Show("Error opening file \"way.txt\"");
+	else System::Windows::Forms::MessageBox::Show("Error opening file: \"output.csv\"");
+}
+
+void ql::without_visualization_3d()
+{
+
 }
