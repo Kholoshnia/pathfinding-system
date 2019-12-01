@@ -11,9 +11,9 @@
 namespace ql
 {
 	extern std::shared_ptr<Agent> agent;
-	extern int finish_state;
+	extern int goal_state;
 	extern std::shared_ptr<Map> map;
-	extern long long int finish_reward;
+	extern long long int goal_reward;
 
 	struct Table
 	{

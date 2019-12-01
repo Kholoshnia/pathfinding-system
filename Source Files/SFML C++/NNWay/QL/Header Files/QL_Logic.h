@@ -26,14 +26,15 @@ namespace ql
 	extern std::string image_path;
 	extern std::fstream fout, fin;
 	extern std::vector<int> initials;
-	extern long long int finish_reward;
-	extern int finish_state, iterations;
-	extern bool map_loaded, finish_loaded;
+	extern long long int goal_reward;
+	extern int goal_state, iterations;
+	extern bool map_loaded, goal_loaded, around;
 
 	void check_2d();
 	void check_3d();
 	void create_new_map_2d();
 	void create_new_map_3d();
+	void draw(sf::Event& event);
 	void load_map_from_file_2d();
 	void load_map_from_file_3d();
 	void load_result_from_file_2d();

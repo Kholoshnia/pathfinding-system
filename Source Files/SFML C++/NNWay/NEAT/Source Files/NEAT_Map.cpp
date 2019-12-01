@@ -2,6 +2,8 @@
 
 neat::Map::Map()
 {
+	map_markup.resize(map_size.y);
+
 	pos_goal = sf::Vector2i(400, 400);
 	pos_agent = sf::Vector2i(400, 300);
 
@@ -30,16 +32,6 @@ void neat::Map::from_file()
 				pos_agent = sf::Vector2i(j * 10, i * 10);
 			else if (map_markup[i][j] == 'B')
 				pos_additional_rewards.emplace_back(j * 10, i * 10);
-}
-
-void neat::Map::map_changed()
-{
-	for (int i = 0; i < map_size.y; i++)
-		for (int j = 0; j < map_size.x; j++)
-	map_markup[pos_rects[pos_rects.size() - 1].y / 10][pos_rects[pos_rects.size() - 1].x / 10] == 'S';
-	map_markup[pos_goal.x / 10][pos_goal.y / 10] == 'G';
-	map_markup[pos_agent.x / 10][pos_agent.y / 10] == 'A';
-	map_markup[pos_additional_rewards[pos_additional_rewards.size() - 1].y / 10][pos_additional_rewards[pos_additional_rewards.size() - 1].x / 10] == 'B';
 }
 
 float neat::Map::dist(sf::Vector2f& obj) { return sqrt((pos_goal.x - obj.x) * (pos_goal.x - obj.x) + (pos_goal.y - obj.y) * (pos_goal.y - obj.y)); }

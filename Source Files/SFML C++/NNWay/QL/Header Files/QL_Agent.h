@@ -6,6 +6,7 @@ extern int width, height;
 
 namespace ql
 {
+	extern float thickness;
 	extern sf::Vector2i map_size;
 
 	struct Agent
