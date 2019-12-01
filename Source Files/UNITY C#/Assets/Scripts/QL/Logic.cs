@@ -26,7 +26,7 @@ namespace Assets.Scripts.QL
 
         private bool pause;
         private readonly string pathOut;
-        private int iterationsK, initialsK;
+        private int repetitionsK, initialsK;
         private readonly long finishReward;
         private readonly int iterations, repetitions;
 
@@ -117,7 +117,7 @@ namespace Assets.Scripts.QL
             if (mode == Modes.LEARN)
             {
                 initialsK = 0;
-                iterationsK = 0;
+                repetitionsK = 0;
 
                 finishReward = mapSize.x * mapSize.y * mapSize.z;
 
@@ -186,10 +186,10 @@ namespace Assets.Scripts.QL
                 if (initialsK > map.Initials.Count - 1)
                 {
                     initialsK = 0;
-                    iterationsK++;
+                    repetitionsK++;
                 }
 
-                if (iterationsK >= repetitions)
+                if (repetitionsK >= repetitions)
                 {
                     FileStream fout = new FileStream(pathOut, FileMode.Create);
 
@@ -212,7 +212,7 @@ namespace Assets.Scripts.QL
                 }
 
                 GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK];
-                GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + iterationsK;
+                GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + repetitionsK;
             }
         }
 

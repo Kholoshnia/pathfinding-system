@@ -9,6 +9,7 @@ ScriptsOnlyBuild:
     - OnCollision
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -562,4 +563,5 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/Main.unity
-  playerPath: C:/Users/vhd-r/Documents/GitHub/NEAT-QL/Release Files/Unity/UNITY C#.exe
+  playerPath: /Users/vadim/Documents/GitHub/NEAT-QL/Release Files/bin/win64/unity-c#/UNITY
+    C#.exe
