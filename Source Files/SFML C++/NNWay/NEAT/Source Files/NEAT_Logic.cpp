@@ -41,11 +41,11 @@ void neat::draw(sf::Event &event)
 			if ([&]
 			{
 				for (auto& el : map->pos_rects)
-					if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
+					if (el == sf::Vector2f(static_cast<float>((event.mouseMove.x / (width / map_size.x)) * (width / map_size.x)), static_cast<float>((event.mouseMove.y / (height / map_size.y)) * (height / map_size.y))))
 						return false;
 					return true;
 			}())
-				map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
+				map->pos_rects.emplace_back(static_cast<float>((event.mouseMove.x / (width / map_size.x))* (width / map_size.x)), static_cast<float>((event.mouseMove.y / (height / map_size.y))* (height / map_size.y)));
 		}
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
@@ -53,18 +53,18 @@ void neat::draw(sf::Event &event)
 			if ([&]
 			{
 				for (auto& el : map->pos_additional_rewards)
-					if (el == sf::Vector2i(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10))
+					if (el == sf::Vector2f(static_cast<float>((event.mouseMove.x / (width / map_size.x)) * (width / map_size.x)), static_cast<float>((event.mouseMove.y / (height / map_size.y)) * (height / map_size.y))))
 						return false;
 					return true;
 			}())
-				map->pos_rects.emplace_back(event.mouseMove.x / 10 * 10, event.mouseMove.y / 10 * 10);
+				map->pos_rects.emplace_back(static_cast<float>((event.mouseMove.x / (width / map_size.x))* (width / map_size.x)), static_cast<float>((event.mouseMove.y / (height / map_size.y))* (height / map_size.y)));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-			map->pos_goal = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
+			map->pos_goal = sf::Vector2f(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
-			map->pos_agent = sf::Vector2i(event.mouseMove.x, event.mouseMove.y);
+			map->pos_agent = sf::Vector2f(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 	}
 }
 

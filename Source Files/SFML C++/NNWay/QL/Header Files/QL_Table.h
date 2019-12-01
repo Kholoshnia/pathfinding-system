@@ -12,17 +12,18 @@
 
 namespace ql
 {
-	extern VisualizationTypes visualization_type;
-	extern int iterations;
-	extern std::shared_ptr<Agent> agent;
-	extern int goal_state;
 	extern std::shared_ptr<Map> map;
+	extern std::shared_ptr<Agent> agent;
+
+	extern float gamma;
 	extern long long int goal_reward;
+	extern int iterations, goal_state;
+
+	extern VisualizationTypes visualization_type;
 
 	struct Table
 	{
 		int state, action;
-		const float gamma = 0.8f;
 		std::vector<std::vector<long long int>> R;
 		std::vector<std::vector<long long int>> Q;
 

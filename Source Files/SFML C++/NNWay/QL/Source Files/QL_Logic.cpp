@@ -4,35 +4,87 @@ void ql::draw(sf::Event& event)
 {
 	if (event.type == event.KeyPressed)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
-			map->pos_walls_pop_back();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && map->pos_walls.size() > 0)
+		{
+			map->map_markup[static_cast<int>(map->pos_walls[map->pos_walls.size() - 1].y) / (height / map_size.y)][static_cast<int>(map->pos_walls[map->pos_walls.size() - 1].x) / (width / map_size.x)] = 'S';
+			map->update();
+		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !around)
 		{
 			around = true;
-			map->fill_around();
+			
+			for (int y = 0; y < map_size.y; y++)
+				for (int x = 0; x < map_size.x; x++)
+					if (x == 0 || x == map_size.x - 1 || y == 0 || y == map_size.y - 1)
+						map->map_markup[y][x] = 'W';
+
+			map->update();
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
 			around = false;
-			map->inc_map_size();
+			
+			map->map_markup[static_cast<int>(map->goal.getPosition().y) / (height / map_size.y)][static_cast<int>(map->goal.getPosition().x) / (width / map_size.x)] = 'G';
+
+			for (int y = 0; y < map_size.y; y++)
+				map->map_markup[y].emplace_back('S');
+
+			std::vector<char> line;
+			for (int x = 0; x < map_size.x + 1; x++)
+				line.emplace_back('S');
+			map->map_markup.emplace_back(line);
+
+			map_size.x += 1;
+			map_size.y += 1;
+			map->update();
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && map_size.x > 2 && map_size.y > 2)
 		{
+			int a = map->goal.getPosition().x + map->goal.getSize().x;
+			if (map->goal.getPosition().x + map->goal.getSize().x > static_cast<float>((height / map_size.y) * map_size.y) || map->goal.getPosition().y + map->goal.getSize().y > static_cast<float>((width / map_size.x) * map_size.x))
+			{
+				map->map_markup[0][0] = 'S';
+				map->goal.setPosition(0.0f, 0.0f);
+			}
+			else
+				map->map_markup[static_cast<int>(map->goal.getPosition().y) / (height / map_size.y)][static_cast<int>(map->goal.getPosition().x) / (width / map_size.x)] = 'G';
+
 			around = false;
-			map->dec_map_size();
+
+			for (int y = 0; y < map_size.y; y++)
+				map->map_markup[y].pop_back();
+			map->map_markup.pop_back();
+			map_size.x -= 1;
+			map_size.y -= 1;
+			map->update();
 		}
 	}
 
 	if (event.type == event.MouseMoved)
 	{
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			if (event.mouseMove.x < (height / map_size.x) * map_size.x && event.mouseMove.y < (width / map_size.y) * map_size.y)
-				map->pos_walls_push_back(event.mouseMove);
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && event.mouseMove.x < (height / map_size.x) * map_size.x && event.mouseMove.y < (width / map_size.y) * map_size.y)
+		{
+			map->map_markup[static_cast<int>(map->goal.getPosition().y) / (height / map_size.y)][static_cast<int>(map->goal.getPosition().x) / (width / map_size.x)] = 'G';
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-			map->set_goal_pos(event.mouseMove);
+			if ([&]()
+			{
+				for (auto& el : map->pos_walls)
+					if (el == sf::Vector2f(static_cast<float>(event.mouseMove.x / (height / map_size.x)), static_cast<float>(event.mouseMove.y / (width / map_size.y))))
+						return false;
+					return true;
+			}())
+				map->map_markup[event.mouseMove.y / (height / map_size.y)][event.mouseMove.x / (width / map_size.x)] = 'W';
+					map->update();
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && event.mouseMove.x < (height / map_size.x) * map_size.x && event.mouseMove.y < (width / map_size.y) * map_size.y)
+		{
+			map->map_markup[static_cast<int>(map->goal.getPosition().y) / (height / map_size.y)][static_cast<int>(map->goal.getPosition().x) / (width / map_size.x)] = 'S';
+			map->goal.setPosition(static_cast<float>(event.mouseMove.x / (width / map_size.x) * (width / map_size.x)), static_cast<float>(event.mouseMove.y / (height / map_size.y) * (height / map_size.y)));
+			map->update();
+		}
 	}
 }
 
@@ -101,7 +153,6 @@ void ql::check_2d()
 
 		window.clear();
 		map->show(window);
-		window.draw(controls[1]);
 
 		if (done)
 		{
@@ -119,6 +170,7 @@ void ql::check_2d()
 			}
 		}
 
+		window.draw(controls[1]);
 		window.display();
 	}
 }
@@ -202,7 +254,7 @@ void ql::create_new_map_2d()
 		window.display();
 	}
 
-	goal_reward = std::pow(map_size.x * map_size.y, 3);
+	goal_reward = static_cast<long long>(std::pow(map_size.x * map_size.y, 3));
 	table.reset(new Table());
 	map_loaded = true;
 }
@@ -288,7 +340,7 @@ void ql::load_map_from_file_2d()
 	}
 
 	map->update();
-	goal_reward = std::pow(map_size.x * map_size.y, 3);
+	goal_reward = static_cast<long long>(std::pow(map_size.x * map_size.y, 3));
 	table.reset(new Table());
 }
 
@@ -304,7 +356,7 @@ void ql::load_result_from_file_2d()
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
-	
+
 	fin.open(path);
 	if (fin.is_open())
 	{

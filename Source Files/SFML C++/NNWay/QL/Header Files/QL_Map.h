@@ -22,13 +22,6 @@ namespace ql
 		Map();
 		void save();
 		void update();
-		void update_size();
-		void fill_around();
-		void inc_map_size();
-		void dec_map_size();
-		void pos_walls_pop_back();
-		void set_goal_pos(sf::Event::MouseMoveEvent pos_mouse);
-		void pos_walls_push_back(sf::Event::MouseMoveEvent pos_mouse);
 		void show(sf::RenderWindow& window);
 	};
 }

@@ -4,8 +4,8 @@ neat::Map::Map()
 {
 	map_markup.resize(map_size.y);
 
-	pos_goal = sf::Vector2i(400, 400);
-	pos_agent = sf::Vector2i(400, 300);
+	pos_goal = sf::Vector2f(400, 400);
+	pos_agent = sf::Vector2f(400, 300);
 
 	circle_goal.setRadius(goal_radius);
 	circle_goal.setFillColor(sf::Color::Red);
@@ -27,9 +27,9 @@ void neat::Map::from_file()
 			if (map_markup[i][j] == 'W')
 				pos_rects.emplace_back(j * 10, i * 10);
 			else if (map_markup[i][j] == 'G')
-				pos_goal = sf::Vector2i(j * 10, i * 10);
+				pos_goal = sf::Vector2f(j * 10, i * 10);
 			else if (map_markup[i][j] == 'A')
-				pos_agent = sf::Vector2i(j * 10, i * 10);
+				pos_agent = sf::Vector2f(j * 10, i * 10);
 			else if (map_markup[i][j] == 'B')
 				pos_additional_rewards.emplace_back(j * 10, i * 10);
 }
@@ -39,7 +39,7 @@ float neat::Map::dist(sf::Vector2f& obj) { return sqrt((pos_goal.x - obj.x) * (p
 bool neat::Map::touched_wall(sf::Vector2f& obj)
 {
 	for (auto& el : pos_rects)
-		if (sf::FloatRect(sf::Vector2f(static_cast<float>(el.x), static_cast<float>(el.y)), sf::Vector2f(10.0f, 10.0f)).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
+		if (sf::FloatRect(el, sf::Vector2f(10.0f, 10.0f)).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
 			return true;
 	return false;
 }
@@ -49,7 +49,7 @@ bool neat::Map::touched_goal(sf::Vector2f& obj) { return dist(obj) < goal_radius
 bool neat::Map::touched_additional_reward(sf::Vector2f& obj)
 {
 	for (auto& el : pos_additional_rewards)
-		if (sf::FloatRect(sf::Vector2f(static_cast<float>(el.x), static_cast<float>(el.y)), sf::Vector2f(10.0f, 10.0f)).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
+		if (sf::FloatRect(el, sf::Vector2f(10.0f, 10.0f)).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
 			return true;
 	return false;
 }
@@ -57,16 +57,16 @@ bool neat::Map::touched_additional_reward(sf::Vector2f& obj)
 void neat::Map::show(sf::RenderWindow& window)
 {
 	rect.setFillColor(sf::Color::Blue);
-	for (auto& pos_rects : pos_rects)
+	for (auto& el : pos_rects)
 	{
-		rect.setPosition(pos_rects.x, pos_rects.y);
+		rect.setPosition(el);
 		window.draw(rect);
 	}
 
 	rect.setFillColor(sf::Color::Yellow);
-	for (auto& pos_additional_rewards : pos_additional_rewards)
+	for (auto& el : pos_additional_rewards)
 	{
-		rect.setPosition(pos_additional_rewards.x, pos_additional_rewards.y);
+		rect.setPosition(el);
 		window.draw(rect);
 	}
 
