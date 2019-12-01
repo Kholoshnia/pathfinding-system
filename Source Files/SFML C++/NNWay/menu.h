@@ -31,7 +31,7 @@ bool from_image, check_from_file, map_loaded, result_loaded, pause, show_control
 
 namespace neat
 {
-	VisualizatoinTypes visualization_type;
+	VisualizationTypes visualization_type;
 
 	std::shared_ptr<Map> map;
 	std::shared_ptr<Layers> layers;
@@ -45,14 +45,14 @@ namespace neat
 	sf::Text text[4], controls[3];
 	sf::Vector2i map_size, wall_size, pos_agent, pos_goal;
 
-	bool was_running, map_loaded, around;
+	bool was_running, around;
 	float agent_radius, goal_radius, max_speed, mutation_rate;
 	int directions_array_size, population_quantity, layers_quantity, auto_exit;
 }
 
 namespace ql
 {
-	VisualizatoinTypes visualization_type;
+	VisualizationTypes visualization_type;
 
 	std::shared_ptr<Map> map;
 	std::shared_ptr<Table> table;
@@ -68,7 +68,7 @@ namespace ql
 	long long int goal_reward;
 	sf::Text text[4], controls[3];
 	int goal_state, iterations, repetitions;
-	bool was_running, map_loaded, goal_loaded, show_controls, around;
+	bool was_running, goal_loaded, show_controls, around;
 }
 #pragma endregion
 
@@ -148,7 +148,16 @@ namespace NNWay
 	private: System::Windows::Forms::Label^ label37;
 	private: System::Windows::Forms::Label^ label38;
 	private: System::Windows::Forms::Label^ label39;
+	private: System::Windows::Forms::Label^ label40;
+	private: System::Windows::Forms::Label^ label41;
+	private: System::Windows::Forms::Label^ label42;
+	private: System::Windows::Forms::Label^ label43;
+	private: System::Windows::Forms::Label^ label44;
+	private: System::Windows::Forms::Label^ label45;
+	private: System::Windows::Forms::Label^ label46;
+	private: System::Windows::Forms::Label^ label47;
 
+	private: System::Windows::Forms::ComboBox^ comboBox1;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
 	private: System::Windows::Forms::ComboBox^ comboBox3;
 	private: System::Windows::Forms::ComboBox^ comboBox4;
@@ -156,6 +165,9 @@ namespace NNWay
 	private: System::Windows::Forms::ComboBox^ comboBox6;
 	private: System::Windows::Forms::ComboBox^ comboBox7;
 	private: System::Windows::Forms::ComboBox^ comboBox8;
+	private: System::Windows::Forms::ComboBox^ comboBox9;
+	private: System::Windows::Forms::ComboBox^ comboBox10;
+	private: System::Windows::Forms::ComboBox^ comboBox11;
 
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Button^ button2;
@@ -189,24 +201,10 @@ namespace NNWay
 	private: System::Windows::Forms::TextBox^ textBox12;
 	private: System::Windows::Forms::TextBox^ textBox13;
 	private: System::Windows::Forms::TextBox^ textBox14;
-private: System::Windows::Forms::TextBox^ textBox15;
-private: System::Windows::Forms::Label^ label40;
-private: System::Windows::Forms::TextBox^ textBox16;
-private: System::Windows::Forms::Label^ label41;
-private: System::Windows::Forms::TextBox^ textBox17;
-private: System::Windows::Forms::Label^ label42;
-private: System::Windows::Forms::TextBox^ textBox18;
-private: System::Windows::Forms::Label^ label43;
-
-private: System::Windows::Forms::Label^ label44;
-private: System::Windows::Forms::ComboBox^ comboBox1;
-private: System::Windows::Forms::Label^ label45;
-private: System::Windows::Forms::ComboBox^ comboBox9;
-private: System::Windows::Forms::Label^ label46;
-private: System::Windows::Forms::ComboBox^ comboBox10;
-
-private: System::Windows::Forms::Label^ label47;
-private: System::Windows::Forms::ComboBox^ comboBox11;
+	private: System::Windows::Forms::TextBox^ textBox15;
+	private: System::Windows::Forms::TextBox^ textBox16;
+	private: System::Windows::Forms::TextBox^ textBox17;
+	private: System::Windows::Forms::TextBox^ textBox18;
 
 	private: System::ComponentModel::Container^ components;
 #pragma endregion
@@ -2054,7 +2052,7 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 			// 
 			this->comboBox11->FormattingEnabled = true;
 			this->comboBox11->Items->AddRange(gcnew cli::array< System::Object^  >(3) {
-				L"With visualization (iterations)", L"With visualization (positions)",
+				L"With visualization (iterations)", L"With visualization (states)",
 					L"Without visualization"
 			});
 			this->comboBox11->Location = System::Drawing::Point(200, 229);
@@ -2377,7 +2375,7 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 			// 
 			this->comboBox10->FormattingEnabled = true;
 			this->comboBox10->Items->AddRange(gcnew cli::array< System::Object^  >(3) {
-				L"With visualization (iterations)", L"With visualization (positions)",
+				L"With visualization (iterations)", L"With visualization (states)",
 					L"Without visualization"
 			});
 			this->comboBox10->Location = System::Drawing::Point(200, 229);
@@ -2930,7 +2928,7 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 			result_loaded = false;
 			check_from_file = false;
 
-			neat::visualization_type = neat::VisualizatoinTypes::WITH;
+			neat::visualization_type = neat::VisualizationTypes::WITH;
 
 			neat::max_speed = 5;
 			neat::auto_exit = 10;
@@ -2983,7 +2981,7 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 				neat::text[i].setFillColor(sf::Color::Black);
 			}
 
-			ql::visualization_type = ql::VisualizatoinTypes::ITERATIONS;
+			ql::visualization_type = ql::VisualizationTypes::ITERATIONS;
 
 			ql::gamma = 0.8f;
 			ql::repetitions = 5;
@@ -3001,8 +2999,8 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 			ql::text[1].setPosition(100, 10);
 			ql::text[1].setString(L"0");
 			ql::text[2].setPosition(15, 30);
-			ql::text[2].setString(L"Iteration: ");
-			ql::text[3].setPosition(100, 30);
+			ql::text[2].setString(L"Repetition: ");
+			ql::text[3].setPosition(115, 30);
 			ql::text[3].setString(L"0");
 
 			for (int i = 0; i < 4; i++)
@@ -3250,10 +3248,10 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 			Windows::Forms::MessageBox::Show("Error: Please, choose visualization type", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 			return;
 		case 0:
-			neat::visualization_type = neat::VisualizatoinTypes::WITH;
+			neat::visualization_type = neat::VisualizationTypes::WITH;
 			break;
 		case 1:
-			neat::visualization_type = neat::VisualizatoinTypes::WITHOUT;
+			neat::visualization_type = neat::VisualizationTypes::WITHOUT;
 			break;
 		}
 
@@ -3270,9 +3268,9 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 		else if (neat::directions_array_size == 0)
 			Windows::Forms::MessageBox::Show("Error: Check directions array size value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
-			if (neat::visualization_type == neat::VisualizatoinTypes::WITH)
+			if (neat::visualization_type == neat::VisualizationTypes::WITH)
 				neat::with_visualization_2d();
-			else if (neat::visualization_type == neat::VisualizatoinTypes::WITHOUT)
+			else if (neat::visualization_type == neat::VisualizationTypes::WITHOUT)
 				neat::without_visualization_2d();
 	}
 #pragma endregion
@@ -3316,10 +3314,10 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 			Windows::Forms::MessageBox::Show("Error: Please, choose visualization type", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 			return;
 		case 0:
-			neat::visualization_type = neat::VisualizatoinTypes::WITH;
+			neat::visualization_type = neat::VisualizationTypes::WITH;
 			break;
 		case 1:
-			neat::visualization_type = neat::VisualizatoinTypes::WITHOUT;
+			neat::visualization_type = neat::VisualizationTypes::WITHOUT;
 			break;
 		}
 
@@ -3336,9 +3334,9 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 		else if (neat::directions_array_size == 0)
 			Windows::Forms::MessageBox::Show("Error: Check directions array size value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
-			if (neat::visualization_type == neat::VisualizatoinTypes::WITH)
+			if (neat::visualization_type == neat::VisualizationTypes::WITH)
 				neat::with_visualization_3d();
-			else if (neat::visualization_type == neat::VisualizatoinTypes::WITHOUT)
+			else if (neat::visualization_type == neat::VisualizationTypes::WITHOUT)
 				neat::without_visualization_3d();
 	}
 #pragma endregion
@@ -3396,13 +3394,13 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 			Windows::Forms::MessageBox::Show("Error: Please, choose visualization type", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 			return;
 		case 0:
-			ql::visualization_type = ql::VisualizatoinTypes::ITERATIONS;
+			ql::visualization_type = ql::VisualizationTypes::ITERATIONS;
 			break;
 		case 1:
-			ql::visualization_type = ql::VisualizatoinTypes::POSITIONS;
+			ql::visualization_type = ql::VisualizationTypes::STATES;
 			break;
 		case 2:
-			ql::visualization_type = ql::VisualizatoinTypes::WITHOUT;
+			ql::visualization_type = ql::VisualizationTypes::WITHOUT;
 			break;
 		}
 
@@ -3413,7 +3411,10 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 		else if (ql::repetitions == 0)
 			Windows::Forms::MessageBox::Show("Error: Check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
-			ql::with_visualization_2d();
+			if (ql::visualization_type == ql::VisualizationTypes::ITERATIONS || ql::visualization_type == ql::VisualizationTypes::STATES)
+				ql::with_visualization_2d();
+			else if (ql::visualization_type == ql::VisualizationTypes::WITHOUT)
+				ql::without_visualization_2d();
 	}
 #pragma endregion
 
@@ -3446,13 +3447,13 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 			Windows::Forms::MessageBox::Show("Error: Please, choose visualization type", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 			return;
 		case 0:
-			ql::visualization_type = ql::VisualizatoinTypes::ITERATIONS;
+			ql::visualization_type = ql::VisualizationTypes::ITERATIONS;
 			break;
 		case 1:
-			ql::visualization_type = ql::VisualizatoinTypes::POSITIONS;
+			ql::visualization_type = ql::VisualizationTypes::STATES;
 			break;
 		case 2:
-			ql::visualization_type = ql::VisualizatoinTypes::WITHOUT;
+			ql::visualization_type = ql::VisualizationTypes::WITHOUT;
 			break;
 		}
 
@@ -3463,7 +3464,10 @@ private: System::Windows::Forms::ComboBox^ comboBox11;
 		else if (ql::repetitions == 0)
 			Windows::Forms::MessageBox::Show("Error: Check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
-			ql::with_visualization_2d();
+			if (ql::visualization_type == ql::VisualizationTypes::ITERATIONS || ql::visualization_type == ql::VisualizationTypes::STATES)
+				ql::with_visualization_3d();
+			else if (ql::visualization_type == ql::VisualizationTypes::WITHOUT)
+				ql::without_visualization_3d();
 	}
 #pragma endregion
 

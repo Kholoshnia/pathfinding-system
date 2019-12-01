@@ -2,9 +2,7 @@
 
 ql::Agent::Agent()
 {
-	rect.setOutlineThickness(thickness);
-	rect.setFillColor(sf::Color::Yellow);
-	rect.setOutlineColor(sf::Color::Black);
+	rect.setFillColor(sf::Color::Black);
 	rect.setSize(sf::Vector2f(static_cast<float>(height / map_size.x), static_cast<float>(width / map_size.y)));
 }
 

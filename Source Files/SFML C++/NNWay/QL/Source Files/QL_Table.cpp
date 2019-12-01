@@ -24,35 +24,31 @@ ql::Table::Table()
 	{
 		for (int x = 0; x < map_size.x; x++)
 		{
-			int a;
-			if (map_size.y * y + x == 146)
-				a = 0;
-
 			if (x - 1 >= 0)
-				if (map->map_markup[y][x - 1] == 'B')
+				if (map->map_markup[y][x - 1] == 'S')
 					R[map_size.y * y + x][map_size.y * y + x - 1] = 0;
-				else if (map->map_markup[y][x - 1] == 'F')
+				else if (map->map_markup[y][x - 1] == 'G')
 					R[map_size.y * y + x][map_size.y * y + x - 1] = goal_reward;
 
 			if (x + 1 < map_size.x)
-				if (map->map_markup[y][x + 1] == 'B')
+				if (map->map_markup[y][x + 1] == 'S')
 					R[map_size.y * y + x][map_size.y * y + x + 1] = 0;
-				else if (map->map_markup[y][x + 1] == 'F')
+				else if (map->map_markup[y][x + 1] == 'G')
 					R[map_size.y * y + x][map_size.y * y + x + 1] = goal_reward;
 
 			if (y - 1 >= 0)
-				if (map->map_markup[y - 1][x] == 'B')
+				if (map->map_markup[y - 1][x] == 'S')
 					R[map_size.y * y + x][map_size.y * (y - 1) + x] = 0;
-				else if (map->map_markup[y - 1][x] == 'F')
+				else if (map->map_markup[y - 1][x] == 'G')
 					R[map_size.y * y + x][map_size.y * (y - 1) + x] = goal_reward;
 
 			if (y + 1 < map_size.y)
-				if (map->map_markup[y + 1][x] == 'B')
+				if (map->map_markup[y + 1][x] == 'S')
 					R[map_size.y * y + x][map_size.y * (y + 1) + x] = 0;
-				else if (map->map_markup[y + 1][x] == 'F')
+				else if (map->map_markup[y + 1][x] == 'G')
 					R[map_size.y * y + x][map_size.y * (y + 1) + x] = goal_reward;
 
-			if (map->map_markup[y][x] == 'F')
+			if (map->map_markup[y][x] == 'G')
 			{
 				R[map_size.y * y + x][map_size.y * y + x] = goal_reward;
 				goal_state = map_size.y * y + x;
@@ -67,9 +63,11 @@ void ql::Table::choose_an_action()
 
 	if (R[state][possible_action] >= 0)
 	{
-		Q[state][possible_action] = (long long)R[state][possible_action] + (long long)gamma * maximum(possible_action, false);
+		Q[state][possible_action] = R[state][possible_action] + static_cast<long long>(gamma * maximum(possible_action, false));
 		state = possible_action;
 	}
+
+	if (visualization_type == VisualizationTypes::STATES) agent->update(state);
 }
 
 void ql::Table::episode(int init_state)
@@ -79,13 +77,14 @@ void ql::Table::episode(int init_state)
 		do
 		{
 			choose_an_action();
-			agent->update(state);
 		} while (state == goal_state);
 	for (int i = 0; i < iterations; i++)
 		choose_an_action();
+
+	if (visualization_type == VisualizationTypes::ITERATIONS) agent->update(init_state);
 }
 
-int ql::Table::inference_best_action(int now_state)
+long long ql::Table::maximum(int now_state, bool return_index)
 {
 	int best_action = 0;
 	long long temp_max_q = 0;
@@ -97,31 +96,8 @@ int ql::Table::inference_best_action(int now_state)
 			best_action = i;
 		}
 
-	return best_action;
-}
-
-long long ql::Table::maximum(int st, bool return_index_only)
-{
-	int winner = 0;
-	bool found_new_winner = false, done = false;
-
-	do
-	{
-		found_new_winner = false;
-		for (int i = 0; i < map_size.x * map_size.y; i++)
-			if ((i < winner) || (i > winner))
-				if (Q[st][i] > Q[st][winner])
-				{
-					winner = i;
-					found_new_winner = true;
-				}
-
-		if (found_new_winner == false)
-			done = true;
-	} while (done == false);
-
-	if (return_index_only == true) return winner;
-	else return Q[st][winner];
+	if (return_index == true) return best_action;
+	else return Q[now_state][best_action];
 }
 
 int ql::Table::get_random_action(int lower_bound, int upper_bound)

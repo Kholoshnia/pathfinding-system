@@ -11,9 +11,9 @@
 #include <QL/Header Files/QL_Table.h>
 #include <QL/Header Files/QL_Agent.h>
 
-extern bool from_image;
 extern sf::Sprite loading;
 extern int fps, width, height;
+extern bool from_image, map_loaded, result_loaded, show_controls;
 
 namespace ql
 {
@@ -21,14 +21,14 @@ namespace ql
 	extern std::shared_ptr<Table> table;
 	extern std::shared_ptr<Agent> agent;
 
-	extern sf::Text text[4];
 	extern sf::Vector2i map_size;
 	extern std::string image_path;
 	extern std::fstream fout, fin;
+	extern bool goal_loaded, around;
 	extern std::vector<int> initials;
 	extern long long int goal_reward;
 	extern int goal_state, repetitions;
-	extern bool map_loaded, goal_loaded, around;
+	extern sf::Text text[4], controls[3];
 
 	void check_2d();
 	void check_3d();

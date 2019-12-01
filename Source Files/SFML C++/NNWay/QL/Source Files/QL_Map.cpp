@@ -32,7 +32,6 @@ void ql::Map::pos_walls_pop_back()
 	if (pos_walls.size() > 0)
 	{
 		map_markup[pos_walls[pos_walls.size() - 1].y / (height / map_size.y)][pos_walls[pos_walls.size() - 1].x / (width / map_size.x)] = 'S';
-		pos_walls.pop_back();
 		update();
 	}
 }
@@ -117,8 +116,6 @@ void ql::Map::update()
 	for (int y = 0; y < map_size.y; y++)
 		for (int x = 0; x < map_size.x; x++)
 		{
-			k++;
-
 			if (map_markup[y][x] == 'S')
 			{
 				pos_spaces.emplace_back(static_cast<float>(x * (height / map_size.x)), static_cast<float>(y * (width / map_size.y)));
@@ -128,6 +125,8 @@ void ql::Map::update()
 				pos_walls.emplace_back(static_cast<float>(x * (height / map_size.x)), static_cast<float>(y * (width / map_size.y)));
 			else if (map_markup[y][x] == 'G')
 				goal.setPosition(static_cast<float>(x * (height / map_size.x)), static_cast<float>(y * (width / map_size.y)));
+
+			k++;
 		}
 
 	wall.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));

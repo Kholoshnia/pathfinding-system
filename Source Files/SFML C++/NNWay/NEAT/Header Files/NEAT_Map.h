@@ -17,6 +17,12 @@ namespace neat
 		std::vector<sf::Vector2i> pos_rects, pos_additional_rewards;
 
 		Map();
+
+		void fill_around();
+		void pos_walls_pop_back();
+		void set_goal_pos(sf::Event::MouseMoveEvent pos_mouse);
+		void pos_walls_push_back(sf::Event::MouseMoveEvent pos_mouse);
+
 		void from_file();
 		float dist(sf::Vector2f& obj);
 		bool touched_wall(sf::Vector2f& obj);

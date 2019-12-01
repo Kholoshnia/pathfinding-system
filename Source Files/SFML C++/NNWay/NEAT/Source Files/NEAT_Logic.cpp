@@ -347,7 +347,7 @@ void neat::with_visualization_2d()
 {
 	layers.reset(new Layers());
 
-	sf::RenderWindow window(sf::VideoMode(width, height), "Learning");
+	sf::RenderWindow window(sf::VideoMode(width, height), "Learn");
 	while (window.isOpen())
 	{
 		sf::Event event;

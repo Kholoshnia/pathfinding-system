@@ -22,7 +22,7 @@ extern bool from_image, map_loaded, result_loaded, pause, show_controls;
 
 namespace neat
 {
-	extern VisualizatoinTypes visualization_type;
+	extern VisualizationTypes visualization_type;
 
 	extern std::shared_ptr<Map> map;
 	extern std::shared_ptr<Layers> layers;
