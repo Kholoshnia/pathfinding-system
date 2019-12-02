@@ -16,14 +16,14 @@ void neat::draw(sf::Event &event)
 
 			for (int x = 0; x < map_size.x; x++)
 			{
-				map->pos_rects.emplace_back(x * 10, 0);
-				map->pos_rects.emplace_back(x * 10, map_size.y * 10 - 10);
+				map->pos_rects.emplace_back(static_cast<float>(x) * 10.0f, 0.0f);
+				map->pos_rects.emplace_back(static_cast<float>(x) * 10.0f, static_cast<float>(map_size.y) * 10.0f - 10.0f);
 			}
 
 			for (int y = 0; y < map_size.y; y++)
 			{
-				map->pos_rects.emplace_back(0, y * 10);
-				map->pos_rects.emplace_back(map_size.x * 10 - 10, y * 10);
+				map->pos_rects.emplace_back(0.0f, static_cast<float>(y) * 10.0f);
+				map->pos_rects.emplace_back(static_cast<float>(map_size.x) * 10.0f - 10.0f, static_cast<float>(y) * 10.0f);
 			}
 		}
 
@@ -125,12 +125,16 @@ void neat::create_new_map_2d()
 			{
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 				{
-					window.draw(loading);
-					window.display();
+					System::Windows::Forms::SaveFileDialog^ open_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+					if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+						path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 
-					fout.open("Resource Files/Data/NEAT/input.csv");
+					fout.open(path);
 					if (fout.is_open())
 					{
+						window.draw(loading);
+						window.display();
+
 						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
 						for (int y = 0; y < map_size.y; y++)
 						{
@@ -141,21 +145,13 @@ void neat::create_new_map_2d()
 								else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
 									fout << 'G';
 								else if ([&x, &y]
-									{
-										for (auto& el : map->pos_rects)
-											if (x == el.x / 10 && y == el.y / 10)
-												return true;
-											return false;
-									}())
+								{
+									for (auto& el : map->pos_rects)
+										if (x == el.x / 10 && y == el.y / 10)
+											return true;
+										return false;
+								}())
 									fout << 'W';
-								else if ([&x, &y]
-									{
-										for (auto& el : map->pos_additional_rewards)
-											if (x == el.x / 10 && y == el.y / 10)
-												return true;
-											return false;
-									}())
-									fout << 'B';
 								else
 									fout << 'S';
 								fout << ';';
@@ -167,7 +163,11 @@ void neat::create_new_map_2d()
 						fout.close();
 						window.close();
 					}
-					else System::Windows::Forms::MessageBox::Show("Error opening file: \"input.csv\"");
+					else
+					{
+						std::string message = "Error opening file: \"" + path + "\"";
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+					}
 				}
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
@@ -200,8 +200,24 @@ void neat::create_new_map_2d()
 
 void neat::create_new_map_3d()
 {
-	System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
-	map_loaded = true;
+	System::Windows::Forms::MessageBox::Show("Open \"QL Map Creator\" as Unity Project and press start when done creating new map. Then load it from file", "QL Map Creator", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+	char buffer[260];
+	GetCurrentDirectory(sizeof(buffer), buffer);
+	std::string str1 = "explorer.exe ";
+	std::string str2 = str1 + buffer;
+	str2.erase(str2.size() - 9);
+	str2 += "unity";
+	system(str2.c_str());
+}
+
+void neat::set_result_file_path()
+{
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+
+	if (path_output != "")
+		output_path_set = true;
 }
 
 void neat::load_map_from_file_2d()
@@ -296,8 +312,8 @@ void neat::load_map_from_file_3d()
 {
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
-	if (path != "")
+		path_input = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	if (path_input != "")
 		map_loaded = true;
 }
 
@@ -338,8 +354,8 @@ void neat::load_result_from_file_3d()
 {
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
-	if (path != "")
+		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	if (path_output != "")
 		result_loaded = true;
 }
 
@@ -370,7 +386,7 @@ void neat::with_visualization_2d()
 					window.draw(loading);
 					window.display();
 
-					fout.open("Resource Files/Data/NEAT/output.csv");
+					fout.open(path_output);
 					if (fout.is_open())
 					{
 						fout << max_speed << std::endl;
@@ -378,11 +394,14 @@ void neat::with_visualization_2d()
 						for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
 							fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
 						fout.close();
-						window.close();
 					}
-					else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
+					else
+					{
+						std::string message = "Error opening file: \"" + path_output + "\"";
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+					}
 
-					fout.open("Resource Files/Data/NEAT/new_input.csv");
+					fout.open(path_input);
 					if (fout.is_open())
 					{
 						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
@@ -395,12 +414,12 @@ void neat::with_visualization_2d()
 								else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
 									fout << 'G';
 								else if ([&x, &y]
-									{
-										for (auto& el : map->pos_rects)
-											if (x == el.x / 10 && y == el.y / 10)
-												return true;
-											return false;
-									}())
+								{
+									for (auto& el : map->pos_rects)
+										if (x == el.x / 10 && y == el.y / 10)
+											return true;
+										return false;
+								}())
 									fout << 'W';
 								else
 									fout << 'S';
@@ -413,7 +432,11 @@ void neat::with_visualization_2d()
 						fout.close();
 						window.close();
 					}
-					else System::Windows::Forms::MessageBox::Show("Error opening file \"new_map.csv\"");
+					else
+					{
+						std::string message = "Error opening file: \"" + path_input + "\"";
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+					}
 				}
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) pause = !pause;
@@ -458,9 +481,14 @@ void neat::with_visualization_2d()
 
 void neat::with_visualization_3d()
 {
-	fout.open(path, std::fstream::app);
+	fout.open(path_output, std::fstream::app);
 	if (fout.is_open())
 	{
+		fout << "QL" << std::endl;
+		fout << "LEARN" << std::endl;
+		//path_input.replace(path_input.begin(), path_input.end(), "\\", '/');
+		fout << path_input << std::endl;
+		fout << path_output << std::endl;
 		fout << "info" << std::endl;
 		fout << "visualization:;" << 1 << std::endl;
 		fout << "direction-array-size:;" << directions_array_size << std::endl;
@@ -489,7 +517,7 @@ void neat::without_visualization_2d()
 	{
 		if (layers->populations[layers->best_population].after_reach > auto_exit)
 		{
-			fout.open("Resource Files/Data/NEAT/output.csv");
+			fout.open(path_output);
 			if (fout.is_open())
 			{
 				fout << max_speed << std::endl;
@@ -499,7 +527,11 @@ void neat::without_visualization_2d()
 				fout.close();
 				calculating = false;
 			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file \"output.csv\"");
+			else
+			{
+				std::string message = "Error opening file: \"" + path_output + "\"";
+				System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+			}
 		}
 
 		layers->update();

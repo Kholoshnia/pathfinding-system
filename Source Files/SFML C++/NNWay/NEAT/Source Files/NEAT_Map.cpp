@@ -25,13 +25,13 @@ void neat::Map::from_file()
 	for (int i = 0; i < map_size.y; i++)
 		for (int j = 0; j < map_size.x; j++)
 			if (map_markup[i][j] == 'W')
-				pos_rects.emplace_back(j * 10, i * 10);
+				pos_rects.emplace_back(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 			else if (map_markup[i][j] == 'G')
-				pos_goal = sf::Vector2f(j * 10, i * 10);
+				pos_goal = sf::Vector2f(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 			else if (map_markup[i][j] == 'A')
-				pos_agent = sf::Vector2f(j * 10, i * 10);
+				pos_agent = sf::Vector2f(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 			else if (map_markup[i][j] == 'B')
-				pos_additional_rewards.emplace_back(j * 10, i * 10);
+				pos_additional_rewards.emplace_back(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
 }
 
 float neat::Map::dist(sf::Vector2f& obj) { return sqrt((pos_goal.x - obj.x) * (pos_goal.x - obj.x) + (pos_goal.y - obj.y) * (pos_goal.y - obj.y)); }

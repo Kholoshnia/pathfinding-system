@@ -4,6 +4,7 @@
 
 #include <sstream>
 #include <fstream>
+#include <Windows.h>
 
 #include <Enums.h>
 
@@ -13,7 +14,8 @@
 
 extern sf::Sprite loading;
 extern int fps, width, height;
-extern bool from_image, map_loaded, result_loaded, show_controls;
+extern std::string path_input, path_output;
+extern bool from_image, map_loaded, result_loaded, output_path_set, show_controls;
 
 namespace ql
 {
@@ -29,11 +31,13 @@ namespace ql
 	extern long long int goal_reward;
 	extern int goal_state, repetitions;
 	extern sf::Text text[4], controls[3];
+	extern std::vector<std::vector<long long int>> temp_Q;
 
 	void check_2d();
 	void check_3d();
 	void create_new_map_2d();
 	void create_new_map_3d();
+	void set_result_file_path();
 	void draw(sf::Event& event);
 	void load_map_from_file_2d();
 	void load_map_from_file_3d();

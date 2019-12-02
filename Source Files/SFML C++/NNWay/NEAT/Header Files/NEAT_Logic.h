@@ -1,10 +1,14 @@
 #pragma once
 
+#include <iostream>
+
 #include <SFML/Graphics.hpp>
-#include <sstream>
-#include <fstream>
+
 #include <vector>
 #include <string>
+#include <sstream>
+#include <fstream>
+#include <Windows.h>
 
 #include <Enums.h>
 
@@ -13,12 +17,13 @@
 #include <NEAT/Header Files/NEAT_Layers.h>
 #include <NEAT/Header Files/NEAT_Population.h>
 
+extern Modes mode;
 extern Dimensions dimension;
 
-extern std::string path;
 extern sf::Sprite loading;
 extern int fps, width, height;
-extern bool from_image, map_loaded, result_loaded, pause, show_controls;
+extern std::string path, path_input, path_output;
+extern bool from_image, map_loaded, result_loaded, pause, output_path_set, show_controls;
 
 namespace neat
 {
@@ -42,6 +47,7 @@ namespace neat
 	void check_3d();
 	void create_new_map_2d();
 	void create_new_map_3d();
+	void set_result_file_path();
 	void load_map_from_file_2d();
 	void load_map_from_file_3d();
 	void load_result_from_file_2d();

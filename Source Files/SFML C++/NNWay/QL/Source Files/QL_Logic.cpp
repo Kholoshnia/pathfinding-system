@@ -42,14 +42,12 @@ void ql::draw(sf::Event& event)
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && map_size.x > 2 && map_size.y > 2)
 		{
-			int a = map->goal.getPosition().x + map->goal.getSize().x;
 			if (map->goal.getPosition().x + map->goal.getSize().x > static_cast<float>((height / map_size.y) * map_size.y) || map->goal.getPosition().y + map->goal.getSize().y > static_cast<float>((width / map_size.x) * map_size.x))
 			{
 				map->map_markup[0][0] = 'S';
 				map->goal.setPosition(0.0f, 0.0f);
 			}
-			else
-				map->map_markup[static_cast<int>(map->goal.getPosition().y) / (height / map_size.y)][static_cast<int>(map->goal.getPosition().x) / (width / map_size.x)] = 'G';
+			else map->map_markup[static_cast<int>(map->goal.getPosition().y) / (height / map_size.y)][static_cast<int>(map->goal.getPosition().x) / (width / map_size.x)] = 'G';
 
 			around = false;
 
@@ -118,7 +116,7 @@ void ql::check_2d()
 					moves.emplace_back(position);
 					while (true)
 					{
-						int best_action = table->maximum(position, true);
+						int best_action = static_cast<int>(table->maximum(position, true));
 						moves.emplace_back(best_action);
 						if (best_action == goal_state) break;
 						else position = best_action;
@@ -145,7 +143,7 @@ void ql::check_2d()
 					else
 					{
 						controls[1].setPosition(552, 10);
-						controls[1].setString(L"[LMB] - Choose state\n[Esc] - Exit without saving\n[E] - Hide controls");
+						controls[1].setString(L"[LMB] - Choose state\n[Esc] - Exit\n[E] - Hide controls");
 					}
 				}
 			}
@@ -199,12 +197,16 @@ void ql::create_new_map_2d()
 			{
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 				{
+					System::Windows::Forms::SaveFileDialog^ open_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+					if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+						path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+
 					window.draw(loading);
 					window.display();
 
 					map->save();
 
-					fout.open("Resource Files/Data/QL/input.csv");
+					fout.open(path);
 					if (fout.is_open())
 					{
 						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
@@ -217,16 +219,14 @@ void ql::create_new_map_2d()
 						}
 
 						fout.close();
-
+						window.close();
 						map_loaded = true;
 					}
 					else
 					{
-						std::string message = "Error opening file: \"input.csv\"";
+						std::string message = "Error opening file: \"" + path + "\"";
 						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
 					}
-
-					window.close();
 				}
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
@@ -261,7 +261,24 @@ void ql::create_new_map_2d()
 
 void ql::create_new_map_3d()
 {
-	System::Windows::Forms::MessageBox::Show("Open \"Map Creator\" and start when you done creating new map and then load from file");
+	System::Windows::Forms::MessageBox::Show("Open \"NEAT Map Creator\" as Unity Project and press start when done creating new map. Then load it from file", "NEAT Map Creator", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+	char buffer[260];
+	GetCurrentDirectory(sizeof(buffer), buffer);
+	std::string str1 = "explorer.exe ";
+	std::string str2 = str1 + buffer;
+	str2.erase(str2.size() - 9);
+	str2 += "unity";
+	system(str2.c_str());
+}
+
+void ql::set_result_file_path()
+{
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+
+	if (path_output != "")
+		output_path_set = true;
 }
 
 void ql::load_map_from_file_2d()
@@ -437,9 +454,12 @@ void ql::with_visualization_2d()
 
 		if (repetitions_k > repetitions - 1)
 		{
-			fout.open("Resource Files/Data/QL/output.csv");
+			fout.open(path_output);
 			if (fout.is_open())
 			{
+				window.draw(loading);
+				window.display();
+
 				for (int y = 0; y < map_size.x * map_size.y; y++)
 				{
 					for (int x = 0; x < map_size.x * map_size.y; x++)
@@ -447,10 +467,14 @@ void ql::with_visualization_2d()
 					fout << std::endl;
 				}
 				fout.close();
-			}
-			else System::Windows::Forms::MessageBox::Show("Error opening file: \"output.csv\"");
 
-			window.close();
+				window.close();
+			}
+			else
+			{
+				std::string message = "Error opening file: \"" + path_output + "\"";
+				System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+			}
 		}
 	}
 }
@@ -469,7 +493,7 @@ void ql::without_visualization_2d()
 		for (auto& el : initials)
 			table->episode(el);
 
-	fout.open("Resource Files/Data/QL/output.csv");
+	fout.open(path_input);
 	if (fout.is_open())
 	{
 		for (int y = 0; y < map_size.x * map_size.y; y++)
@@ -480,7 +504,11 @@ void ql::without_visualization_2d()
 		}
 		fout.close();
 	}
-	else System::Windows::Forms::MessageBox::Show("Error opening file: \"output.csv\"");
+	else
+	{
+		std::string message = "Error opening file: \"" + path_output + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+	}
 }
 
 void ql::without_visualization_3d()
