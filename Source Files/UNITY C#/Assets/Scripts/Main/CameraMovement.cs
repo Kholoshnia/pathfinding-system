@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour
     private readonly int yMinLimit = -80;
     private readonly float xSpeed = 200.0f;
     private readonly float ySpeed = 200.0f;
+    private readonly float zSpeed = 200.0f;
     private readonly float zoomDampening = 5.0f;
 
     private float xDeg;
@@ -45,9 +46,13 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
             transform.Translate(Vector3.left * ySpeed * Time.deltaTime / 10.0f);
         if (Input.GetKey(KeyCode.S))
-            transform.Translate(-Vector3.forward * xSpeed * Time.deltaTime / 10.0f);
+            transform.Translate(Vector3.back * xSpeed * Time.deltaTime / 10.0f);
         if (Input.GetKey(KeyCode.D))
             transform.Translate(Vector3.right * ySpeed * Time.deltaTime / 10.0f);
+        if (Input.GetKey(KeyCode.E))
+            transform.Translate(Vector3.up * zSpeed * Time.deltaTime / 10.0f);
+        if (Input.GetKey(KeyCode.Q))
+            transform.Translate(Vector3.down * zSpeed * Time.deltaTime / 10.0f);
 
         if (Input.GetKeyUp(KeyCode.P))
             GameObject.Find("Main Camera").GetComponent<Camera>().orthographic = !GameObject.Find("Main Camera").GetComponent<Camera>().orthographic;
