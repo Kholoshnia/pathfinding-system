@@ -15,7 +15,7 @@ TagManager:
   - ImagePosition
   - ImageIteration
   - TextPosition
-  - TextIteration
+  - TextRepetition
   - Walls
   - StartPositions
   layers:

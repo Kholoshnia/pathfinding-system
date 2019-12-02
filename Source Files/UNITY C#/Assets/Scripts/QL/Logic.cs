@@ -27,7 +27,7 @@ namespace Assets.Scripts.QL
         private readonly long finishReward;
         private readonly string pathIn, pathOut;
         private readonly int iterations, repetitions;
-        private int repetitionsK, initialsK, selectedValue;
+        private int repetitionsK, initialsK, previousValue;
 
         public Logic(Modes mode, string pathIn, string pathOut, string pathInfo)
         {
@@ -167,7 +167,7 @@ namespace Assets.Scripts.QL
                 }
 
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextPosition"));
-                UnityEngine.Object.Destroy(GameObject.FindWithTag("TextIteration"));
+                UnityEngine.Object.Destroy(GameObject.FindWithTag("TextRepetition"));
             }
 
             for (int j = 0; j < map.Walls.Count; j++)
@@ -186,10 +186,14 @@ namespace Assets.Scripts.QL
                 {
                     initialsK = 0;
                     repetitionsK++;
+                    GameObject.FindWithTag("TextRepetition").GetComponent<Text>().text = "Iteration: " + repetitionsK;
                 }
+                GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK];
 
                 if (repetitionsK >= repetitions)
                 {
+                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK] + " (Loading)";
+
                     FileStream fout = new FileStream(pathOut, FileMode.Create);
 
                     using (StreamWriter writer = new StreamWriter(fout))
@@ -206,12 +210,11 @@ namespace Assets.Scripts.QL
                     }
                     fout.Close();
 
+                    GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK] + " (Done)";
+
                     Application.Quit();
                     pause = true;
                 }
-
-                GameObject.FindWithTag("TextPosition").GetComponent<Text>().text = "Position: " + map.Initials[initialsK];
-                GameObject.FindWithTag("TextIteration").GetComponent<Text>().text = "Iteration: " + repetitionsK;
             }
         }
 
@@ -221,8 +224,8 @@ namespace Assets.Scripts.QL
             {
                 if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
                 {
-                    selectedValue = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value;
-                    int nowState = selectedValue - 1;
+                    previousValue = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value;
+                    int nowState = previousValue - 1;
                     position = map.Spaces[nowState].transform.position;
                     moves.Add(position);
 
@@ -258,7 +261,7 @@ namespace Assets.Scripts.QL
             }
             else
             {
-                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != selectedValue)
+                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != previousValue)
                 {
                     done = false;
                     moves.Clear();

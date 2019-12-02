@@ -3202,8 +3202,8 @@ GameObject:
   - component: {fileID: 1871829297}
   - component: {fileID: 1871829299}
   m_Layer: 5
-  m_Name: Iteration
-  m_TagString: TextIteration
+  m_Name: Repetitions
+  m_TagString: TextRepetition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3258,7 +3258,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Iteration: 0'
+  m_Text: 'Repetitions: 0'
 --- !u!222 &1871829298
 CanvasRenderer:
   m_ObjectHideFlags: 0
