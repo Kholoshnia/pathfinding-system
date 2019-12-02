@@ -2473,7 +2473,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			this->comboBox8->Size = System::Drawing::Size(147, 21);
 			this->comboBox8->TabIndex = 61;
 			this->comboBox8->Text = L"Choose action...";
-			this->comboBox8->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox7_SelectedIndexChanged);
+			this->comboBox8->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox8_SelectedIndexChanged);
 			// 
 			// button5
 			// 
