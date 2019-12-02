@@ -9,10 +9,9 @@ namespace Assets.Scripts.QL
 {
     class Logic
     {
-        private int k;
         private bool done;
-        private float timer;
         private Vector3 position;
+        private List<GameObject> pos_agents;
         private readonly List<Vector3> moves;
 
         private Vector3Int mapSize;
@@ -25,18 +24,17 @@ namespace Assets.Scripts.QL
         private readonly VisualizationType visualization;
 
         private bool pause;
-        private readonly string pathOut;
-        private int repetitionsK, initialsK;
         private readonly long finishReward;
+        private readonly string pathIn, pathOut;
         private readonly int iterations, repetitions;
+        private int repetitionsK, initialsK, selectedValue;
 
         public Logic(Modes mode, string pathIn, string pathOut, string pathInfo)
         {
-            k = 0;
-
             UnityEngine.Object.Destroy(GameObject.Find("NEAT"));
             UnityEngine.Object.Destroy(GameObject.Find("NEAT_Canvas"));
 
+            this.pathIn = pathIn;
             this.pathOut = pathOut;
 
             this.mode = mode;
@@ -55,9 +53,9 @@ namespace Assets.Scripts.QL
                 mapSize = new Vector3Int(Convert.ToInt32(values[1]), Convert.ToInt32(values[2]), Convert.ToInt32(values[3]));
                 map.map = new char[mapSize.z, mapSize.y, mapSize.x];
 
-                for (int z = mapSize.z - 1; z >= 0; z--)
+                for (int z = 0; z < mapSize.z; z++)
                 {
-                    for (int y = mapSize.y - 1; y >= 0; y--)
+                    for (int y = 0; y < mapSize.y; y++)
                     {
                         values = reader.ReadLine().Split(';');
                         for (int x = 0; x < mapSize.x; x++)
@@ -140,6 +138,7 @@ namespace Assets.Scripts.QL
             }
             else if (mode == Modes.CHECK)
             {
+                pos_agents = new List<GameObject>();
                 agent.SetActive(false);
                 moves = new List<Vector3>();
                 table = new Table(finishReward, mapSize, map, gamma);
@@ -222,7 +221,8 @@ namespace Assets.Scripts.QL
             {
                 if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
                 {
-                    int nowState = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value - 1;
+                    selectedValue = GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value;
+                    int nowState = selectedValue - 1;
                     position = map.Spaces[nowState].transform.position;
                     moves.Add(position);
 
@@ -235,7 +235,6 @@ namespace Assets.Scripts.QL
                         }
 
                     if (found)
-                    {
                         while (true)
                         {
                             nowState = Convert.ToInt32(table.Maximum(nowState, true));
@@ -246,30 +245,26 @@ namespace Assets.Scripts.QL
                             if (moves.Count > mapSize.z * mapSize.y * mapSize.x)
                                 break;
                         }
-                    }
+
                     done = true;
                     agent.SetActive(true);
+                    for (int i = 0; i < moves.Count; i++)
+                    {
+                        agent.transform.position = moves[i];
+                        pos_agents.Add(UnityEngine.Object.Instantiate(agent));
+                    }
+                    agent.SetActive(false);
                 }
             }
             else
             {
-                agent.transform.position = moves[k];
-
-                timer += Time.deltaTime;
-
-                if (timer >= 0.25f)
+                if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != selectedValue)
                 {
-                    k++;
-                    timer = 0;
-                }
-
-                if (k > moves.Count - 1)
-                {
-                    k = 0;
                     done = false;
                     moves.Clear();
-                    agent.SetActive(false);
-                    GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value = 0;
+                    for (int i = 0; i < pos_agents.Count; i++)
+                        UnityEngine.Object.Destroy(pos_agents[i]);
+                    pos_agents.Clear();
                 }
             }
         }
