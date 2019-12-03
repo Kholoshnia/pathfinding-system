@@ -72,7 +72,6 @@ void neat::Population::calculate_fitness()
 
 void neat::Population::natural_selection()
 {
-	calculate_fitness_sum();
 	std::vector<Agent>new_agents;
 	new_agents.resize(agents.size());
 	new_agents[0] = agents[best_agent].get_copy();

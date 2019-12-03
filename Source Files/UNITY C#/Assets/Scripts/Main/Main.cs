@@ -16,17 +16,11 @@ public class Main : MonoBehaviour
 
         switch (Application.platform)
         {
-            case RuntimePlatform.WindowsEditor:
-                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Release Files/data/info.csv";
-                break;
             case RuntimePlatform.WindowsPlayer:
-                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 19) + "data/info.csv";
+                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 29) + "data/info.csv";
                 break;
             case RuntimePlatform.OSXEditor:
-                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 28) + "Release Files/data/info.csv";
-                break;
-            case RuntimePlatform.OSXPlayer:
-                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 19) + "data/info.csv";
+                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 14) + "Release Files/data/info.csv";
                 break;
         }
 
@@ -34,6 +28,9 @@ public class Main : MonoBehaviour
 
         using (StreamReader reader = new StreamReader(fin))
         {
+            pathInfoIn = reader.ReadLine();
+            pathInfoOut = reader.ReadLine();
+
             switch (reader.ReadLine())
             {
                 case "NEAT":
@@ -59,9 +56,6 @@ public class Main : MonoBehaviour
                     Debug.Log("Incorrect mode");
                     break;
             }
-
-            pathInfoIn = reader.ReadLine();
-            pathInfoOut = reader.ReadLine();
         }
         fin.Close();
     }

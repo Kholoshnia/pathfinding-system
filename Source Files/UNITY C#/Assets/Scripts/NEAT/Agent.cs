@@ -16,7 +16,7 @@ namespace Assets.Scripts.NEAT
         public bool ReachedGoal { get; private set; }
         public Color Color { get => color; set => color = value; }
 
-        public Agent(int directionArraySize, float mutationRate, float speed, float maxSpeed)
+        public Agent(int directionArraySize, float mutationRate, float maxSpeed)
         {
             Dead = false;
             IsBest = false;
@@ -25,7 +25,7 @@ namespace Assets.Scripts.NEAT
             Fitness = 0;
             this.maxSpeed = maxSpeed;
 
-            Brain = new Brain(directionArraySize, mutationRate, speed);
+            Brain = new Brain(directionArraySize, mutationRate);
             Sphere = Object.Instantiate(GameObject.FindWithTag("Start"));
 
             vel = Vector3.zero;
@@ -69,6 +69,6 @@ namespace Assets.Scripts.NEAT
             else Fitness = 1.0f / Mathf.Pow(GameObject.FindWithTag("Goal").GetComponent<Information>().GetDistance(Sphere), 2);
         }
 
-        public Agent GetCopy() { return new Agent(Brain.Directions.Length, Brain.MutationRate, Brain.Speed, maxSpeed) { Brain = Brain.Clone() }; }
+        public Agent GetCopy() { return new Agent(Brain.Directions.Length, Brain.MutationRate, maxSpeed) { Brain = Brain.Clone() }; }
     };
 }

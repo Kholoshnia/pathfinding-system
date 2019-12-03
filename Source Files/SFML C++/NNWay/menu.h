@@ -2320,7 +2320,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 					this->dimensionToolStripMenuItem, this->learningAlgorithmToolStripMenuItem
 			});
 			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
-			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 19);
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(92, 29);
 			this->settingsToolStripMenuItem->Text = L"Settings";
 			// 
 			// modeToolStripMenuItem
@@ -2330,20 +2330,20 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 					this->checkToolStripMenuItem
 			});
 			this->modeToolStripMenuItem->Name = L"modeToolStripMenuItem";
-			this->modeToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->modeToolStripMenuItem->Size = System::Drawing::Size(263, 34);
 			this->modeToolStripMenuItem->Text = L"Mode";
 			// 
 			// learnToolStripMenuItem
 			// 
 			this->learnToolStripMenuItem->Name = L"learnToolStripMenuItem";
-			this->learnToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->learnToolStripMenuItem->Size = System::Drawing::Size(161, 34);
 			this->learnToolStripMenuItem->Text = L"Learn";
 			this->learnToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::learnToolStripMenuItem_Click);
 			// 
 			// checkToolStripMenuItem
 			// 
 			this->checkToolStripMenuItem->Name = L"checkToolStripMenuItem";
-			this->checkToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->checkToolStripMenuItem->Size = System::Drawing::Size(161, 34);
 			this->checkToolStripMenuItem->Text = L"Check";
 			this->checkToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::checkToolStripMenuItem_Click);
 			// 
@@ -2354,20 +2354,20 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 					this->dToolStripMenuItem1
 			});
 			this->dimensionToolStripMenuItem->Name = L"dimensionToolStripMenuItem";
-			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->dimensionToolStripMenuItem->Size = System::Drawing::Size(263, 34);
 			this->dimensionToolStripMenuItem->Text = L"Dimension";
 			// 
 			// dToolStripMenuItem
 			// 
 			this->dToolStripMenuItem->Name = L"dToolStripMenuItem";
-			this->dToolStripMenuItem->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem->Size = System::Drawing::Size(137, 34);
 			this->dToolStripMenuItem->Text = L"2D";
 			this->dToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::dToolStripMenuItem_Click);
 			// 
 			// dToolStripMenuItem1
 			// 
 			this->dToolStripMenuItem1->Name = L"dToolStripMenuItem1";
-			this->dToolStripMenuItem1->Size = System::Drawing::Size(88, 22);
+			this->dToolStripMenuItem1->Size = System::Drawing::Size(137, 34);
 			this->dToolStripMenuItem1->Text = L"3D";
 			this->dToolStripMenuItem1->Click += gcnew System::EventHandler(this, &menu::dToolStripMenuItem1_Click);
 			// 
@@ -2378,20 +2378,20 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 					this->qLearningToolStripMenuItem
 			});
 			this->learningAlgorithmToolStripMenuItem->Name = L"learningAlgorithmToolStripMenuItem";
-			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->learningAlgorithmToolStripMenuItem->Size = System::Drawing::Size(263, 34);
 			this->learningAlgorithmToolStripMenuItem->Text = L"Learning algorithm";
 			// 
 			// nEATToolStripMenuItem
 			// 
 			this->nEATToolStripMenuItem->Name = L"nEATToolStripMenuItem";
-			this->nEATToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->nEATToolStripMenuItem->Size = System::Drawing::Size(202, 34);
 			this->nEATToolStripMenuItem->Text = L"NEAT";
 			this->nEATToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::nEATToolStripMenuItem_Click);
 			// 
 			// qLearningToolStripMenuItem
 			// 
 			this->qLearningToolStripMenuItem->Name = L"qLearningToolStripMenuItem";
-			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->qLearningToolStripMenuItem->Size = System::Drawing::Size(202, 34);
 			this->qLearningToolStripMenuItem->Text = L"Q-Learning";
 			this->qLearningToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::qLearningToolStripMenuItem_Click);
 			// 
@@ -2402,32 +2402,33 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 					this->howToUseToolStripMenuItem, this->bugReportToolStripMenuItem
 			});
 			this->informationToolStripMenuItem->Name = L"informationToolStripMenuItem";
-			this->informationToolStripMenuItem->Size = System::Drawing::Size(82, 19);
+			this->informationToolStripMenuItem->Size = System::Drawing::Size(122, 29);
 			this->informationToolStripMenuItem->Text = L"Information";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(205, 34);
 			this->aboutToolStripMenuItem->Text = L"About";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::aboutToolStripMenuItem_Click);
 			// 
 			// howToUseToolStripMenuItem
 			// 
 			this->howToUseToolStripMenuItem->Name = L"howToUseToolStripMenuItem";
-			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->howToUseToolStripMenuItem->Size = System::Drawing::Size(205, 34);
 			this->howToUseToolStripMenuItem->Text = L"How to use";
 			this->howToUseToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::howToUseToolStripMenuItem_Click);
 			// 
 			// bugReportToolStripMenuItem
 			// 
 			this->bugReportToolStripMenuItem->Name = L"bugReportToolStripMenuItem";
-			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(134, 22);
+			this->bugReportToolStripMenuItem->Size = System::Drawing::Size(205, 34);
 			this->bugReportToolStripMenuItem->Text = L"Bug report";
 			this->bugReportToolStripMenuItem->Click += gcnew System::EventHandler(this, &menu::bugReportToolStripMenuItem_Click);
 			// 
 			// menuStrip1
 			// 
+			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(28, 28);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->settingsToolStripMenuItem,
@@ -2435,8 +2436,8 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Padding = System::Windows::Forms::Padding(9, 3, 0, 3);
-			this->menuStrip1->Size = System::Drawing::Size(356, 25);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(14, 4, 0, 4);
+			this->menuStrip1->Size = System::Drawing::Size(534, 37);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -2446,20 +2447,18 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			this->label22->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->label22->ForeColor = System::Drawing::Color::Blue;
-			this->label22->Location = System::Drawing::Point(11, 50);
-			this->label22->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label22->Location = System::Drawing::Point(16, 75);
 			this->label22->Name = L"label22";
-			this->label22->Size = System::Drawing::Size(336, 37);
+			this->label22->Size = System::Drawing::Size(503, 55);
 			this->label22->TabIndex = 59;
 			this->label22->Text = L"Q-Learning, 3D, Learn";
 			// 
 			// label21
 			// 
 			this->label21->AutoSize = true;
-			this->label21->Location = System::Drawing::Point(11, 176);
-			this->label21->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label21->Location = System::Drawing::Point(16, 264);
 			this->label21->Name = L"label21";
-			this->label21->Size = System::Drawing::Size(46, 13);
+			this->label21->Size = System::Drawing::Size(73, 20);
 			this->label21->TabIndex = 60;
 			this->label21->Text = L"Gamma:";
 			// 
@@ -2467,51 +2466,46 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			// 
 			this->comboBox8->FormattingEnabled = true;
 			this->comboBox8->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create new map", L"Load map from file" });
-			this->comboBox8->Location = System::Drawing::Point(200, 117);
-			this->comboBox8->Margin = System::Windows::Forms::Padding(2);
+			this->comboBox8->Location = System::Drawing::Point(300, 176);
 			this->comboBox8->Name = L"comboBox8";
-			this->comboBox8->Size = System::Drawing::Size(147, 21);
+			this->comboBox8->Size = System::Drawing::Size(218, 28);
 			this->comboBox8->TabIndex = 61;
 			this->comboBox8->Text = L"Choose action...";
 			this->comboBox8->SelectedIndexChanged += gcnew System::EventHandler(this, &menu::comboBox8_SelectedIndexChanged);
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(140, 380);
-			this->button5->Margin = System::Windows::Forms::Padding(2);
+			this->button5->Location = System::Drawing::Point(210, 570);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 30);
+			this->button5->Size = System::Drawing::Size(112, 45);
 			this->button5->TabIndex = 62;
 			this->button5->Text = L"&Start";
 			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &menu::button4_Click);
+			this->button5->Click += gcnew System::EventHandler(this, &menu::button5_Click);
 			// 
 			// textBox9
 			// 
-			this->textBox9->Location = System::Drawing::Point(200, 173);
-			this->textBox9->Margin = System::Windows::Forms::Padding(2);
+			this->textBox9->Location = System::Drawing::Point(300, 260);
 			this->textBox9->Name = L"textBox9";
-			this->textBox9->Size = System::Drawing::Size(147, 20);
+			this->textBox9->Size = System::Drawing::Size(218, 26);
 			this->textBox9->TabIndex = 63;
-			this->textBox9->Text = L"0.8";
+			this->textBox9->Text = L"0,8";
 			this->textBox9->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox7_KeyPress);
 			// 
 			// label20
 			// 
 			this->label20->AutoSize = true;
-			this->label20->Location = System::Drawing::Point(11, 120);
-			this->label20->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label20->Location = System::Drawing::Point(16, 180);
 			this->label20->Name = L"label20";
-			this->label20->Size = System::Drawing::Size(95, 13);
+			this->label20->Size = System::Drawing::Size(147, 20);
 			this->label20->TabIndex = 64;
 			this->label20->Text = L"Map configuration:";
 			// 
 			// textBox8
 			// 
-			this->textBox8->Location = System::Drawing::Point(200, 230);
-			this->textBox8->Margin = System::Windows::Forms::Padding(2);
+			this->textBox8->Location = System::Drawing::Point(300, 345);
 			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(147, 20);
+			this->textBox8->Size = System::Drawing::Size(218, 26);
 			this->textBox8->TabIndex = 65;
 			this->textBox8->Text = L"5";
 			this->textBox8->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &menu::textBox10_KeyPress);
@@ -2519,39 +2513,35 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			// label19
 			// 
 			this->label19->AutoSize = true;
-			this->label19->Location = System::Drawing::Point(11, 232);
-			this->label19->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label19->Location = System::Drawing::Point(16, 348);
 			this->label19->Name = L"label19";
-			this->label19->Size = System::Drawing::Size(110, 13);
+			this->label19->Size = System::Drawing::Size(175, 20);
 			this->label19->TabIndex = 66;
 			this->label19->Text = L"Number of repetitions:";
 			// 
 			// textBox18
 			// 
-			this->textBox18->Location = System::Drawing::Point(200, 202);
-			this->textBox18->Margin = System::Windows::Forms::Padding(2);
+			this->textBox18->Location = System::Drawing::Point(300, 303);
 			this->textBox18->Name = L"textBox18";
-			this->textBox18->Size = System::Drawing::Size(147, 20);
+			this->textBox18->Size = System::Drawing::Size(218, 26);
 			this->textBox18->TabIndex = 67;
 			this->textBox18->Text = L"0";
 			// 
 			// label43
 			// 
 			this->label43->AutoSize = true;
-			this->label43->Location = System::Drawing::Point(11, 204);
-			this->label43->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label43->Location = System::Drawing::Point(16, 306);
 			this->label43->Name = L"label43";
-			this->label43->Size = System::Drawing::Size(104, 13);
+			this->label43->Size = System::Drawing::Size(166, 20);
 			this->label43->TabIndex = 68;
 			this->label43->Text = L"Number of iterations:";
 			// 
 			// label46
 			// 
 			this->label46->AutoSize = true;
-			this->label46->Location = System::Drawing::Point(11, 260);
-			this->label46->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label46->Location = System::Drawing::Point(16, 390);
 			this->label46->Name = L"label46";
-			this->label46->Size = System::Drawing::Size(110, 13);
+			this->label46->Size = System::Drawing::Size(175, 20);
 			this->label46->TabIndex = 70;
 			this->label46->Text = L"Number of repetitions:";
 			// 
@@ -2562,29 +2552,26 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 				L"With visualization (iterations)", L"With visualization (states)",
 					L"Without visualization"
 			});
-			this->comboBox10->Location = System::Drawing::Point(200, 257);
-			this->comboBox10->Margin = System::Windows::Forms::Padding(2);
+			this->comboBox10->Location = System::Drawing::Point(300, 386);
 			this->comboBox10->Name = L"comboBox10";
-			this->comboBox10->Size = System::Drawing::Size(147, 21);
+			this->comboBox10->Size = System::Drawing::Size(218, 28);
 			this->comboBox10->TabIndex = 71;
 			this->comboBox10->Text = L"Choose action...";
 			// 
 			// label51
 			// 
 			this->label51->AutoSize = true;
-			this->label51->Location = System::Drawing::Point(11, 148);
-			this->label51->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label51->Location = System::Drawing::Point(16, 222);
 			this->label51->Name = L"label51";
-			this->label51->Size = System::Drawing::Size(80, 13);
+			this->label51->Size = System::Drawing::Size(126, 20);
 			this->label51->TabIndex = 72;
 			this->label51->Text = L"Result file path:";
 			// 
 			// button21
 			// 
-			this->button21->Location = System::Drawing::Point(200, 144);
-			this->button21->Margin = System::Windows::Forms::Padding(2);
+			this->button21->Location = System::Drawing::Point(300, 216);
 			this->button21->Name = L"button21";
-			this->button21->Size = System::Drawing::Size(124, 21);
+			this->button21->Size = System::Drawing::Size(186, 32);
 			this->button21->TabIndex = 73;
 			this->button21->Text = L"&Set";
 			this->button21->UseVisualStyleBackColor = true;
@@ -2594,17 +2581,18 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			// 
 			this->checkBox8->AutoCheck = false;
 			this->checkBox8->AutoSize = true;
-			this->checkBox8->Location = System::Drawing::Point(329, 148);
+			this->checkBox8->Location = System::Drawing::Point(494, 222);
+			this->checkBox8->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->checkBox8->Name = L"checkBox8";
-			this->checkBox8->Size = System::Drawing::Size(15, 14);
+			this->checkBox8->Size = System::Drawing::Size(22, 21);
 			this->checkBox8->TabIndex = 74;
 			this->checkBox8->UseVisualStyleBackColor = true;
 			// 
 			// menu
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
+			this->AutoScaleDimensions = System::Drawing::SizeF(144, 144);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(356, 431);
+			this->ClientSize = System::Drawing::Size(534, 646);
 			this->Controls->Add(this->checkBox8);
 			this->Controls->Add(this->button21);
 			this->Controls->Add(this->label51);
@@ -2626,7 +2614,6 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2);
 			this->MaximizeBox = false;
 			this->Name = L"menu";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -3605,7 +3592,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 	{
 		neat::population_quantity = Convert::ToInt32(textBox5->Text);
 		neat::layers_quantity = Convert::ToInt32(textBox6->Text);
-		neat::max_speed = Convert::ToSingle(textBox12->Text);
+		neat::max_speed = Convert::ToSingle(textBox1->Text);
 		try { neat::mutation_rate = Convert::ToSingle(textBox14->Text); }
 		catch (System::FormatException^)
 		{
@@ -3613,7 +3600,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			return;
 		}
 		neat::directions_array_size = Convert::ToInt32(textBox16->Text);
-		neat::auto_exit = Convert::ToInt32(textBox1->Text);
+		neat::auto_exit = Convert::ToInt32(textBox12->Text);
 		switch (comboBox9->SelectedIndex)
 		{
 		case -1:
@@ -3629,7 +3616,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 
 		if (comboBox6->SelectedIndex == -1)
 			Windows::Forms::MessageBox::Show("Error: Please, choose action with map", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
-		else if (!checkBox1->Checked)
+		else if (!checkBox2->Checked)
 			Windows::Forms::MessageBox::Show("Error: Please, set file path for result", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (neat::population_quantity == 0)
 			Windows::Forms::MessageBox::Show("Error: Please, Check number of populations value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
@@ -3694,7 +3681,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 #pragma endregion
 
 #pragma region QL, 2D, Learn actions
-	private: System::Void textBox7_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox7_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != 0x08; }
 	private: System::Void textBox10_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
 	private: System::Void comboBox7_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -3717,7 +3704,12 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		ql::gamma = Convert::ToSingle(textBox7->Text);
+		try { ql::gamma = Convert::ToSingle(textBox7->Text); }
+		catch (System::FormatException^)
+		{
+			Windows::Forms::MessageBox::Show("Error: Please, check gamma value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			return;
+		}
 		ql::repetitions = Convert::ToInt32(textBox10->Text);
 		if (Convert::ToInt32(textBox17->Text) == 0) ql::iterations = ql::map_size.x * ql::map_size.y;
 		else ql::iterations = Convert::ToInt32(textBox17->Text);
@@ -3742,9 +3734,9 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 		else if (!checkBox7->Checked)
 			Windows::Forms::MessageBox::Show("Error: Please, set file path for result", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (ql::gamma == 0 || ql::gamma > 1)
-			Windows::Forms::MessageBox::Show("Error: Check gamma value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			Windows::Forms::MessageBox::Show("Error: Please, check gamma value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (ql::repetitions == 0)
-			Windows::Forms::MessageBox::Show("Error: Check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			Windows::Forms::MessageBox::Show("Error: Please, check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
 			if (ql::visualization_type == ql::VisualizationTypes::ITERATIONS || ql::visualization_type == ql::VisualizationTypes::STATES)
 				ql::with_visualization_2d();
@@ -3755,7 +3747,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 
 #pragma region QL, 3D, Learn actions
 	private: System::Void textBox8_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
-	private: System::Void textBox9_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != 0x08; }
+	private: System::Void textBox9_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { e->Handled = !Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != 0x08; }
 	private: System::Void comboBox8_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 	{
 		switch (comboBox8->SelectedIndex)
@@ -3777,8 +3769,13 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e)
 	{
-		ql::gamma = Convert::ToSingle(textBox8->Text);
-		ql::repetitions = Convert::ToInt32(textBox9->Text);
+		try { ql::gamma = Convert::ToSingle(textBox9->Text); }
+		catch (System::FormatException^)
+		{
+			Windows::Forms::MessageBox::Show("Error: Please, check gamma value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			return;
+		}
+		ql::repetitions = Convert::ToInt32(textBox8->Text);
 		if (Convert::ToInt32(textBox18->Text) == 0) ql::iterations = ql::map_size.x * ql::map_size.y;
 		else ql::iterations = Convert::ToInt32(textBox18->Text);
 		switch (comboBox10->SelectedIndex)
@@ -3802,9 +3799,9 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 		else if (!checkBox8->Checked)
 			Windows::Forms::MessageBox::Show("Error: Please, set file path for result", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (ql::gamma == 0 || ql::gamma > 1)
-			Windows::Forms::MessageBox::Show("Error: Check gamma value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			Windows::Forms::MessageBox::Show("Error: Please, check gamma value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else if (ql::repetitions == 0)
-			Windows::Forms::MessageBox::Show("Error: Check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
+			Windows::Forms::MessageBox::Show("Error: Please, check number of iteration value correctness", "Error", Windows::Forms::MessageBoxButtons::OK, Windows::Forms::MessageBoxIcon::Error);
 		else
 			if (ql::visualization_type == ql::VisualizationTypes::ITERATIONS || ql::visualization_type == ql::VisualizationTypes::STATES)
 				ql::with_visualization_3d();
@@ -3861,5 +3858,5 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			ql::check_3d();
 	}
 #pragma endregion
-};
+	};
 }

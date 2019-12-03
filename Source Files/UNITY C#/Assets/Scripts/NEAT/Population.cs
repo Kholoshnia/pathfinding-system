@@ -5,26 +5,27 @@ namespace Assets.Scripts.NEAT
     public class Population
     {
         private Color color;
-        private float fitnessSum;
         private readonly int layersQuantity;
 
+        public int AfterReach { get; set; }
         public int Gen { get; private set; }
         public int MinStep { get; private set; }
         public int BestAgent { get; private set; }
         public Agent[] Agents { get; private set; }
+        public float FitnessSum { get; private set; }
         public bool ReachedTheGoal { get; private set; }
 
-        public Population(int directionArraySize, int populationQuantity, int layersQuantity, float mutationRate, float speed, float maxSpeed)
+        public Population(int directionArraySize, int populationQuantity, int layersQuantity, float mutationRate, float maxSpeed)
         {
             if (layersQuantity != 1) color = Random.ColorHSV();
-            fitnessSum = 0;
+            FitnessSum = 0;
             Agents = new Agent[populationQuantity];
             if (layersQuantity != 1)
                 for (int i = 0; i < Agents.Length; i++)
-                    Agents[i] = new Agent(directionArraySize, mutationRate, speed, maxSpeed) { Color = color };
+                    Agents[i] = new Agent(directionArraySize, mutationRate, maxSpeed) { Color = color };
             else
                 for (int i = 0; i < Agents.Length; i++)
-                    Agents[i] = new Agent(directionArraySize, mutationRate, speed, maxSpeed);
+                    Agents[i] = new Agent(directionArraySize, mutationRate, maxSpeed);
             Gen = 1;
             BestAgent = 0;
             MinStep = directionArraySize;
@@ -68,7 +69,7 @@ namespace Assets.Scripts.NEAT
 
         public Agent SelectParent()
         {
-            float random = Random.Range(0, fitnessSum);
+            float random = Random.Range(0, FitnessSum);
             float runningSum = 0;
             for (int i = 0; i < Agents.Length; i++)
             {
@@ -95,9 +96,7 @@ namespace Assets.Scripts.NEAT
 
         public void NaturalSelection()
         {
-            CalculateFitnessSum();
             Agent[] newAgents = new Agent[Agents.Length];
-            SetBestAgent();
             newAgents[0] = Agents[BestAgent].GetCopy();
             newAgents[0].IsBest = true;
             for (int i = 1; i < Agents.Length; ++i)
@@ -112,11 +111,11 @@ namespace Assets.Scripts.NEAT
             Gen++;
         }
 
-        private void CalculateFitnessSum()
+        public void CalculateFitnessSum()
         {
-            fitnessSum = 0;
+            FitnessSum = 0;
             for (int i = 0; i < Agents.Length; i++)
-                fitnessSum += Agents[i].Fitness;
+                FitnessSum += Agents[i].Fitness;
         }
     };
 }

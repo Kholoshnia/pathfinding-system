@@ -1,8 +1,8 @@
+C:\Users\vhd-r\Documents\GitHub\NEAT-QL\Release Files\data\input-ql.csv
+C:\Users\vhd-r\Documents\GitHub\NEAT-QL\Release Files\data\output.csv
 QL
 LEARN
-/Users/vadim/Documents/GitHub/NEAT-QL/Release Files/data/input-ql.csv
-/Users/vadim/Documents/GitHub/NEAT-QL/Release Files/data/output.csv
 gamma:;0.8
-iterations:;0
-repetitions:;1
+iterations:;100
+repetitions:;5
 visualization:;1

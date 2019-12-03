@@ -120,6 +120,8 @@ void ql::check_2d()
 						moves.emplace_back(best_action);
 						if (best_action == goal_state) break;
 						else position = best_action;
+						if (moves.size() > map_size.x * map_size.y)
+							break;
 					}
 					done = true;
 				}
@@ -175,7 +177,34 @@ void ql::check_2d()
 
 void ql::check_3d()
 {
+	char buffer[260];
+	GetCurrentDirectory(sizeof(buffer), buffer);
+	std::string str = buffer;
+	str.erase(str.size() - 14);
+	str += "data\\info.csv";
 
+	fout.open(str);
+	if (fout.is_open())
+	{
+		fout.clear();
+		fout << path_input << std::endl;
+		fout << path_output << std::endl;
+		fout << "QL" << std::endl;
+		fout << "CHECK" << std::endl;
+		fout.close();
+	}
+	else
+	{
+		std::string message = "Error opening file: \"" + str + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+	}
+
+	str = buffer;
+	str = "\"" + str;
+	str.erase(str.size() - 14);
+	str += "bin\\win64\\unity\\UNITY C#.exe\"";
+
+	system(str.c_str());
 }
 
 void ql::create_new_map_2d()
@@ -197,9 +226,25 @@ void ql::create_new_map_2d()
 			{
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 				{
-					System::Windows::Forms::SaveFileDialog^ open_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
-					if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-						path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+					System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+					save_file_dialog->DefaultExt = "csv";
+					save_file_dialog->AddExtension = true;
+					save_file_dialog->Filter = "CSV|*.csv";
+					save_file_dialog->FileName = "new_map";
+					save_file_dialog->Title = "Save map";
+					if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+						path_input = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
+
+					if (path_input != "")
+					{
+						System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path_input.c_str()));
+						new_file->Close();
+					}
+					else
+					{
+						std::string message = "Error: Please, choose file to save map";
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+					}
 
 					window.draw(loading);
 					window.display();
@@ -209,6 +254,7 @@ void ql::create_new_map_2d()
 					fout.open(path);
 					if (fout.is_open())
 					{
+						fout.clear();
 						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
 
 						for (int y = 0; y < map_size.y; y++)
@@ -225,7 +271,7 @@ void ql::create_new_map_2d()
 					else
 					{
 						std::string message = "Error opening file: \"" + path + "\"";
-						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 					}
 				}
 
@@ -273,9 +319,24 @@ void ql::create_new_map_3d()
 
 void ql::set_result_file_path()
 {
-	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+	save_file_dialog->AddExtension = true;
+	save_file_dialog->Filter = "CSV|*.csv";
+	save_file_dialog->FileName = "new_result";
+	save_file_dialog->Title = "Set result file";
+	if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
+
+	if (path_output != "")
+	{
+		System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path_output.c_str()));
+		new_file->Close();
+	}
+	else
+	{
+		std::string message = "Error: Please, choose file to save map";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+	}
 
 	if (path_output != "")
 		output_path_set = true;
@@ -286,12 +347,15 @@ void ql::load_map_from_file_2d()
 	map.reset(new Map());
 
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	open_file_dialog->Title = "Load map";
+	open_file_dialog->AddExtension = true;
+	open_file_dialog->Filter = "CSV|*.csv";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+		path_input = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 
 	std::string str;
-	for (int i = static_cast<int>(path.length()) - 1; i >= 0; i--)
-		if (path[i] != '.') str += path[i];
+	for (int i = static_cast<int>(path_input.length()) - 1; i >= 0; i--)
+		if (path_input[i] != '.') str += path_input[i];
 		else break;
 
 	if (str == "pmb" || str == "gnp" || str == "agt" || str == "gpj" ||
@@ -300,6 +364,26 @@ void ql::load_map_from_file_2d()
 
 	if (from_image)
 	{
+		System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+		save_file_dialog->DefaultExt = "csv";
+		save_file_dialog->AddExtension = true;
+		save_file_dialog->Filter = "CSV|*.csv";
+		save_file_dialog->FileName = "new_map";
+		save_file_dialog->Title = "Save map from image";
+		if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
+
+		if (path != "")
+		{
+			System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path.c_str()));
+			new_file->Close();
+		}
+		else
+		{
+			std::string message = "Error: Please, choose file to save map";
+			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+		}
+
 		sf::Image map_image;
 		map_image.loadFromFile(image_path);
 		for (int y = 0; y < map_size.y; y++)
@@ -316,11 +400,12 @@ void ql::load_map_from_file_2d()
 					map->map_markup[y][x] = 'S';
 			}
 
-		map_loaded = true;
+		if (path_input != "")
+			map_loaded = true;
 	}
 	else
 	{
-		fin.open(path);
+		fin.open(path_input);
 		if (fin.is_open())
 		{
 			char ch = '\0';
@@ -351,8 +436,8 @@ void ql::load_map_from_file_2d()
 		}
 		else
 		{
-			std::string message = "Error opening file \"" + path + "\"";
-			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+			std::string message = "Error opening file \"" + path_input + "\"";
+			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 		}
 	}
 
@@ -364,17 +449,26 @@ void ql::load_map_from_file_2d()
 void ql::load_map_from_file_3d()
 {
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	open_file_dialog->Title = "Load map";
+	open_file_dialog->AddExtension = true;
+	open_file_dialog->Filter = "CSV|*.csv";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+		path_input = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+
+	if (path_input != "")
+		map_loaded = true;
 }
 
 void ql::load_result_from_file_2d()
 {
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	open_file_dialog->Title = "Load result";
+	open_file_dialog->AddExtension = true;
+	open_file_dialog->Filter = "CSV|*.csv";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 
-	fin.open(path);
+	fin.open(path_output);
 	if (fin.is_open())
 	{
 		std::string line;
@@ -389,8 +483,8 @@ void ql::load_result_from_file_2d()
 	}
 	else
 	{
-		std::string message = "Error opening file \"" + path + "\"";
-		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+		std::string message = "Error opening file \"" + path_output + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 	}
 
 	result_loaded = true;
@@ -457,6 +551,7 @@ void ql::with_visualization_2d()
 			fout.open(path_output);
 			if (fout.is_open())
 			{
+				fout.clear();
 				window.draw(loading);
 				window.display();
 
@@ -473,7 +568,7 @@ void ql::with_visualization_2d()
 			else
 			{
 				std::string message = "Error opening file: \"" + path_output + "\"";
-				System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+				System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 			}
 		}
 	}
@@ -481,7 +576,38 @@ void ql::with_visualization_2d()
 
 void ql::with_visualization_3d()
 {
+	char buffer[260];
+	GetCurrentDirectory(sizeof(buffer), buffer);
+	std::string str = buffer;
+	str.erase(str.size() - 14);
+	str += "data\\info.csv";
 
+	fout.open(str);
+	if (fout.is_open())
+	{
+		fout.clear();
+		fout << path_input << std::endl;
+		fout << path_output << std::endl;
+		fout << "QL" << std::endl;
+		fout << "LEARN" << std::endl;
+		fout << "gamma:;" << gamma << std::endl;
+		fout << "iterations:;" << iterations << std::endl;
+		fout << "repetitions:;" << repetitions << std::endl;
+		fout << "visualization:;" << visualization_type << std::endl;
+		fout.close();
+	}
+	else
+	{
+		std::string message = "Error opening file: \"" + str + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+	}
+
+	str = buffer;
+	str = "\"" + str;
+	str.erase(str.size() - 14);
+	str += "bin\\win64\\unity\\UNITY C#.exe\"";
+
+	system(str.c_str());
 }
 
 void ql::without_visualization_2d()
@@ -496,6 +622,7 @@ void ql::without_visualization_2d()
 	fout.open(path_input);
 	if (fout.is_open())
 	{
+		fout.clear();
 		for (int y = 0; y < map_size.x * map_size.y; y++)
 		{
 			for (int x = 0; x < map_size.x * map_size.y; x++)
@@ -507,11 +634,40 @@ void ql::without_visualization_2d()
 	else
 	{
 		std::string message = "Error opening file: \"" + path_output + "\"";
-		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 	}
 }
 
 void ql::without_visualization_3d()
 {
+	char buffer[260];
+	GetCurrentDirectory(sizeof(buffer), buffer);
+	std::string str = buffer;
+	str.erase(str.size() - 14);
+	str += "data\\info.csv";
 
+	fout.open(str);
+	if (fout.is_open())
+	{
+		fout.clear();
+		fout << path_input << std::endl;
+		fout << path_output << std::endl;
+		fout << "QL" << std::endl;
+		fout << "LEARN" << std::endl;
+		fout << "gamma:;" << gamma << std::endl;
+		fout << "iterations:;" << iterations << std::endl;
+		fout << "repetitions:;" << repetitions << std::endl;
+		fout << "visualization:;" << visualization_type << std::endl;
+		fout.close();
+	}
+	else
+	{
+		std::string message = "Error opening file: \"" + str + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+	}
+
+	str = buffer;
+	str = "\"" + str;
+	str.erase(str.size() - 14);
+	str += "bin\\win64\\unity\\UNITY C#.exe\"";
 }

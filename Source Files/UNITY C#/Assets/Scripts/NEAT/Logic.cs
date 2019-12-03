@@ -18,14 +18,15 @@ namespace Assets.Scripts.NEAT
         private readonly string pathOut;
 
         private int steps, k;
-        private readonly bool visualization, autoEnd;
-        private readonly float mutationRate, speed, maxSpeed;
-        private readonly int directionArraySize, populationQuantity, layersQuantity, autoExit;
+        private readonly bool visualization;
+        private readonly float mutationRate, maxSpeed;
+        private readonly int directionArraySize, populationQuantity, layersQuantity, autoCompletion;
 
         public Logic(Modes mode, string pathIn, string pathOut, string pathInfo)
         {
             UnityEngine.Object.Destroy(GameObject.Find("QL"));
             UnityEngine.Object.Destroy(GameObject.Find("QL_Canvas"));
+
 
             this.pathOut = pathOut;
 
@@ -70,44 +71,43 @@ namespace Assets.Scripts.NEAT
             }
             fin.Close();
 
-            FileStream finInfo = new FileStream(pathInfo, FileMode.Open);
-
-            using (StreamReader reader = new StreamReader(finInfo))
-            {
-                reader.ReadLine();
-                reader.ReadLine();
-                reader.ReadLine();
-                reader.ReadLine();
-
-                var values = reader.ReadLine().Split(';');
-                visualization |= Convert.ToInt32(values[1]) == 1;
-
-                values = reader.ReadLine().Split(';');
-                directionArraySize = Convert.ToInt32(values[1]);
-                values = reader.ReadLine().Split(';');
-                populationQuantity = Convert.ToInt32(values[1]);
-                values = reader.ReadLine().Split(';');
-                layersQuantity = Convert.ToInt32(values[1]);
-
-                values = reader.ReadLine().Split(';');
-                if (Convert.ToInt32(values[1]) == 1) autoEnd = true;
-                else autoEnd = false;
-                autoExit = Convert.ToInt32(values[2]);
-
-                values = reader.ReadLine().Split(';');
-                speed = Convert.ToSingle(values[1]);
-                maxSpeed = Convert.ToSingle(values[2]);
-
-                values = reader.ReadLine().Split(';');
-                mutationRate = Convert.ToSingle(values[1]);
-            }
-            finInfo.Close();
-
             UnityEngine.Object.Destroy(GameObject.FindWithTag("Wall"));
 
             if (mode == Modes.LEARN)
             {
-                layers = new Layers(directionArraySize, populationQuantity, layersQuantity, mutationRate, speed, maxSpeed);
+                FileStream finInfo = new FileStream(pathInfo, FileMode.Open);
+
+                using (StreamReader reader = new StreamReader(finInfo))
+                {
+                    reader.ReadLine();
+                    reader.ReadLine();
+                    reader.ReadLine();
+                    reader.ReadLine();
+
+                    var values = reader.ReadLine().Split(';');
+                    visualization |= Convert.ToInt32(values[1]) == 1;
+
+                    values = reader.ReadLine().Split(';');
+                    directionArraySize = Convert.ToInt32(values[1]);
+
+                    values = reader.ReadLine().Split(';');
+                    populationQuantity = Convert.ToInt32(values[1]);
+
+                    values = reader.ReadLine().Split(';');
+                    layersQuantity = Convert.ToInt32(values[1]);
+
+                    values = reader.ReadLine().Split(';');
+                    autoCompletion = Convert.ToInt32(values[1]);
+
+                    values = reader.ReadLine().Split(';');
+                    maxSpeed = Convert.ToSingle(values[1]);
+
+                    values = reader.ReadLine().Split(';');
+                    mutationRate = Convert.ToSingle(values[1]);
+                }
+                finInfo.Close();
+
+                layers = new Layers(directionArraySize, populationQuantity, layersQuantity, mutationRate, maxSpeed);
 
                 if (!visualization)
                 {
@@ -134,19 +134,22 @@ namespace Assets.Scripts.NEAT
 
                 using (StreamReader reader = new StreamReader(fin2))
                 {
-                    way = new GameObject[Convert.ToInt32(reader.ReadLine())];
+                    var values = reader.ReadLine().Split(';');
+                    maxSpeed = Convert.ToInt32(values[1]);
+                    values = reader.ReadLine().Split(';');
+                    way = new GameObject[Convert.ToInt32(values[1])];
                     acc = new Vector3[way.Length];
                     for (int i = 0; i < way.Length; i++)
                     {
                         way[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Start"));
 
-                        var values = reader.ReadLine().Split(';');
+                        values = reader.ReadLine().Split(';');
                         acc[i] = new Vector3(Convert.ToSingle(values[0]), Convert.ToSingle(values[1]), Convert.ToSingle(values[2]));
                     }
                 }
 
                 populationQuantity = 1;
-                layers = new Layers(directionArraySize, populationQuantity, layersQuantity, mutationRate, speed, maxSpeed);
+                layers = new Layers(directionArraySize, populationQuantity, layersQuantity, mutationRate, maxSpeed);
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextReachedTheGoal"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("ImageReachedTheGoal"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextGen"));
@@ -161,16 +164,16 @@ namespace Assets.Scripts.NEAT
         {
             layers.Update();
 
-            if (layers.AllPopulationsDead())
-                steps = layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Step;
-
-            if (Input.GetKeyUp(KeyCode.Space) || (autoEnd && layers.GetBestPopulation().Gen >= autoExit))
+            if (Input.GetKeyUp(KeyCode.Space) || (layers.GetBestPopulation().AfterReach >= autoCompletion))
             {
                 FileStream fout = new FileStream(pathOut, FileMode.Create);
                 using (StreamWriter writer = new StreamWriter(fout))
                 {
-                    writer.WriteLine(steps);
-                    for (int i = 0; i < steps; i++)
+                    writer.Write("max-speed:;");
+                    writer.WriteLine(maxSpeed);
+                    writer.Write("directions-array-size:;");
+                    writer.WriteLine(layers.GetBestPopulation().MinStep);
+                    for (int i = 0; i < layers.GetBestPopulation().MinStep; i++)
                     {
                         writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].x);
                         writer.Write(';');

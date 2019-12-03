@@ -5,8 +5,8 @@ namespace Assets.Scripts.NEAT
 {
     public class Layers
     {
+        private static int BestPopulation;
         private readonly UpdateThreads updateThreads;
-
         public static Population[] Populations { get; private set; }
 
         private struct UpdateThreads : IJobParallelFor
@@ -16,22 +16,27 @@ namespace Assets.Scripts.NEAT
                 if (Populations[i].AllAgentsDead())
                 {
                     Populations[i].CalculateFitness();
+                    Populations[i].SetBestAgent();
+                    Populations[i].CalculateFitnessSum();
+                    SetBestPopulation();
                     for (int j = 0; j < Populations[i].Agents.Length; j++)
                         Object.Destroy(Populations[i].Agents[j].Sphere);
                     Populations[i].NaturalSelection();
                     Populations[i].Mutate();
+                    if (Populations[i].ReachedTheGoal) Populations[i].AfterReach++;
                 }
                 else
                     Populations[i].Update();
             }
         }
 
-        public Layers(int directionArraySize, int populationQuantity, int layersQuantity, float mutationRate, float speed, float maxSpeed)
+        public Layers(int directionArraySize, int populationQuantity, int layersQuantity, float mutationRate, float maxSpeed)
         {
+            BestPopulation = 0;
             updateThreads = new UpdateThreads();
             Populations = new Population[layersQuantity];
             for (int i = 0; i < Populations.Length; i++)
-                Populations[i] = new Population(directionArraySize, populationQuantity, layersQuantity, mutationRate, speed, maxSpeed);
+                Populations[i] = new Population(directionArraySize, populationQuantity, layersQuantity, mutationRate, maxSpeed);
         }
 
         public void Update()
@@ -48,17 +53,19 @@ namespace Assets.Scripts.NEAT
             return true;
         }
 
-        public Population GetBestPopulation()
+        public static void SetBestPopulation()
         {
             float max = 0;
             int maxIndex = 0;
             for (int i = 0; i < Populations.Length; i++)
-                if (Populations[i].Agents[Populations[i].BestAgent].Fitness > max)
+                if (Populations[i].FitnessSum > max)
                 {
-                    max = Populations[i].Agents[Populations[i].BestAgent].Fitness;
+                    max = Populations[i].FitnessSum;
                     maxIndex = i;
                 }
-            return Populations[maxIndex];
+            BestPopulation = maxIndex;
         }
+
+        public Population GetBestPopulation() { return Populations[BestPopulation]; }
     };
 }

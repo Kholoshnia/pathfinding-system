@@ -103,7 +103,34 @@ void neat::check_2d()
 
 void neat::check_3d()
 {
-	system("OpenUnity.exe");
+	char buffer[260];
+	GetCurrentDirectory(sizeof(buffer), buffer);
+	std::string str = buffer;
+	str.erase(str.size() - 14);
+	str += "data\\info.csv";
+
+	fout.open(str);
+	if (fout.is_open())
+	{
+		fout.clear();
+		fout << path_input << std::endl;
+		fout << path_output << std::endl;
+		fout << "NEAT" << std::endl;
+		fout << "CHECK" << std::endl;
+		fout.close();
+	}
+	else
+	{
+		std::string message = "Error opening file: \"" + str + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+	}
+
+	str = buffer;
+	str = "\"" + str;
+	str.erase(str.size() - 14);
+	str += "bin\\win64\\unity\\UNITY C#.exe\"";
+
+	system(str.c_str());
 }
 
 void neat::create_new_map_2d()
@@ -125,16 +152,33 @@ void neat::create_new_map_2d()
 			{
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
 				{
-					System::Windows::Forms::SaveFileDialog^ open_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
-					if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-						path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+					System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+					save_file_dialog->Title = "Save map";
+					save_file_dialog->DefaultExt = "csv";
+					save_file_dialog->AddExtension = true;
+					save_file_dialog->Filter = "CSV|*.csv";
+					save_file_dialog->FileName = "new_map";
+					if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+						path_input = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
 
-					fout.open(path);
+					if (path_input != "")
+					{
+						System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path_input.c_str()));
+						new_file->Close();
+					}
+					else
+					{
+						std::string message = "Error: Please, choose file to save map";
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+					}
+
+					fout.open(path_input);
 					if (fout.is_open())
 					{
 						window.draw(loading);
 						window.display();
 
+						fout.clear();
 						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
 						for (int y = 0; y < map_size.y; y++)
 						{
@@ -166,7 +210,7 @@ void neat::create_new_map_2d()
 					else
 					{
 						std::string message = "Error opening file: \"" + path + "\"";
-						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 					}
 				}
 
@@ -184,6 +228,9 @@ void neat::create_new_map_2d()
 						neat::controls[1].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[Esc] - Exit without saving\n[Enter] - save&exit\n[E] - Hide controls");
 					}
 				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+					window.close();
 			}
 
 			draw(event);
@@ -205,16 +252,31 @@ void neat::create_new_map_3d()
 	GetCurrentDirectory(sizeof(buffer), buffer);
 	std::string str1 = "explorer.exe ";
 	std::string str2 = str1 + buffer;
-	str2.erase(str2.size() - 9);
+	str2.erase(str2.size() - 14);
 	str2 += "unity";
 	system(str2.c_str());
 }
 
 void neat::set_result_file_path()
 {
-	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
-	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+	save_file_dialog->AddExtension = true;
+	save_file_dialog->Filter = "CSV|*.csv";
+	save_file_dialog->FileName = "new_result";
+	save_file_dialog->Title = "Set result file";
+	if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
+
+	if (path_output != "")
+	{
+		System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path_output.c_str()));
+		new_file->Close();
+	}
+	else
+	{
+		std::string message = "Error: Please, choose file to save map";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+	}
 
 	if (path_output != "")
 		output_path_set = true;
@@ -227,12 +289,15 @@ void neat::load_map_from_file_2d()
 	map.reset(new Map);
 
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	open_file_dialog->Title = "Load map";
+	open_file_dialog->AddExtension = true;
+	open_file_dialog->Filter = "CSV|*.csv";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+		path_input = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 	
 	std::string str;
-	for (int i = static_cast<int>(path.length()) - 1; i >= 0; i--)
-		if (path[i] != '.') str += path[i];
+	for (int i = static_cast<int>(path_input.length()) - 1; i >= 0; i--)
+		if (path_input[i] != '.') str += path_input[i];
 		else break;
 
 	if (str == "pmb" || str == "gnp" || str == "agt" || str == "gpj" ||
@@ -243,9 +308,29 @@ void neat::load_map_from_file_2d()
 
 	if (from_image)
 	{
+		System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+		save_file_dialog->DefaultExt = "csv";
+		save_file_dialog->AddExtension = true;
+		save_file_dialog->Filter = "CSV|*.csv";
+		save_file_dialog->FileName = "map_from_image";
+		save_file_dialog->Title = "Save map from image";
+		if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
+
+		if (path != "")
+		{
+			System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path.c_str()));
+			new_file->Close();
+		}
+		else
+		{
+			std::string message = "Error: Please, choose file to save map";
+			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+		}
+
 		sf::Image map_image;
 		map_image.getSize();
-		map_image.loadFromFile(path);
+		map_image.loadFromFile(path_input);
 
 		for (int y = 0; y < map_size.y; y++)
 		{
@@ -266,11 +351,13 @@ void neat::load_map_from_file_2d()
 		}
 
 		map->from_file();
-		map_loaded = true;
+
+		if (path_input != "")
+			map_loaded = true;
 	}
 	else
 	{
-		fin.open(path);
+		fin.open(path_input);
 		if (fin.is_open())
 		{
 			char ch = '\0';
@@ -302,8 +389,8 @@ void neat::load_map_from_file_2d()
 		}
 		else
 		{
-			std::string message = "Error opening file \"" + path + "\"";
-			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+			std::string message = "Error opening file \"" + path_input + "\"";
+			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 		}
 	}
 }
@@ -311,8 +398,12 @@ void neat::load_map_from_file_2d()
 void neat::load_map_from_file_3d()
 {
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	open_file_dialog->Title = "Load map";
+	open_file_dialog->AddExtension = true;
+	open_file_dialog->Filter = "CSV|*.csv";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path_input = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	
 	if (path_input != "")
 		map_loaded = true;
 }
@@ -320,24 +411,37 @@ void neat::load_map_from_file_3d()
 void neat::load_result_from_file_2d()
 {
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	open_file_dialog->Title = "Load result";
+	open_file_dialog->AddExtension = true;
+	open_file_dialog->Filter = "CSV|*.csv";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-		path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 	
-	fin.open(path);
+	fin.open(path_output);
 	if (fin.is_open())
 	{
+		char ch = '\0';
+
+		while (ch != ';') fin.get(ch);
 		fin >> max_speed;
+		fin.get(ch);
+		while (ch != ';') fin.get(ch);
 		fin >> directions_array_size;
+		fin.get(ch);
 
 		population_quantity = 1;
 		population.reset(new Population());
 
+		std::string line;
 		for (auto& el : population->agents[0].brain.directions)
 		{
-			fin >> el.x;
-			fin.get();
-			fin.get();
-			fin >> el.y;
+			std::getline(fin, line, ';');
+			std::replace(line.begin(), line.end(), '.', ',');
+			el.x = System::Convert::ToSingle(gcnew System::String(line.c_str()));
+
+			std::getline(fin, line, '\n');
+			std::replace(line.begin(), line.end(), '.', ',');
+			el.y = System::Convert::ToSingle(gcnew System::String(line.c_str()));
 		}
 		fout.close();
 
@@ -346,13 +450,16 @@ void neat::load_result_from_file_2d()
 	else
 	{
 		std::string message = "Error opening file \"" + path + "\"";
-		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 	}
 }
 
 void neat::load_result_from_file_3d()
 {
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	open_file_dialog->Title = "Load result";
+	open_file_dialog->AddExtension = true;
+	open_file_dialog->Filter = "CSV|*.csv";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 	if (path_output != "")
@@ -389,21 +496,23 @@ void neat::with_visualization_2d()
 					fout.open(path_output);
 					if (fout.is_open())
 					{
-						fout << max_speed << std::endl;
-						fout << layers->populations[layers->best_population].min_step << std::endl;
+						fout.clear();
+						fout << "max-speed:;" << max_speed << std::endl;
+						fout << "directions-array-size:;" << layers->populations[layers->best_population].min_step << std::endl;
 						for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
-							fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
+							fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << ';' << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
 						fout.close();
 					}
 					else
 					{
 						std::string message = "Error opening file: \"" + path_output + "\"";
-						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 					}
 
 					fout.open(path_input);
 					if (fout.is_open())
 					{
+						fout.clear();
 						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
 						for (int y = 0; y < map_size.y; y++)
 						{
@@ -435,7 +544,7 @@ void neat::with_visualization_2d()
 					else
 					{
 						std::string message = "Error opening file: \"" + path_input + "\"";
-						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 					}
 				}
 
@@ -481,31 +590,41 @@ void neat::with_visualization_2d()
 
 void neat::with_visualization_3d()
 {
-	fout.open(path_output, std::fstream::app);
+	char buffer[260];
+	GetCurrentDirectory(sizeof(buffer), buffer);
+	std::string str = buffer;
+	str.erase(str.size() - 14);
+	str += "data\\info.csv";
+
+	fout.open(str);
 	if (fout.is_open())
 	{
-		fout << "QL" << std::endl;
-		fout << "LEARN" << std::endl;
-		//path_input.replace(path_input.begin(), path_input.end(), "\\", '/');
+		fout.clear();
 		fout << path_input << std::endl;
 		fout << path_output << std::endl;
-		fout << "info" << std::endl;
-		fout << "visualization:;" << 1 << std::endl;
+		fout << "NEAT" << std::endl;
+		fout << "LEARN" << std::endl;
+		fout << "visualization:;" << visualization_type << std::endl;
 		fout << "direction-array-size:;" << directions_array_size << std::endl;
 		fout << "population-quantity:;" << population_quantity << std::endl;
 		fout << "layers-quantity:;" << layers_quantity << std::endl;
-		fout << "auto-completion:;" << auto_exit;
-		fout << "speed:;" << 1.0f << ';' << max_speed;
-		fout << "mutation-rate" << mutation_rate;
+		fout << "auto-completion:;" << auto_exit << std::endl;
+		fout << "max-speed:;" << max_speed << std::endl;
+		fout << "mutation-rate:;" << static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(mutation_rate.ToString()).ToPointer()) << std::endl;
 		fout.close();
 	}
 	else
 	{
-		std::string message = "Error opening file: \"" + path + "\"";
-		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+		std::string message = "Error opening file: \"" + str + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 	}
 
-	system("OpenUnity.exe");
+	str = buffer;
+	str = "\"" + str;
+	str.erase(str.size() - 14);
+	str += "bin\\win64\\unity\\UNITY C#.exe\"";
+
+	system(str.c_str());
 }
 
 void neat::without_visualization_2d()
@@ -520,8 +639,9 @@ void neat::without_visualization_2d()
 			fout.open(path_output);
 			if (fout.is_open())
 			{
-				fout << max_speed << std::endl;
-				fout << layers->populations[layers->best_population].min_step << std::endl;
+				fout.clear();
+				fout << "max-speed:;" << max_speed << std::endl;
+				fout << "directions-array-size:;" << layers->populations[layers->best_population].min_step << std::endl;
 				for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
 					fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << " ; " << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
 				fout.close();
@@ -530,7 +650,7 @@ void neat::without_visualization_2d()
 			else
 			{
 				std::string message = "Error opening file: \"" + path_output + "\"";
-				System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+				System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 			}
 		}
 
@@ -540,25 +660,39 @@ void neat::without_visualization_2d()
 
 void neat::without_visualization_3d()
 {
-	fout.open(path, std::fstream::app);
+	char buffer[260];
+	GetCurrentDirectory(sizeof(buffer), buffer);
+	std::string str = buffer;
+	str.erase(str.size() - 14);
+	str += "data\\info.csv";
 
+	fout.open(str);
 	if (fout.is_open())
 	{
-		fout << "info" << std::endl;
-		fout << "visualization:;" << 0 << std::endl;
+		fout.clear();
+		fout << path_input << std::endl;
+		fout << path_output << std::endl;
+		fout << "NEAT" << std::endl;
+		fout << "LEARN" << std::endl;
+		fout << "visualization:;" << visualization_type << std::endl;
 		fout << "direction-array-size:;" << directions_array_size << std::endl;
 		fout << "population-quantity:;" << population_quantity << std::endl;
 		fout << "layers-quantity:;" << layers_quantity << std::endl;
-		fout << "auto-completion:;" << auto_exit;
-		fout << "speed:;" << 1.0f << ';' << max_speed;
-		fout << "mutation-rate" << mutation_rate;
+		fout << "auto-completion:;" << auto_exit << std::endl;
+		fout << "max-speed:;" << max_speed << std::endl;
+		fout << "mutation-rate:;" << static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(mutation_rate.ToString()).ToPointer()) << std::endl;
 		fout.close();
 	}
 	else
 	{
-		std::string message = "Error opening file: \"" + path + "\"";
-		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()));
+		std::string message = "Error opening file: \"" + str + "\"";
+		System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 	}
 
-	system("OpenUnity.exe");
+	str = buffer;
+	str = "\"" + str;
+	str.erase(str.size() - 14);
+	str += "bin\\win64\\unity\\UNITY C#.exe\"";
+
+	system(str.c_str());
 }
