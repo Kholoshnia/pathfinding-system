@@ -128,8 +128,8 @@ mono_crash.*
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+#[Rr]elease/
+#[Rr]eleases/
 x64/
 x86/
 [Aa][Rr][Mm]/
@@ -452,4 +452,4 @@ healthchecksdb
 MigrationBackup/
 
 #Release Files
-!"Release Files/"
+!Release\ Files/
