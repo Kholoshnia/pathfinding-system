@@ -22,6 +22,9 @@ public class Main : MonoBehaviour
             case RuntimePlatform.OSXEditor:
                 pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 14) + "Release Files/data/info.csv";
                 break;
+            case RuntimePlatform.WindowsEditor:
+                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 29) + "/Release Files/data/info.csv";
+                break;
         }
 
         FileStream fin = new FileStream(pathInfo, FileMode.Open);

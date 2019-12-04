@@ -40,19 +40,19 @@ namespace Assets.Scripts.NEAT
 
                 reader.ReadLine();
                 reader.ReadLine();
-                values = reader.ReadLine().Split(';');
+                values = reader.ReadLine().Replace('.', ',').Split(';');
                 GameObject.FindWithTag("Goal").transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
-                values = reader.ReadLine().Split(';');
+                values = reader.ReadLine().Replace('.', ',').Split(';');
                 GameObject.FindWithTag("Goal").transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
-                values = reader.ReadLine().Split(';');
+                values = reader.ReadLine().Replace('.', ',').Split(';');
                 GameObject.FindWithTag("Goal").transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
                 reader.ReadLine();
                 reader.ReadLine();
-                values = reader.ReadLine().Split(';');
+                values = reader.ReadLine().Replace('.', ',').Split(';');
                 GameObject.FindWithTag("Start").transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
-                values = reader.ReadLine().Split(';');
+                values = reader.ReadLine().Replace('.', ',').Split(';');
                 GameObject.FindWithTag("Start").transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
-                values = reader.ReadLine().Split(';');
+                values = reader.ReadLine().Replace('.', ',').Split(';');
                 GameObject.FindWithTag("Start").transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
 
                 for (int i = 0; i < numberOfObjects - 2; i++)
@@ -61,11 +61,11 @@ namespace Assets.Scripts.NEAT
                     reader.ReadLine();
                     walls[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Wall"));
                     walls[i].name = "Wall " + i;
-                    values = reader.ReadLine().Split(';');
+                    values = reader.ReadLine().Replace('.', ',').Split(';');
                     walls[i].transform.position = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
-                    values = reader.ReadLine().Split(';');
+                    values = reader.ReadLine().Replace('.', ',').Split(';');
                     walls[i].transform.rotation = new Quaternion(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]), Convert.ToSingle(values[4]));
-                    values = reader.ReadLine().Split(';');
+                    values = reader.ReadLine().Replace('.', ',').Split(';');
                     walls[i].transform.localScale = new Vector3(Convert.ToSingle(values[1]), Convert.ToSingle(values[2]), Convert.ToSingle(values[3]));
                 }
             }
@@ -99,10 +99,10 @@ namespace Assets.Scripts.NEAT
                     values = reader.ReadLine().Split(';');
                     autoCompletion = Convert.ToInt32(values[1]);
 
-                    values = reader.ReadLine().Split(';');
+                    values = reader.ReadLine().Replace('.', ',').Split(';');
                     maxSpeed = Convert.ToSingle(values[1]);
 
-                    values = reader.ReadLine().Split(';');
+                    values = reader.ReadLine().Replace('.', ',').Split(';');
                     mutationRate = Convert.ToSingle(values[1]);
                 }
                 finInfo.Close();
@@ -143,7 +143,7 @@ namespace Assets.Scripts.NEAT
                     {
                         way[i] = UnityEngine.Object.Instantiate(GameObject.FindWithTag("Start"));
 
-                        values = reader.ReadLine().Split(';');
+                        values = reader.ReadLine().Replace('.', ',').Split(';');
                         acc[i] = new Vector3(Convert.ToSingle(values[0]), Convert.ToSingle(values[1]), Convert.ToSingle(values[2]));
                     }
                 }
@@ -175,11 +175,11 @@ namespace Assets.Scripts.NEAT
                     writer.WriteLine(layers.GetBestPopulation().MinStep);
                     for (int i = 0; i < layers.GetBestPopulation().MinStep; i++)
                     {
-                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].x);
+                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].x.ToString().Replace(',', '.'));
                         writer.Write(';');
-                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].y);
+                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].y.ToString().Replace(',', '.'));
                         writer.Write(';');
-                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].z);
+                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].z.ToString().Replace(',', '.'));
                         writer.WriteLine();
                     }
                 }

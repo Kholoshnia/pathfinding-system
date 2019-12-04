@@ -75,7 +75,7 @@ namespace Assets.Scripts.QL
                 reader.ReadLine();
                 reader.ReadLine();
 
-                values = reader.ReadLine().Split(';');
+                values = reader.ReadLine().Replace('.', ',').Split(';');
                 gamma = Convert.ToSingle(values[1]);
 
                 values = reader.ReadLine().Split(';');
@@ -251,7 +251,7 @@ namespace Assets.Scripts.QL
 
                     done = true;
                     agent.SetActive(true);
-                    for (int i = 0; i < moves.Count; i++)
+                    for (int i = 0; i < moves.Count - 1; i++)
                     {
                         agent.transform.position = moves[i];
                         pos_agents.Add(UnityEngine.Object.Instantiate(agent));

@@ -462,6 +462,7 @@ void neat::load_result_from_file_3d()
 	open_file_dialog->Filter = "CSV|*.csv";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	
 	if (path_output != "")
 		result_loaded = true;
 }

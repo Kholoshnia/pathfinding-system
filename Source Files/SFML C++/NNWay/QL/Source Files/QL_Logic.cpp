@@ -368,7 +368,7 @@ void ql::load_map_from_file_2d()
 		save_file_dialog->DefaultExt = "csv";
 		save_file_dialog->AddExtension = true;
 		save_file_dialog->Filter = "CSV|*.csv";
-		save_file_dialog->FileName = "new_map";
+		save_file_dialog->FileName = "map_from_image";
 		save_file_dialog->Title = "Save map from image";
 		if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 			path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
@@ -492,7 +492,15 @@ void ql::load_result_from_file_2d()
 
 void ql::load_result_from_file_3d()
 {
-
+	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
+	open_file_dialog->Title = "Load result";
+	open_file_dialog->AddExtension = true;
+	open_file_dialog->Filter = "CSV|*.csv";
+	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		path_output = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
+	
+	if (path_output != "")
+		result_loaded = true;
 }
 
 void ql::with_visualization_2d()
