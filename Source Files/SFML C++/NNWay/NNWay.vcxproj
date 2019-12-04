@@ -96,7 +96,7 @@
     <Link>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SFML\lib</AdditionalLibraryDirectories>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,13 +109,13 @@
     <Link>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SFML\lib</AdditionalLibraryDirectories>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>SFML_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)SFML\include; $(SolutionDir)NNWay</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -127,7 +127,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>SFML_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)SFML\include; $(SolutionDir)NNWay</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

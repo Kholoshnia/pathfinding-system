@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <Windows.h>
 #include <SFML/Graphics.hpp>
 
 #include <NEAT/Header Files/NEAT_Map.h>

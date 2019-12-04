@@ -61,10 +61,10 @@ void neat::draw(sf::Event &event)
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-			map->pos_goal = sf::Vector2f(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
+			map->pos_goal = sf::Vector2f(static_cast<float>(event.mouseMove.x / (width / map_size.x) * (width / map_size.x)), static_cast<float>(event.mouseMove.y / (height / map_size.y) * (height / map_size.y)));
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
-			map->pos_agent = sf::Vector2f(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
+			map->pos_agent = sf::Vector2f(static_cast<float>(event.mouseMove.x / (width / map_size.x) * (width / map_size.x)), static_cast<float>(event.mouseMove.y / (height / map_size.y) * (height / map_size.y)));
 	}
 }
 
@@ -184,9 +184,9 @@ void neat::create_new_map_2d()
 						{
 							for (int x = 0; x < map_size.x; x++)
 							{
-								if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
+								if (x == map->pos_agent.x / (width / map_size.x) && y == map->pos_agent.y / (height / map_size.y))
 									fout << 'A';
-								else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
+								else if (x == map->pos_goal.x / (width / map_size.x) && y == map->pos_goal.y / (height / map_size.y))
 									fout << 'G';
 								else if ([&x, &y]
 								{
