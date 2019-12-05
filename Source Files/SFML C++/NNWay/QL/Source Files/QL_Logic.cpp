@@ -134,18 +134,18 @@ void ql::check_2d()
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 					window.close();
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
 				{
 					show_controls = !show_controls;
 					if (show_controls)
 					{
 						controls[1].setPosition(612, 10);
-						controls[1].setString(L"[E] - Show controls");
+						controls[1].setString(L"[H] - Show controls");
 					}
 					else
 					{
 						controls[1].setPosition(552, 10);
-						controls[1].setString(L"[LMB] - Choose state\n[Esc] - Exit\n[E] - Hide controls");
+						controls[1].setString(L"[LMB] - Choose state\n[Esc] - Exit\n[H] - Hide controls");
 					}
 				}
 			}
@@ -275,18 +275,18 @@ void ql::create_new_map_2d()
 					}
 				}
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
 				{
 					show_controls = !show_controls;
 					if (show_controls)
 					{
 						controls[2].setPosition(612, 10);
-						controls[2].setString(L"[E] - Show controls");
+						controls[2].setString(L"[H] - Show controls");
 					}
 					else
 					{
 						controls[2].setPosition(552, 10);
-						controls[2].setString(L"[LShift] - Move goal\n[Up][Down] - Resize map\n[Tab] - Fill around\n[LMB] - Draw map\n[RCtrl] - Erase map\n[Esc] - Exit without saving\n[Enter] - save&exit\n[E] - Hide controls");
+						controls[2].setString(L"[LShift] - Move goal\n[Up][Down] - Resize map\n[Tab] - Fill around\n[LMB] - Draw map\n[RCtrl] - Erase map\n[Esc] - Exit without saving\n[Enter] - save&exit\n[H] - Hide controls");
 					}
 				}
 			}

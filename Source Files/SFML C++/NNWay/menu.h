@@ -3202,9 +3202,9 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			neat::controls[0].setPosition(685, 10);
 			neat::controls[0].setString(L"[Esc] - Exit");
 			neat::controls[1].setPosition(612, 10);
-			neat::controls[1].setString(L"[E] - Show controls");
+			neat::controls[1].setString(L"[H] - Show controls");
 			neat::controls[2].setPosition(612, 10);
-			neat::controls[2].setString(L"[E] - Show controls");
+			neat::controls[2].setString(L"[H] - Show controls");
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -3270,9 +3270,9 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			ql::controls[0].setPosition(685, 10);
 			ql::controls[0].setString(L"[Esc] - Exit");
 			ql::controls[1].setPosition(612, 10);
-			ql::controls[1].setString(L"[E] - Show controls");
+			ql::controls[1].setString(L"[H] - Show controls");
 			ql::controls[2].setPosition(612, 10);
-			ql::controls[2].setString(L"[E] - Show controls");
+			ql::controls[2].setString(L"[H] - Show controls");
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -3312,9 +3312,9 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			neat::was_running = false;
 
 			neat::controls[1].setPosition(612, 10);
-			neat::controls[1].setString(L"[E] - Show controls");
+			neat::controls[1].setString(L"[H] - Show controls");
 			neat::controls[2].setPosition(612, 10);
-			neat::controls[2].setString(L"[E] - Show controls");
+			neat::controls[2].setString(L"[H] - Show controls");
 
 			neat::rect.setFillColor(sf::Color::Blue);
 			neat::rect.setSize(sf::Vector2f(10, 10));
@@ -3343,9 +3343,9 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			ql::text[3].setString(L"0");
 
 			ql::controls[1].setPosition(612, 10);
-			ql::controls[1].setString(L"[E] - Show controls");
+			ql::controls[1].setString(L"[H] - Show controls");
 			ql::controls[2].setPosition(612, 10);
-			ql::controls[2].setString(L"[E] - Show controls");
+			ql::controls[2].setString(L"[H] - Show controls");
 		}
 		void ChooseInitializer(void)
 		{

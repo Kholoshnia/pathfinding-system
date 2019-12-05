@@ -214,18 +214,18 @@ void neat::create_new_map_2d()
 					}
 				}
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
 				{
 					show_controls = !show_controls;
 					if (show_controls)
 					{
 						neat::controls[1].setPosition(612, 10);
-						neat::controls[1].setString(L"[E] - Show controls");
+						neat::controls[1].setString(L"[H] - Show controls");
 					}
 					else
 					{
 						neat::controls[1].setPosition(552, 10);
-						neat::controls[1].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[Esc] - Exit without saving\n[Enter] - save&exit\n[E] - Hide controls");
+						neat::controls[1].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[Esc] - Exit without saving\n[Enter] - save&exit\n[H] - Hide controls");
 					}
 				}
 
@@ -551,18 +551,18 @@ void neat::with_visualization_2d()
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) pause = !pause;
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
 				{
 					show_controls = !show_controls;
 					if (show_controls)
 					{
 						neat::controls[2].setPosition(612, 10);
-						neat::controls[2].setString(L"[E] - Show controls");
+						neat::controls[2].setString(L"[H] - Show controls");
 					}
 					else
 					{
 						neat::controls[2].setPosition(552, 10);
-						neat::controls[2].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[R] - Reset minimum steps\n[Esc] - Exit without saving\n[Enter] - save&exit\n[E] - Hide controls");
+						neat::controls[2].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[R] - Reset minimum steps\n[Esc] - Exit without saving\n[Enter] - save&exit\n[H] - Hide controls");
 					}
 				}
 			}
