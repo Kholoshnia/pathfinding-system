@@ -349,7 +349,7 @@ void ql::load_map_from_file_2d()
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	open_file_dialog->Title = "Load map";
 	open_file_dialog->AddExtension = true;
-	open_file_dialog->Filter = "CSV|*.csv";
+	open_file_dialog->Filter = "CSV|*.csv|BMP|*.bmp|PNG|*.png|TGA|*.tga|JPG|*.jpg|GIF|*.gif|PSD|*.psd|HDR|*.hdr|PIC|*.pic";
 	if (open_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		path_input = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(open_file_dialog->InitialDirectory + open_file_dialog->FileName).ToPointer());
 
