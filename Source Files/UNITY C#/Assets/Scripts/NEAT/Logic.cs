@@ -18,6 +18,7 @@ namespace Assets.Scripts.NEAT
         private readonly string pathOut;
 
         private int steps, k;
+        private bool showControls, pause;
         private readonly bool visualization;
         private readonly float mutationRate, maxSpeed;
         private readonly int directionArraySize, populationQuantity, layersQuantity, autoCompletion;
@@ -27,7 +28,8 @@ namespace Assets.Scripts.NEAT
             UnityEngine.Object.Destroy(GameObject.Find("QL"));
             UnityEngine.Object.Destroy(GameObject.Find("QL_Canvas"));
 
-
+            pause = false;
+            showControls = false;
             this.pathOut = pathOut;
 
             FileStream fin = new FileStream(pathIn, FileMode.Open);
@@ -109,6 +111,8 @@ namespace Assets.Scripts.NEAT
 
                 layers = new Layers(directionArraySize, populationQuantity, layersQuantity, mutationRate, maxSpeed);
 
+                GameObject.FindWithTag("Controls").GetComponent<Text>().text = "[WASD] - Move camere\n[MouseXY] - Rotate camera\n[Enter] - save&exit\n[Esc] - exit\n[H] - Hide controls";
+
                 if (!visualization)
                 {
                     UnityEngine.Object.Destroy(GameObject.FindWithTag("Walls"));
@@ -123,6 +127,7 @@ namespace Assets.Scripts.NEAT
 
                     GameObject.FindWithTag("Goal").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.FindWithTag("Start").GetComponent<MeshRenderer>().enabled = false;
+                    UnityEngine.Object.Destroy(GameObject.FindWithTag("Controls"));
                 }
             }
             else if (mode == Modes.CHECK)
@@ -154,6 +159,7 @@ namespace Assets.Scripts.NEAT
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("ImageReachedTheGoal"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextGen"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("ImageGen"));
+                GameObject.FindWithTag("TextControls").GetComponent<RectTransform>().transform.localPosition = new Vector3(-210.0f, 230.3f, 0.0f);
             }
 
             for (int i = 0; i < walls.Length; i++)
@@ -162,39 +168,68 @@ namespace Assets.Scripts.NEAT
 
         public void Learn()
         {
-            layers.Update();
+            if (Input.GetKeyUp(KeyCode.Space))
+                pause = !pause;
 
-            if (Input.GetKeyUp(KeyCode.Space) || (layers.GetBestPopulation().AfterReach >= autoCompletion))
+            if (!pause)
             {
-                FileStream fout = new FileStream(pathOut, FileMode.Create);
-                using (StreamWriter writer = new StreamWriter(fout))
+                layers.Update();
+
+                if (Input.GetKeyUp(KeyCode.H))
                 {
-                    writer.Write("max-speed:;");
-                    writer.WriteLine(maxSpeed);
-                    writer.Write("directions-array-size:;");
-                    writer.WriteLine(layers.GetBestPopulation().MinStep);
-                    for (int i = 0; i < layers.GetBestPopulation().MinStep; i++)
-                    {
-                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].x.ToString().Replace(',', '.'));
-                        writer.Write(';');
-                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].y.ToString().Replace(',', '.'));
-                        writer.Write(';');
-                        writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].z.ToString().Replace(',', '.'));
-                        writer.WriteLine();
-                    }
+                    showControls = !showControls;
+
+                    if (showControls) GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[WASDEQ] - Move camere\n[Mouse] - Rotate camera\n[P] - Change perspective\n[Space] - Pause\n[Enter] - save&exit\n[Esc] - exit\n[H] - Hide controls";
+                    else GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[H] - Show controls";
                 }
-                fout.Close();
 
-                Application.Quit();
+                if (Input.GetKeyUp(KeyCode.Escape))
+                    Application.Quit();
+
+                if (Input.GetKeyUp(KeyCode.Return) || (layers.GetBestPopulation().AfterReach >= autoCompletion))
+                {
+                    FileStream fout = new FileStream(pathOut, FileMode.Create);
+                    using (StreamWriter writer = new StreamWriter(fout))
+                    {
+                        writer.Write("max-speed:;");
+                        writer.WriteLine(maxSpeed);
+                        writer.Write("directions-array-size:;");
+                        writer.WriteLine(layers.GetBestPopulation().MinStep);
+                        for (int i = 0; i < layers.GetBestPopulation().MinStep; i++)
+                        {
+                            writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].x.ToString().Replace(',', '.'));
+                            writer.Write(';');
+                            writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].y.ToString().Replace(',', '.'));
+                            writer.Write(';');
+                            writer.Write(layers.GetBestPopulation().Agents[layers.GetBestPopulation().BestAgent].Brain.Directions[i].z.ToString().Replace(',', '.'));
+                            writer.WriteLine();
+                        }
+                    }
+                    fout.Close();
+
+                    Application.Quit();
+                    pause = true;
+                }
+
+                if (layers.GetBestPopulation().ReachedTheGoal) GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Reached the goal: Yes";
+                else GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Reached the goal: No";
+                GameObject.FindWithTag("TextGen").GetComponent<Text>().text = "Gen: " + layers.GetBestPopulation().Gen;
             }
-
-            if (layers.GetBestPopulation().ReachedTheGoal) GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Reached the goal: Yes";
-            else GameObject.FindWithTag("TextReachedTheGoal").GetComponent<Text>().text = "Reached the goal: No";
-            GameObject.FindWithTag("TextGen").GetComponent<Text>().text = "Gen: " + layers.GetBestPopulation().Gen;
         }
 
         public void Check()
         {
+            if (Input.GetKeyUp(KeyCode.H))
+            {
+                showControls = !showControls;
+
+                if (showControls) GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[WASDEQ] - Move camere\n[Mouse] - Rotate camera\n[P] - Change perspective\n[Esc] - exit\n[H] - Hide controls";
+                else GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[H] - Show controls";
+            }
+
+            if (Input.GetKeyUp(KeyCode.Escape))
+                Application.Quit();
+
             if (k < acc.Length)
             {
                 if (Mathf.Abs(vel.x + acc[k].x) < maxSpeed) vel.x += acc[k].x;

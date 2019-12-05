@@ -1,13 +1,4 @@
-C:\Users\vhd-r\Documents\GitHub\NEAT-QL\Release Files\data\input-ql.csv
-C:\Users\vhd-r\Documents\GitHub\NEAT-QL\Release Files\data\output-ql.csv
-QL
+/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/NEAT/3D/Input Files/input-neat.csv
+/Users/vadim/Documents/GitHub/NEAT-QL/Demo Files/NEAT/3D/Output Files/output-neat.csv
+NEAT
 CHECK
-gamma:;0.8
-iterations:;100
-repetitions:;1
-visualization:;1
-ty:;250
-layers-quantity:;5
-auto-completion:;100
-max-speed:;5
-mutation-rate:;0,01

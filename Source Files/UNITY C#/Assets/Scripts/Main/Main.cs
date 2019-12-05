@@ -20,7 +20,7 @@ public class Main : MonoBehaviour
                 pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 29) + "data/info.csv";
                 break;
             case RuntimePlatform.OSXEditor:
-                pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 14) + "Release Files/data/info.csv";
+                pathInfo = "/Users/vadim/Documents/GitHub/NEAT-QL/Release Files/data/info.csv";
                 break;
             case RuntimePlatform.WindowsEditor:
                 pathInfo = Application.dataPath.Remove(Application.dataPath.Length - 29) + "/Release Files/data/info.csv";

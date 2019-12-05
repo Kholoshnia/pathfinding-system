@@ -18,6 +18,7 @@ TagManager:
   - TextRepetition
   - Walls
   - StartPositions
+  - TextControls
   layers:
   - Default
   - TransparentFX

@@ -23,7 +23,7 @@ namespace Assets.Scripts.QL
         private readonly Modes mode;
         private readonly VisualizationType visualization;
 
-        private bool pause;
+        private bool pause, showControls;
         private readonly long finishReward;
         private readonly string pathIn, pathOut;
         private readonly int iterations, repetitions;
@@ -34,6 +34,7 @@ namespace Assets.Scripts.QL
             UnityEngine.Object.Destroy(GameObject.Find("NEAT"));
             UnityEngine.Object.Destroy(GameObject.Find("NEAT_Canvas"));
 
+            showControls = false;
             this.pathIn = pathIn;
             this.pathOut = pathOut;
 
@@ -168,6 +169,7 @@ namespace Assets.Scripts.QL
 
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextPosition"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextRepetition"));
+                GameObject.FindWithTag("TextControls").GetComponent<RectTransform>().transform.localPosition = new Vector3(-210.0f, 230.3f, 0.0f);
             }
 
             for (int j = 0; j < map.Walls.Count; j++)
@@ -176,8 +178,22 @@ namespace Assets.Scripts.QL
 
         public void Learn()
         {
+            if (Input.GetKeyUp(KeyCode.Space))
+                pause = !pause;
+
             if (!pause)
             {
+                if (Input.GetKeyUp(KeyCode.H))
+                {
+                    showControls = !showControls;
+
+                    if (showControls) GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[WASDEQ] - Move camere\n[Mouse] - Rotate camera\n[P] - Change perspective\n[Space] - Pause\n[Esc] - exit\n[H] - Hide controls";
+                    else GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[H] - Show controls";
+                }
+
+                if (Input.GetKeyUp(KeyCode.Escape))
+                    Application.Quit();
+
                 table.Episode(map.Initials[initialsK], iterations, visualization);
 
                 initialsK++;
@@ -220,6 +236,17 @@ namespace Assets.Scripts.QL
 
         public void Check()
         {
+            if (Input.GetKeyUp(KeyCode.H))
+            {
+                showControls = !showControls;
+
+                if (showControls) GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[WASDEQ] - Move camere\n[Mouse] - Rotate camera\n[P] - Change perspective\n[Esc] - exit\n[H] - Hide controls";
+                else GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[H] - Show controls";
+            }
+
+            if (Input.GetKeyUp(KeyCode.Escape))
+                Application.Quit();
+
             if (!done)
             {
                 if (GameObject.FindWithTag("StartPositions").GetComponent<DropdownStartPositions>().value != 0)
