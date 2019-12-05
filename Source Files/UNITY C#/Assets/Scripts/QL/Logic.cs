@@ -169,7 +169,7 @@ namespace Assets.Scripts.QL
 
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextPosition"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextRepetition"));
-                GameObject.FindWithTag("TextControls").GetComponent<RectTransform>().transform.localPosition = new Vector3(-210.0f, 230.3f, 0.0f);
+                GameObject.FindWithTag("TextControls").GetComponent<RectTransform>().transform.localPosition = new Vector3(-204.65f, 230.3f, 0.0f);
             }
 
             for (int j = 0; j < map.Walls.Count; j++)
@@ -181,19 +181,19 @@ namespace Assets.Scripts.QL
             if (Input.GetKeyUp(KeyCode.Space))
                 pause = !pause;
 
+            if (Input.GetKeyUp(KeyCode.H))
+            {
+                showControls = !showControls;
+
+                if (showControls) GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[WASDEQ] - Move camere\n[Mouse] - Rotate camera\n[P] - Change perspective\n[Space] - Pause\n[Esc] - exit\n[H] - Hide controls";
+                else GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[H] - Show controls";
+            }
+
+            if (Input.GetKeyUp(KeyCode.Escape))
+                Application.Quit();
+
             if (!pause)
             {
-                if (Input.GetKeyUp(KeyCode.H))
-                {
-                    showControls = !showControls;
-
-                    if (showControls) GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[WASDEQ] - Move camere\n[Mouse] - Rotate camera\n[P] - Change perspective\n[Space] - Pause\n[Esc] - exit\n[H] - Hide controls";
-                    else GameObject.FindWithTag("TextControls").GetComponent<Text>().text = "[H] - Show controls";
-                }
-
-                if (Input.GetKeyUp(KeyCode.Escape))
-                    Application.Quit();
-
                 table.Episode(map.Initials[initialsK], iterations, visualization);
 
                 initialsK++;

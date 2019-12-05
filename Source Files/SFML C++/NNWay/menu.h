@@ -1560,7 +1560,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			this->label25->Name = L"label25";
 			this->label25->Size = System::Drawing::Size(96, 13);
 			this->label25->TabIndex = 40;
-			this->label25->Text = L"Lead map from file:";
+			this->label25->Text = L"Load map from file:";
 			// 
 			// label26
 			// 
@@ -1826,7 +1826,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			this->label28->Name = L"label28";
 			this->label28->Size = System::Drawing::Size(96, 13);
 			this->label28->TabIndex = 46;
-			this->label28->Text = L"Lead map from file:";
+			this->label28->Text = L"Load map from file:";
 			// 
 			// label29
 			// 
@@ -2800,7 +2800,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			this->label31->Name = L"label31";
 			this->label31->Size = System::Drawing::Size(96, 13);
 			this->label31->TabIndex = 68;
-			this->label31->Text = L"Lead map from file:";
+			this->label31->Text = L"Load map from file:";
 			// 
 			// label32
 			// 
@@ -3066,7 +3066,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			this->label34->Name = L"label34";
 			this->label34->Size = System::Drawing::Size(96, 13);
 			this->label34->TabIndex = 74;
-			this->label34->Text = L"Lead map from file:";
+			this->label34->Text = L"Load map from file:";
 			// 
 			// label35
 			// 

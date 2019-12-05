@@ -2,3 +2,11 @@ C:\Users\vhd-r\Documents\GitHub\NEAT-QL\Demo Files\NEAT\3D\Input Files\input-nea
 C:\Users\vhd-r\Documents\GitHub\NEAT-QL\Demo Files\NEAT\3D\Output Files\output-neat.csv
 NEAT
 CHECK
+visualization:;1
+direction-array-size:;400
+population-quantity:;250
+layers-quantity:;5
+auto-completion:;5
+max-speed:;5
+mutation-rate:;0,01
+

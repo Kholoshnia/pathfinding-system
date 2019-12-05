@@ -563,5 +563,5 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/Main.unity
-  playerPath: C:/Users/vhd-r/Documents/GitHub/NEAT-QL/Release Files/bin/win32/unity/UNITY
+  playerPath: C:/Users/vhd-r/Documents/GitHub/NEAT-QL/Release Files/bin/win32/UNITY
     C#.exe
