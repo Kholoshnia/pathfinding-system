@@ -8,7 +8,7 @@
 
 #include <NEAT/Header Files/NEAT_Population.h>
 
-extern int fps;
+extern sf::Image icon;
 
 namespace neat
 {

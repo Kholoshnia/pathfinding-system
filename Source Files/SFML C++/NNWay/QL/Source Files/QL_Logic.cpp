@@ -91,6 +91,7 @@ void ql::check_2d()
 	agent.reset(new Agent());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Check");
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	std::vector<int> moves;
 
@@ -212,6 +213,8 @@ void ql::create_new_map_2d()
 	map.reset(new Map());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Map creator");
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -344,6 +347,8 @@ void ql::set_result_file_path()
 
 void ql::load_map_from_file_2d()
 {
+	map_size.x = 80;
+	map_size.y = 80;
 	map.reset(new Map());
 
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
@@ -364,41 +369,22 @@ void ql::load_map_from_file_2d()
 
 	if (from_image)
 	{
-		System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
-		save_file_dialog->DefaultExt = "csv";
-		save_file_dialog->AddExtension = true;
-		save_file_dialog->Filter = "CSV|*.csv";
-		save_file_dialog->FileName = "map_from_image";
-		save_file_dialog->Title = "Save map from image";
-		if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
-
-		if (path != "")
-		{
-			System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path.c_str()));
-			new_file->Close();
-		}
-		else
-		{
-			std::string message = "Error: Please, choose file to save map";
-			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
-		}
-
 		sf::Image map_image;
-		map_image.loadFromFile(image_path);
+		map_image.loadFromFile(path_input);
+		map_size.x = static_cast<int>(map_image.getSize().x) / 10;
+		map_size.y = static_cast<int>(map_image.getSize().y) / 10;
+
 		for (int y = 0; y < map_size.y; y++)
 			for (int x = 0; x < map_size.x; x++)
-			{
 				if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Red && !goal_loaded)
 				{
 					map->map_markup[y][x] = 'G';
 					goal_loaded = true;
 				}
-				else if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Black)
+				else if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Blue)
 					map->map_markup[y][x] = 'W';
 				else
 					map->map_markup[y][x] = 'S';
-			}
 
 		if (path_input != "")
 			map_loaded = true;
@@ -508,6 +494,7 @@ void ql::with_visualization_2d()
 	agent.reset(new Agent());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Learn");
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	int repetitions_k = 0, initials_k = 0;
 

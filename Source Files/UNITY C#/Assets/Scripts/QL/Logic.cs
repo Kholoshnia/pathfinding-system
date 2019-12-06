@@ -169,7 +169,7 @@ namespace Assets.Scripts.QL
 
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextPosition"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextRepetition"));
-                GameObject.FindWithTag("TextControls").GetComponent<RectTransform>().transform.localPosition = new Vector3(-204.65f, 230.3f, 0.0f);
+                GameObject.FindWithTag("TextControls").GetComponent<RectTransform>().transform.localPosition = new Vector3(-205.35f, 230.3f, 0.0f);
             }
 
             for (int j = 0; j < map.Walls.Count; j++)

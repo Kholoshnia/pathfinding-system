@@ -24,11 +24,12 @@ LearningAlgorythms learning_algorithm;
 std::string path;
 
 sf::Font font;
+sf::Image icon;
 sf::Sprite loading;
 sf::Texture loading_texture;
 std::string path_input, path_output;
 
-int fps, width, height;
+int width, height;
 bool from_image, check_from_file, map_loaded, result_loaded, output_path_set, pause, show_controls;
 
 namespace neat
@@ -47,7 +48,7 @@ namespace neat
 	sf::Text text[4], controls[3];
 	sf::Vector2i map_size, wall_size, pos_agent, pos_goal;
 
-	bool was_running, around;
+	bool around, map_changed;
 	float agent_radius, goal_radius, max_speed, mutation_rate;
 	int directions_array_size, population_quantity, layers_quantity, auto_exit;
 }
@@ -65,7 +66,6 @@ namespace ql
 	std::vector<std::vector<long long int>> temp_Q;
 
 	sf::Vector2i map_size;
-	std::string image_path;
 	std::fstream fout, fin;
 	std::vector<int> initials;
 	long long int goal_reward;
@@ -3159,7 +3159,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 		}
 #pragma endregion
 
-#pragma region functions
+#pragma region Functions
 		void InitializeVariables(void)
 		{
 			font.loadFromFile("Resource Files/Fonts/sans-serif.ttf");
@@ -3168,6 +3168,8 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			loading.setOrigin(100, 25);
 			loading.setPosition(400, 400);
 			loading.setTexture(loading_texture);
+
+			icon.loadFromFile("icon.png");
 
 			mode = Modes::LEARN;
 			dimension = Dimensions::TWOD;
@@ -3197,7 +3199,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			neat::directions_array_size = 400;
 
 			neat::around = false;
-			neat::was_running = false;
+			neat::map_changed = false;
 
 			neat::controls[0].setPosition(685, 10);
 			neat::controls[0].setString(L"[Esc] - Exit");
@@ -3309,7 +3311,7 @@ private: System::Windows::Forms::CheckBox^ checkBox12;
 			neat::directions_array_size = 400;
 
 			neat::around = false;
-			neat::was_running = false;
+			neat::map_changed = false;
 
 			neat::controls[1].setPosition(612, 10);
 			neat::controls[1].setString(L"[H] - Show controls");

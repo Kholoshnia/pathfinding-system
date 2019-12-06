@@ -159,7 +159,7 @@ namespace Assets.Scripts.NEAT
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("ImageReachedTheGoal"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("TextGen"));
                 UnityEngine.Object.Destroy(GameObject.FindWithTag("ImageGen"));
-                GameObject.FindWithTag("TextControls").GetComponent<RectTransform>().transform.localPosition = new Vector3(-204.65f, 230.3f, 0.0f);
+                GameObject.FindWithTag("TextControls").GetComponent<RectTransform>().transform.localPosition = new Vector3(-205.35f, 230.3f, 0.0f);
             }
 
             for (int i = 0; i < walls.Length; i++)

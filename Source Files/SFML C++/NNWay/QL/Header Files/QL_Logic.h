@@ -12,8 +12,9 @@
 #include <QL/Header Files/QL_Table.h>
 #include <QL/Header Files/QL_Agent.h>
 
+extern sf::Image icon;
+extern int width, height;
 extern sf::Sprite loading;
-extern int fps, width, height;
 extern std::string path_input, path_output;
 extern bool from_image, map_loaded, result_loaded, output_path_set, show_controls;
 
@@ -24,7 +25,6 @@ namespace ql
 	extern std::shared_ptr<Agent> agent;
 
 	extern sf::Vector2i map_size;
-	extern std::string image_path;
 	extern std::fstream fout, fin;
 	extern bool goal_loaded, around;
 	extern std::vector<int> initials;

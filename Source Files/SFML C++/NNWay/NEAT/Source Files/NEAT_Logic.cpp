@@ -16,14 +16,14 @@ void neat::draw(sf::Event &event)
 
 			for (int x = 0; x < map_size.x; x++)
 			{
-				map->pos_rects.emplace_back(static_cast<float>(x) * 10.0f, 0.0f);
-				map->pos_rects.emplace_back(static_cast<float>(x) * 10.0f, static_cast<float>(map_size.y) * 10.0f - 10.0f);
+				map->pos_rects.emplace_back(static_cast<float>(x * (width / map_size.x)), 0.0f);
+				map->pos_rects.emplace_back(static_cast<float>(x * (width / map_size.x)), static_cast<float>(map_size.y * (height / map_size.y)) - (height / map_size.y));
 			}
 
 			for (int y = 0; y < map_size.y; y++)
 			{
-				map->pos_rects.emplace_back(0.0f, static_cast<float>(y) * 10.0f);
-				map->pos_rects.emplace_back(static_cast<float>(map_size.x) * 10.0f - 10.0f, static_cast<float>(y) * 10.0f);
+				map->pos_rects.emplace_back(0.0f, static_cast<float>(y * (width / map_size.y)));
+				map->pos_rects.emplace_back(static_cast<float>(map_size.x * (width / map_size.x)) - (width / map_size.x), static_cast<float>(y) * (height / map_size.y));
 			}
 		}
 
@@ -73,6 +73,8 @@ void neat::check_2d()
 	std::vector<sf::Vector2f> check;
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Check");
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -140,6 +142,8 @@ void neat::create_new_map_2d()
 	map.reset(new Map());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Map creator");
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -284,10 +288,6 @@ void neat::set_result_file_path()
 
 void neat::load_map_from_file_2d()
 {
-	map_size.x = 80;
-	map_size.y = 80;
-	map.reset(new Map);
-
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	open_file_dialog->Title = "Load map";
 	open_file_dialog->AddExtension = true;
@@ -308,42 +308,24 @@ void neat::load_map_from_file_2d()
 
 	if (from_image)
 	{
-		System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
-		save_file_dialog->DefaultExt = "csv";
-		save_file_dialog->AddExtension = true;
-		save_file_dialog->Filter = "CSV|*.csv";
-		save_file_dialog->FileName = "map_from_image";
-		save_file_dialog->Title = "Save map from image";
-		if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
-
-		if (path != "")
-		{
-			System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path.c_str()));
-			new_file->Close();
-		}
-		else
-		{
-			std::string message = "Error: Please, choose file to save map";
-			System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
-		}
-
 		sf::Image map_image;
-		map_image.getSize();
 		map_image.loadFromFile(path_input);
+		map_size.x = static_cast<int>(map_image.getSize().x) / 10;
+		map_size.y = static_cast<int>(map_image.getSize().y) / 10;
+		map.reset(new Map);
 
-		for (int y = 0; y < map_size.y; y++)
+		for (unsigned int y = 0; y < static_cast<unsigned int>(map_size.y); y++)
 		{
 			map_markup[y].resize(map_size.x);
-			for (int x = 0; x < map_size.x; x++)
+			for (unsigned int x = 0; x < static_cast<unsigned int>(map_size.x); x++)
 			{
-				if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Black)
+				if (map_image.getPixel(x * (map_image.getSize().x / static_cast<unsigned int>(map_size.x)), y * (map_image.getSize().y / static_cast<unsigned int>(map_size.y))) == sf::Color::Black)
 					map_markup[y][x] = 'A';
-				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Red)
+				else if (map_image.getPixel(x * (map_image.getSize().x / static_cast<unsigned int>(map_size.x)), y * (map_image.getSize().y / static_cast<unsigned int>(map_size.y))) == sf::Color::Red)
 					map_markup[y][x] = 'G';
-				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Blue)
+				else if (map_image.getPixel(x * (map_image.getSize().x / static_cast<unsigned int>(map_size.x)), y * (map_image.getSize().y / static_cast<unsigned int>(map_size.y))) == sf::Color::Blue)
 					map_markup[y][x] = 'W';
-				else if (map_image.getPixel(x * 10u, y * 10u) == sf::Color::Yellow)
+				else if (map_image.getPixel(x * (map_image.getSize().x / static_cast<unsigned int>(map_size.x)), y * (map_image.getSize().y / static_cast<unsigned int>(map_size.y))) == sf::Color::Yellow)
 					map_markup[y][x] = 'B';
 				else
 					map_markup[y][x] = 'S';
@@ -360,6 +342,10 @@ void neat::load_map_from_file_2d()
 		fin.open(path_input);
 		if (fin.is_open())
 		{
+			map_size.x = 80;
+			map_size.y = 80;
+			map.reset(new Map);
+
 			char ch = '\0';
 
 			while (ch != ';') fin.get(ch);
@@ -472,6 +458,8 @@ void neat::with_visualization_2d()
 	layers.reset(new Layers());
 
 	sf::RenderWindow window(sf::VideoMode(width, height), "Learn");
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -484,6 +472,20 @@ void neat::with_visualization_2d()
 
 			if (event.type == event.KeyPressed || (layers->populations[layers->best_population].after_reach > auto_exit))
 			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) ||
+					sf::Keyboard::isKeyPressed(sf::Keyboard::RControl) ||
+					(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab) && !around) ||
+					sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
+					sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ||
+					sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
+					sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+					map_changed = true;
+
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left) ||
+					sf::Mouse::isButtonPressed(sf::Mouse::Right) ||
+					sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
+					sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+					map_changed = true;
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 					for (auto& el : layers->populations)
@@ -503,6 +505,8 @@ void neat::with_visualization_2d()
 						for (int i = 0; i < layers->populations[layers->best_population].min_step; ++i)
 							fout << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].x << ';' << layers->populations[layers->best_population].agents[layers->populations[layers->best_population].best_agent].brain.directions[i].y << std::endl;
 						fout.close();
+						if (!map_changed)
+							window.close();
 					}
 					else
 					{
@@ -510,42 +514,65 @@ void neat::with_visualization_2d()
 						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 					}
 
-					fout.open(path_input);
-					if (fout.is_open())
+					if (map_changed)
 					{
-						fout.clear();
-						fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
-						for (int y = 0; y < map_size.y; y++)
+						System::Windows::Forms::SaveFileDialog^ save_file_dialog = gcnew System::Windows::Forms::SaveFileDialog();
+						save_file_dialog->DefaultExt = "csv";
+						save_file_dialog->AddExtension = true;
+						save_file_dialog->Filter = "CSV|*.csv";
+						save_file_dialog->FileName = "new_map";
+						save_file_dialog->Title = "Save map";
+						if (save_file_dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+							path = static_cast<char*>(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(save_file_dialog->InitialDirectory + save_file_dialog->FileName).ToPointer());
+
+						if (path != "")
 						{
-							for (int x = 0; x < map_size.x; x++)
-							{
-								if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
-									fout << 'A';
-								else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
-									fout << 'G';
-								else if ([&x, &y]
-								{
-									for (auto& el : map->pos_rects)
-										if (x == el.x / 10 && y == el.y / 10)
-											return true;
-										return false;
-								}())
-									fout << 'W';
-								else
-									fout << 'S';
-								fout << ';';
-							}
-							fout << std::endl;
+							System::IO::StreamWriter^ new_file = gcnew System::IO::StreamWriter(gcnew System::String(path.c_str()));
+							new_file->Close();
 						}
-						fout << "agent-radius:;" << agent_radius << std::endl;
-						fout << "goal-radius:;" << goal_radius << std::endl;
-						fout.close();
-						window.close();
-					}
-					else
-					{
-						std::string message = "Error opening file: \"" + path_input + "\"";
-						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+						else
+						{
+							std::string message = "Error: Please, choose file to save map";
+							System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+						}
+
+						fout.open(path);
+						if (fout.is_open())
+						{
+							fout.clear();
+							fout << "map-size:;" << map_size.x << ';' << map_size.y << std::endl;
+							for (int y = 0; y < map_size.y; y++)
+							{
+								for (int x = 0; x < map_size.x; x++)
+								{
+									if (x == map->pos_agent.x / 10 && y == map->pos_agent.y / 10)
+										fout << 'A';
+									else if (x == map->pos_goal.x / 10 && y == map->pos_goal.y / 10)
+										fout << 'G';
+									else if ([&x, &y]
+										{
+											for (auto& el : map->pos_rects)
+												if (x == el.x / 10 && y == el.y / 10)
+													return true;
+												return false;
+										}())
+										fout << 'W';
+									else
+										fout << 'S';
+									fout << ';';
+								}
+								fout << std::endl;
+							}
+							fout << "agent-radius:;" << agent_radius << std::endl;
+							fout << "goal-radius:;" << goal_radius << std::endl;
+							fout.close();
+							window.close();
+						}
+						else
+						{
+							std::string message = "Error opening file: \"" + path + "\"";
+							System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+						}
 					}
 				}
 

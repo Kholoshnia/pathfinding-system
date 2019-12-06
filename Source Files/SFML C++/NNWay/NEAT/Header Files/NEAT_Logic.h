@@ -18,8 +18,8 @@
 extern Modes mode;
 extern Dimensions dimension;
 
+extern int width, height;
 extern sf::Sprite loading;
-extern int fps, width, height;
 extern std::string path, path_input, path_output;
 extern bool from_image, map_loaded, result_loaded, pause, output_path_set, show_controls;
 
@@ -38,7 +38,7 @@ namespace neat
 	extern sf::Text text[4], controls[3];
 	extern sf::Vector2i map_size, wall_size;
 
-	extern bool around;
+	extern bool around, map_changed;
 	extern int population_quantity, layers_quantity, directions_array_size, auto_exit;
 
 	void check_2d();

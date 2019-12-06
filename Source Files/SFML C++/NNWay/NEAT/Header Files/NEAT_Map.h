@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+extern int width, height;
+
 namespace neat
 {
 	extern sf::Vector2i map_size;
@@ -10,7 +12,6 @@ namespace neat
 
 	struct Map
 	{
-		int size;
 		sf::RectangleShape rect;
 		sf::Vector2f pos_goal, pos_agent;
 		sf::CircleShape circle_goal, circle_agent;

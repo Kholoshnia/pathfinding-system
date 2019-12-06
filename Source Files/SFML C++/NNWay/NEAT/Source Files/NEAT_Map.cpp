@@ -17,7 +17,7 @@ neat::Map::Map()
 	circle_agent.setOrigin(agent_radius, agent_radius);
 	circle_agent.setPosition(static_cast<float>(pos_agent.x), static_cast<float>(pos_agent.y));
 
-	rect.setSize(sf::Vector2f(10.0f, 10.0f));
+	rect.setSize(sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y)));
 }
 
 void neat::Map::from_file()
@@ -25,13 +25,13 @@ void neat::Map::from_file()
 	for (int i = 0; i < map_size.y; i++)
 		for (int j = 0; j < map_size.x; j++)
 			if (map_markup[i][j] == 'W')
-				pos_rects.emplace_back(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
+				pos_rects.emplace_back(static_cast<float>(j * (width / map_size.x)), static_cast<float>(i * (height / map_size.y)));
 			else if (map_markup[i][j] == 'G')
-				pos_goal = sf::Vector2f(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
+				pos_goal = sf::Vector2f(static_cast<float>(j * (width / map_size.x)), static_cast<float>(i * (height / map_size.y)));
 			else if (map_markup[i][j] == 'A')
-				pos_agent = sf::Vector2f(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
+				pos_agent = sf::Vector2f(static_cast<float>(j * (width / map_size.x)), static_cast<float>(i * (height / map_size.y)));
 			else if (map_markup[i][j] == 'B')
-				pos_additional_rewards.emplace_back(static_cast<float>(j) * 10.0f, static_cast<float>(i) * 10.0f);
+				pos_additional_rewards.emplace_back(static_cast<float>(j * (width / map_size.x)), static_cast<float>(i * (height / map_size.y)));
 }
 
 float neat::Map::dist(sf::Vector2f& obj) { return sqrt((pos_goal.x - obj.x) * (pos_goal.x - obj.x) + (pos_goal.y - obj.y) * (pos_goal.y - obj.y)); }
@@ -39,7 +39,7 @@ float neat::Map::dist(sf::Vector2f& obj) { return sqrt((pos_goal.x - obj.x) * (p
 bool neat::Map::touched_wall(sf::Vector2f& obj)
 {
 	for (auto& el : pos_rects)
-		if (sf::FloatRect(el, sf::Vector2f(10.0f, 10.0f)).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
+		if (sf::FloatRect(el, sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y))).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
 			return true;
 	return false;
 }
@@ -49,7 +49,7 @@ bool neat::Map::touched_goal(sf::Vector2f& obj) { return dist(obj) < goal_radius
 bool neat::Map::touched_additional_reward(sf::Vector2f& obj)
 {
 	for (auto& el : pos_additional_rewards)
-		if (sf::FloatRect(el, sf::Vector2f(10.0f, 10.0f)).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
+		if (sf::FloatRect(el, sf::Vector2f(static_cast<float>(width / map_size.x), static_cast<float>(height / map_size.y))).intersects(sf::FloatRect(obj, sf::Vector2f(agent_radius, agent_radius))))
 			return true;
 	return false;
 }
