@@ -251,7 +251,7 @@ void ql::create_new_map_2d()
 
 					map->save();
 
-					fout.open(path);
+					fout.open(path_input);
 					if (fout.is_open())
 					{
 						fout.clear();
@@ -270,7 +270,7 @@ void ql::create_new_map_2d()
 					}
 					else
 					{
-						std::string message = "Error opening file: \"" + path + "\"";
+						std::string message = "Error opening file: \"" + path_input + "\"";
 						System::Windows::Forms::MessageBox::Show(gcnew System::String(message.c_str()), "Error", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 					}
 				}
