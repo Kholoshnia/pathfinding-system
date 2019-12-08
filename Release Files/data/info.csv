@@ -1,10 +1,12 @@
-C:\Users\vhd-r\Desktop\new_map.csv
+C:\Users\vhd-r\Desktop\Map_10x10x10.csv
 C:\Users\vhd-r\Desktop\new_result.csv
-NEAT
-CHECK
+QL
+LEARN
+gamma:;0.8
+iterations:;100
+repetitions:;1
 visualization:;1
-direction-array-size:;400
-population-quantity:;250
+250
 layers-quantity:;5
 auto-completion:;100
 max-speed:;5
