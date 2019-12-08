@@ -310,7 +310,7 @@ void ql::create_new_map_2d()
 
 void ql::create_new_map_3d()
 {
-	System::Windows::Forms::MessageBox::Show("Open \"NEAT Map Creator\" as Unity Project and press start when done creating new map. Then load it from file", "QL Map Creator", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+	System::Windows::Forms::MessageBox::Show("Open \"QL Map Creator\" as Unity Project and press start when done creating new map. Then load it from file", "QL Map Creator", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
 	char buffer[260];
 	GetCurrentDirectory(sizeof(buffer), buffer);
 	std::string str1 = "explorer.exe ";
