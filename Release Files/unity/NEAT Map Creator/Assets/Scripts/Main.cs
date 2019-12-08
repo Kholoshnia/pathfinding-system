@@ -14,7 +14,7 @@ public class Main : MonoBehaviour
 
         if (isPlaying)
         {
-            path = EditorUtility.SaveFilePanel("Save map", "", "new_map", "txt");
+            path = EditorUtility.SaveFilePanel("Save map", "", "new_map", "csv");
 
             FileStream fout = new FileStream(path, FileMode.Create);
             using (StreamWriter writer = new StreamWriter(fout))

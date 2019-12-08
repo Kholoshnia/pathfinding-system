@@ -310,12 +310,12 @@ void ql::create_new_map_2d()
 
 void ql::create_new_map_3d()
 {
-	System::Windows::Forms::MessageBox::Show("Open \"NEAT Map Creator\" as Unity Project and press start when done creating new map. Then load it from file", "NEAT Map Creator", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+	System::Windows::Forms::MessageBox::Show("Open \"NEAT Map Creator\" as Unity Project and press start when done creating new map. Then load it from file", "QL Map Creator", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
 	char buffer[260];
 	GetCurrentDirectory(sizeof(buffer), buffer);
 	std::string str1 = "explorer.exe ";
 	std::string str2 = str1 + buffer;
-	str2.erase(str2.size() - 9);
+	str2.erase(str2.size() - 14);
 	str2 += "unity";
 	system(str2.c_str());
 }
@@ -347,10 +347,6 @@ void ql::set_result_file_path()
 
 void ql::load_map_from_file_2d()
 {
-	map_size.x = 80;
-	map_size.y = 80;
-	map.reset(new Map());
-
 	System::Windows::Forms::OpenFileDialog^ open_file_dialog = gcnew System::Windows::Forms::OpenFileDialog();
 	open_file_dialog->Title = "Load map";
 	open_file_dialog->AddExtension = true;
@@ -373,15 +369,16 @@ void ql::load_map_from_file_2d()
 		map_image.loadFromFile(path_input);
 		map_size.x = static_cast<int>(map_image.getSize().x) / 10;
 		map_size.y = static_cast<int>(map_image.getSize().y) / 10;
+		map.reset(new Map());
 
 		for (int y = 0; y < map_size.y; y++)
 			for (int x = 0; x < map_size.x; x++)
-				if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Red && !goal_loaded)
+				if (map_image.getPixel(x * (map_image.getSize().x / static_cast<unsigned int>(map_size.x)), y* (map_image.getSize().y / static_cast<unsigned int>(map_size.y))) == sf::Color::Red && !goal_loaded)
 				{
 					map->map_markup[y][x] = 'G';
 					goal_loaded = true;
 				}
-				else if (map_image.getPixel(x * (height / map_size.x), y * (width / map_size.y)) == sf::Color::Blue)
+				else if (map_image.getPixel(x * (map_image.getSize().x / static_cast<unsigned int>(map_size.x)), y* (map_image.getSize().y / static_cast<unsigned int>(map_size.y))) == sf::Color::Blue)
 					map->map_markup[y][x] = 'W';
 				else
 					map->map_markup[y][x] = 'S';
@@ -391,6 +388,10 @@ void ql::load_map_from_file_2d()
 	}
 	else
 	{
+		map_size.x = 10;
+		map_size.y = 10;
+		map.reset(new Map());
+
 		fin.open(path_input);
 		if (fin.is_open())
 		{

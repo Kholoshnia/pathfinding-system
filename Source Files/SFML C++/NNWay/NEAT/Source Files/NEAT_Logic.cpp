@@ -229,7 +229,7 @@ void neat::create_new_map_2d()
 					else
 					{
 						neat::controls[1].setPosition(552, 10);
-						neat::controls[1].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw rewards\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[Esc] - Exit without saving\n[Enter] - save&exit\n[H] - Hide controls");
+						neat::controls[1].setString(L"[LShift] - Move goal\n[RShift] - Move agent\n[Up][Down] - Resize goal\n[left][right] - Resize agent\n[Tab] - Fill around\n[LMB] - Draw map\n[RMB] - Draw reward\n[RCtrl] - Erase map\n[RCtrl] - Erase reward\n[Esc] - Exit without saving\n[Enter] - save&exit\n[H] - Hide controls");
 					}
 				}
 
@@ -251,7 +251,7 @@ void neat::create_new_map_2d()
 
 void neat::create_new_map_3d()
 {
-	System::Windows::Forms::MessageBox::Show("Open \"QL Map Creator\" as Unity Project and press start when done creating new map. Then load it from file", "QL Map Creator", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
+	System::Windows::Forms::MessageBox::Show("Open \"NEAT Map Creator\" as Unity Project and press start when done creating new map. Then load it from file", "QL Map Creator", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Information);
 	char buffer[260];
 	GetCurrentDirectory(sizeof(buffer), buffer);
 	std::string str1 = "explorer.exe ";
@@ -429,7 +429,7 @@ void neat::load_result_from_file_2d()
 			std::replace(line.begin(), line.end(), '.', ',');
 			el.y = System::Convert::ToSingle(gcnew System::String(line.c_str()));
 		}
-		fout.close();
+		fin.close();
 
 		result_loaded = true;
 	}
