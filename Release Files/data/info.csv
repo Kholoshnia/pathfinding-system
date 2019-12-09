@@ -1,19 +1,12 @@
-C:\Users\vhd-r\Desktop\Map_10x10x10.csv
-C:\Users\vhd-r\Desktop\new_result.csv
-QL
+C:\Users\vhd-r\Documents\GitHub\NEAT-QL\Demo Files\NEAT\3D\Input Files\new_map.csv
+C:\Users\vhd-r\Documents\GitHub\NEAT-QL\Demo Files\NEAT\3D\Output Files\output-neat.csv
+NEAT
 CHECK
-gamma:;0.8
-iterations:;100
-repetitions:;1
-visualization:;2
-s:;100
-repetitions:;1
 visualization:;1
-100
-max-speed:;5
-mutation-rate:;0,01
-pulation-quantity:;250
+direction-array-size:;400
+population-quantity:;250
 layers-quantity:;5
 auto-completion:;100
 max-speed:;5
 mutation-rate:;0,01
+1
