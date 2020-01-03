@@ -16,7 +16,7 @@
 #include <QL/Header Files/QL_Logic.h>
 #include <QL/Header Files/QL_Agent.h>
 
-#pragma region variables
+#pragma region Variables
 Modes mode;
 Dimensions dimension;
 LearningAlgorythms learning_algorithm;
