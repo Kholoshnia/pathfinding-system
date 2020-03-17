@@ -9,8 +9,6 @@
 
 #include "Population.hpp"
 
-extern unsigned int layers_quantity;
-
 class Layers
 {
 public:

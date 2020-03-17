@@ -20,7 +20,7 @@ Brain Brain::clone()
 
 void Brain::mutate()
 {
-    for (auto& el : directions)
+    for (auto &el : directions)
     {
         float randn = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX));
         if (randn < mutation_rate)
@@ -30,12 +30,16 @@ void Brain::mutate()
 
 void Brain::randomize()
 {
-    for (auto& el : directions)
+    for (auto &el : directions)
         movement(el);
 }
 
 void Brain::movement(sf::Vector2f &obj)
 {
-    obj.x = cos(-180.0f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 360.0f) * static_cast<float>(M_PI) / 180.0f);
-    obj.y = sin(-180.0f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 360.0f) * static_cast<float>(M_PI) / 180.0f);
+    obj.x = cos(-180.0f +
+                static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 360.0f) * static_cast<float>(M_PI) /
+                180.0f);
+    obj.y = sin(-180.0f +
+                static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / 360.0f) * static_cast<float>(M_PI) /
+                180.0f);
 }

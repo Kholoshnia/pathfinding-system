@@ -26,6 +26,7 @@ public:
     bool touched_wall(sf::Vector2f &obj);
 
     bool touched_goal(sf::Vector2f &obj);
+
     bool touched_additional_reward(sf::Vector2f &obj);
 
     void show(sf::RenderWindow &window);

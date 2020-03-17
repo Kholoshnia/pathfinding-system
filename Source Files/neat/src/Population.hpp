@@ -26,7 +26,7 @@ public:
         agents.resize(population_quantity);
         color = sf::Color(rand() & 255, rand() & 255, rand() & 255);
         if (layers_quantity > 1)
-            for (auto& el : agents)
+            for (auto &el : agents)
                 el.circle.setFillColor(color);
     }
 
