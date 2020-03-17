@@ -1,0 +1,10 @@
+mode:;LEARN
+path-input:;/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/Project1/res/data/input.csv
+path-output:;/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/Project1/res/data/output.csv
+visualization:;WITH
+direction-array-size:;400
+population-quantity:;250
+layers-quantity:;5
+auto-completion:;100
+max-speed:;5
+mutation-rate:;0.01
