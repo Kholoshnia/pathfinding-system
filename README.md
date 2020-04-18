@@ -4,25 +4,29 @@ In the course of the research work, the system for finding the least resource-in
 
 # Figures of algorithms presented in the system
 
-## NEAT
+## NEAT 2D
 
-### 2D
+<p align="center">
+  <img align="center" width="500" height="500" src="Demo%20Files/Figures/NEATLearn2D.png">
+</p>
 
-![NEAT 2D](Demo%20Files/Figures/NEATLearn2D.png)
+## NEAT 3D
 
-### 3D
+<p align="center">
+  <img align="center" width="500" height="500" src="Demo%20Files/Figures/NEATLearn3D.png">
+</p>
 
-![NEAT 3D](Demo%20Files/Figures/NEATLearn3D.png)
+## Q-Learning 2D
 
-## Q-Learning
+<p align="center">
+  <img align="center" width="500" height="500" src="Demo%20Files/Figures/QLLearn2D.png">
+</p>
 
-### 2D
+## Q-Learning 3D
 
-![Q-Learning 2D](Demo%20Files/Figures/QLLearn2D.png)
-
-### 3D
-
-![Q-Learning 3D](Demo%20Files/Figures/QLLearn3D.png)
+<p align="center">
+  <img align="center" width="500" height="500" src="Demo%20Files/Figures/QLLearn3D.png">
+</p>
 
 # Full paper
 
