@@ -1,0 +1,7 @@
+mode:;LEARN
+path-input:;/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/Demo Files/QL/3D/Input Files/Map_10x10x10.csv
+path-output:;/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/Demo Files/QL/3D/Output Files/output.csv
+visualization:;ITERATIONS
+gamma:;0.8
+iterations:;0
+repetitions:;1

@@ -53,10 +53,11 @@ void initialize_variables(void)
     icon.loadFromFile("icon.png");
 #elif __APPLE__
     font.loadFromFile(
-            "/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/neat/res/fonts/sans-serif.ttf");
+            "/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/Source Files/neat/res/fonts/sans-serif.ttf");
     loading_texture.loadFromFile(
-            "/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/neat/res/textures/loading.png");
-    icon.loadFromFile("/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/neat/res/icons/icon.png");
+            "/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/Source Files/neat/res/textures/loading.png");
+    icon.loadFromFile(
+            "/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/Source Files/neat/res/icons/icon.png");
 #endif
 
     loading.setOrigin(100, 25);
@@ -634,7 +635,7 @@ void load_parameters_from_info_file()
 #elif _WIN32
     path_info = "Resource Files/Data/info-learn.csv";
 #elif __APPLE__
-    path_info = "/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/neat/res/data/info-create.csv";
+    path_info = "/Users/vadim/Documents/GitHub/Kholoshnia/pathfinding-system/Source Files/neat/res/data/info-create.csv";
 #endif
 
     f_in.open(path_info);
